@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
-
+import Button from "react-bootstrap/Button";
+import { useParams } from "react-router-dom";
 const Specific = ({ data }) => {
+    const { item } = useParams();
     useEffect(() => {
         console.log("Specific:", data);
-    }, [data]); 
+        console.log("item", item);
+    }, [data,item]); 
+
+
 
     return (
         <div>
@@ -13,6 +18,7 @@ const Specific = ({ data }) => {
                     <p>Description: {data.attributes.description}</p>
                     <p>Count: {data.attributes.count}</p>
                     <p>linkCount: {data.attributes.likeCount}</p>
+                    <Button variant="outline-dark">ลงเรียน</Button>
                 </div>
             )}
         </div>

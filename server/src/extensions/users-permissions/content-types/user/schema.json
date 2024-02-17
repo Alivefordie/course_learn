@@ -70,7 +70,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::course.course",
-      "mappedBy": "owners"
+      "mappedBy": "owner"
     }
   }
 }
