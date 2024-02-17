@@ -10,6 +10,7 @@ const Register = () => {
     const navigate = useNavigate();
     const initialUser = { email: "", password: "", username: "" };
     const [user, setUser] = useState(initialUser);
+
     const registerUser = async () => {
         try {
             const response = await axios.post('http://localhost:1337/api/auth/local/register', {
@@ -54,7 +55,7 @@ const Register = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Enter password" name = "email" value = {user.password} onChange={handleUserChange}/>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button onClick={handleRegisterClick} variant="primary" type="submit">
           Register
         </Button>
       </Form>

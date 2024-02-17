@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Toprank from "../components/Toprank";
 import Common from "../components/Common";
 const Pag1 = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [courses1, setCourses1] = useState([]);
 
   useEffect(() => {

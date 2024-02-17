@@ -19,7 +19,7 @@ const Pag2 = () => {
         };
 
         fetchData();
-    }, []);
+    }, [item]);
 
     return (
         <div>
