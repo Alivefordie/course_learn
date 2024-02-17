@@ -408,7 +408,7 @@ export interface ApiCourseCourse extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    count: Attribute.BigInteger;
+    amount: Attribute.Integer & Attribute.DefaultTo<0>;
     owner: Attribute.Relation<
       'api::course.course',
       'manyToMany',

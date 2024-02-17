@@ -6,7 +6,7 @@ const Specific = ({ data }) => {
     useEffect(() => {
         console.log("Specific:", data);
         console.log("item", item);
-    }, [data,item]); 
+    }, [data, item]);
 
 
 
@@ -16,7 +16,7 @@ const Specific = ({ data }) => {
                 <div>
                     <h1>Title: {data.attributes.title}</h1>
                     <p>Description: {data.attributes.description}</p>
-                    <p>Count: {data.attributes.count}</p>
+                    <p>amount: {data.attributes.amount}</p>
                     <p>linkCount: {data.attributes.likeCount}</p>
                     <Button variant="outline-dark">ลงเรียน</Button>
                 </div>

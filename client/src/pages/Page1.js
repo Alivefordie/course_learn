@@ -10,7 +10,7 @@ const Pag1 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/courses');
+        const response = await axios.get('http://localhost:1337/api/courses?populate=*');
         const coursesData = response.data.data; 
         setCourses1(coursesData); 
         // console.log(coursesData);

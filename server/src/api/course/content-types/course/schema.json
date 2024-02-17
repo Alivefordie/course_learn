@@ -18,8 +18,9 @@
     "description": {
       "type": "text"
     },
-    "count": {
-      "type": "biginteger"
+    "amount": {
+      "type": "integer",
+      "default": 0
     },
     "owner": {
       "type": "relation",
