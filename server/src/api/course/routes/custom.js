@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  routes: [ //custom routes
+  routes: [ 
     {
       method: 'GET',
       path: '/courses/:id/like',
