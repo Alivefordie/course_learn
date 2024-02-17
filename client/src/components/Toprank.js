@@ -16,7 +16,7 @@ const Toprank = ({ data }) => {
                     <p className="me-2">amount : {item.attributes.amount}</p>
                     <p className="me-2">Like : {item.attributes.likeCount}</p>
                     <p className="me-2">url: {item.attributes.picture.data.attributes.url}</p>
-                    <img src={`http://localhost:1337/${item.attributes.picture.data.attributes.url}`} alt="item" />
+                    <img src={"http://localhost:1337"+item.attributes.picture.data.attributes.url} alt="item" />
                     <Link to={{ pathname: `./${item.id}` }}>
                         <Button variant="outline-dark">Detail</Button>
                     </Link>
