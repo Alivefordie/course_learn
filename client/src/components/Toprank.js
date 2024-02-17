@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-const Toprank = ({ data }) => {
 
+const Toprank = ({ data }) => {
     useEffect(() => {
-        console.log("Toprank", data)
-    })
+        console.log("Toprank", data);
+    }, [data]); // Added data to the dependency array
 
     return (
         <div>
@@ -15,16 +15,15 @@ const Toprank = ({ data }) => {
                     <p className="me-2">description : {item.attributes.description}</p>
                     <p className="me-2">amount : {item.attributes.amount}</p>
                     <p className="me-2">Like : {item.attributes.likeCount}</p>
-                    <p className="me-2">url: {item.attributes.picture.data.attributes.url}</p>
-                    <img src={"http://localhost:1337"+item.attributes.picture.data.attributes.url} alt="item" />
-                    <Link to={{ pathname: `./${item.id}` }}>
-                        <Button variant="outline-dark">Detail</Button>
+                    <img src={"http://localhost:1337" + item.attributes.picture.data.attributes.url} alt="item" width={50} />
+                    <Link to={{ pathname: `/${item.id}` }}>
+                        <Button variant="dark">Detail</Button>
                     </Link>
                     <hr />
                 </div>
             ))}
         </div>
     );
-}
+};
 
 export default Toprank;

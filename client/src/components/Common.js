@@ -13,6 +13,7 @@ const Common = ({ data }) => {
                     <p className="me-2">description : {item.attributes.description}</p>
                     <p className="me-2">amount : {item.attributes.amount}</p>
                     <p className="me-2">Like : {item.attributes.likeCount}</p>
+                    <img src={"http://localhost:1337" + item.attributes.picture.data.attributes.url} alt="item" width={50} />
                     <Link to={{ pathname: `./${item.id}` }}>
                         <Button variant="outline-dark">Detail</Button> {/* Use the imported Button component */}
                     </Link>
