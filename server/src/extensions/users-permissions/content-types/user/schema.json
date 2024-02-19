@@ -66,9 +66,15 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "entries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart.cart",
+      "mappedBy": "owner"
+    },
     "courses": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::course.course",
       "mappedBy": "owner"
     }

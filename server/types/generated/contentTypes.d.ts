@@ -367,23 +367,26 @@ export interface ApiCartCart extends Schema.CollectionType {
   info: {
     singularName: 'cart';
     pluralName: 'carts';
-    displayName: 'cart';
+    displayName: 'entry';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    courses: Attribute.Relation<
+    course: Attribute.Relation<
       'api::cart.cart',
-      'manyToMany',
+      'manyToOne',
       'api::course.course'
     >;
     owner: Attribute.Relation<
       'api::cart.cart',
-      'oneToOne',
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
+    like: Attribute.DateTime;
+    cart: Attribute.DateTime;
+    enroll: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -408,18 +411,23 @@ export interface ApiCourseCourse extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    amount: Attribute.Integer & Attribute.DefaultTo<0>;
+    duration: Attribute.Integer;
     owner: Attribute.Relation<
       'api::course.course',
-      'manyToMany',
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
+    price: Attribute.Integer;
+    amount: Attribute.Integer & Attribute.DefaultTo<0>;
     likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
     picture: Attribute.Media;
-    carts: Attribute.Relation<
+    entry: Attribute.Relation<
       'api::course.course',
-      'manyToMany',
+      'oneToMany',
       'api::cart.cart'
+    >;
+    course_syllabus: Attribute.DynamicZone<
+      ['activity.file', 'activity.text', 'activity.video']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -796,9 +804,14 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    entries: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::cart.cart'
+    >;
     courses: Attribute.Relation<
       'plugin::users-permissions.user',
-      'manyToMany',
+      'oneToMany',
       'api::course.course'
     >;
     createdAt: Attribute.DateTime;

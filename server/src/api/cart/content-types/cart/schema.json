@@ -4,7 +4,7 @@
   "info": {
     "singularName": "cart",
     "pluralName": "carts",
-    "displayName": "cart",
+    "displayName": "entry",
     "description": ""
   },
   "options": {
@@ -12,16 +12,26 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "courses": {
+    "course": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::course.course",
-      "inversedBy": "carts"
+      "inversedBy": "entry"
     },
     "owner": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "entries"
+    },
+    "like": {
+      "type": "datetime"
+    },
+    "cart": {
+      "type": "datetime"
+    },
+    "enroll": {
+      "type": "datetime"
     }
   }
 }
