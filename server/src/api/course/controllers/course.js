@@ -19,4 +19,30 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     const sanitizedResults = await this.sanitizeOutput(entries, ctx);
     return this.transformResponse(sanitizedResults);
   },
+  async find(ctx) {
+    const entries = await strapi.db.query("api::course.course").findMany({
+      select: [
+        "title",
+        "description",
+        "duration",
+        "price",
+        "amount",
+        "likeCount",
+      ],
+      where: {
+        entries: {
+          like: {
+            $null: true,
+          },
+          cart: {
+            $null: true,
+          },
+        },
+      },
+      orderBy: { id: "desc" },
+      populate: { picture: true },
+    });
+
+    return entries;
+  },
 }));
