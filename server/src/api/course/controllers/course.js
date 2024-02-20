@@ -18,6 +18,7 @@ const Parameters = {
 const { createCoreController } = require("@strapi/strapi").factories;
 module.exports = createCoreController("api::course.course", ({ strapi }) => ({
   async favorite(ctx) {
+    const user = ctx.state.user;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
       where: {
@@ -25,13 +26,15 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           like: {
             $notNull: true,
           },
+          owner: { id: user.id },
         },
       },
       populate: { picture: true, entries: { select: ["id", "like"] } },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
   async cart(ctx) {
+    const user = ctx.state.user;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
       where: {
@@ -39,11 +42,12 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           cart: {
             $notNull: true,
           },
+          owner: { id: user.id },
         },
       },
       populate: { picture: true, entries: { select: ["id", "cart"] } },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
   async find(ctx) {
     const entries = await strapi.db.query("api::course.course").findMany({
@@ -62,6 +66,6 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       //orderBy: [{ amount: "desc" }, { id: "desc" }],
       populate: { picture: true, entries: { select: ["id", "like"] } },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
 }));
