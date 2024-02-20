@@ -384,6 +384,7 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     >;
     price: Attribute.Integer;
     amount: Attribute.Integer & Attribute.DefaultTo<0>;
+    maxCapacity: Attribute.Integer;
     likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
     picture: Attribute.Media;
     entries: Attribute.Relation<

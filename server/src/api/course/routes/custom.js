@@ -7,5 +7,10 @@ module.exports = {
       path: "/favorite",
       handler: "course.favorite",
     },
+    {
+      method: "GET",
+      path: "/cart",
+      handler: "course.cart",
+    },
   ],
 };

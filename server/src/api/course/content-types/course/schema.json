@@ -34,6 +34,9 @@
       "type": "integer",
       "default": 0
     },
+    "maxCapacity": {
+      "type": "integer"
+    },
     "likeCount": {
       "type": "integer",
       "default": 0
