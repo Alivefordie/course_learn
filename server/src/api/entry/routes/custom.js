@@ -3,12 +3,17 @@
 module.exports = {
   routes: [
     {
-      method: "PUT",
+      method: "GET",
       path: "/courses/:id/like",
       handler: "entry.like",
       config: {
         middlewares: ["api::entry.have-entry"],
       },
+    },
+    {
+      method: "GET",
+      path: "/enroll",
+      handler: "entry.enroll",
     },
   ],
 };

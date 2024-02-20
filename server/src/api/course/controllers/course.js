@@ -23,9 +23,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       ...Parameters,
       where: {
         entries: {
-          like: {
-            $notNull: true,
-          },
+          like: { $notNull: true },
           owner: { id: user.id },
         },
       },
@@ -39,9 +37,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       ...Parameters,
       where: {
         entries: {
-          cart: {
-            $notNull: true,
-          },
+          cart: { $notNull: true },
           owner: { id: user.id },
         },
       },
@@ -55,9 +51,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       ...Parameters,
       where: {
         entries: {
-          enroll: {
-            $notNull: true,
-          },
+          enroll: { $notNull: true },
           owner: { id: user.id },
         },
       },

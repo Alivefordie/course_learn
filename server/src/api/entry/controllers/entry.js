@@ -31,9 +31,51 @@ module.exports = createCoreController("api::entry.entry", ({ strapi }) => ({
       await strapi.entityService.update("api::course.course", entityId, {
         data: { likeCount: count },
       });
-      ctx.body = { ok: 1, likeCount: count };
+      if (!entry[0].like) {
+        ctx.body = { like: "ok", likeCount: count };
+      } else {
+        ctx.body = { unlike: "ok", likeCount: count };
+      }
     } catch (err) {
       ctx.body = err;
     }
+  },
+  async enroll(ctx) {
+    const { CourseId } = ctx.query;
+    const entriesID = Object.values(CourseId);
+    const userId = ctx.state.user.id;
+    const toUpdate = await strapi.db.query("api::entry.entry").findMany({
+      where: {
+        course: { id: entriesID },
+        owner: { id: userId },
+        cart: { $notNull: true },
+      },
+      populate: { course: true, owner: true },
+    });
+    await strapi.db.query("api::entry.entry").updateMany({
+      where: {
+        id: { $in: toUpdate.map(({ id }) => id) },
+      },
+      data: { cart: null, enroll: new Date() },
+    });
+    const count = await Promise.all(
+      entriesID.map((entryid) =>
+        strapi.db.query("api::entry.entry").count({
+          where: {
+            course: { id: entryid },
+            enroll: { $notNull: true },
+          },
+        })
+      )
+    );
+    await Promise.all(
+      entriesID.map((courseId, index) => {
+        strapi.db.query("api::course.course").update({
+          where: { id: courseId },
+          data: { amount: count[index] },
+        });
+      })
+    );
+    ctx.body = { enroll: "ok", enroll_ID: entriesID };
   },
 }));
