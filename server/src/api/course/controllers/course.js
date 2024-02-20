@@ -49,6 +49,22 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+  async mycourses(ctx) {
+    const user = ctx.state.user;
+    const entries = await strapi.db.query("api::course.course").findMany({
+      ...Parameters,
+      where: {
+        entries: {
+          enroll: {
+            $notNull: true,
+          },
+          owner: { id: user.id },
+        },
+      },
+      populate: { picture: true, entries: { select: ["id", "enroll"] } },
+    });
+    return this.transformResponse(entries);
+  },
   async find(ctx) {
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,

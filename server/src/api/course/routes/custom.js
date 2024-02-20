@@ -12,5 +12,10 @@ module.exports = {
       path: "/cart",
       handler: "course.cart",
     },
+    {
+      method: "GET",
+      path: "/my-courses",
+      handler: "course.mycourses",
+    },
   ],
 };
