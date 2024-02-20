@@ -419,9 +419,10 @@ export interface ApiEntryEntry extends Schema.CollectionType {
     singularName: 'entry';
     pluralName: 'entries';
     displayName: 'entry';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     course: Attribute.Relation<
@@ -439,7 +440,6 @@ export interface ApiEntryEntry extends Schema.CollectionType {
     enroll: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::entry.entry',
       'oneToOne',
