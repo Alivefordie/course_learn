@@ -7,13 +7,13 @@ const Common = ({ data }) => {
     })
     return (
         <div>
-            {data.sort((a, b) => b.attributes.likeCount - a.attributes.likeCount).slice(3).map((item) => (
+            {data.sort((a, b) => b.likeCount - a.likeCount).slice(3).map((item) => (
                 <div className="d-flex mb-3" key={item.id}>
-                    <p className="me-2">title : {item.attributes.title}</p>
-                    <p className="me-2">description : {item.attributes.description}</p>
-                    <p className="me-2">amount : {item.attributes.amount}</p>
-                    <p className="me-2">Like : {item.attributes.likeCount}</p>
-                    <img src={"http://localhost:1337" + item.attributes.picture.data.attributes.url} alt="item" width={50} />
+                    <p className="me-2">title : {item.title}</p>
+                    <p className="me-2">description : {item.description}</p>
+                    <p className="me-2">amount : {item.amount}</p>
+                    <p className="me-2">Like : {item.likeCount}</p>
+                    <img src={"http://localhost:1337" + item.picture.url} alt="item" width={50} />
                     <Link to={{ pathname: `./${item.id}` }}>
                         <Button variant="outline-dark">Detail</Button> {/* Use the imported Button component */}
                     </Link>

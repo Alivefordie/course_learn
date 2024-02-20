@@ -27,9 +27,12 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           owner: { id: user.id },
         },
       },
-      populate: { picture: true, entries: { select: ["id", "like"] } },
+      populate: {
+        picture: true,
+        entries: { select: ["id", "like"], where: { owner: user.id } },
+      },
     });
-    return this.transformResponse(entries);
+    return entries;
   },
   async cart(ctx) {
     const user = ctx.state.user;
@@ -41,9 +44,12 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           owner: { id: user.id },
         },
       },
-      populate: { picture: true, entries: { select: ["id", "cart"] } },
+      populate: {
+        picture: true,
+        entries: { select: ["id", "cart"], where: { owner: user.id } },
+      },
     });
-    return this.transformResponse(entries);
+    return entries;
   },
   async mycourses(ctx) {
     const user = ctx.state.user;
@@ -55,27 +61,32 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           owner: { id: user.id },
         },
       },
-      populate: { picture: true, entries: { select: ["id", "enroll"] } },
+      populate: {
+        picture: true,
+        entries: { select: ["id", "enroll"], where: { owner: user.id } },
+      },
     });
-    return this.transformResponse(entries);
+    return entries;
   },
   async find(ctx) {
+    const user = ctx.state.user;
+    const myLike = user
+      ? {
+          entries: { select: ["id", "like"], where: { owner: user.id } },
+        }
+      : undefined;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
       where: {
         entries: {
-          like: {
-            $null: true,
-          },
-          cart: {
-            $null: true,
-          },
+          like: { $null: true },
+          cart: { $null: true },
         },
       },
       //orderBy: [{ id: "desc" }, { entries: { enroll: "asc" } }],
       //orderBy: [{ amount: "desc" }, { id: "desc" }],
-      populate: { picture: true, entries: { select: ["id", "like"] } },
+      populate: { picture: true, ...myLike },
     });
-    return this.transformResponse(entries);
+    return entries;
   },
 }));

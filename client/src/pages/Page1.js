@@ -11,9 +11,10 @@ const Pag1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:1337/api/courses?populate=*');
-        const coursesData = response.data.data; 
+        const coursesData = response.data; 
         setCourses1(coursesData); 
-        // console.log(coursesData);
+        console.log(response)
+        console.log(coursesData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
