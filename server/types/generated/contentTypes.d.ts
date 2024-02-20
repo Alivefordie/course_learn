@@ -362,41 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCartCart extends Schema.CollectionType {
-  collectionName: 'carts';
-  info: {
-    singularName: 'cart';
-    pluralName: 'carts';
-    displayName: 'entry';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    course: Attribute.Relation<
-      'api::cart.cart',
-      'manyToOne',
-      'api::course.course'
-    >;
-    owner: Attribute.Relation<
-      'api::cart.cart',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    like: Attribute.DateTime;
-    cart: Attribute.DateTime;
-    enroll: Attribute.DateTime;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCourseCourse extends Schema.CollectionType {
   collectionName: 'courses';
   info: {
@@ -421,10 +386,10 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     amount: Attribute.Integer & Attribute.DefaultTo<0>;
     likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
     picture: Attribute.Media;
-    entry: Attribute.Relation<
+    entries: Attribute.Relation<
       'api::course.course',
       'oneToMany',
-      'api::cart.cart'
+      'api::entry.entry'
     >;
     course_syllabus: Attribute.DynamicZone<
       ['activity.file', 'activity.text', 'activity.video']
@@ -440,6 +405,48 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEntryEntry extends Schema.CollectionType {
+  collectionName: 'entries';
+  info: {
+    singularName: 'entry';
+    pluralName: 'entries';
+    displayName: 'entry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    course: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'api::course.course'
+    >;
+    owner: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    like: Attribute.DateTime;
+    cart: Attribute.DateTime;
+    enroll: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::entry.entry',
       'oneToOne',
       'admin::user'
     > &
@@ -804,15 +811,15 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    entries: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::cart.cart'
-    >;
     courses: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',
       'api::course.course'
+    >;
+    entries: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::entry.entry'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -888,8 +895,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::cart.cart': ApiCartCart;
       'api::course.course': ApiCourseCourse;
+      'api::entry.entry': ApiEntryEntry;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

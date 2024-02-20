@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "carts",
+  "collectionName": "entries",
   "info": {
-    "singularName": "cart",
-    "pluralName": "carts",
-    "displayName": "entry",
-    "description": ""
+    "singularName": "entry",
+    "pluralName": "entries",
+    "displayName": "entry"
   },
   "options": {
     "draftAndPublish": true
@@ -16,7 +15,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::course.course",
-      "inversedBy": "entry"
+      "inversedBy": "entries"
     },
     "owner": {
       "type": "relation",

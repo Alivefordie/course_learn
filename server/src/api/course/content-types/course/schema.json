@@ -49,10 +49,10 @@
         "audios"
       ]
     },
-    "entry": {
+    "entries": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::cart.cart",
+      "target": "api::entry.entry",
       "mappedBy": "course"
     },
     "course_syllabus": {
