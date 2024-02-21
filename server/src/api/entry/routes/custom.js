@@ -12,6 +12,14 @@ module.exports = {
     },
     {
       method: "GET",
+      path: "/courses/:id/toCart",
+      handler: "entry.toCart",
+      config: {
+        middlewares: ["api::entry.have-entry"],
+      },
+    },
+    {
+      method: "GET",
       path: "/enroll",
       handler: "entry.enroll",
     },

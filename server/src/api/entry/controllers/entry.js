@@ -40,6 +40,28 @@ module.exports = createCoreController("api::entry.entry", ({ strapi }) => ({
       ctx.body = err;
     }
   },
+  async toCart(ctx) {
+    const entityId = ctx.params.id;
+    const userId = ctx.state.user.id;
+    try {
+      const entry = await strapi.entityService.findMany("api::entry.entry", {
+        filters: { owner: userId, course: entityId },
+      });
+      if (!entry[0].cart) {
+        await strapi.entityService.update("api::entry.entry", entry[0].id, {
+          data: { cart: new Date() },
+        });
+        ctx.body = { AddToCart: "ok", courseID: entityId };
+      } else {
+        await strapi.entityService.update("api::entry.entry", entry[0].id, {
+          data: { cart: null },
+        });
+        ctx.body = { RemoveFromCart: "ok", courseID: entityId };
+      }
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
   async enroll(ctx) {
     const { CourseId } = ctx.query;
     const entriesID = Object.values(CourseId);

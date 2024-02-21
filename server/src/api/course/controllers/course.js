@@ -29,7 +29,10 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
-        entries: { select: ["id", "like"], where: { owner: user.id } },
+        entries: {
+          select: ["id", "like"],
+          where: { owner: user.id },
+        },
       },
     });
     return this.transformResponse(entries);
@@ -46,10 +49,13 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
-        entries: { select: ["id", "cart"], where: { owner: user.id } },
+        entries: {
+          select: ["id", "cart"],
+          where: { owner: user.id },
+        },
       },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
   async mycourses(ctx) {
     const user = ctx.state.user;
@@ -63,7 +69,10 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
-        entries: { select: ["id", "enroll"], where: { owner: user.id } },
+        entries: {
+          select: ["id", "enroll"],
+          where: { owner: user.id },
+        },
       },
     });
     return this.transformResponse(entries);
@@ -72,7 +81,10 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     const user = ctx.state.user;
     const myLike = user
       ? {
-          entries: { select: ["id", "like"], where: { owner: user.id } },
+          entries: {
+            select: ["id", "like"],
+            where: { owner: user.id },
+          },
         }
       : undefined;
     const entries = await strapi.db.query("api::course.course").findMany({
