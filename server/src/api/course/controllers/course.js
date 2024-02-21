@@ -101,4 +101,13 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+  async create(ctx) {
+    const { user } = ctx.state;
+    ctx.request["body"].data = {
+      ...ctx.request["body"].data,
+      owner: { connect: [user.id] },
+    };
+    const response = await super.create(ctx);
+    return response;
+  },
 }));
