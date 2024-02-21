@@ -455,6 +455,38 @@ export interface ApiEntryEntry extends Schema.CollectionType {
   };
 }
 
+export interface ApiTansactionTansaction extends Schema.CollectionType {
+  collectionName: 'tansactions';
+  info: {
+    singularName: 'tansaction';
+    pluralName: 'tansactions';
+    displayName: 'tansaction';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    paymentAmout: Attribute.BigInteger;
+    slip: Attribute.Media;
+    paymentDate: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -898,6 +930,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::course.course': ApiCourseCourse;
       'api::entry.entry': ApiEntryEntry;
+      'api::tansaction.tansaction': ApiTansactionTansaction;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
