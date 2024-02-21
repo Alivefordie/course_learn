@@ -20,8 +20,11 @@ module.exports = {
     },
     {
       method: "GET",
-      path: "/enroll",
+      path: "/enroll/:id",
       handler: "entry.enroll",
+      config: {
+        middlewares: ["api::entry.check-cart"],
+      },
     },
   ],
 };

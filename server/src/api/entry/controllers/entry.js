@@ -63,7 +63,7 @@ module.exports = createCoreController("api::entry.entry", ({ strapi }) => ({
     }
   },
   async enroll(ctx) {
-    const { CourseId } = ctx.query;
+    const CourseId = ctx.params.id;
     const entriesID = Object.values(CourseId);
     const userId = ctx.state.user.id;
     const toUpdate = await strapi.db.query("api::entry.entry").findMany({
