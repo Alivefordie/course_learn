@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import Pag1 from './pages/public/Page1';
-import Pag2 from './pages/Page2';
+import Pag2 from './pages/public/Page2';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Payment from './pages/Payment';
