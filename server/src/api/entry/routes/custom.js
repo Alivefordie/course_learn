@@ -23,7 +23,7 @@ module.exports = {
       path: "/enroll/:id",
       handler: "entry.enroll",
       config: {
-        middlewares: ["api::entry.check-cart"],
+        middlewares: ["api::entry.check-cart", "api::entry.check-capacity"],
       },
     },
   ],
