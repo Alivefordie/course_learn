@@ -32,7 +32,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         entries: { select: ["id", "like"], where: { owner: user.id } },
       },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
   async cart(ctx) {
     const user = ctx.state.user;
@@ -66,7 +66,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         entries: { select: ["id", "enroll"], where: { owner: user.id } },
       },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
   async find(ctx) {
     const user = ctx.state.user;
@@ -87,6 +87,6 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       //orderBy: [{ amount: "desc" }, { id: "desc" }],
       populate: { picture: true, ...myLike },
     });
-    return entries;
+    return this.transformResponse(entries);
   },
 }));
