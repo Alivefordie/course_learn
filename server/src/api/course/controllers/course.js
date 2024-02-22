@@ -79,7 +79,13 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
   },
   async find(ctx) {
     const user = ctx.state.user;
-    const myLike = user
+    const haveLikemost = ctx.request.query.likeMost
+      ? { likeCount: "desc" }
+      : undefined;
+    const haveNewest = ctx.request.query.Newest
+      ? { publishedAt: "desc" }
+      : undefined;
+    const userLike = user
       ? {
           entries: {
             select: ["id", "like"],
@@ -87,6 +93,12 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           },
         }
       : undefined;
+    const Owned =
+      user && ctx.request.query.owner
+        ? {
+            owner: user.id,
+          }
+        : undefined;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
       where: {
@@ -94,10 +106,16 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
           like: { $null: true },
           cart: { $null: true },
         },
+        ...Owned,
       },
-      //orderBy: [{ id: "desc" }, { entries: { enroll: "asc" } }],
-      //orderBy: [{ amount: "desc" }, { id: "desc" }],
-      populate: { picture: true, ...myLike },
+      populate: {
+        picture: true,
+        owner: {
+          select: "username",
+        },
+        ...userLike,
+      },
+      orderBy: { ...haveLikemost, ...haveNewest },
     });
     return this.transformResponse(entries);
   },
@@ -108,6 +126,18 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       owner: { connect: [user.id] },
     };
     const response = await super.create(ctx);
+    return response;
+  },
+  async findOne(ctx) {
+    ctx.request.query = {
+      populate: {
+        // @ts-ignore
+        owner: { fields: "username" },
+        picture: true,
+        course_syllabus: true,
+      },
+    };
+    const response = await super.findOne(ctx);
     return response;
   },
 }));
