@@ -3,13 +3,13 @@ import { Nav } from "react-bootstrap";
 const NavbarLink = () => {
     return (    
         <Nav style={{ marginLeft: "auto", marginRight:'10px' }}>
-            <Nav.Link href="/page1" style={{  flexDirection: 'column', textAlign: 'center' }}>
+            <Nav.Link href="/mycourses" style={{  flexDirection: 'column', textAlign: 'center' }}>
                 <img 
                 src=".\course.png"
                 style={{  width: '40px', height: '40px' }} />
                 <div style={{ fontSize: '10px' }}>myCourses</div>
             </Nav.Link>
-            <Nav.Link href="/" style={{ flexDirection: 'column', textAlign: 'center' }}>
+            <Nav.Link href="/history" style={{ flexDirection: 'column', textAlign: 'center' }}>
                 <img 
                 src=".\history.png" 
                 style={{ width: '40px', height: '40px' }} />

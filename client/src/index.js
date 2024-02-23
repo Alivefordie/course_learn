@@ -16,6 +16,7 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Payment from './pages/Payment';
 import Register from './pages/Register';
+import MyCourses from './pages/myCourses';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/mycourses',
+    element: <MyCourses />,
   },
 
   
