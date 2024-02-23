@@ -187,3 +187,24 @@
   bottom: 0;
   
 }
+
+.top-rank-course {
+  border: 1px solid #010101;
+  height: 600px;
+  border-spacing: 30px;
+  border-radius: 8px;
+}
+
+.common-col {
+  border: 1px solid #010101;
+  height: 600px;
+  border-spacing: 30px;
+  border-radius: 8px;
+}
+
+.newest-col {
+  border: 1px solid #010101;
+  height: 600px;
+  border-spacing: 30px;
+  border-radius: 8px;
+}

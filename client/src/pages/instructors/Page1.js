@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Toprank from "../../components/Toprank";
 import Common from "../../components/Common";
 import NavbarTop from "../../components/NavbarTop";
 import NavbarLink from "../../components/NavbarLink";
+import { Col, Container, Row } from "react-bootstrap";
 
-const Pag1 = () => {
+const Page1 = () => {
   const [courses, setCourses] = useState([]);
   const storedJwtToken = sessionStorage.getItem("jwtToken");
   const storedRolename = sessionStorage.getItem("Rolename");
@@ -13,7 +14,9 @@ const Pag1 = () => {
   // Set default headers
   useEffect(() => {
     if (storedJwtToken) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${storedJwtToken}`;
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${storedJwtToken}`;
     }
   }, [storedJwtToken]);
 
@@ -21,9 +24,11 @@ const Pag1 = () => {
     const fetchData = async () => {
       try {
         if (storedJwtToken && storedRolename === "Instructors") {
-          const response = await axios.get('http://localhost:1337/api/courses?populate=*');
-          const coursesData = response.data.data; 
-          setCourses(coursesData); 
+          const response = await axios.get(
+            "http://localhost:1337/api/courses?populate=*"
+          );
+          const coursesData = response.data.data;
+          setCourses(coursesData);
         } else {
           console.log("User is not authorized to view this data");
         }
@@ -37,14 +42,27 @@ const Pag1 = () => {
 
   return (
     <div>
-      <NavbarTop NavbarLink={NavbarLink}/>
-      <h5>Pag1</h5>
-      <h3>Top 3 ranks</h3>
-      <Toprank data={courses} />
-      <h3>Common</h3>
-      <Common data={courses} />
+      <NavbarTop NavbarLink={NavbarLink} />
+      <Container className="page1-continer" sm="3" md='4'>
+        <Row className="page1-rows">
+          <Col className="top-rank-course">
+            <h3 className="header-toprank">Top 3 ranks</h3>
+            <Toprank data={courses} />
+          </Col>
+
+          <Col className="common-col">
+            <h3 className="header-common">Common</h3>
+            <Common data={courses} />
+          </Col>
+
+          <Col className="newest-col">
+            <h3 className="header-newest">Newest</h3>
+            <Common data={courses} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
 
-export default Pag1;
+export default Page1;
