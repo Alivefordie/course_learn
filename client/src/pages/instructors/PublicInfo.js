@@ -1,4 +1,3 @@
-
 import './App.css';
 import NavbarTop from './components/NavbarTop';
 import NavbarLink from './components/NavbarLink';
@@ -6,7 +5,7 @@ import { BsBell } from "react-icons/bs";
 import React,{ useEffect,useState} from 'react';
 
 
-function App() {
+function Public() {
 
   
  const [courses1, setCourses1] = useState([]);
@@ -70,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default Public;
