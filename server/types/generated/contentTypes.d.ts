@@ -393,7 +393,7 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'api::entry.entry'
     >;
     course_syllabus: Attribute.DynamicZone<
-      ['activity.file', 'activity.text', 'activity.video']
+      ['activity.file', 'activity.text', 'activity.video', 'activity.topic']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

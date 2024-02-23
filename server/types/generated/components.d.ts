@@ -25,6 +25,17 @@ export interface ActivityText extends Schema.Component {
   };
 }
 
+export interface ActivityTopic extends Schema.Component {
+  collectionName: 'components_activity_topics';
+  info: {
+    displayName: 'topic';
+    icon: 'folder';
+  };
+  attributes: {
+    name: Attribute.String;
+  };
+}
+
 export interface ActivityVideo extends Schema.Component {
   collectionName: 'components_activity_videos';
   info: {
@@ -42,6 +53,7 @@ declare module '@strapi/types' {
     export interface Components {
       'activity.file': ActivityFile;
       'activity.text': ActivityText;
+      'activity.topic': ActivityTopic;
       'activity.video': ActivityVideo;
     }
   }

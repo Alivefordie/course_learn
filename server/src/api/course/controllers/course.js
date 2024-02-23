@@ -121,14 +121,56 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
   },
   async create(ctx) {
     const { user } = ctx.state;
-    ctx.request["body"].data = {
-      ...ctx.request["body"].data,
-      owner: { connect: [user.id] },
+    if (typeof ctx.request["body"].data === "string") {
+      ctx.request["body"].data = JSON.parse(ctx.request["body"].data);
+      ctx.request["body"].data = JSON.stringify({
+        ...ctx.request["body"].data,
+        owner: { connect: [user.id] },
+      });
+    } else {
+      ctx.request["body"].data = {
+        ...ctx.request["body"].data,
+        owner: { connect: [user.id] },
+      };
+    }
+    ctx.request.query = {
+      populate: {
+        // @ts-ignore
+        picture: "true",
+        course_syllabus: {
+          populate: "*",
+        },
+      },
     };
     const response = await super.create(ctx);
     return response;
   },
   async findOne(ctx) {
+    // const user = ctx.state.user;
+    // const entryId = ctx.params.id;
+    // const Owned = await strapi.db.query("api::course.course").count({
+    //   where: {
+    //     id: entryId,
+    //     owner: user.id,
+    //   },
+    // });
+    // const enrolled = await strapi.db.query("api::entry.entry").count({
+    //   where: {
+    //     course: entryId,
+    //     owner: user.id,
+    //     enroll: { $notNull: true },
+    //   },
+    // });
+    // const myCourse =
+    //   Owned > 0 || enrolled > 0
+    //     ? { course_syllabus: true }
+    //     : {
+    //         course_syllabus: {
+    //           filters: {
+    //             __component: "activity.topic",
+    //           },
+    //         },
+    //       };
     ctx.request.query = {
       populate: {
         // @ts-ignore
