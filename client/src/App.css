@@ -208,3 +208,18 @@
   border-spacing: 30px;
   border-radius: 8px;
 }
+
+.cart-container {
+  border: 1px solid #010101;
+  height: 600px;
+  border-radius: 8px;
+}
+
+.incart-container {
+  background-color: #b3b3b3;
+  height: 450px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+
+}
+
