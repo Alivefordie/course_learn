@@ -56,3 +56,30 @@
   margin-right: 20px;
 }
 
+.incart-container {
+  background-color: #fff;
+  border-radius: 8px;
+  height: 400px;
+  justify-content: center;
+}
+
+.pay-but {
+  margin-top: 200px;
+}
+
+.order-col {
+  height: fit-content;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.price-col {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.item-cart, .price-cart {
+  background-color: #d8d6d6;
+  height: fit-content;
+  border-radius: 8px;
+}
