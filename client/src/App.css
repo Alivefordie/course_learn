@@ -4,7 +4,7 @@
 
 .top-rank-course, .common-col, .newest-col {
   border: 1px solid #fff;
-  background-color: aliceblue;
+  background-color: #fff;
   height: 550px;
   border-spacing: 30px;
   border-radius: 8px;
@@ -14,9 +14,11 @@
 
 
 .cart-container {
-  border: 1px solid #010101;
-  height: 600px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 550px;
   border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .incart-container {
@@ -46,5 +48,14 @@
 }
 
 .NavbarTop {
+  margin-bottom: 20px;
+}
+
+.week-col, .month-col, .year-col {
+  background-color: #fff;
+  border: 1px solid #fff;
+  height: 550px;
+  border-radius: 8px;
+  margin-right: 20px;
   margin-bottom: 20px;
 }

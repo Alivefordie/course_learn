@@ -7,7 +7,7 @@ const Cart = () => {
   return (
     <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
-      <Container className="cart-container">
+      <Container className="cart-container" >
         <h1 style={{ textAlign: "center" }}>myCart</h1>
         <Container className="incart-container">
           <h2>incart</h2>
