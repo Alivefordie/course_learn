@@ -83,3 +83,22 @@
   height: fit-content;
   border-radius: 8px;
 }
+
+.item-top, .item-common, .item-newest {
+  background-color: #d8d6d6;
+  height: fit-content;
+  border-radius: 8px;
+}
+
+.item-inpro, .item-complete, .item-expired {
+  background-color: #d8d6d6;
+  height: fit-content;
+  border-radius: 8px;
+}
+
+.item-week, .item-month, .item-year {
+  background-color: #d8d6d6;
+  height: fit-content;
+  border-radius: 8px;
+}
+

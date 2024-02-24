@@ -13,12 +13,15 @@ const MyCourses = () => {
         <Row className="mycourse-rows">
           <Col className="inprogress-col">
             <h1 style={{fontSize: 30}}>Inprogress</h1>
+            <Container className="item-inpro">inpro 1</Container>
           </Col>
           <Col className="complete-col">
             <h1 style={{fontSize: 30}}>Complete</h1>
+            <Container className="item-complete">complete 1</Container>
           </Col>
           <Col className="expired-col">
             <h1 style={{fontSize: 30}}>Expired</h1>
+            <Container className="item-expired">expired 1</Container>
           </Col>
         </Row>
       </Container>
