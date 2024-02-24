@@ -18,15 +18,24 @@
     "description": {
       "type": "text"
     },
+    "duration": {
+      "type": "integer"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "courses"
+    },
+    "price": {
+      "type": "integer"
+    },
     "amount": {
       "type": "integer",
       "default": 0
     },
-    "owner": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "courses"
+    "maxCapacity": {
+      "type": "integer"
     },
     "likeCount": {
       "type": "integer",
@@ -43,11 +52,20 @@
         "audios"
       ]
     },
-    "carts": {
+    "entries": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::cart.cart",
-      "mappedBy": "courses"
+      "relation": "oneToMany",
+      "target": "api::entry.entry",
+      "mappedBy": "course"
+    },
+    "course_syllabus": {
+      "type": "dynamiczone",
+      "components": [
+        "activity.file",
+        "activity.text",
+        "activity.video",
+        "activity.topic"
+      ]
     }
   }
 }

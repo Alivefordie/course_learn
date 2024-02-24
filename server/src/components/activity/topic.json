@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_activity_topics",
+  "info": {
+    "displayName": "topic",
+    "icon": "folder"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}
