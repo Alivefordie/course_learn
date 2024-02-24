@@ -14,8 +14,9 @@ const InsSee = () => {
         const storedRolename = sessionStorage.getItem("Rolename");
         if (storedJwtToken && storedRolename === "Instructors") {
           axios.defaults.headers.common['Authorization'] = `Bearer ${storedJwtToken}`;
-          const response = await axios.get("http://localhost:1337/api/users/me?populate[courses]=*");
+          const response = await axios.get("http://localhost:1337/api/users/me?populate[courses][populate][picture]=*");
           setMyData(response.data.courses);
+          console.log(response.data.courses);
         } else {
           console.log('JWT token not found.');
         }

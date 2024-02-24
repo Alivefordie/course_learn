@@ -8,9 +8,9 @@ const TopIns = ({ data }) => {
   const [loading, setLoading] = useState(false); // State to manage loading state
   const [error, setError] = useState(null); // State to manage error state
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   const handleEditClick = (item) => {
     setSelectedItem(item);
@@ -61,6 +61,7 @@ const TopIns = ({ data }) => {
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
               <Card.Text>
+                <img src={"http://localhost:1337" + item.picture?.url} alt="item" width={50} />
                 Price: {item.price}
                 <br />
                 Max Capacity: {item.maxCapacity}
