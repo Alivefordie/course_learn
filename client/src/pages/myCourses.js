@@ -7,7 +7,7 @@ import '../App.css'
 const MyCourses = () => {
 
   return (
-    <div>
+    <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
       <Container sm='3' md='4'>
         <Row className="mycourse-rows">

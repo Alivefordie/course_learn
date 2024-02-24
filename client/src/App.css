@@ -1,63 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
-.App {
-  text-align: center;
+.body {
+  background-color: #dc143c;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.top-rank-course {
-  border: 1px solid #010101;
-  height: 600px;
+.top-rank-course, .common-col, .newest-col {
+  border: 1px solid #fff;
+  background-color: aliceblue;
+  height: 550px;
   border-spacing: 30px;
   border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
-.common-col {
-  border: 1px solid #010101;
-  height: 600px;
-  border-spacing: 30px;
-  border-radius: 8px;
-}
-
-.newest-col {
-  border: 1px solid #010101;
-  height: 600px;
-  border-spacing: 30px;
-  border-radius: 8px;
-}
 
 .cart-container {
   border: 1px solid #010101;
@@ -78,20 +32,19 @@
   justify-content: space-between;
 }
 
-.inprogress-col {
-  border: 1px solid black;
-  height: 600px;
+.inprogress-col, .complete-col,.expired-col  {
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 550px;
   border-radius: 8px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
-.complete-col {
-  border: 1px solid black;
-  height: 600px;
-  border-radius: 8px;
+.NavbarLink {
+  margin-bottom: 20px;
 }
 
-.expired-col {
-  border: 1px solid black;
-  height: 600px;
-  border-radius: 8px;
+.NavbarTop {
+  margin-bottom: 20px;
 }

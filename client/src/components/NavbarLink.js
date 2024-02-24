@@ -2,7 +2,7 @@ import { Nav } from "react-bootstrap";
 
 const NavbarLink = () => {
     return (    
-        <Nav style={{ marginLeft: "auto", marginRight:'10px' }}>
+        <Nav className="NavbarLink" style={{ marginLeft: "auto", marginRight:'10px' }}>
             <Nav.Link href="/mycourses" style={{  flexDirection: 'column', textAlign: 'center' }}>
                 <img 
                 src=".\course.png"

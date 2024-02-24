@@ -5,7 +5,7 @@ import { Button, Container } from "react-bootstrap";
 
 const Cart = () => {
   return (
-    <div>
+    <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
       <Container className="cart-container">
         <h1 style={{ textAlign: "center" }}>myCart</h1>

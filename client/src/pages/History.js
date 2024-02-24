@@ -7,7 +7,7 @@ import '../App.css'
 const History = () => {
 
   return (
-    <div>
+    <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
       <Container sm='3' md='4'>
         <h1>History</h1>
