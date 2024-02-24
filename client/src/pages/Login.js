@@ -52,7 +52,8 @@ const Login = () => {
 
 
     return (
-        <div className="container">
+        <div className="body">
+            <Container className="login-container">
             <Form onSubmit={handleSubmit} className="rounded p-4 border shadow">
                 <h2>Sign In</h2>
                 <Form.Group controlId="username">
@@ -83,6 +84,7 @@ const Login = () => {
                     </Button>
                 </div>
             </Form>
+            </Container>
         </div>
     );
 };

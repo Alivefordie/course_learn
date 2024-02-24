@@ -4,7 +4,7 @@ const Payment
 
 
     return(
-        <div>
+        <div className="body">
             <h1>
                 Payment        
             </h1>

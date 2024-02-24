@@ -12,23 +12,6 @@
   margin-right: 20px;
 }
 
-.cart-container {
-  border: 1px solid #fff;
-  background-color: #fff;
-  height: 550px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
-.incart-container {
-  background-color: #b3b3b3;
-  height: 450px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-
-}
-
 .header-mycourse {
   display: flex;
   justify-content: space-between;
@@ -61,3 +44,4 @@
   margin-bottom: 20px;
   margin-right: 20px;
 }
+

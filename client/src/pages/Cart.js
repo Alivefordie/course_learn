@@ -7,7 +7,7 @@ import '../App.css'
 const Cart = () => {
   return (
     <div className="body">
-      <NavbarTop NavbarLink={NavbarLink} />
+<NavbarTop NavbarLink={NavbarLink} />
       <Container className="cart-container" >
         <h1 style={{ textAlign: "center" }}>myCart</h1>
         <Container className="incart-container">
