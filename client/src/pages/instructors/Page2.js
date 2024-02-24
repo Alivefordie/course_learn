@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"; 
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Specific from "../components/Specific";
+import Specific from "../../components/Specific";
 
 const Pag2 = () => {
     const [courses1, setCourses1] = useState([]);

@@ -10,12 +10,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Pag1 from './pages/Page1';
-import Pag2 from './pages/Page2';
+import Pag1 from './pages/instructors/Page1';
+import Pag2 from './pages/instructors/Page2';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Payment from './pages/Payment';
 import Register from './pages/Register';
+import MyCourses from './pages/myCourses';
+import History from './pages/History';
 
 
 const router = createBrowserRouter([
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/mycourses',
+    element: <MyCourses />,
+  },
+  {
+    path: '/history',
+    element: <History />,
   },
 
   
