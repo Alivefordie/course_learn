@@ -12,13 +12,13 @@
   margin-right: 20px;
 }
 
-
 .cart-container {
   border: 1px solid #fff;
   background-color: #fff;
   height: 550px;
   border-radius: 8px;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .incart-container {
@@ -38,9 +38,10 @@
   border: 1px solid #fff;
   background-color: #fff;
   height: 550px;
+  border-spacing: 30px;
   border-radius: 8px;
-  margin-right: 20px;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .NavbarLink {
@@ -52,10 +53,11 @@
 }
 
 .week-col, .month-col, .year-col {
-  background-color: #fff;
   border: 1px solid #fff;
+  background-color: #fff;
   height: 550px;
+  border-spacing: 30px;
   border-radius: 8px;
-  margin-right: 20px;
   margin-bottom: 20px;
+  margin-right: 20px;
 }

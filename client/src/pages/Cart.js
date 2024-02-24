@@ -2,6 +2,7 @@ import React from "react";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import { Button, Container } from "react-bootstrap";
+import '../App.css'
 
 const Cart = () => {
   return (

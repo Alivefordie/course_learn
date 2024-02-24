@@ -10,7 +10,6 @@ const History = () => {
     <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
       <Container sm='3' md='4'>
-        <h1 style={{textAlign: 'center', fontSize: 30}}>History</h1>
         <Row>
           <Col className="week-col">
           <h1 style={{fontSize: 30}}>This week</h1>
