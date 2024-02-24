@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     element: <History />,
   },
   {
-    path: '/testcode',
+    path: '/Instructors',
     element: <InsSee />,
   },
 

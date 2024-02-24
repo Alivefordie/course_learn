@@ -40,7 +40,7 @@
                     const Rolename = userResult.data.role.name;
                     sessionStorage.setItem('Rolename', Rolename);
                     if (Rolename === 'Instructors') {
-                        navigate('/testcode');
+                        navigate('/Instructors');
                     } else if (Rolename === '') {
                         navigate('/');
                     }

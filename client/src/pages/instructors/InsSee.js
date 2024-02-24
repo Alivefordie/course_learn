@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TopIns from "../../components/Ins/TopIns";
 
-
 const InsSee = () => {
   const [myData, setMyData] = useState([]);
 
@@ -15,7 +14,6 @@ const InsSee = () => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${storedJwtToken}`;
           const response = await axios.get("http://localhost:1337/api/users/me?populate[courses]=*");
           setMyData(response.data.courses);
-        //   console.log(response.data.courses)
         } else {
           console.log('JWT token not found.');
         }
@@ -29,7 +27,6 @@ const InsSee = () => {
 
   return (
     <div>
-     testcode
      <TopIns data={myData} />
     </div>
   );
