@@ -24,15 +24,15 @@ const AllCourse = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (storedJwtToken && storedRolename === "Public") {
+        // if (storedJwtToken && storedRolename === "Public") {
           const response = await axios.get(
             "http://localhost:1337/api/courses"
           );
           const coursesData = response.data.data;
           setCourses(coursesData);
-        } else {
-          console.log("User is not authorized to view this data");
-        }
+        // } else {
+        //   console.log("User is not authorized to view this data");
+        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -362,38 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCartCart extends Schema.CollectionType {
-  collectionName: 'carts';
-  info: {
-    singularName: 'cart';
-    pluralName: 'carts';
-    displayName: 'cart';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    courses: Attribute.Relation<
-      'api::cart.cart',
-      'manyToMany',
-      'api::course.course'
-    >;
-    owner: Attribute.Relation<
-      'api::cart.cart',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::cart.cart', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCourseCourse extends Schema.CollectionType {
   collectionName: 'courses';
   info: {
@@ -408,18 +376,24 @@ export interface ApiCourseCourse extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    amount: Attribute.Integer & Attribute.DefaultTo<0>;
+    duration: Attribute.Integer;
     owner: Attribute.Relation<
       'api::course.course',
-      'manyToMany',
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
+    price: Attribute.Integer;
+    amount: Attribute.Integer & Attribute.DefaultTo<0>;
+    maxCapacity: Attribute.Integer;
     likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
     picture: Attribute.Media;
-    carts: Attribute.Relation<
+    entries: Attribute.Relation<
       'api::course.course',
-      'manyToMany',
-      'api::cart.cart'
+      'oneToMany',
+      'api::entry.entry'
+    >;
+    course_syllabus: Attribute.DynamicZone<
+      ['activity.file', 'activity.text', 'activity.video', 'activity.topic']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -432,6 +406,80 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEntryEntry extends Schema.CollectionType {
+  collectionName: 'entries';
+  info: {
+    singularName: 'entry';
+    pluralName: 'entries';
+    displayName: 'entry';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    course: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'api::course.course'
+    >;
+    owner: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    like: Attribute.DateTime;
+    cart: Attribute.DateTime;
+    enroll: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTansactionTansaction extends Schema.CollectionType {
+  collectionName: 'tansactions';
+  info: {
+    singularName: 'tansaction';
+    pluralName: 'tansactions';
+    displayName: 'tansaction';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    paymentAmout: Attribute.BigInteger;
+    slip: Attribute.Media;
+    paymentDate: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tansaction.tansaction',
       'oneToOne',
       'admin::user'
     > &
@@ -798,8 +846,13 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     courses: Attribute.Relation<
       'plugin::users-permissions.user',
-      'manyToMany',
+      'oneToMany',
       'api::course.course'
+    >;
+    entries: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::entry.entry'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -875,8 +928,9 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::cart.cart': ApiCartCart;
       'api::course.course': ApiCourseCourse;
+      'api::entry.entry': ApiEntryEntry;
+      'api::tansaction.tansaction': ApiTansactionTansaction;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

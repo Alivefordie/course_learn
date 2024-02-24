@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tansactions",
+  "info": {
+    "singularName": "tansaction",
+    "pluralName": "tansactions",
+    "displayName": "tansaction"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "paymentAmout": {
+      "type": "biginteger"
+    },
+    "slip": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "paymentDate": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,16 +1,21 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  routes: [ 
+  routes: [
     {
-      method: 'GET',
-      path: '/courses/:id/like',
-      handler: 'course.like'
+      method: "GET",
+      path: "/favorite",
+      handler: "course.favorite",
     },
     {
-      method: 'PUT',
-      path: '/courses/:id/amount',
-      handler: 'course.amount'
-    }
-  ]
+      method: "GET",
+      path: "/cart",
+      handler: "course.cart",
+    },
+    {
+      method: "GET",
+      path: "/my-courses",
+      handler: "course.mycourses",
+    },
+  ],
 };

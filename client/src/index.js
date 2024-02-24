@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import InsSee from './pages/instructors/InsSee';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -57,6 +57,11 @@ const router = createBrowserRouter([
     path: '/history',
     element: <History />,
   },
+  {
+    path: '/Instructors',
+    element: <InsSee />,
+  },
+
 
   
 ]);
