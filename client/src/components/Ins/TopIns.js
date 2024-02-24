@@ -4,6 +4,7 @@ import { Card, Button, Modal, Spinner, Alert, Form } from "react-bootstrap"; // 
 const TopIns = ({ data }) => {
   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
   const [selectedItem, setSelectedItem] = useState(null); // State to store selected item for editing
+  const [editedItem, setEditedItem] = useState(null); // State to store edited item
   const [loading, setLoading] = useState(false); // State to manage loading state
   const [error, setError] = useState(null); // State to manage error state
 
@@ -13,30 +14,44 @@ const TopIns = ({ data }) => {
 
   const handleEditClick = (item) => {
     setSelectedItem(item);
+    setEditedItem({ ...item }); // Make a copy of the item being edited
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedItem(null);
     setShowModal(false);
+    setEditedItem(null); // Clear the edited item state
+    setSelectedItem(null); // Clear the selected item state
   };
 
   const handleSaveChanges = () => {
     // Logic to save changes goes here
     // You can send the edited data to the server or update state as needed
     // For simplicity, this example just closes the modal
+    console.log("Edited Item:", editedItem);
     handleCloseModal();
   };
 
   const handleChange = (e) => {
-    setSelectedItem({
-      ...selectedItem,
+    setEditedItem({
+      ...editedItem,
       [e.target.name]: e.target.value
     });
   };
 
+  const handleAddCourse = () => {
+    setEditedItem({
+      title: "",
+      description: "",
+      price: "",
+      maxCapacity: ""
+    });
+    setShowModal(true);
+  };
+
   return (
     <div className="card-container">
+      <Button variant="primary" onClick={handleAddCourse}>Add Course</Button>
       {loading && <Spinner animation="border" role="status" />}
       {error && <Alert variant="danger">{error}</Alert>}
       {!loading &&
@@ -50,8 +65,6 @@ const TopIns = ({ data }) => {
                 <br />
                 Max Capacity: {item.maxCapacity}
                 <br />
-                Like Count: {item.likeCount}
-                <br />
                 Description: {item.description}
               </Card.Text>
               <Button variant="primary" onClick={() => handleEditClick(item)}>
@@ -62,65 +75,59 @@ const TopIns = ({ data }) => {
         ))}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Item</Modal.Title>
+          <Modal.Title>{selectedItem ? "Edit Course" : "Add Course"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedItem && (
-            <Form>
-              <Form.Group controlId="formTitle">
-                <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={selectedItem.title}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="description"
-                  value={selectedItem.description}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formPrice">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="price"
-                  value={selectedItem.price}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formMaxCapacity">
-                <Form.Label>Max Capacity</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="maxCapacity"
-                  value={selectedItem.maxCapacity}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formLikeCount">
-                <Form.Label>Like Count</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="likeCount"
-                  value={selectedItem.likeCount}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Form>
-          )}
+          <Form>
+            <Form.Group controlId="formTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={editedItem ? editedItem.title : ""}
+                onChange={handleChange}
+                placeholder="Enter title"
+              />
+            </Form.Group>
+            <Form.Group controlId="formDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="description"
+                value={editedItem ? editedItem.description : ""}
+                onChange={handleChange}
+                placeholder="Enter description"
+              />
+            </Form.Group>
+            <Form.Group controlId="formPrice">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="text"
+                name="price"
+                value={editedItem ? editedItem.price : ""}
+                onChange={handleChange}
+                placeholder="Enter price"
+              />
+            </Form.Group>
+            <Form.Group controlId="formMaxCapacity">
+              <Form.Label>Max Capacity</Form.Label>
+              <Form.Control
+                type="text"
+                name="maxCapacity"
+                value={editedItem ? editedItem.maxCapacity : ""}
+                onChange={handleChange}
+                placeholder="Enter max capacity"
+              />
+            </Form.Group>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSaveChanges}>
-            Save Changes
+            {selectedItem ? "Save Changes" : "Add Course"}
           </Button>
         </Modal.Footer>
       </Modal>

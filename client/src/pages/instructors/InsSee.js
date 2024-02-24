@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TopIns from "../../components/Ins/TopIns";
+import NavbarTop from "../../components/NavbarTop";
+import NavbarLink from "../../components/NavbarLink";
 
 const InsSee = () => {
   const [myData, setMyData] = useState([]);
@@ -27,6 +29,7 @@ const InsSee = () => {
 
   return (
     <div>
+    <NavbarTop NavbarLink={NavbarLink} />
      <TopIns data={myData} />
     </div>
   );
