@@ -8,9 +8,13 @@
 }
 
 .test123 {
-    margin-top: 10px; /* ตั้งค่าระยะห่างของข้อความด้านบน */
+    margin-top: 10px;
+}
+
+.test123:hover {
+    cursor: pointer; 
 }
 
 .test123 span {
-    margin-right: 50px; /* กำหนดระยะห่างด้านขวาของข้อความ */
+    margin-right: 50px;
 }

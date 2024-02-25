@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/LoginCss.module.css";
+// import Register from "./Register";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -51,6 +52,11 @@ const Login = () => {
         }
     };
 
+
+    const goto_register = () =>{
+        navigate("/register")
+    }
+
     return (
         <div className={styles.test01}>
             <div className={`container ${styles.leftAlign}`}>
@@ -86,7 +92,7 @@ const Login = () => {
                         </div>
                         <div className={styles.test123}>
                             <span>Forgot Password</span>
-                            <span>Don't have Account?</span>
+                            <span onClick={goto_register}>Don't have Account?</span>
                         </div>
                     </Form>
                 </div>
