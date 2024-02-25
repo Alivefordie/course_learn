@@ -11,23 +11,28 @@ const Specific = ({ data }) => {
 
 
     return (
-        <div  className="body">
+        <Container className="body">
             {data && data.attributes && (
-                <div>
-                    <Container className="newest-col">                      
-                    <img src={"http://localhost:1337" + data.attributes.picture.data.attributes.url} alt="item" width={50} />
-                    <h1>Title: {data.attributes.title}</h1>
-                    <p>Description: {data.attributes.description}</p>
-                    <p>amount: {data.attributes.amount}</p>
-                    <p>linkCount: {data.attributes.likeCount}</p>
-                    <div style={{ display: "flex", justifyContent: "flex-end"}}>
-                    <Button variant="outline-dark">add to cart</Button>
-                    </div>                  
-                    </Container>
-                </div>
-            )}
-        </div>
-        
+              <div>
+                <Container className="course-info"> 
+                  <div> 
+                    <div className="course-title">        
+                    <img src={"http://localhost:1337" + data.attributes.picture.data.attributes.url} alt="item" width={300} />
+                    <h4>Title: {data.attributes.title}</h4>
+                    </div>       
+                    <p style={{wordWrap: 'break-word'}}>Description: {data.attributes.description}</p>
+                    <p>Amount: {data.attributes.amount}</p>
+                    <p>Link Count: {data.attributes.likeCount}</p>
+                  </div>
+                               
+                  <div style={{marginTop: 'auto', display: "flex", justifyContent: "flex-end"}}>
+                    <Button variant="outline-dark" style={{marginBottom: '10px'}}>add to cart</Button>
+                  </div>
+                </Container>  
+              </div>
+            )}       
+          </Container>  
+          
     );
 }
 
