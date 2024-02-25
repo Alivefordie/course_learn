@@ -13,6 +13,9 @@ const Parameters = {
     "amount",
     "maxCapacity",
     "likeCount",
+    "createdAt",
+    "updatedAt",
+    "publishedAt",
   ],
 };
 const { createCoreController } = require("@strapi/strapi").factories;
@@ -110,9 +113,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
-        owner: {
-          select: "username",
-        },
+        owner: { select: "username" },
         ...userLike,
       },
       orderBy: { ...haveLikemost, ...haveNewest },
