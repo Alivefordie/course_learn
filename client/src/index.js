@@ -18,7 +18,7 @@ import Payment from './pages/Payment';
 import Register from './pages/Register';
 import MyCourses from './pages/myCourses';
 import History from './pages/History';
-
+import AllCourse from './pages/allCourse';
 
 const router = createBrowserRouter([
   {

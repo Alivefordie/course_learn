@@ -6,9 +6,10 @@ import "../App.css";
 import axios from "axios";
 
 const Cart = () => {
-const [cart,setdata] = useState([])
+  const [data, setData] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const fect = async() => {
+  const fetchData = async () => {
     try {
       const jwtToken = sessionStorage.getItem('jwtToken');
       if (!jwtToken) {
@@ -16,18 +17,28 @@ const [cart,setdata] = useState([])
         return;
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      const response = await axios.get("http://localhost:1337/api/users/me?populate[courses]=*");
+      const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
       console.log(response.data.courses);
-      setdata(response.data.courses);
+      setData(response.data.courses);
+      calculateTotalPrice(response.data.courses);
     } catch(error) {
       console.error('Error occurred:', error);
     }
   }
-  
-  
-  useEffect(()=>{
-    fect()
-  },[])
+
+  const calculateTotalPrice = (courses) => {
+    const totalPrice = courses.reduce((acc, course) => {
+      if (course.price) {
+        return acc + course.price;
+      }
+      return acc;
+    }, 0);
+    setTotalPrice(totalPrice);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="body">
@@ -39,17 +50,19 @@ const [cart,setdata] = useState([])
             <Col className="order-col" sm={8}>
               <p>Order</p>
               <Container className="item-cart">
-                <p>
-                  item 1
-                </p>
+                {data.map((item) => (
+                  <div key={item.id}>
+                    <p>Title: {item.title}</p>
+                    <p>Price: {item.price}</p>
+                  </div>
+                ))}
+                
               </Container>
             </Col>
             <Col className="price-col" sm={2}>
-              <p>Price</p>
+              <p>Total Price</p>
               <Container className="price-cart">
-                <p>
-                  2,990
-                </p>
+                <p>{totalPrice}</p>
               </Container>
             </Col>
           </Row>
@@ -57,7 +70,6 @@ const [cart,setdata] = useState([])
             <Button variant="outline-dark" className="pay-but">Payment</Button>
           </div>
         </Container>
-
       </Container>
     </div>
   );
