@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "../css/PayCss.module.css";
 import Button from "react-bootstrap/Button";
-import axios from "axios"; // Import axios for making HTTP requests
+import Modal from "react-bootstrap/Modal";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import axios from "axios"; 
 
 const Payment = () => {
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const fetchData = async () => {
         try {
@@ -18,7 +22,7 @@ const Payment = () => {
             const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
             console.log(response.data.courses);
             setData(response.data.courses);
-            calculateTotalPrice(response.data.courses); // Call calculateTotalPrice after fetching data
+            calculateTotalPrice(response.data.courses); 
         } catch(error) {
             console.error('Error occurred:', error);
         }
@@ -35,8 +39,23 @@ const Payment = () => {
     }
 
     useEffect(() => {
-        fetchData(); // Fetch data when the component mounts
+        fetchData(); 
     }, []);
+
+    const handleConfirm = () => {
+        setShowModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setProgress(0); 
+    }
+
+    const handleNext = () => {
+        if (progress < 100) {
+            setProgress(Math.min(progress + 33.33, 100));
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -45,12 +64,12 @@ const Payment = () => {
                 <div className={styles.ct1}>
                     1
                     <div className={styles.ct1_1}>
-                    {data.map((item) => (
-                  <div key={item.id}>
-                    <p>Title: {item.title}</p>
-                    <p>Price: {item.price}</p>
-                  </div>
-                ))} 
+                        {data.map((item) => (
+                            <div key={item.id}>
+                                <p>Title: {item.title}</p>
+                                <p>Price: {item.price}</p>
+                            </div>
+                        ))} 
                     </div>
                     <div className={styles.totalPrice}>
                         TotalPrice: {totalPrice} 
@@ -81,14 +100,37 @@ const Payment = () => {
                         <p>METHOD</p>
                         <br />
                         <div className={styles.confirm}>
-                            <Button variant="dark">Detail</Button>
+                            <Button onClick={handleConfirm} variant="dark">Confirm</Button>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal Title</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {progress >= 0 && <p>Step 1: Payment Details</p>}
+                    {progress >= 33 && 
+                        <div>
+                            <p>Step 2: QR Code</p>
+                            <img src="/qrcode.png" alt="QR Code" className={styles.qrCode} />
+                        </div>
+                    }
+                    {progress >= 66 && <p>Step 3: Completion</p>}
+                    <ProgressBar now={progress} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleNext}>
+                        Next
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
