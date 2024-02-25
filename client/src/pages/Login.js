@@ -1,10 +1,9 @@
 import React from "react";
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavbarTop from "../components/NavbarTop";
-import styles from "../css/LoginCss.module.css"
+import styles from "../css/LoginCss.module.css";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -30,7 +29,7 @@ const Login = () => {
                 password: user.password,
             });
             console.log(response.data);
-            const jwtToken = response.data.jwt; // Corrected variable name
+            const jwtToken = response.data.jwt;
             sessionStorage.setItem('jwtToken', jwtToken);
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
 
@@ -52,45 +51,47 @@ const Login = () => {
         }
     };
 
-
     return (
         <div className={styles.test01}>
-        <div className="container">
-            <div className={styles.test}>
-                <Form onSubmit={handleSubmit} className="rounded p-4 border shadow">
-                    <h2>Login </h2>
-                    <img src="cart.png"></img>
-                    <Form.Group controlId="username">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter username"
-                            value={user.username}
-                            onChange={handleUserChange}
-                            required
-                        />
-                    </Form.Group>
-
-                    <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            value={user.password}
-                            onChange={handleUserChange}
-                            required
-                        />
-                    </Form.Group>
-                    <br/>
-                    <div>
-                        <Button variant="primary" type="submit" disabled={!submitEnabled}>
-                            Login
-                        </Button>
-                    </div>
-                </Form>
+            <div className={`container ${styles.leftAlign}`}>
+                <div className={styles.test}>
+                    <Form onSubmit={handleSubmit} className="rounded p-4 border shadow">
+                        <h2>Login </h2>
+                        <img src="/cart.png" alt="Cart" />
+                        <Form.Group controlId="username">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter username"
+                                value={user.username}
+                                onChange={handleUserChange}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="password">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Password"
+                                value={user.password}
+                                onChange={handleUserChange}
+                                required
+                            />
+                        </Form.Group>
+                        <div>
+                            <br/>
+                            <Button variant="primary" type="submit" disabled={!submitEnabled}>
+                                Login
+                            </Button>
+                        </div>
+                        <div className={styles.test123}>
+                            <span>Forgot Password</span>
+                            <span>Don't have Account?</span>
+                        </div>
+                    </Form>
+                </div>
             </div>
         </div>
-    </div>
     );
 };
 

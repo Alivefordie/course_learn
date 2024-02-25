@@ -6,3 +6,11 @@
 .leftAlign {
     text-align: left;
 }
+
+.test123 {
+    margin-top: 10px; /* ตั้งค่าระยะห่างของข้อความด้านบน */
+}
+
+.test123 span {
+    margin-right: 50px; /* กำหนดระยะห่างด้านขวาของข้อความ */
+}
