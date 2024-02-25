@@ -3,7 +3,7 @@ import styles from "../css/PayCss.module.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import axios from "axios"; 
+import axios from "axios";
 
 const Payment = () => {
     const [data, setData] = useState([]);
@@ -15,15 +15,15 @@ const Payment = () => {
         try {
             const jwtToken = sessionStorage.getItem('jwtToken');
             if (!jwtToken) {
-              console.error('JWT token not found.');
-              return;
+                console.error('JWT token not found.');
+                return;
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
             const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
             console.log(response.data.courses);
             setData(response.data.courses);
-            calculateTotalPrice(response.data.courses); 
-        } catch(error) {
+            calculateTotalPrice(response.data.courses);
+        } catch (error) {
             console.error('Error occurred:', error);
         }
     }
@@ -39,7 +39,7 @@ const Payment = () => {
     }
 
     useEffect(() => {
-        fetchData(); 
+        fetchData();
     }, []);
 
     const handleConfirm = () => {
@@ -48,19 +48,21 @@ const Payment = () => {
 
     const handleCloseModal = () => {
         setShowModal(false);
-        setProgress(0); 
+        setProgress(0);
     }
 
     const handleNext = () => {
         if (progress < 100) {
             setProgress(Math.min(progress + 33.33, 100));
         }
+        if (progress > 70) {
+            handleCloseModal();
+        }
     }
 
     return (
         <div className={styles.container}>
             <div className={styles.body}>
-
                 <div className={styles.ct1}>
                     1
                     <div className={styles.ct1_1}>
@@ -69,11 +71,11 @@ const Payment = () => {
                                 <p>Title: {item.title}</p>
                                 <p>Price: {item.price}</p>
                             </div>
-                        ))} 
+                        ))}
                     </div>
                     <div className={styles.totalPrice}>
-                        TotalPrice: {totalPrice} 
-                    </div >
+                        TotalPrice: {totalPrice}
+                    </div>
                 </div>
                 <div className={styles.ct2}>
                     Name
@@ -91,7 +93,6 @@ const Payment = () => {
                     Phone
                     <br />
                     <input className={styles.input} placeholder="phone" />
-
                 </div>
                 <div className={styles.ct3}>
                     3
@@ -104,16 +105,18 @@ const Payment = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal Title</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {progress >= 0 && <p>Step 1: Payment Details</p>}
-                    {progress >= 33 && 
+                    {progress >= 0 &&
+                        <div>
+                            <p>Step 1: Payment Details: {totalPrice} บาท</p>
+                        </div>
+                    }
+                    {progress >= 33 &&
                         <div>
                             <p>Step 2: QR Code</p>
                             <img src="/qrcode.png" alt="QR Code" className={styles.qrCode} />
