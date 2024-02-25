@@ -5,6 +5,9 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NavbarTop from "../components/NavbarTop";
+import NavbarLink from "../components/NavbarLink";
+import styles from "../css/RegisterCss.module.css";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -18,7 +21,6 @@ const Register = () => {
                 email: user.email,
                 password: user.password,
             });
-    
             console.log('Well done!');
             console.log('User profile', response.data.user);
             console.log('User token', response.data.jwt);
@@ -40,11 +42,12 @@ const Register = () => {
         }));
       };
     return (
-        <div className="container"> 
-      <h1>Register</h1>
-      <Form className="rounded p-4 border shadow">
+        <div className = {styles.Register}> 
+        <NavbarTop />
+      <h1 className = {styles.righteous}>Register</h1>
+      <Form className= {styles.register}>
         <Form.Group controlId="name" >
-          <Form.Label>Name</Form.Label>
+          <Form.Label  className= {styles.register2}>Name</Form.Label>
           <Form.Control type="text" placeholder="Enter your full name" name = "username" value = {user.username} onChange={handleUserChange}/>
         </Form.Group>
         <Form.Group controlId="email">

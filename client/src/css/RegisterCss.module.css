@@ -1,0 +1,26 @@
+.Register {
+    background-color: rgb(218, 29, 0);
+    color: white;
+       
+}
+
+.register {
+    color: black;
+    margin-left: 3vw;
+}
+
+.register2 {
+    color: black;
+    
+}
+
+.righteous {
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 3vw;
+  }
+
+.form {
+    margin-right: 3vw;
+}  

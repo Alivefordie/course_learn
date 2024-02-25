@@ -62,6 +62,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+
   async mycourses(ctx) {
     const user = ctx.state.user;
     const entries = await strapi.db.query("api::course.course").findMany({
@@ -83,6 +84,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+
   async find(ctx) {
     const user = ctx.state.user;
     const haveLikemost = ctx.request.query.likeMost
@@ -123,6 +125,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+  
   async create(ctx) {
     const { user } = ctx.state;
     if (typeof ctx.request["body"].data === "string") {
