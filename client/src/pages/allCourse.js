@@ -84,13 +84,20 @@ const AllCourse = () => {
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
                   </Card.Body>
-                  <Link className="add-icon position-absolute top-0 end-0 p-2">
+                  <Col className="add-icon position-absolute top-0 end-0 p-2">
                     <img
                       src="../plus.png"
                       style={{ width: "20px", height: "20px" }}
                       alt="Add Icon"
                     />
-                  </Link>
+                  </Col>
+                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
+                    <img
+                      src="../heart.png"
+                      style={{ width: "20px", height: "20px" }}
+                      alt="Like Icon"
+                    />
+                  </Col>
                 </div>
               </Card>
             </Container>
@@ -113,13 +120,20 @@ const AllCourse = () => {
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
                   </Card.Body>
-                  <Link className="add-icon position-absolute top-0 end-0 p-2">
+                  <Col className="add-icon position-absolute top-0 end-0 p-2">
                     <img
                       src="../plus.png"
                       style={{ width: "20px", height: "20px" }}
                       alt="Add Icon"
                     />
-                  </Link>
+                  </Col>
+                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
+                    <img
+                      src="../heart.png"
+                      style={{ width: "20px", height: "20px" }}
+                      alt="Like Icon"
+                    />
+                  </Col>
                 </div>
               </Card>
             </Container>
@@ -142,13 +156,20 @@ const AllCourse = () => {
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
                   </Card.Body>
-                  <Link className="add-icon position-absolute top-0 end-0 p-2">
+                  <Col className="add-icon position-absolute top-0 end-0 p-2">
                     <img
                       src="../plus.png"
                       style={{ width: "20px", height: "20px" }}
                       alt="Add Icon"
                     />
-                  </Link>
+                  </Col>
+                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
+                    <img
+                      src="../heart.png"
+                      style={{ width: "20px", height: "20px" }}
+                      alt="Like Icon"
+                    />
+                  </Col>
                 </div>
               </Card>
             </Container>
