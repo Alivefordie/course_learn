@@ -13,7 +13,6 @@ function App() {
     
     <div >
        <Register/>
-       
     </div>
 
   );
