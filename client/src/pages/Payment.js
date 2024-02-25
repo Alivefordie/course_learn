@@ -12,7 +12,9 @@ const Payment = () => {
                     </div>
                 </div>
                 <div className={styles.ct2}>
-                    2
+                <div className={styles.ct1_2}>
+                        2
+                    </div>
                 </div>
                 <div className={styles.ct3}>
                     3
