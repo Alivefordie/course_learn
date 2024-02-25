@@ -32,6 +32,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
+        owner: { select: "username" },
         entries: {
           select: ["id", "like"],
           where: { owner: user.id },
@@ -52,6 +53,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
+        owner: { select: "username" },
         entries: {
           select: ["id", "cart"],
           where: { owner: user.id },
@@ -72,6 +74,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       },
       populate: {
         picture: true,
+        owner: { select: "username" },
         entries: {
           select: ["id", "enroll"],
           where: { owner: user.id },
