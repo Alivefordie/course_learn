@@ -4,8 +4,11 @@ import NavbarLink from "../components/NavbarLink";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Payment from "./Payment";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -24,6 +27,10 @@ const Cart = () => {
     } catch(error) {
       console.error('Error occurred:', error);
     }
+  }
+
+  const payment = () =>{
+    navigate("/payment");
   }
 
   const calculateTotalPrice = (courses) => {
@@ -66,7 +73,8 @@ const Cart = () => {
             </Col>
           </Row>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="outline-dark" className="pay-but">Payment</Button>
+            <Button variant="outline-dark" onClick={payment}  className="pay-but">Payment</Button>
+
           </div>
         </Container>
       </Container>
