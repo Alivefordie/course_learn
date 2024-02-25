@@ -62,6 +62,7 @@ const TopIns = ({ data }) => {
               <Card.Title>{item.title}</Card.Title>
               <Card.Text>
                 <img src={"http://localhost:1337" + item.picture?.url} alt="item" width={50} />
+                <br />
                 Price: {item.price}
                 <br />
                 Max Capacity: {item.maxCapacity}

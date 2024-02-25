@@ -1,15 +1,35 @@
 import React from "react";
-const Payment
- = () =>{
+import styles from "../css/PayCss.module.css";
+
+const Payment = () => {
+    return (
+        <div className={styles.container}>
+            <div className={styles.body}>
+
+                <div className={styles.ct1}>
+                    <div className={styles.ct1_1}>
+                        1
+                    </div>
+                </div>
+                <div className={styles.ct2}>
+                    2
+                </div>
+                <div className={styles.ct3}>
+                    3
+                    <div className={styles.payment}>
+                        Choose payment
+                        <br />
+                        <div className={styles.confirm}>
+                            <btn>confirm</btn>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
-    return(
-        <div className="body">
-            <h1>
-                Payment        
-            </h1>
         </div>
-    )
+    );
 }
 
-export default Payment
+export default Payment;
