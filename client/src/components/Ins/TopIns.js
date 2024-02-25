@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Modal, Spinner, Alert, Form } from "react-bootstrap"; // Import Bootstrap components
+import { Card, Button, Modal, Spinner, Alert, Form } from "react-bootstrap";
+import axios from "axios"; // Import axios for HTTP requests
 
 const TopIns = ({ data }) => {
-  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
-  const [selectedItem, setSelectedItem] = useState(null); // State to store selected item for editing
-  const [editedItem, setEditedItem] = useState(null); // State to store edited item
-  const [loading, setLoading] = useState(false); // State to manage loading state
-  const [error, setError] = useState(null); // State to manage error state
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [editedItem, setEditedItem] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleEditClick = (item) => {
     setSelectedItem(item);
-    setEditedItem({ ...item }); // Make a copy of the item being edited
+    setEditedItem({ ...item });
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setEditedItem(null); // Clear the edited item state
-    setSelectedItem(null); // Clear the selected item state
+    setEditedItem(null);
+    setSelectedItem(null);
   };
 
   const handleSaveChanges = () => {
-    // Logic to save changes goes here
-    // You can send the edited data to the server or update state as needed
-    // For simplicity, this example just closes the modal
     console.log("Edited Item:", editedItem);
     handleCloseModal();
   };
@@ -47,6 +41,16 @@ const TopIns = ({ data }) => {
       maxCapacity: ""
     });
     setShowModal(true);
+  };
+
+  const handleDelete = async (itemId) => {
+    try {
+      const response = await axios.delete(`http://localhost:1337/api/courses/${itemId}`);
+      console.log("Delete Response:", response);
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      setError("Failed to delete course. Please try again."); 
+    }
   };
 
   return (
@@ -69,9 +73,8 @@ const TopIns = ({ data }) => {
                 <br />
                 Description: {item.description}
               </Card.Text>
-              <Button variant="primary" onClick={() => handleEditClick(item)}>
-                Edit
-              </Button>
+              <Button variant="primary" onClick={() => handleEditClick(item)}>Edit</Button>
+              <Button variant="danger" onClick={() => handleDelete(item.id)}>Delete</Button>
             </Card.Body>
           </Card>
         ))}
@@ -125,9 +128,7 @@ const TopIns = ({ data }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
+          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
           <Button variant="primary" onClick={handleSaveChanges}>
             {selectedItem ? "Save Changes" : "Add Course"}
           </Button>
