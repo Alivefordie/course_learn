@@ -7,6 +7,28 @@ import NavbarLink from "../components/NavbarLink";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import { Link, NavLink } from "react-router-dom";
+/*
+const CourseCard = () => {
+  <Card style={{ width: "100%" }} className="d-flex flex-row">
+    <div className="image-col">
+      <Card.Img className="course-image" variant="left" src="books-pile.png" />
+    </div>
+    <div className="body-col">
+      <Card.Body>
+        <Card.Title>Course Title</Card.Title>
+        <Card.Text>details</Card.Text>
+      </Card.Body>
+      <Link className="add-icon position-absolute top-0 end-0 p-2">
+        <img
+          src="../plus.png"
+          style={{ width: "20px", height: "20px" }}
+          alt="Add Icon"
+        />
+      </Link>
+    </div>
+  </Card>;
+};
+*/
 
 const AllCourse = () => {
   const [courses, setCourses] = useState([]);

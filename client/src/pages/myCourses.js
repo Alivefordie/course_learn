@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  ProgressBar,
+} from "react-bootstrap";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import "../App.css";
-import { Link } from "react-router-dom";
+
+const inpro = 60; //now progress % form data
+const complete = 100;
+const late = 40;
 
 const MyCourses = () => {
   return (
@@ -26,6 +36,7 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
+                    <ProgressBar now={inpro} label={`${inpro}%`} />
                   </Card.Body>
                 </div>
               </Card>
@@ -46,6 +57,7 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
+                    <ProgressBar now={complete} label={`${complete}%`} />
                   </Card.Body>
                 </div>
               </Card>
@@ -66,6 +78,7 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
+                    <ProgressBar now={late} label={`${late}%`} />
                   </Card.Body>
                 </div>
               </Card>
