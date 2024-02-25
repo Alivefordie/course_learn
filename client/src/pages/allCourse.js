@@ -6,7 +6,7 @@ import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
-import { Link, NavLink } from "react-router-dom";
+
 /*
 const CourseCard = () => {
   <Card style={{ width: "100%" }} className="d-flex flex-row">
@@ -68,7 +68,15 @@ const AllCourse = () => {
       <Container className="page1-continer" sm="3" md="4">
         <Row className="page1-rows">
           <Col className="top-rank-course">
-            <h3 className="header-toprank">Top 3 ranks</h3>
+            <h3 className="header-toprank">
+              <img
+                src="../fire.png"
+                style={{ width: "30px", height: "30px" }}
+                alt="Fire Icon"
+                className="fire-image"
+              />
+              Top 3 ranks
+            </h3>
             <Toprank data={courses} />
             <Container className="item-top">
               <Card style={{ width: "100%" }} className="d-flex flex-row">
@@ -104,7 +112,15 @@ const AllCourse = () => {
           </Col>
 
           <Col className="common-col">
-            <h3 className="header-common">Common</h3>
+            <h3 className="header-common">
+              <img
+                src="../book.png"
+                style={{ width: "30px", height: "30px" }}
+                alt="Common Icon"
+                className="common-image"
+              />
+              Common
+            </h3>
             <Common data={courses} />
             <Container className="item-common">
               <Card style={{ width: "100%" }} className="d-flex flex-row">
@@ -140,7 +156,15 @@ const AllCourse = () => {
           </Col>
 
           <Col className="newest-col">
-            <h3 className="header-newest">Newest</h3>
+            <h3 className="header-newest">
+              <img
+                src="../newest.png"
+                style={{ width: "40px", height: "40px" }}
+                alt="Newest Icon"
+                className="newest-image"
+              />
+              Newest
+            </h3>
             <Common data={courses} />
             <Container className="item-newest">
               <Card style={{ width: "100%" }} className="d-flex flex-row">

@@ -64,7 +64,7 @@
 }
 
 .pay-but {
-  margin-top: 20px;
+  margin-top: 200px;
 }
 
 .order-col {
@@ -138,6 +138,15 @@
   justify-content: right;
 }
 
-.add-icon {
-  justify-content: right;
+.header-toprank, .header-common, .header-newest {
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.fire-image, .common-image, .newest-image {
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
