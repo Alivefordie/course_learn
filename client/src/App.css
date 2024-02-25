@@ -85,19 +85,16 @@
 }
 
 .item-top, .item-common, .item-newest {
-  background-color: #d8d6d6;
   height: fit-content;
   border-radius: 8px;
 }
 
 .item-inpro, .item-complete, .item-expired {
-  background-color: #d8d6d6;
   height: fit-content;
   border-radius: 8px;
 }
 
 .item-week, .item-month, .item-year {
-  background-color: #d8d6d6;
   height: fit-content;
   border-radius: 8px;
 }
@@ -120,4 +117,27 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+}
+
+.course-image {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.image-col {
+  justify-content: left;
+}
+
+.body-col {
+  justify-content: right;
+}
+
+.add-icon {
+  justify-content: right;
 }
