@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../css/PayCss.module.css";
+import Button from "react-bootstrap/Button";
 
 const Payment = () => {
     return (
@@ -7,13 +8,15 @@ const Payment = () => {
             <div className={styles.body}>
 
                 <div className={styles.ct1}>
+                    1
                     <div className={styles.ct1_1}>
-                        1
+                        1.1
                     </div>
                 </div>
                 <div className={styles.ct2}>
+                    2
                 <div className={styles.ct1_2}>
-                        2
+                        2.2
                     </div>
                 </div>
                 <div className={styles.ct3}>
@@ -22,7 +25,7 @@ const Payment = () => {
                         Choose payment
                         <br />
                         <div className={styles.confirm}>
-                            <btn>confirm</btn>
+                        <Button variant="dark">Detail</Button>
                         </div>
                     </div>
                 </div>
