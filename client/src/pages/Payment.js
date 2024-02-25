@@ -12,14 +12,26 @@ const Payment = () => {
                     <div className={styles.ct1_1}>
                         1.1
                     </div>
+                    <div className={styles.totalPrice}>
+                        totalPrice:
+                    </div >
                 </div>
                 <div className={styles.ct2}>
-                    2
-                
-                    <div className={styles.test}>
-                        <input className={styles.input} placeholder="Name" />
-                    </div>
-                
+                    Name
+                    <br />
+                    <input className={styles.input} placeholder="Name" />
+                    <br />
+                    email
+                    <br />
+                    <input className={styles.input} placeholder="email" />
+                    <br />
+                    date
+                    <br />
+                    <input className={styles.input} placeholder="date" />
+                    <br />
+                    phone
+                    <br />
+                    <input className={styles.input} placeholder="phone" />
 
                 </div>
                 <div className={styles.ct3}>
@@ -28,7 +40,7 @@ const Payment = () => {
                         Choose payment
                         <br />
                         <div className={styles.confirm}>
-                        <Button variant="dark">Detail</Button>
+                            <Button variant="dark">Detail</Button>
                         </div>
                     </div>
                 </div>

@@ -55,8 +55,7 @@ const Cart = () => {
                     <p>Title: {item.title}</p>
                     <p>Price: {item.price}</p>
                   </div>
-                ))}
-                
+                ))} 
               </Container>
             </Col>
             <Col className="price-col" sm={2}>
