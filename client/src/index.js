@@ -23,7 +23,7 @@ import AllCourse from './pages/allCourse';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AllCourse />,
+    element: <App />,
   },
   {
     path: '/page1',
