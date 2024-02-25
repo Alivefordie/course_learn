@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const MyCourses = () => {
   return (
@@ -25,7 +26,6 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
                   </Card.Body>
                 </div>
               </Card>
@@ -46,7 +46,6 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
                   </Card.Body>
                 </div>
               </Card>
@@ -67,7 +66,6 @@ const MyCourses = () => {
                   <Card.Body>
                     <Card.Title>Course Title</Card.Title>
                     <Card.Text>details</Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
                   </Card.Body>
                 </div>
               </Card>
