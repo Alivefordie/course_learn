@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 const Specific = ({ data }) => {
     const { item } = useParams();
@@ -11,17 +11,23 @@ const Specific = ({ data }) => {
 
 
     return (
-        <div>
+        <div  className="body">
             {data && data.attributes && (
                 <div>
+                    <Container className="newest-col">                      
+                    <img src={"http://localhost:1337" + data.attributes.picture.data.attributes.url} alt="item" width={50} />
                     <h1>Title: {data.attributes.title}</h1>
                     <p>Description: {data.attributes.description}</p>
                     <p>amount: {data.attributes.amount}</p>
                     <p>linkCount: {data.attributes.likeCount}</p>
-                    <Button variant="outline-dark">ลงเรียน</Button>
+                    <div style={{ display: "flex", justifyContent: "flex-end"}}>
+                    <Button variant="outline-dark">add to cart</Button>
+                    </div>                  
+                    </Container>
                 </div>
             )}
         </div>
+        
     );
 }
 

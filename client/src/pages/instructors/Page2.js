@@ -24,12 +24,9 @@ const Pag2 = () => {
     }, [item]);
 
     return (
-        <div>
-            <NavbarTop NavbarLink={NavbarLink} />
-            <h1>
-                <Specific data = {courses1} />
-            </h1>
-         
+        <div className="body">
+      <NavbarTop NavbarLink={NavbarLink} />
+            <Specific data = {courses1} />
         </div>
     );
 }
