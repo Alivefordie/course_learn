@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Modal, Spinner, Alert, Form } from "react-bootstrap";
+import axios from "axios"; // Import axios for HTTP requests
 
 const TopIns = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
@@ -42,9 +43,14 @@ const TopIns = ({ data }) => {
     setShowModal(true);
   };
 
-  const handleDelete = (itemId) => {
-    // Implement logic to delete item by itemId
-    console.log("Deleting item with id:", itemId);
+  const handleDelete = async (itemId) => {
+    try {
+      const response = await axios.delete(`http://localhost:1337/api/courses/${itemId}`);
+      console.log("Delete Response:", response);
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      setError("Failed to delete course. Please try again."); 
+    }
   };
 
   return (
