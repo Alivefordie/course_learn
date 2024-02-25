@@ -64,7 +64,7 @@ const Payment = () => {
         <div className={styles.container}>
             <div className={styles.body}>
                 <div className={styles.ct1}>
-                    1
+                    .
                     <div className={styles.ct1_1}>
                         {data.map((item) => (
                             <div key={item.id}>
@@ -95,7 +95,7 @@ const Payment = () => {
                     <input className={styles.input} placeholder="phone" />
                 </div>
                 <div className={styles.ct3}>
-                    3
+                    .
                     <div className={styles.payment}>
                         <p>CHOOSE PAYMENT</p>
                         <p>METHOD</p>
