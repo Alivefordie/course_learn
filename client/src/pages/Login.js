@@ -1,62 +1,28 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/LoginCss.module.css";
 // import Register from "./Register";
 import NavbarTop from "../components/NavbarTop";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
+  
+  
+    const { login } = useContext(AuthContext);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const initialUser = { password: "", username: "" };
-    const [user, setUser] = useState(initialUser);
-    const [submitEnabled, setSubmitEnabled] = useState(true);
 
-    const handleUserChange = ({ target }) => {
-        const { id, value } = target;
-        setUser((currentUser) => ({
-            ...currentUser,
-            [id]: value,
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        console.log('submitted');
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setSubmitEnabled(false);
         try {
-            let response = await axios.post('http://localhost:1337/api/auth/local', {
-                identifier: user.username,
-                password: user.password,
-            });
-            console.log(response.data);
-            const jwtToken = response.data.jwt;
-            sessionStorage.setItem('jwtToken', jwtToken);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-
-            const userResult = await axios.get('http://localhost:1337/api/users/me?populate=role');
-
-            if (userResult.data.role) {
-                const Rolename = userResult.data.role.name;
-                sessionStorage.setItem('Rolename', Rolename);
-                if (Rolename === 'Instructors') {
-                    navigate('/Instructors');
-                } else if (Rolename === '') {
-                    navigate('/');
-                }
-            }
+            login(username, password, navigate);
+            navigate("/cart")
         } catch (error) {
-            console.log('Error occurred:', error);
-            console.log('Wrong username & password');
-            setSubmitEnabled(true);
+            console.error('Login error', error);
         }
     };
-
-
-    const goto_register = () =>{
-        navigate("/register")
-    }
 
     return (
         <div className={styles.body}>
@@ -73,8 +39,8 @@ const Login = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter username"
-                                value={user.username}
-                                onChange={handleUserChange}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
                         </Form.Group>
@@ -83,20 +49,20 @@ const Login = () => {
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
-                                value={user.password}
-                                onChange={handleUserChange}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </Form.Group>
                         <div>
                             <br/>
-                            <Button variant="primary" type="submit" disabled={!submitEnabled}>
+                            <Button variant="primary" type="submit">
                                 Login
                             </Button>
                         </div>
                         <div className={styles.choice}>
                             <span>Forgot Password</span>
-                            <span onClick={goto_register}>Don't have Account?</span>
+                            {/* <span onClick={goto_register}>Don't have Account?</span> */}
                         </div>
                     </Form>
                 </div>

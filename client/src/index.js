@@ -20,6 +20,8 @@ import MyCourses from './pages/myCourses';
 import History from './pages/History';
 import AllCourse from './pages/allCourse';
 
+import { ContextProvider } from './context/AuthContext';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -70,7 +72,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ContextProvider>
       <RouterProvider router={router} />
+      </ContextProvider>
   </React.StrictMode>
 );
 
