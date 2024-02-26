@@ -1,3 +1,7 @@
+.body {
+  background-color: #dc143c;
+  min-height: 100vh;
+}
 
 
 .top-rank-course, .common-col, .newest-col {
