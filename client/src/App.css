@@ -36,16 +36,6 @@
   margin-bottom: 20px;
 }
 
-.form {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  margin: 16px;
-  flex: 1;
-}
-
 .week-col, .month-col, .year-col {
   border: 1px solid #fff;
   background-color: #fff;
