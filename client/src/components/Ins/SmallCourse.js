@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function MiniCourse({ course }) {
+function SmallCourse({ course }) {
 	const navigate = useNavigate();
 	const courseContent = course.attributes;
 	const picture = courseContent.picture.data.attributes.formats.thumbnail.url;
@@ -13,7 +13,7 @@ function MiniCourse({ course }) {
 	return (
 		<>
 			<Card
-				onClick={() => navigate(`page1/${course.id}`)}
+				onClick={() => navigate(`${course.id}`)}
 				style={{ cursor: "pointer" }}
 				className="m-2 d-flex flex-row">
 				<div className="image-col">
@@ -36,4 +36,4 @@ function MiniCourse({ course }) {
 		</>
 	);
 }
-export default MiniCourse;
+export default SmallCourse;
