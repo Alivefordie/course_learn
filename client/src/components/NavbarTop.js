@@ -1,12 +1,12 @@
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import UnloginNavbar from "./UnloginNavbar";
 import InsNavbar from "./Ins/InsNavbar";
 const NavbarTop = ({ NavbarLink }) => {
 	const context = useContext(AuthContext);
-	const role = sessionStorage.getItem("userRole");
+	const [role, setRole] = useState(sessionStorage.getItem("userRole"));
 	useEffect(() => {
 		//console.log(context.state);
 		//console.log(role);
