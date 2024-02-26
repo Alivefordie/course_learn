@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Specific from "../../components/Specific";
+import NavbarTop from "../../components/NavbarTop";
+import NavbarLink from "../../components/NavbarLink";
+
 
 const Pag2 = () => {
     const [courses1, setCourses1] = useState([]);
@@ -22,12 +25,9 @@ const Pag2 = () => {
     }, [item]);
 
     return (
-        <div>
-            <h1>
-                
-                <Specific data = {courses1} />
-            </h1>
-         
+        <div className="body">
+        <NavbarTop NavbarLink={NavbarLink} />
+              <Specific data = {courses1} />
         </div>
     );
 }
