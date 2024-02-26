@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
+import NavbarTop from "../components/NavbarTop";
+import NavbarLink from "../components/NavbarLink";
 
 const Payment = () => {
     const [data, setData] = useState([]);
@@ -17,7 +19,7 @@ const Payment = () => {
 
     const fetchData = async () => {
         try {
-            const jwtToken = sessionStorage.getItem('jwtToken');
+            const jwtToken = sessionStorage.getItem('auth.jwt');
             if (!jwtToken) {
                 console.error('JWT token not found.');
                 return;
@@ -70,6 +72,8 @@ const Payment = () => {
     }
 
     return (
+        <div>
+        <NavbarTop NavbarLink={NavbarLink} />
         <div className={styles.container}>
             <div className={styles.body}>
                 <div className={styles.ct1}>
@@ -184,6 +188,7 @@ const Payment = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
         </div>
     );
 }
