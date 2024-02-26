@@ -4,6 +4,7 @@ import InsNavbar from "../../components/Ins/InsNavbar";
 import "../../App.css";
 import SmallCourse from "../../components/Ins/SmallCourse";
 import { Row } from "react-bootstrap";
+import NavbarTop from "../../components/NavbarTop";
 const InsSee = () => {
 	const [myData, setMyData] = useState([]);
 	const fetchData = async () => {
@@ -22,7 +23,7 @@ const InsSee = () => {
 
 	return (
 		<div className="body">
-			<InsNavbar />
+			<NavbarTop />
 			<div className=" d-flex justify-content-center">
 				<Row className=" " md="auto">
 					{myData.map((c, i) => (

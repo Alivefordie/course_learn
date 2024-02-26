@@ -15,7 +15,6 @@ import Payment from "./pages/Payment";
 import Register from "./pages/Register";
 import MyCourses from "./pages/myCourses";
 import History from "./pages/History";
-import AllCourse from "./pages/allCourse";
 import SpecificCourse from "./pages/instructors/SpecificCourse";
 import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";

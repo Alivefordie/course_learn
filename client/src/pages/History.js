@@ -11,9 +11,11 @@ import MiniCourse from "../components/MiniCourse";
 
 const History = () => {
 	const [myCourses, setmyCourse] = useState("");
-	const fetch = async () => {
+	const setJwt = () => {
 		const jwtToken = sessionStorage.getItem("auth.jwt");
 		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+	};
+	const fetch = async () => {
 		const response = await axios.get("http://localhost:1337/api/my-courses");
 		const courses = response.data.data;
 		const time = ["week", "month", "year"];
@@ -27,6 +29,7 @@ const History = () => {
 		setmyCourse(GroupCourses);
 	};
 	useEffect(() => {
+		setJwt();
 		fetch();
 	}, []);
 	return (

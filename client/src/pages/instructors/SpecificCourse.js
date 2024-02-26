@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Specific from "../../components/Specific";
 import InsNavbar from "../../components/Ins/InsNavbar";
 import "../../App.css";
+import NavbarTop from "../../components/NavbarTop";
 const SpecificCourse = () => {
 	const param = useParams();
 	const fetch = () => {};
@@ -12,7 +13,7 @@ const SpecificCourse = () => {
 	}, []);
 	return (
 		<div className="body">
-			<InsNavbar />
+			<NavbarTop />
 		</div>
 	);
 };

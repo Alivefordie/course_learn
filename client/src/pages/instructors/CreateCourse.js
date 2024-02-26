@@ -5,6 +5,7 @@ import InsNavbar from "../../components/Ins/InsNavbar";
 import Accordion from "react-bootstrap/Accordion";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
+import NavbarTop from "../../components/NavbarTop";
 
 const CreateCourse = () => {
 	const [CourseData, setCourseData] = useState(null);
@@ -51,7 +52,7 @@ const CreateCourse = () => {
 	}, []);
 	return (
 		<div className="body ">
-			<InsNavbar />
+			<NavbarTop />
 			{loading ? (
 				<Spinner animation="border" role="status" />
 			) : (
