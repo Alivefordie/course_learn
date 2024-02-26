@@ -56,7 +56,7 @@ const Cart = () => {
           <Row>
             <Col className="order-col" sm={8}>
               <p>Order</p>
-              {data.length === 0 && <p>No course in cart</p>}
+              {data.length === 0 && <p className="no-course-message">No course in cart</p>}
               <Container className="item-cart">
                 {data.map((item) => (
                   <div key={item.id}>
@@ -67,7 +67,7 @@ const Cart = () => {
               </Container>
             </Col>
             <Col className="price-col" sm={2}>
-              <p>Total Price</p>
+              <p className="total-price">Total Price</p>
               <Container className="price-cart">
                 <p>{totalPrice}</p>
               </Container>

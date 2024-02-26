@@ -66,7 +66,7 @@ const Payment = () => {
                 <div className={styles.ct1}>
                     <p>.</p>
                     {data.length === 0 ? (
-                        <p>No course in cart</p>
+                        <p className={styles.no_cart}>No course in cart</p>
                     ) : (
                         <div className={styles.ct1_1}>
                             {data.map((item) => (
