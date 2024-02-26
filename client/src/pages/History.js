@@ -4,7 +4,7 @@ import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import axios from "axios";
 import "../App.css";
-import "../css/History.module.css";
+import style from "../css/History.module.css";
 import moment from "moment";
 import _ from "lodash";
 import MiniCourse from "../components/MiniCourse";
@@ -12,8 +12,8 @@ import MiniCourse from "../components/MiniCourse";
 const History = () => {
 	const [myCourses, setmyCourse] = useState("");
 	const fetch = async () => {
-		const storedJwtToken = sessionStorage.getItem("jwtToken");
-		axios.defaults.headers.common["Authorization"] = `Bearer ${storedJwtToken}`;
+		const jwtToken = sessionStorage.getItem("auth.jwt");
+		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
 		const response = await axios.get("http://localhost:1337/api/my-courses");
 		const courses = response.data.data;
 		const time = ["week", "month", "year"];
@@ -35,32 +35,38 @@ const History = () => {
 			<Container sm="3" md="4">
 				<Row>
 					<Col className="week-col">
-						<h1 className="righteous d-flex justify-content-center">This week</h1>
+						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+							This week
+						</h1>
 						<Container className="item-week">
 							{myCourses.week ? (
 								myCourses.week.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
 							) : (
-								<h1>no data</h1>
+								<h1 className={`mx-auto ${style.righteous}`}>no data</h1>
 							)}
 						</Container>
 					</Col>
 					<Col className="month-col">
-						<h1 className="righteous d-flex justify-content-center">This month</h1>
+						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+							This month
+						</h1>
 						<Container className="item-month">
 							{myCourses.month ? (
 								myCourses.month.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
 							) : (
-								<h1>no data</h1>
+								<h1 className={style.righteous}>no data</h1>
 							)}
 						</Container>
 					</Col>
 					<Col className="year-col">
-						<h1 className="righteous d-flex justify-content-center">This year</h1>
+						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+							This year
+						</h1>
 						<Container className="item-year">
 							{myCourses.year ? (
 								myCourses.year.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
 							) : (
-								<h1>no data</h1>
+								<h1 className={style.righteous}>no data</h1>
 							)}
 						</Container>
 					</Col>

@@ -11,7 +11,6 @@ const InsNavbar = ({ NavbarLink }) => {
 						<img src="../course_learn.png" width="125" height="60" />
 					</Link>
 				</Navbar.Brand>
-
 				<Nav className="NavbarLink" style={{ marginLeft: "auto", marginRight: "10px" }}>
 					<Nav.Link
 						href="/Instructors/create"
