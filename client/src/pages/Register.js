@@ -21,10 +21,14 @@ const Register = () => {
     const [user, setUser] = useState(initialUser);
     const [startDate, setStartDate] = useState(new Date());
     const [securityLevel, setSecurityLevel] = useState("Bad");
-    const [color , setColor] = useState("red");
-
+    const [color , setColor] = useState("yellow");
+    const [error, setError] = useState("");
     const registerUser = async () => {
         try {
+          if (user.password !== user.cpassword) {
+            setError("Passwords do not match");
+            return;
+        }
             const response = await axios.post('http://localhost:1337/api/auth/local/register', {
                 username: user.username,
                 email: user.email,
@@ -57,7 +61,7 @@ const Register = () => {
             setColor("green");
         } else {
             setSecurityLevel("Bad");
-            setColor("red");
+            setColor("yellow");
         }
       };
     return (

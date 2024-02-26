@@ -18,12 +18,7 @@
     margin-right: 50px;
 }
 
-.body{
-    background-color: #dc143c;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+
 
 .font {
     font-family: 'Righteous';
@@ -52,4 +47,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.loginImage {
+    width: 100%;
+    margin-top: 5vw;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the image stays behind the form */
+
+}
+
+.username {
+    margin-left: 3vw;
+    
+    margin-top: 20vw;
+    color: white;
+    width: 35vw;
+}
+
+.resize {
+    height: 3vw;
+    border-radius: 15px;
+}
+
+.forgetpassword {
+    display: flex;
+    
 }
