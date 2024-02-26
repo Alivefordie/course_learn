@@ -54,20 +54,26 @@ const Payment = () => {
 
     const handleCloseModal = () => {
         setShowModal(false);
-        setProgress(0);
-        setName("");
-        setEmail("");
-        setDate("");
-        setPhone("");
-        setData([]);
+        // setProgress(0);
+    //     setName("");
+    //     setEmail("");
+    //     setDate("");
+    //     setPhone("");
+    //     setData([]);
     }
 
     const handleNext = () => {
         if (progress < 100) {
             setProgress(Math.min(progress + 33.33, 100));
         }
-        if (progress > 70) {
+        if (progress >= 66) {
             handleCloseModal();
+            setProgress(0);
+            setName("");
+            setEmail("");
+            setDate("");
+            setPhone("");
+            setData([]);
         }
     }
 
