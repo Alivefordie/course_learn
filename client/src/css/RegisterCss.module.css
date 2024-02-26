@@ -1,26 +1,133 @@
 .Register {
-    background-color: rgb(218, 29, 0);
+    background-color: rgb(255, 255, 255);
     color: white;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+       
+    border-radius: 15px;
+}
+
+.Register2 {
+    background-color: rgb(210, 210, 210);
+    width: 50vw;
+    color: white;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
        
 }
 
 .register {
     color: black;
     margin-left: 3vw;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
+    
 }
 
 .register2 {
     color: black;
-    
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
+    height: 3vw;
+}
+
+.register4 {
+    color: black;
+    text-decoration-line: underline;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
+    height: 3vw;
 }
 
 .righteous {
+    
     font-family: "Righteous", sans-serif;
     font-weight: 400;
     font-style: normal;
     margin-left: 3vw;
+    display: flex;
+    color: white;
+    border-radius: 15px;
   }
 
 .form {
-    margin-right: 3vw;
+    margin-right: 60vw;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
 }  
+
+.form2 {
+    margin-right: 80vw;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 15px;
+    
+}
+
+/* RegisterCss.module.css */
+.backgroundContainer {
+    
+    width: 100%;
+}
+
+.registerImage {
+    width: 100%;
+    margin-top: 5vw;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the image stays behind the form */
+
+}
+
+.formContainer {
+   margin-right: 55vw; 
+   border-radius: 15px;
+   
+}
+
+.white {
+    color : white;
+}
+
+.resize {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.register_button {
+     margin-left: 10vw;
+     color: black;
+     margin-top : 2vw;
+     width: 20vw;
+     border-radius: 15px;
+     height: 3vw;
+}
+
+.register_check{
+    margin-top : 2vw;
+    margin-left: 5vw;
+    color: black;
+    border-radius: 15px;
+}
+
+.footer {
+    
+    width: 100%;
+    background-color: rgb(62, 3, 3);
+    color: white;
+    text-align: center;
+    }
