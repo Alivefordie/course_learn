@@ -56,6 +56,7 @@ const Cart = () => {
           <Row>
             <Col className="order-col" sm={8}>
               <p>Order</p>
+              {data.length === 0 && <p>No course in cart</p>}
               <Container className="item-cart">
                 {data.map((item) => (
                   <div key={item.id}>
@@ -74,7 +75,6 @@ const Cart = () => {
           </Row>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button variant="outline-dark" onClick={payment}  className="pay-but">Payment</Button>
-
           </div>
         </Container>
       </Container>

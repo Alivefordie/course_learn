@@ -64,18 +64,24 @@ const Payment = () => {
         <div className={styles.container}>
             <div className={styles.body}>
                 <div className={styles.ct1}>
-                    .
-                    <div className={styles.ct1_1}>
-                        {data.map((item) => (
-                            <div key={item.id}>
-                                <p>Title: {item.title}</p>
-                                <p>Price: {item.price}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className={styles.totalPrice}>
-                        TotalPrice: {totalPrice}
-                    </div>
+                    <p>.</p>
+                    {data.length === 0 ? (
+                        <p>No course in cart</p>
+                    ) : (
+                        <div className={styles.ct1_1}>
+                            {data.map((item) => (
+                                <div key={item.id}>
+                                    <p>Title: {item.title}</p>
+                                    <p>Price: {item.price}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {data.length > 0 && (
+                        <div className={styles.totalPrice}>
+                            TotalPrice: {totalPrice}
+                        </div>
+                    )}
                 </div>
                 <div className={styles.ct2}>
                     Name
