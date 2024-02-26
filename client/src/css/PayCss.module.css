@@ -95,3 +95,10 @@
   font-size: 20px;
   margin: 20px;
 }
+.choosebank{
+  /* border: 1px solid black; */
+  margin-bottom: 70px;
+}
+.choosebank img{
+  margin: 25px;
+}

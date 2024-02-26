@@ -106,9 +106,24 @@ const Payment = () => {
                         <p>CHOOSE PAYMENT</p>
                         <p>METHOD</p>
                         <br />
-                        <div className={styles.confirm}>
-                            <Button onClick={handleConfirm} variant="dark">Confirm</Button>
+                        <div className={styles.choosebank}>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <br/>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <img src="/logo512.png" width={50} height={50}></img>
+                        <br/>
+                        <img src="/logo512.png" width={50} height={50}></img>
                         </div>
+                        {data.length === 0 ? (
+                            <p>Cannot confirm when cart is empty</p>
+                        ) : (
+                            <div className={styles.confirm}>
+                                <Button onClick={handleConfirm} variant="dark">Confirm</Button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
