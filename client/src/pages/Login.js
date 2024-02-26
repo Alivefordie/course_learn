@@ -16,7 +16,7 @@ const Login = () => {
         e.preventDefault();
         try {
             login(username, password, navigate);
-            navigate("/cart")
+            navigate("/")
         } catch (error) {
             console.error('Login error', error);
         }

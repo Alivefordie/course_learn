@@ -20,7 +20,6 @@ const Cart = () => {
       if (!jwtToken) {
         console.error('JWT token not found.');
         return;
-        
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
       const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
