@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Payment from "./Payment";
 
+
+
 const Cart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -14,10 +16,11 @@ const Cart = () => {
 
   const fetchData = async () => {
     try {
-      const jwtToken = sessionStorage.getItem('jwtToken');
+      const jwtToken = sessionStorage.getItem('auth.jwt');
       if (!jwtToken) {
         console.error('JWT token not found.');
         return;
+        
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
       const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
