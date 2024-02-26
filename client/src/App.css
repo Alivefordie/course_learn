@@ -144,3 +144,23 @@
 .total-price {
   font-size: 18px; 
 }
+
+.syllabus-col{
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 550px;
+  border-spacing: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.courseData-col{
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 550px;
+  border-spacing: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
