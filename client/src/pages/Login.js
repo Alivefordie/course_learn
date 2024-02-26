@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/LoginCss.module.css";
 // import Register from "./Register";
+import NavbarTop from "../components/NavbarTop";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -58,12 +59,15 @@ const Login = () => {
     }
 
     return (
-        <div className={styles.test01}>
-            <div className={`container ${styles.leftAlign}`}>
-                <div className={styles.test}>
-                    <Form onSubmit={handleSubmit} className="rounded p-4 border shadow">
-                        <h2>Login </h2>
+        <div className={styles.body}>
+            <NavbarTop/>
+            <div style={{ display: "flex"}}>
+                <div className={styles.form}>
+                    <Form onSubmit={handleSubmit} >
+                        <div className={styles.center}>
+                        <h2 className={styles.font}>Login </h2>
                         <img src="/cart.png" alt="Cart" />
+                        </div>
                         <Form.Group controlId="username">
                             <Form.Label>Username</Form.Label>
                             <Form.Control
@@ -90,12 +94,14 @@ const Login = () => {
                                 Login
                             </Button>
                         </div>
-                        <div className={styles.test123}>
+                        <div className={styles.choice}>
                             <span>Forgot Password</span>
                             <span onClick={goto_register}>Don't have Account?</span>
                         </div>
                     </Form>
                 </div>
+                    <div className={styles.form}>
+                    </div>
             </div>
         </div>
     );
