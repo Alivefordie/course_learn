@@ -22,6 +22,7 @@ const Cart = () => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
       const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
       console.log(response.data.courses);
+      console.log(response.data)
       setData(response.data.courses);
       calculateTotalPrice(response.data.courses);
     } catch(error) {

@@ -10,6 +10,10 @@ const Payment = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [date, setDate] = useState("");
+    const [phone, setPhone] = useState("");
 
     const fetchData = async () => {
         try {
@@ -49,6 +53,11 @@ const Payment = () => {
     const handleCloseModal = () => {
         setShowModal(false);
         setProgress(0);
+        setName("");
+        setEmail("");
+        setDate("");
+        setPhone("");
+        setData([]);
     }
 
     const handleNext = () => {
@@ -86,19 +95,39 @@ const Payment = () => {
                 <div className={styles.ct2}>
                     Name
                     <br />
-                    <input className={styles.input} placeholder="Name" />
+                    <input
+                        className={styles.input}
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <br />
                     Email
                     <br />
-                    <input className={styles.input} placeholder="email" />
+                    <input
+                        className={styles.input}
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <br />
                     Date
                     <br />
-                    <input className={styles.input} placeholder="date" />
+                    <input
+                        className={styles.input}
+                        placeholder="Date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                    />
                     <br />
                     Phone
                     <br />
-                    <input className={styles.input} placeholder="phone" />
+                    <input
+                        className={styles.input}
+                        placeholder="Phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
                 </div>
                 <div className={styles.ct3}>
                     .
@@ -107,26 +136,15 @@ const Payment = () => {
                         <p>METHOD</p>
                         <br />
                         <div className={styles.choosebank}>
-                        
-                        
-                        <img src="/a.png" width={50} height={50}></img>
-
-                        <img src="/b.png" width={50} height={50}></img>
-
-                        <img src="/c.png" width={50} height={50}></img>
-
-                        <br/>
-
-                        <img src="/d.png" width={50} height={50}></img>
-
-                        <img src="/e.png" width={50} height={50}></img>
-
-                        <img src="/f.png" width={50} height={50}></img>
-
-                        <br/>
-
-                        <img src="/g.png" width={50} height={50}></img>
-
+                            <img src="/a.png" width={50} height={50}></img>
+                            <img src="/b.png" width={50} height={50}></img>
+                            <img src="/c.png" width={50} height={50}></img>
+                            <br />
+                            <img src="/d.png" width={50} height={50}></img>
+                            <img src="/e.png" width={50} height={50}></img>
+                            <img src="/f.png" width={50} height={50}></img>
+                            <br />
+                            <img src="/g.png" width={50} height={50}></img>
                         </div>
                         {data.length === 0 ? (
                             <p>Cannot confirm when cart is empty</p>
