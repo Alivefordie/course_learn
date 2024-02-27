@@ -15,7 +15,7 @@ const Common = ({ data }) => {
         .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
         .slice(3)
         .map((item) => (
-          <Card key={item.id} style={{ width: "100%" }} className="d-flex mb-3">
+          <Card key={item.id} style={{ width: "100%" }} className="d-flex flex-row mb-3">
             <div className="image-col">
               <Card.Img
                 className="course-image"
