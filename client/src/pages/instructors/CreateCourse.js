@@ -5,7 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
 import NavbarTop from "../../components/NavbarTop";
-
+import style from "../../css/CreateCourse.module.css";
 const CreateCourse = () => {
 	const [CourseData, setCourseData] = useState(null);
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
@@ -120,7 +120,7 @@ const CreateCourse = () => {
 		setCourseSyllabus(onchangeVal);
 	};
 	return (
-		<div className="body">
+		<div className={style.body}>
 			<NavbarTop />
 			{loading ? (
 				<Spinner animation="border" role="status" />
@@ -212,7 +212,7 @@ const CreateCourse = () => {
 								</Row>
 							</Form>
 						</Col>
-						<Col className="syllabus-col">
+						<Col className={`${style.scrollbar} syllabus-col`}>
 							{!edit && (
 								<div className="m-1">
 									<Button className="m-1" onClick={addFile}>

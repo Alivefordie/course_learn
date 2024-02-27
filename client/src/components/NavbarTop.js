@@ -8,7 +8,7 @@ const NavbarTop = ({ NavbarLink }) => {
 	const context = useContext(AuthContext);
 	useEffect(() => {
 		//console.log(context);
-		//console.log(role);
+		//console.log(context.state.role);
 	});
 	return (
 		<div>
@@ -19,7 +19,7 @@ const NavbarTop = ({ NavbarLink }) => {
 					</Link>
 				</Navbar.Brand>
 				{context.state.isLoggedIn ? (
-					context.state.role == "student" ? (
+					sessionStorage.getItem("userRole") == "student" ? (
 						NavbarLink && <NavbarLink />
 					) : (
 						<InsNavbar />
