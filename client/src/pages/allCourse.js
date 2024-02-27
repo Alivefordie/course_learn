@@ -38,13 +38,13 @@ const AllCourse = () => {
   return (
     <div>
       <NavbarTop NavbarLink={NavbarLink} />
-      <Container className="page1-continer" sm="3" md="4">
+      <Container className="page1-container" sm="3" md="4">
         <Row className="page1-rows">
           <Col
             id="top-rank-course"
             className="top-rank-course"
             data-bs-spy="scroll"
-            data-bs-target="#navbar-example"
+            data-bs-target="#top-rank-course"
             data-bs-offset="0"
           >
             <h3 className="header-toprank">
@@ -56,15 +56,20 @@ const AllCourse = () => {
               />
               Top 3 ranks
             </h3>
-            <Toprank data={courses} />
-            <Container className="item-top overflow-scroll"></Container>
+
+            <div
+              className="item-top overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Toprank data={courses} />
+            </div>
           </Col>
 
           <Col
             id="common-col"
             className="common-col"
             data-bs-spy="scroll"
-            data-bs-target="#navbar-example"
+            data-bs-target="#common-col"
             data-bs-offset="0"
           >
             <h3 className="header-common">
@@ -76,15 +81,20 @@ const AllCourse = () => {
               />
               Common
             </h3>
-            <Common data={courses} />
-            <Container className="item-common overflow-scroll"></Container>
+
+            <div
+              className="item-common overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Common data={courses} />
+            </div>
           </Col>
 
           <Col
             id="newest-col"
             className="newest-col"
             data-bs-spy="scroll"
-            data-bs-target="#navbar-example"
+            data-bs-target="#newest-col"
             data-bs-offset="0"
           >
             <h3 className="header-newest">
@@ -96,8 +106,12 @@ const AllCourse = () => {
               />
               Newest
             </h3>
-            <Common data={courses} />
-            <Container className="item-newest overflow-scroll"></Container>
+            <div
+              className="item-newest overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Common data={courses} />
+            </div>
           </Col>
         </Row>
       </Container>

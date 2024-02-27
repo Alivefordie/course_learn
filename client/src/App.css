@@ -7,7 +7,7 @@
 .top-rank-course, .common-col, .newest-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -22,7 +22,7 @@
 .inprogress-col, .complete-col,.expired-col  {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -40,7 +40,7 @@
 .week-col, .month-col, .year-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -169,7 +169,7 @@
   margin-right: 20px;
 }
 
-.overflow-scroll {
-  overflow-y: auto; /* Adds vertical scrollbar */
-  max-height: 500px;
+.overflow-y-scroll {
+  overflow-y: auto; /* Adds vertical scrollbar when content overflows vertically */
+  max-height: 500px; /* Adjust this value as needed */
 }
