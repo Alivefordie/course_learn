@@ -19,7 +19,7 @@ const Specific = ({ data }) => {
         } else if (response.data.RemoveFromCart){
           alert('course remove')
         }
-        window.history.back();
+        window.location.href = '/';
       } catch(error) {
         console.error("Error fetching data:", error);
       }

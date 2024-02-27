@@ -19,10 +19,12 @@ const Cart = () => {
         return;
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
-      console.log("test:",response.data.entries.map(entry => entry.course))
-      setData(response.data.entries.map(entry => entry.course));
-      calculateTotalPrice(response.data.entries.map(entry => entry.course));
+      const response = await axios.get("http://localhost:1337/api/cart");
+      console.log(response)
+      console.log("test:",response.data.data.map(entry => entry.attributes))
+      setData(response.data.data.map(entry => entry.attributes));
+      console.log(data)
+      calculateTotalPrice(response.data.data.map(entry => entry.attributes));
     } catch(error) {
       console.error('Error occurred:', error);
     }
