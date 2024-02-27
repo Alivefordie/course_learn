@@ -5,19 +5,11 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Payment from "./Payment";
-
-
 
 const Cart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
-
-
-  const test = sessionStorage.getItem("userRole")
-  console.log("test_role:", test)
 
   const fetchData = async () => {
     try {
@@ -27,17 +19,16 @@ const Cart = () => {
         return;
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
-      console.log(response.data.courses);
-      console.log(response.data)
-      setData(response.data.courses);
-      calculateTotalPrice(response.data.courses);
-    } catch (error) {
+      const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
+      console.log("test:",response.data.entries.map(entry => entry.course))
+      setData(response.data.entries.map(entry => entry.course));
+      calculateTotalPrice(response.data.entries.map(entry => entry.course));
+    } catch(error) {
       console.error('Error occurred:', error);
     }
   }
 
-  const payment = () => {
+  const payment = () =>{
     navigate("/payment");
   }
 
@@ -64,7 +55,6 @@ const Cart = () => {
           <Row>
             <Col className="order-col" sm={8}>
               <p>Order</p>
-              {data.length === 0 && <p className="no-course-message">No course in cart</p>}
               <Container className="item-cart">
                 {data.map((item) => (
                   <div key={item.id}>
