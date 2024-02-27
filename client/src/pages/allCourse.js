@@ -6,6 +6,7 @@ import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
+import Newest from "../components/Newest";
 
 const AllCourse = () => {
   const [courses, setCourses] = useState([]);
@@ -110,7 +111,7 @@ const AllCourse = () => {
               className="item-newest overflow-y-scroll"
               style={{ maxHeight: "500px" }}
             >
-              <Common data={courses} />
+              <Newest data={courses} />
             </div>
           </Col>
         </Row>
