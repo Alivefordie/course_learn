@@ -13,6 +13,7 @@ const CreateCourse = () => {
 	const [validated, setValidated] = useState(false);
 	const [Svalidated, setSValidated] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [edit, setedit] = useState(false);
 	const handleChange = (e) => {
 		setCourseData({
 			...CourseData,
@@ -68,11 +69,13 @@ const CreateCourse = () => {
 			event.preventDefault();
 			event.stopPropagation();
 		} else {
+			setedit(false);
 			handleSyllabusChange(event, i);
 		}
 		setSValidated(true);
 	};
 	const addFile = () => {
+		setedit(true);
 		setSValidated(false);
 		setCourseSyllabus([
 			...CourseSyllabus,
@@ -80,6 +83,7 @@ const CreateCourse = () => {
 		]);
 	};
 	const addvideo = () => {
+		setedit(true);
 		setSValidated(false);
 		setCourseSyllabus([
 			...CourseSyllabus,
@@ -87,15 +91,19 @@ const CreateCourse = () => {
 		]);
 	};
 	const addtext = () => {
+		setedit(true);
 		setSValidated(false);
 		setCourseSyllabus([
 			...CourseSyllabus,
 			{ __component: "activity.text", title: "", description: "", onEdit: false },
 		]);
 	};
-	const handleDelete = (i) => {
+	const handleDelete = (ed, i) => {
 		const deleteVal = [...CourseSyllabus];
 		deleteVal.splice(i, 1);
+		if (deleteVal.length === 0) {
+			setedit(false);
+		}
 		setCourseSyllabus(deleteVal);
 	};
 	const handleSyllabusChange = (e, i) => {
@@ -205,10 +213,20 @@ const CreateCourse = () => {
 							</Form>
 						</Col>
 						<Col className="syllabus-col">
-							<Button onClick={addFile}>file</Button>
-							<Button onClick={addvideo}>video</Button>
-							<Button onClick={addtext}>text</Button>
-							<br />
+							{!edit && (
+								<div className="m-1">
+									<Button className="m-1" onClick={addFile}>
+										file
+									</Button>
+									<Button className="m-1" onClick={addvideo}>
+										video
+									</Button>
+									<Button className="m-1" onClick={addtext}>
+										text
+									</Button>
+									<br />
+								</div>
+							)}
 							<Form id="CForm" noValidate validated={Svalidated} className="mt-3">
 								{CourseSyllabus.map((val, i) => {
 									switch (val.__component) {
@@ -248,7 +266,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -275,7 +293,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -310,9 +328,7 @@ const CreateCourse = () => {
 																<Form.Control
 																	required
 																	type="file"
-																	files={val.videoFile}
 																	onChange={(e) => handleSyllabusFileChange(e, i)}
-																	value={val.NvideoFile}
 																	name="videoFile"
 																/>
 															</Col>
@@ -320,7 +336,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -347,7 +363,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -392,7 +408,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -417,7 +433,7 @@ const CreateCourse = () => {
 														<button
 															onClick={(e) => {
 																e.preventDefault();
-																handleDelete(i);
+																handleDelete(val.onEdit, i);
 															}}>
 															Delete
 														</button>
@@ -427,9 +443,11 @@ const CreateCourse = () => {
 									}
 								})}
 							</Form>
-							<Button form="myform" type="submit">
-								New
-							</Button>
+							{!edit && (
+								<Button form="myform" type="submit">
+									New
+								</Button>
+							)}
 						</Col>
 					</Row>
 				</Container>
