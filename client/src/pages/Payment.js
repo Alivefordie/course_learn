@@ -16,7 +16,7 @@ const Payment = () => {
     const [email, setEmail] = useState("");
     const [date, setDate] = useState("");
     const [phone, setPhone] = useState("");
-    const [Id, setID] = useState([])
+    const [Id, setID] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +34,6 @@ const Payment = () => {
                 console.log(allIds)
                 setData(response.data.entries.map(entry => entry.course));
                 calculateTotalPrice(response.data.entries.map(entry => entry.course));
-
             } catch (error) {
                 console.error('Error occurred:', error);
             }
@@ -72,24 +71,28 @@ const Payment = () => {
             setDate("");
             setPhone("");
             setData([]);
-            test()
-
+            success(Id); 
         }
     }
-
 
     useEffect(() => {
         console.log(Id)
     }, [Id])
 
-    const success = async () => {
+    const success = async (Id) => { 
         try {
-
+            const jwtToken = sessionStorage.getItem('auth.jwt');
+            if (!jwtToken) {
+                console.error('JWT token not found.');
+                return;
+            }
+            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+            const response = await axios.get(`http://localhost:1337/api/enroll/${Id}`);
+            console.log(response)
         }
         catch {
             console.log("fail")
         }
-
     }
 
     return (

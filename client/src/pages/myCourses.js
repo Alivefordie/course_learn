@@ -12,6 +12,7 @@ import NavbarLink from "../components/NavbarLink";
 import "../App.css";
 
 const inpro = 60; //now progress % form data
+
 const complete = 100;
 const late = 40;
 
