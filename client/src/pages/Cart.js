@@ -10,6 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [fillter, setFillter] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -20,15 +21,16 @@ const Cart = () => {
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
       const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
-      console.log("test:",response.data.entries.map(entry => entry.course))
-      setData(response.data.entries.map(entry => entry.course));
-      calculateTotalPrice(response.data.entries.map(entry => entry.course));
+      const filteredData = response.data.entries.filter(entry => entry.cart !== null);
+      setFillter(filteredData);
+      setData(filteredData.map(entry => entry.course));
+      calculateTotalPrice(filteredData.map(entry => entry.course));
     } catch(error) {
       console.error('Error occurred:', error);
     }
   }
 
-  const payment = () =>{
+  const payment = () => {
     navigate("/payment");
   }
 
@@ -56,10 +58,10 @@ const Cart = () => {
             <Col className="order-col" sm={8}>
               <p>Order</p>
               <Container className="item-cart">
-                {data.map((item) => (
+                {fillter.map((item) => (
                   <div key={item.id}>
-                    <p>Title: {item.title}</p>
-                    <p>Price: {item.price}</p>
+                    <p>Title: {item.course.title}</p>
+                    <p>Price: {item.course.price}</p>
                   </div>
                 ))}
               </Container>

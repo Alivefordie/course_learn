@@ -17,6 +17,7 @@ const Payment = () => {
     const [date, setDate] = useState("");
     const [phone, setPhone] = useState("");
     const [Id, setID] = useState([]);
+    const [filter, setFilter] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,12 +29,13 @@ const Payment = () => {
                 }
                 axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
                 const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
-                const data = response.data.entries.map(entry => entry.course)
+                const data = response.data.entries.map(entry => entry.course);
                 setID(data.map(course => course.id));
-                const allIds = data.map(course => course.id);
-                console.log(allIds)
-                setData(response.data.entries.map(entry => entry.course));
-                calculateTotalPrice(response.data.entries.map(entry => entry.course));
+                setData(data);
+                calculateTotalPrice(data);
+
+                const filteredData = response.data.entries.filter(entry => entry.cart !== null);
+                setFilter(filteredData);
             } catch (error) {
                 console.error('Error occurred:', error);
             }
@@ -89,6 +91,7 @@ const Payment = () => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
             const response = await axios.get(`http://localhost:1337/api/enroll/${Id}`);
             console.log(response)
+            window.location.reload();
         }
         catch {
             console.log("fail")
@@ -102,7 +105,7 @@ const Payment = () => {
                 <div className={styles.body}>
                     <div className={styles.ct1}>
                         <p>.</p>
-                        {data.length === 0 ? (
+                        {filter.length === 0 ? (
                             <p className={styles.no_cart}>No course in cart</p>
                         ) : (
                             <div className={styles.ct1_1}>
@@ -114,7 +117,7 @@ const Payment = () => {
                                 ))}
                             </div>
                         )}
-                        {data.length > 0 && (
+                        {filter.length > 0 && (
                             <div className={styles.totalPrice}>
                                 TotalPrice: {totalPrice}
                             </div>
