@@ -52,6 +52,8 @@
   border-radius: 8px;
   height: 400px;
   justify-content: center;
+  height: 100%; 
+
 }
 
 .pay-but {
@@ -170,6 +172,47 @@
 }
 
 .overflow-y-scroll {
-  overflow-y: auto; /* Adds vertical scrollbar when content overflows vertically */
-  max-height: 500px; /* Adjust this value as needed */
+  overflow-y: auto; 
+  max-height: 500px; 
 }
+
+
+.payment-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pay-button {
+  width: 200px;
+}
+.item-cart {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.item-cart p {
+  margin-bottom: 5px;
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pay-button {
+  width: 200px;
+}
+
+.cart-container {
+  margin-top: 20px;
+}
+.vertical-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
