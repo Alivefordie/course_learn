@@ -409,7 +409,9 @@ const CreateCourse = () => {
 												return (
 													<div key={i}>
 														<Accordion>
-															<Accordion.Header>{val.title}</Accordion.Header>
+															<Accordion.Header>
+																{val.title ? `${1 + i}. ${val.title}` : `${1 + i}. No Title`}
+															</Accordion.Header>
 															<Accordion.Body>{val.description}</Accordion.Body>
 														</Accordion>
 														<button
