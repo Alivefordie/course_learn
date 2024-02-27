@@ -5,19 +5,12 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Payment from "./Payment";
-
-
 
 const Cart = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
-
-
-  const test = sessionStorage.getItem("userRole")
-  console.log("test_role:", test)
+  const [filter, setFilter] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -27,12 +20,12 @@ const Cart = () => {
         return;
       }
       axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      const response = await axios.get("http://localhost:1337/api/users/me?populate=*");
-      console.log(response.data.courses);
-      console.log(response.data)
-      setData(response.data.courses);
-      calculateTotalPrice(response.data.courses);
-    } catch (error) {
+      const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
+      const filteredData = response.data.entries.filter(entry => entry.cart !== null);
+      setFilter(filteredData);
+      setData(filteredData.map(entry => entry.course));
+      calculateTotalPrice(filteredData.map(entry => entry.course));
+    } catch(error) {
       console.error('Error occurred:', error);
     }
   }
@@ -60,30 +53,27 @@ const Cart = () => {
       <NavbarTop NavbarLink={NavbarLink} />
       <Container className="cart-container">
         <Container className="incart-container">
-          <h1 style={{ textAlign: "center" }}>myCart</h1>
-          <Row>
-            <Col className="order-col" sm={8}>
-              <p>Order</p>
-              {data.length === 0 && <p className="no-course-message">No course in cart</p>}
-              <Container className="item-cart">
-                {data.map((item) => (
-                  <div key={item.id}>
-                    <p>Title: {item.title}</p>
-                    <p>Price: {item.price}</p>
+          <h1 className="text-center mb-4">My Cart</h1>
+          <Row className="g-4">
+            <Col md={6}>
+              {filter.map((item) => (
+                <div key={item.id} className="card border border-dark mb-3" style={{ backgroundImage: `url(${item.course.image})`, backgroundSize: 'cover', backgroundPosition: 'left', width: "100%" }}>
+                  <div className="card-body">
+                    <h5 className="card-title">{item.course.title}</h5>
+                    <p className="card-text">Price: {item.course.price}</p>
                   </div>
-                ))}
-              </Container>
+                </div>
+              ))}
             </Col>
-            <Col className="price-col" sm={2}>
-              <p className="total-price">Total Price</p>
-              <Container className="price-cart">
-                <p>{totalPrice}</p>
-              </Container>
+            <Col md={6}>
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <Button variant="outline-dark" onClick={payment} className="pay-button mb-3">Proceed to Payment</Button>
+                <div className="total-price">
+                  <p className="mb-0">Total Price: {totalPrice}</p>
+                </div>
+              </div>
             </Col>
           </Row>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="outline-dark" onClick={payment} className="pay-but">Payment</Button>
-          </div>
         </Container>
       </Container>
     </div>

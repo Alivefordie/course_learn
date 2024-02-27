@@ -7,8 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import InsSee from "./pages/instructors/InsSee";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Pag1 from "./pages/instructors/Page1";
-import Pag2 from "./pages/instructors/Page2";
+import CourseInfo from "./pages/instructors/CourseInfo";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
@@ -25,12 +24,8 @@ const router = createBrowserRouter([
 		element: <App />,
 	},
 	{
-		path: "/page1",
-		element: <Pag1 />,
-	},
-	{
-		path: "/page1/:item",
-		element: <Pag2 />,
+		path: "/courses/:item",
+		element: <CourseInfo />,
 	},
 	{
 		path: "/cart",

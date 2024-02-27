@@ -4,22 +4,18 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 
-const Toprank = ({ data }) => {
+const Newest = ({ data }) => {
   useEffect(() => {
-    console.log("Toprank", data);
-  }, [data]);
+    console.log("Common", data);
+  });
 
   return (
     <div>
       {data
-        .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
-        .slice(0, 3)
+        .sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate))
+        .slice(0, 2)
         .map((item) => (
-          <Card
-            key={item.id}
-            style={{ width: "100%" }}
-            className="d-flex flex-row mb-3"
-          >
+          <Card key={item.id} style={{ width: "100%" }} className="d-flex flex-row mb-3">
             <div className="image-col">
               <Card.Img
                 className="course-image"
@@ -52,7 +48,7 @@ const Toprank = ({ data }) => {
                 />
               </Col>
               <Link to={{ pathname: `/courses/${item.id}` }}>
-                <Button variant="dark">Detail</Button>
+                <Button variant="outline-dark">Detail</Button>
               </Link>
             </div>
           </Card>
@@ -61,4 +57,4 @@ const Toprank = ({ data }) => {
   );
 };
 
-export default Toprank;
+export default Newest;

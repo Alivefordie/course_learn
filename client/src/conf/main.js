@@ -3,7 +3,9 @@ const conf = {
     loginEndpoint: '/auth/local',
     jwtUserEndpoint: '/users/me',
     jwtSessionStorageKey: 'auth.jwt',
-    RoleSessionStorageKey: '/users/me?populate=role' 
+    RoleSessionStorageKey: '/users/me?populate=role',
+    test:"/users/me?populate[entries][populate][course]=*",
+    Cart:"/cart"
 };
 
 export default conf;

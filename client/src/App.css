@@ -1,5 +1,5 @@
 .body {
-  background-color: #dc143c;
+  background-color: #ff2121;
   min-height: 100vh;
 }
 
@@ -7,7 +7,7 @@
 .top-rank-course, .common-col, .newest-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -22,7 +22,7 @@
 .inprogress-col, .complete-col,.expired-col  {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -40,7 +40,7 @@
 .week-col, .month-col, .year-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -52,6 +52,8 @@
   border-radius: 8px;
   height: 400px;
   justify-content: center;
+  height: 100%; 
+
 }
 
 .pay-but {
@@ -168,3 +170,49 @@
   margin-bottom: 20px;
   margin-right: 20px;
 }
+
+.overflow-y-scroll {
+  overflow-y: auto; 
+  max-height: 500px; 
+}
+
+
+.payment-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pay-button {
+  width: 200px;
+}
+.item-cart {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.item-cart p {
+  margin-bottom: 5px;
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pay-button {
+  width: 200px;
+}
+
+.cart-container {
+  margin-top: 20px;
+}
+.vertical-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+

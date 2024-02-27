@@ -4,31 +4,9 @@ import Toprank from "../components/Toprank";
 import Common from "../components/Common";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
-
-/*
-const CourseCard = () => {
-  <Card style={{ width: "100%" }} className="d-flex flex-row">
-    <div className="image-col">
-      <Card.Img className="course-image" variant="left" src="books-pile.png" />
-    </div>
-    <div className="body-col">
-      <Card.Body>
-        <Card.Title>Course Title</Card.Title>
-        <Card.Text>details</Card.Text>
-      </Card.Body>
-      <Link className="add-icon position-absolute top-0 end-0 p-2">
-        <img
-          src="../plus.png"
-          style={{ width: "20px", height: "20px" }}
-          alt="Add Icon"
-        />
-      </Link>
-    </div>
-  </Card>;
-};
-*/
+import Newest from "../components/Newest";
 
 const AllCourse = () => {
   const [courses, setCourses] = useState([]);
@@ -47,13 +25,9 @@ const AllCourse = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // if (storedJwtToken && storedRolename === "Public") {
         const response = await axios.get("http://localhost:1337/api/courses");
         const coursesData = response.data.data;
         setCourses(coursesData);
-        // } else {
-        //   console.log("User is not authorized to view this data");
-        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -65,9 +39,15 @@ const AllCourse = () => {
   return (
     <div>
       <NavbarTop NavbarLink={NavbarLink} />
-      <Container className="page1-continer" sm="3" md="4">
+      <Container className="page1-container" sm="3" md="4">
         <Row className="page1-rows">
-          <Col className="top-rank-course">
+          <Col
+            id="top-rank-course"
+            className="top-rank-course"
+            data-bs-spy="scroll"
+            data-bs-target="#top-rank-course"
+            data-bs-offset="0"
+          >
             <h3 className="header-toprank">
               <img
                 src="../fire.png"
@@ -77,41 +57,22 @@ const AllCourse = () => {
               />
               Top 3 ranks
             </h3>
-            <Toprank data={courses} />
-            <Container className="item-top">
-              <Card style={{ width: "100%" }} className="d-flex flex-row">
-                <div className="image-col">
-                  <Card.Img
-                    className="course-image"
-                    variant="left"
-                    src="books-pile.png"
-                  />
-                </div>
-                <div className="body-col">
-                  <Card.Body>
-                    <Card.Title>Course Title</Card.Title>
-                    <Card.Text>details</Card.Text>
-                  </Card.Body>
-                  <Col className="add-icon position-absolute top-0 end-0 p-2">
-                    <img
-                      src="../plus.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Add Icon"
-                    />
-                  </Col>
-                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-                    <img
-                      src="../heart.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Like Icon"
-                    />
-                  </Col>
-                </div>
-              </Card>
-            </Container>
+
+            <div
+              className="item-top overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Toprank data={courses} />
+            </div>
           </Col>
 
-          <Col className="common-col">
+          <Col
+            id="common-col"
+            className="common-col"
+            data-bs-spy="scroll"
+            data-bs-target="#common-col"
+            data-bs-offset="0"
+          >
             <h3 className="header-common">
               <img
                 src="../book.png"
@@ -121,41 +82,22 @@ const AllCourse = () => {
               />
               Common
             </h3>
-            <Common data={courses} />
-            <Container className="item-common">
-              <Card style={{ width: "100%" }} className="d-flex flex-row">
-                <div className="image-col">
-                  <Card.Img
-                    className="course-image"
-                    variant="left"
-                    src="books-pile.png"
-                  />
-                </div>
-                <div className="body-col">
-                  <Card.Body>
-                    <Card.Title>Course Title</Card.Title>
-                    <Card.Text>details</Card.Text>
-                  </Card.Body>
-                  <Col className="add-icon position-absolute top-0 end-0 p-2">
-                    <img
-                      src="../plus.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Add Icon"
-                    />
-                  </Col>
-                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-                    <img
-                      src="../heart.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Like Icon"
-                    />
-                  </Col>
-                </div>
-              </Card>
-            </Container>
+
+            <div
+              className="item-common overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Common data={courses} />
+            </div>
           </Col>
 
-          <Col className="newest-col">
+          <Col
+            id="newest-col"
+            className="newest-col"
+            data-bs-spy="scroll"
+            data-bs-target="#newest-col"
+            data-bs-offset="0"
+          >
             <h3 className="header-newest">
               <img
                 src="../newest.png"
@@ -165,38 +107,12 @@ const AllCourse = () => {
               />
               Newest
             </h3>
-            <Common data={courses} />
-            <Container className="item-newest">
-              <Card style={{ width: "100%" }} className="d-flex flex-row">
-                <div className="image-col">
-                  <Card.Img
-                    className="course-image"
-                    variant="left"
-                    src="books-pile.png"
-                  />
-                </div>
-                <div className="body-col">
-                  <Card.Body>
-                    <Card.Title>Course Title</Card.Title>
-                    <Card.Text>details</Card.Text>
-                  </Card.Body>
-                  <Col className="add-icon position-absolute top-0 end-0 p-2">
-                    <img
-                      src="../plus.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Add Icon"
-                    />
-                  </Col>
-                  <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-                    <img
-                      src="../heart.png"
-                      style={{ width: "20px", height: "20px" }}
-                      alt="Like Icon"
-                    />
-                  </Col>
-                </div>
-              </Card>
-            </Container>
+            <div
+              className="item-newest overflow-y-scroll"
+              style={{ maxHeight: "500px" }}
+            >
+              <Newest data={courses} />
+            </div>
           </Col>
         </Row>
       </Container>
