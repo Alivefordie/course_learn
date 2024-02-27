@@ -5,6 +5,8 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ax from "../conf/ax";
+import conf from "../conf/main";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -13,17 +15,18 @@ const Cart = () => {
 
   const fetchData = async () => {
     try {
-      const jwtToken = sessionStorage.getItem('auth.jwt');
-      if (!jwtToken) {
-        console.error('JWT token not found.');
-        return;
-      }
-      axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      const response = await axios.get("http://localhost:1337/api/cart");
-      console.log(response)
-      console.log("test:",response.data.data.map(entry => entry.attributes))
-      setData(response.data.data.map(entry => entry.attributes));
-      console.log(data)
+      // const jwtToken = sessionStorage.getItem('auth.jwt');
+      // if (!jwtToken) {
+      //   console.error('JWT token not found.');
+      //   return;
+      // }
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+      // const response = await axios.get("http://localhost:1337/api/cart");
+      const response = await ax.get(conf.Cart);
+      const data = response.data.data.map(entry => entry.attributes)
+      setData(data);
+      const allIds = data.map(course => course.id);
+      console.log(allIds)
       calculateTotalPrice(response.data.data.map(entry => entry.attributes));
     } catch(error) {
       console.error('Error occurred:', error);

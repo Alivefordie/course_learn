@@ -16,23 +16,31 @@ const Payment = () => {
     const [email, setEmail] = useState("");
     const [date, setDate] = useState("");
     const [phone, setPhone] = useState("");
+    const [Id, setID] = useState([])
 
-    const fetchData = async () => {
-        try {
-            const jwtToken = sessionStorage.getItem('auth.jwt');
-            if (!jwtToken) {
-                console.error('JWT token not found.');
-                return;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const jwtToken = sessionStorage.getItem('auth.jwt');
+                if (!jwtToken) {
+                    console.error('JWT token not found.');
+                    return;
+                }
+                axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+                const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
+                const data = response.data.entries.map(entry => entry.course)
+                setID(data.map(course => course.id));
+                const allIds = data.map(course => course.id);
+                console.log(allIds)
+                setData(response.data.entries.map(entry => entry.course));
+                calculateTotalPrice(response.data.entries.map(entry => entry.course));
+
+            } catch (error) {
+                console.error('Error occurred:', error);
             }
-            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-            const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
-            console.log(response.data.entries.map(entry => entry.course));
-            setData(response.data.entries.map(entry => entry.course));
-            calculateTotalPrice(response.data.entries.map(entry => entry.course));
-        } catch (error) {
-            console.error('Error occurred:', error);
         }
-    }
+        fetchData();
+    }, []);
 
     const calculateTotalPrice = (courses) => {
         const totalPrice = courses.reduce((acc, course) => {
@@ -43,10 +51,6 @@ const Payment = () => {
         }, 0);
         setTotalPrice(totalPrice);
     }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const handleConfirm = () => {
         setShowModal(true);
@@ -68,7 +72,24 @@ const Payment = () => {
             setDate("");
             setPhone("");
             setData([]);
+            test()
+
         }
+    }
+
+
+    useEffect(() => {
+        console.log(Id)
+    }, [Id])
+
+    const success = async () => {
+        try {
+
+        }
+        catch {
+            console.log("fail")
+        }
+
     }
 
     return (
