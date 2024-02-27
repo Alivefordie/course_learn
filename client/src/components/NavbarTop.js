@@ -6,9 +6,8 @@ import UnloginNavbar from "./UnloginNavbar";
 import InsNavbar from "./Ins/InsNavbar";
 const NavbarTop = ({ NavbarLink }) => {
 	const context = useContext(AuthContext);
-	const [role, setRole] = useState(sessionStorage.getItem("userRole"));
 	useEffect(() => {
-		//console.log(context.state);
+		//console.log(context);
 		//console.log(role);
 	});
 	return (
@@ -20,7 +19,7 @@ const NavbarTop = ({ NavbarLink }) => {
 					</Link>
 				</Navbar.Brand>
 				{context.state.isLoggedIn ? (
-					role == "student" ? (
+					context.state.role == "student" ? (
 						NavbarLink && <NavbarLink />
 					) : (
 						<InsNavbar />
