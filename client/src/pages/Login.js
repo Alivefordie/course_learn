@@ -16,7 +16,7 @@ const Login = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		try {
-			login(username, password, navigate);
+			login(username, password);
 			navigate("/");
 		} catch (error) {
 			console.error("Login error", error);

@@ -14,6 +14,11 @@ const Cart = () => {
   const [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
+
+
+  const test = sessionStorage.getItem("userRole")
+  console.log("test_role:", test)
+
   const fetchData = async () => {
     try {
       const jwtToken = sessionStorage.getItem('auth.jwt');
@@ -27,12 +32,12 @@ const Cart = () => {
       console.log(response.data)
       setData(response.data.courses);
       calculateTotalPrice(response.data.courses);
-    } catch(error) {
+    } catch (error) {
       console.error('Error occurred:', error);
     }
   }
 
-  const payment = () =>{
+  const payment = () => {
     navigate("/payment");
   }
 
@@ -66,7 +71,7 @@ const Cart = () => {
                     <p>Title: {item.title}</p>
                     <p>Price: {item.price}</p>
                   </div>
-                ))} 
+                ))}
               </Container>
             </Col>
             <Col className="price-col" sm={2}>
@@ -77,7 +82,7 @@ const Cart = () => {
             </Col>
           </Row>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="outline-dark" onClick={payment}  className="pay-but">Payment</Button>
+            <Button variant="outline-dark" onClick={payment} className="pay-but">Payment</Button>
           </div>
         </Container>
       </Container>

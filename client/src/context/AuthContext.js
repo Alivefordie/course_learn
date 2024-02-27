@@ -23,6 +23,9 @@ const updateJwt = (jwt) => {
   }
 };
 
+
+
+
 export const ContextProvider = props => {
   const [state, setState] = useSetState(initialState);
 
@@ -62,8 +65,10 @@ export const ContextProvider = props => {
     updateJwt(null);
     setLoginSuccess(false);
     setLoginError(null);
-    setRole(""); 
+    // setRole(""); 
+    sessionStorage.setItem('userRole', '');
   };
+  
 
   return (
     <AuthContext.Provider
@@ -89,6 +94,7 @@ const fetchLogin = async (username, password, callback) => {
       callback(null, response.data);
       const roleResponse = await ax.get(conf.RoleSessionStorageKey);
       const role = roleResponse.data.role.name; 
+      console.log(role)
       sessionStorage.setItem('userRole', role); 
       
     } else {
