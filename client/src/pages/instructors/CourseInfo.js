@@ -6,7 +6,7 @@ import NavbarTop from "../../components/NavbarTop";
 import NavbarLink from "../../components/NavbarLink";
 
 
-const Pag2 = () => {
+const CourseInfo = () => {
     const [courses1, setCourses1] = useState([]);
     const { item } = useParams();
     useEffect(() => {
@@ -32,4 +32,4 @@ const Pag2 = () => {
     );
 }
 
-export default Pag2;
+export default CourseInfo;
