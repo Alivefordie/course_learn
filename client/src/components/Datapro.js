@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 const Datapro = ({ data }) => {
     const data_1 = data[0];
     const entries = data[1];
-    const picture = data[3];
+    let picture = data[3];
+
+    if (picture === null) {
+        const picture_defaults = "Profiledf.jpg";
+        picture = picture_defaults;
+    }
+    
 
     useEffect(() => {
         console.log("data:", data_1);
@@ -22,7 +28,7 @@ const Datapro = ({ data }) => {
             <div>
                 <h2 style={{ fontFamily: "Roboto, sans-serif", fontSize: "24px", color: "#333", borderBottom: "2px solid #ccc", paddingBottom: "10px", marginBottom: "20px" }}>Profile Information</h2>
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-                    <img src={`http://localhost:1337${picture}`} alt="Profile" style={{ width: "150px", height: "150px", borderRadius: "50%", marginBottom: "20px", boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)" }} />
+                    <img src={picture ? `http://localhost:1337${picture}` : "Profiledf.jpg"} alt="Profile" style={{ width: "150px", height: "150px", borderRadius: "50%", marginBottom: "20px", boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)" }} />
                     <div style={{ textAlign: "center" }}>
                         <p style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px" }}><strong>Username:</strong> {data_1.username}</p>
                         <p style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px" }}><strong>Email:</strong> {data_1.email}</p>

@@ -6,6 +6,7 @@ import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 
 
+
 const Profile = () => {
     const [data, setData] = useState({});
     const [entries, setEntries] = useState([]);
@@ -27,7 +28,7 @@ const Profile = () => {
 
     const fetchProfilePicture = async () => {
         try {
-            const response = await ax.get("http://localhost:1337/api/users/me?populate[picture]=*");
+            const response = await ax.get(conf.Picture);
             const pictureUrl = response.data.picture.map((item) => item.url)
             setpicture(pictureUrl)
             // console.log(pictureUrl)
