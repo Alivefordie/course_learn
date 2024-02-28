@@ -4,7 +4,7 @@ const conf = {
     jwtUserEndpoint: '/users/me',
     jwtSessionStorageKey: 'auth.jwt',
     RoleSessionStorageKey: '/users/me?populate=role',
-    test:"/users/me?populate[entries][populate][course]=*",
+    findanything:"/users/me?populate[entries][populate][course]=*",
     Cart:"/cart",
     Profile: '/users/me?populate=*',
     Picture: "users/me?populate[picture]=*"

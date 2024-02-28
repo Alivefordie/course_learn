@@ -16,7 +16,7 @@ const Profile = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await ax.get(conf.test);
+            const response = await ax.get(conf.findanything);
             setData(response.data);
             setEntries(response.data.entries);
             const courses = response.data.entries.map((item) => item.course);

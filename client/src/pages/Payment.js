@@ -6,6 +6,8 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
+import ax from "../conf/ax";
+import conf from "../conf/main";
 
 const Payment = () => {
     const [data, setData] = useState([]);
@@ -22,13 +24,14 @@ const Payment = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const jwtToken = sessionStorage.getItem('auth.jwt');
-                if (!jwtToken) {
-                    console.error('JWT token not found.');
-                    return;
-                }
-                axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-                const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
+                // const jwtToken = sessionStorage.getItem('auth.jwt');
+                // if (!jwtToken) {
+                //     console.error('JWT token not found.');
+                //     return;
+                // }
+                // axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+                // const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
+                const response = await ax.get(conf.findanything);
                 const data = response.data.entries.map(entry => entry.course);
                 setID(data.map(course => course.id));
                 setData(data);
