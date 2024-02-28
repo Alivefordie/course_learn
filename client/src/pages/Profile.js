@@ -1,43 +1,52 @@
 import React, { useEffect, useState } from "react";
 import Datapro from "../components/Datapro";
-// import axios from "axios";
 import conf from "../conf/main";
 import ax from "../conf/ax";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 
+
 const Profile = () => {
-    const [data, setdata] = useState({});
-    const [entries, setentries] = useState([]);
-    const [course, setcourse] = useState([]);
+    const [data, setData] = useState({});
+    const [entries, setEntries] = useState([]);
+    const [course, setCourse] = useState([]);
+    const [picture,setpicture] = useState("")
+
 
     const fetchProfile = async () => {
         try {
             const response = await ax.get(conf.test);
-            setdata(response.data);
-            // console.log("response data: ", response.data);
-
-            setentries(response.data.entries);
-            // console.log("response entries: ", response.data.entries);
-
-            
+            setData(response.data);
+            setEntries(response.data.entries);
             const courses = response.data.entries.map((item) => item.course);
-            setcourse(courses);
-            // console.log("response course: ", courses);
+            setCourse(courses);
+        } catch (error) {
+            console.log("fetchProfile error:", error);
         }
-        catch (error) {
-            console.log("fail");
+    };
+
+    const fetchProfilePicture = async () => {
+        try {
+            const response = await ax.get("http://localhost:1337/api/users/me?populate[picture]=*");
+            const pictureUrl = response.data.picture.map((item) => item.url)
+            setpicture(pictureUrl)
+            // console.log(pictureUrl)
+            
+
+        } catch (error) {
+            console.log("fetchProfilePicture error:", error);
         }
     };
 
     useEffect(() => {
         fetchProfile();
+        fetchProfilePicture();
     }, []);
 
     return (
         <div>
             <NavbarTop NavbarLink={NavbarLink} />
-            <Datapro data={[data, entries, course]} />
+            <Datapro data={[data, entries, course,picture]} />
         </div>
     );
 };
