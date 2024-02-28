@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 const Datapro = ({ data }) => {
     const data_1 = data[0];
     const entries = data[1];
-    const course = data[2];
     const picture = data[3];
 
     useEffect(() => {
         console.log("data:", data_1);
         console.log("entries", entries);
-        console.log("course", course);
         console.log("picture:", picture)
-    }, [data_1, entries, course, picture]);
+    }, [data_1, entries, picture]);
+
+
+    const filteredEntries = entries.filter(entry => entry.cart === null);
+    console.log("filteredEntries:", filteredEntries);
+    
 
     return (
         <div style={{ backgroundColor: "#f9f9f9", padding: "20px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}>
@@ -28,16 +31,13 @@ const Datapro = ({ data }) => {
                 <div style={{ backgroundColor: "#fff", borderRadius: "5px", padding: "20px", boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)" }}>
                     <p style={{ fontFamily: "Roboto, sans-serif", fontSize: "18px", marginBottom: "20px", color: "#333" }}><strong>My Course Details:</strong></p>
                     <ul style={{ padding: "0", margin: "0" }}>
-                        {course.map((item, index) => (
+                        {filteredEntries.map((entry, index) => (
                             <li key={index} style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px", listStyleType: "none" }}>
                                 <Link to="#" className="custom-link">
-                                    <strong>{item.name}</strong> {item.title} 
+                                    <strong>{entry.course.title}</strong>
                                     <br/>
-                                    - {item.description} 
+                                    - {entry.course.description} 
                                 </Link>
-
-
-
                             </li>
                         ))}
                     </ul>
