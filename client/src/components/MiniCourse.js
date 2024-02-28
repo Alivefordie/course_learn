@@ -10,7 +10,7 @@ function MiniCourse({ course }) {
 	return (
 		<>
 			<Card
-				onClick={() => navigate(`/page1/${course.id}`, { replace: true })}
+				onClick={() => navigate(`/courses/${course.id}`, { replace: true })}
 				style={{ cursor: "pointer", width: "100%" }}
 				className="d-flex flex-row">
 				<div className="image-col">
