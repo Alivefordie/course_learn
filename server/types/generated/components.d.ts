@@ -41,10 +41,12 @@ export interface ActivityVideo extends Schema.Component {
   info: {
     displayName: 'video';
     icon: 'link';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     link: Attribute.String;
+    videoFile: Attribute.Media;
   };
 }
 

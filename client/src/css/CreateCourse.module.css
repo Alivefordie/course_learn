@@ -1,0 +1,14 @@
+.body {
+  background-color: #ff2121;
+  height: 100vh;
+  width: 100vw;
+}
+
+.scrollbar {
+  overflow: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
