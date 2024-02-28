@@ -17,6 +17,7 @@ import History from "./pages/History";
 import SpecificCourse from "./pages/instructors/SpecificCourse";
 import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
 	{
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
 		path: "/Instructors/create",
 		element: <CreateCourse />,
 	},
+	{
+		path: "/profile",
+		element: <Profile />,
+	},
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

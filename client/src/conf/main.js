@@ -5,7 +5,8 @@ const conf = {
     jwtSessionStorageKey: 'auth.jwt',
     RoleSessionStorageKey: '/users/me?populate=role',
     test:"/users/me?populate[entries][populate][course]=*",
-    Cart:"/cart"
+    Cart:"/cart",
+    Profile: '/users/me?populate=*',
 };
 
 export default conf;
