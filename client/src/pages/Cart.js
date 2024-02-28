@@ -1,3 +1,4 @@
+//จัดเลอร์เยอะโอเค เหลือเพิ่มเข้าไป
 import React, { useEffect, useState } from "react";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
@@ -75,6 +76,8 @@ const Cart = () => {
             </Col>
           </Row>
         </Container>
+      <div>
+      </div>
       </Container>
     </div>
   );
