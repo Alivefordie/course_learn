@@ -31,7 +31,9 @@ const Datapro = ({ data }) => {
                         {course.map((item, index) => (
                             <li key={index} style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px", listStyleType: "none" }}>
                                 <Link to="#" className="custom-link">
-                                    <strong>{item.name}</strong> - {item.description}
+                                    <strong>{item.name}</strong> {item.title} 
+                                    <br/>
+                                    - {item.description} 
                                 </Link>
 
 
