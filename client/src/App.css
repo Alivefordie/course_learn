@@ -215,4 +215,13 @@
   align-items: center;
 
 }
+.custom-link {
+  color: #000000; 
+  text-decoration: none;
+  transition: color 0.3s ease; 
+  
+}
 
+.custom-link:hover {
+  color: #0056b3;
+}
