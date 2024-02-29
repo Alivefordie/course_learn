@@ -6,6 +6,8 @@ const ManageData = () => {
     const [courses, setCourses] = useState([]);
     const [entries, setEntries] = useState([]);
     const [editingItemId, setEditingItemId] = useState(null);
+    const [searchCourse, setSearchCourse] = useState("");
+    const [searchEntryId, setSearchEntryId] = useState(""); 
 
     const fetchCourse = async () => {
         try {
@@ -29,7 +31,6 @@ const ManageData = () => {
         setEditingItemId(id);
     };
 
-    // Function to delete a course
     const handleDeleteCourse = async (id) => {
         try {
             await axios.delete(`http://localhost:1337/api/courses/${id}`);
@@ -52,6 +53,22 @@ const ManageData = () => {
         }
     };
 
+    const handleSearchCourse = (e) => {
+        setSearchCourse(e.target.value);
+    };
+
+    const handleSearchEntryId = (e) => {
+        setSearchEntryId(e.target.value);
+    };
+
+    const filteredCourses = courses.filter(course =>
+        course.attributes.title.toLowerCase().includes(searchCourse.toLowerCase())
+    );
+
+    const filteredEntries = entries.filter(entry =>
+        entry.id.toString().includes(searchEntryId)
+    );
+
     useEffect(() => {
         fetchCourse();
         fetchEntries();
@@ -61,10 +78,31 @@ const ManageData = () => {
         <div className="manage-data-container">
             <h1 className="header">Manage Data</h1>
             <p className="role">Role: Super Admin</p>
+
+            <div className="search-container">
+                {/*course */}
+                <input
+                    type="text"
+                    placeholder="Search course..."
+                    value={searchCourse}
+                    onChange={handleSearchCourse}
+                    className="search-input"
+                />
+                
+                {/*entries*/}
+                <input
+                    type="text"
+                    placeholder="Search entry ID..."
+                    value={searchEntryId}
+                    onChange={handleSearchEntryId}
+                    className="search-input"
+                />
+            </div>
+
             <div className="section">
                 <h2 className="section-header">Courses</h2>
                 <div className="data-list">
-                    {courses.map(course => (
+                    {filteredCourses.map(course => (
                         <div key={course.id} className="data-item">
                             <div className="course-details">
                                 <strong>Title:</strong> {course.attributes && course.attributes.title}<br />
@@ -82,10 +120,11 @@ const ManageData = () => {
                     ))}
                 </div>
             </div>
+
             <div className="section">
                 <h2 className="section-header">Entries</h2>
                 <div className="data-list">
-                    {entries.map(entry => (
+                    {filteredEntries.map(entry => (
                         <div key={entry.id} className="data-item">
                             <div className="entry-details">
                                 <strong>ID:</strong> {entry.id}<br />
