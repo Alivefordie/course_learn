@@ -18,6 +18,7 @@ import SpecificCourse from "./pages/instructors/SpecificCourse";
 import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
+import Management from "./pages/superadmin/Management";
 
 const router = createBrowserRouter([
 	{
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
 	{
 		path: "/profile",
 		element: <Profile />,
+	},
+	{
+		path: "/subperadmin",
+		element: <Management />,
 	},
 
 ]);
