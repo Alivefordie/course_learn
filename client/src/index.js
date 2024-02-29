@@ -65,7 +65,7 @@ const router = createBrowserRouter([
 		element: <Profile />,
 	},
 	{
-		path: "/subperadmin",
+		path: "/superadmin",
 		element: <Management />,
 	},
 ]);

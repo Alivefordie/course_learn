@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import conf from "../../conf/main";
+import ax from "../../conf/ax";
 
 const ManageData = () => {
     const [courses, setCourses] = useState([]);
@@ -11,7 +12,7 @@ const ManageData = () => {
 
     const fetchCourse = async () => {
         try {
-            const response = await axios.get("http://localhost:1337/api/courses?populate=*");
+            const response = await ax.get(conf.Course);
             setCourses(response.data.data);
         } catch (error) {
             console.log("Failed to fetch courses data", error);
@@ -19,14 +20,8 @@ const ManageData = () => {
     };
     
     const fetchEntries = async () => {
-        const jwtToken = sessionStorage.getItem('auth.jwt');
-        if (!jwtToken) {
-          console.error('JWT token not found.');
-          return;
-        }
-        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
         try {
-            const response = await axios.get("http://localhost:1337/api/entries?populate[owner]=*");
+            const response = await ax.get(conf.Entries);
             setEntries(response.data.data);
         } catch (error) {
             console.log("Failed to fetch entries data", error);
@@ -106,7 +101,7 @@ const ManageData = () => {
             </div>
 
             <div className="section">
-                <h2 className="section-header">Courses</h2>
+                <h2 className="section-header">Courses ({courses.length})</h2>
                 <div className="data-list">
                     {filteredCourses.map(course => (
                         <div key={course.id} className="data-item">
@@ -128,7 +123,7 @@ const ManageData = () => {
             </div>
 
             <div className="section">
-                <h2 className="section-header">Entries</h2>
+                <h2 className="section-header">Entries ({entries.length})</h2>
                 <div className="data-list">
                     {filteredEntries.map(entry => (
                         <div key={entry.id} className="data-item">
