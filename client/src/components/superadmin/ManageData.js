@@ -19,6 +19,12 @@ const ManageData = () => {
     };
     
     const fetchEntries = async () => {
+        const jwtToken = sessionStorage.getItem('auth.jwt');
+        if (!jwtToken) {
+          console.error('JWT token not found.');
+          return;
+        }
+        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
         try {
             const response = await axios.get("http://localhost:1337/api/entries?populate[owner]=*");
             setEntries(response.data.data);
