@@ -12,6 +12,7 @@ const initialState = {
 	isLoginPending: false,
 	loginError: null,
 	role: "",
+	picture: "",
 };
 
 const updateJwt = (jwt) => {
@@ -27,9 +28,11 @@ export const ContextProvider = (props) => {
 	const [state, setState] = useSetState(initialState);
 
 	const setLoginPending = (isLoginPending) => setState({ isLoginPending });
-	const setLoginSuccess = (isLoggedIn, user) => setState({ isLoggedIn, user });
+	const setLoginSuccess = (isLoggedIn, user, role, picture) =>
+		setState({ isLoggedIn, user, role, picture });
 	const setLoginError = (loginError) => setState({ loginError });
 	const setRole = (role) => setState({ role });
+	const setPicture = (picture) => setState({ picture });
 
 	const handleLoginResult = (error, result) => {
 		setLoginPending(false);
@@ -38,7 +41,11 @@ export const ContextProvider = (props) => {
 			if (result.jwt) {
 				updateJwt(result.jwt);
 			}
-			setLoginSuccess(true, result.user);
+			if (result.user.role || result.user.picture) {
+				setLoginSuccess(true, result.user, result.user.role.name, result.user.picture?.url);
+			} else {
+				setLoginSuccess(true, result.user);
+			}
 		} else if (error) {
 			setLoginError(error);
 		}
@@ -54,7 +61,7 @@ export const ContextProvider = (props) => {
 		setLoginSuccess(false);
 		setLoginError(null);
 
-		fetchLogin(username, password, handleLoginResult, setRole);
+		fetchLogin(username, password, handleLoginResult);
 	};
 
 	const logout = () => {
@@ -63,6 +70,7 @@ export const ContextProvider = (props) => {
 		setLoginSuccess(false);
 		setLoginError(null);
 		setRole("");
+		setPicture("");
 		sessionStorage.setItem("userRole", "");
 	};
 
@@ -79,7 +87,7 @@ export const ContextProvider = (props) => {
 	);
 };
 
-const fetchLogin = async (username, password, callback, setRole) => {
+const fetchLogin = async (username, password, callback) => {
 	try {
 		const response = await ax.post(conf.loginEndpoint, {
 			identifier: username,
@@ -87,10 +95,9 @@ const fetchLogin = async (username, password, callback, setRole) => {
 		});
 		if (response.data.jwt && response.data.user.id > 0) {
 			callback(null, response.data);
-			const roleResponse = await ax.get(conf.RoleSessionStorageKey);
-			const role = roleResponse.data.role.name;
-			console.log(role);
-			setRole(role);
+			const Response = await ax.get(conf.RoleSessionStorageKey);
+			callback(null, { user: Response.data });
+			const role = Response.data.role.name;
 			sessionStorage.setItem("userRole", role);
 		} else {
 			callback(new Error("Invalid username and password"));

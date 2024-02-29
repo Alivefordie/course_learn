@@ -34,7 +34,6 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         picture: true,
         owner: { select: "username" },
         entries: {
-          select: ["id", "like"],
           where: { owner: user.id },
         },
       },
@@ -56,7 +55,6 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         picture: true,
         owner: { select: "username" },
         entries: {
-          select: ["id", "cart"],
           where: { owner: user.id },
         },
       },
@@ -78,7 +76,6 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         picture: true,
         owner: { select: "username" },
         entries: {
-          select: ["id", "enroll"],
           where: { owner: user.id },
         },
       },
@@ -94,20 +91,15 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     const haveNewest = ctx.request.query.Newest
       ? { publishedAt: "desc" }
       : undefined;
-    const userLike = user
+    const userEnrty = user
       ? {
           entries: {
-            select: ["id", "like", "enroll"],
             where: { owner: user.id },
           },
         }
       : undefined;
     const Owned =
-      user && ctx.request.query.owner
-        ? {
-            owner: user.id,
-          }
-        : undefined;
+      user && ctx.request.query.owner ? { owner: user.id } : undefined;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
       where: {
@@ -120,9 +112,9 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       populate: {
         picture: true,
         owner: { select: "username" },
-        ...userLike,
+        ...userEnrty,
       },
-      orderBy: { ...haveLikemost, ...haveNewest },
+      orderBy: haveLikemost ? haveLikemost : haveNewest,
     });
     return this.transformResponse(entries);
   },
@@ -185,7 +177,8 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         // @ts-ignore
         owner: { fields: "username" },
         picture: true,
-        course_syllabus: true,
+        course_syllabus: { populate: "*" },
+        entries: true,
       },
     };
     const response = await super.findOne(ctx);

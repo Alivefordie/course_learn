@@ -8,32 +8,51 @@ import { Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import Newest from "../components/Newest";
 import Spinner from "../components/Spinner";
+import ax from "../conf/ax";
+import conf from "../conf/main";
+
 const AllCourse = () => {
 	const [courses, setCourses] = useState([]);
-	const storedJwtToken = sessionStorage.getItem("jwtToken");
-	const storedRolename = sessionStorage.getItem("Rolename");
+	const [newestCourses, setNewestCourses] = useState([]);
 	const [loading, setLoading] = useState(true);
-	// Set default headers
-	useEffect(() => {
-		if (storedJwtToken) {
-			axios.defaults.headers.common["Authorization"] = `Bearer ${storedJwtToken}`;
+
+	const fetchData = async () => {
+		try {
+			setLoading(true);
+			await fetchLikeMost();
+			await fetchNewest();
+			setLoading(false);
+		} catch (error) {
+			console.error("Error fetching data:", error);
+			setLoading(false);
 		}
-	}, [storedJwtToken]);
+	};
+
+	const fetchNewest = async () => {
+		try {
+			const response = await ax.get(`${conf.apiUrlPrefix}/courses?`);
+			const coursesData = response.data.data;
+			setNewestCourses(coursesData);
+		} catch (error) {
+			console.error("Error fetching data:", error);
+			setLoading(false);
+		}
+	};
+
+	const fetchLikeMost = async () => {
+		try {
+			const response = await ax.get(`${conf.apiUrlPrefix}/courses?likeMost=true`);
+			const coursesData = response.data.data;
+			setCourses(coursesData);
+		} catch (error) {
+			console.error("Error fetching data:", error);
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get("http://localhost:1337/api/courses");
-				const coursesData = response.data.data;
-				setCourses(coursesData);
-				setLoading(false);
-			} catch (error) {
-				console.error("Error fetching data:", error);
-				setLoading(false);
-			}
-		};
 		fetchData();
-	}, [storedJwtToken, storedRolename]);
+	}, []);
 
 	return (
 		<div>
@@ -101,7 +120,7 @@ const AllCourse = () => {
 								Newest
 							</h3>
 							<div className="item-newest scrollbar" style={{ maxHeight: "500px" }}>
-								<Newest data={courses} />
+								<Newest data={newestCourses} />
 							</div>
 						</Col>
 					</Row>
