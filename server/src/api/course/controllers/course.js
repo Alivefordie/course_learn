@@ -41,6 +41,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
+
   async cart(ctx) {
     const user = ctx.state.user;
     const entries = await strapi.db.query("api::course.course").findMany({
@@ -96,7 +97,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     const userLike = user
       ? {
           entries: {
-            select: ["id", "like"],
+            select: ["id", "like", "enroll"],
             where: { owner: user.id },
           },
         }
@@ -125,7 +126,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     });
     return this.transformResponse(entries);
   },
-  
+
   async create(ctx) {
     const { user } = ctx.state;
     if (typeof ctx.request["body"].data === "string") {
@@ -152,6 +153,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
     const response = await super.create(ctx);
     return response;
   },
+
   async findOne(ctx) {
     // const user = ctx.state.user;
     // const entryId = ctx.params.id;

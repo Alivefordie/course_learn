@@ -8,9 +8,11 @@ import style from "../css/History.module.css";
 import moment from "moment";
 import _ from "lodash";
 import MiniCourse from "../components/MiniCourse";
+import Spinner from "../components/Spinner";
 
 const History = () => {
 	const [myCourses, setmyCourse] = useState("");
+	const [loading, setLoading] = useState(true);
 	const setJwt = () => {
 		const jwtToken = sessionStorage.getItem("auth.jwt");
 		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
@@ -27,6 +29,7 @@ const History = () => {
 			GroupCourses = { ...GroupCourses, [t]: groupConditon.true };
 		});
 		setmyCourse(GroupCourses);
+		setLoading(false);
 	};
 	useEffect(() => {
 		setJwt();
@@ -35,46 +38,50 @@ const History = () => {
 	return (
 		<div className="body">
 			<NavbarTop NavbarLink={NavbarLink} />
-			<Container sm="3" md="4">
-				<Row>
-					<Col className="week-col">
-						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
-							This week
-						</h1>
-						<Container className="item-week">
-							{myCourses.week ? (
-								myCourses.week.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
-							) : (
-								<h1 className={`mx-auto ${style.righteous}`}>no data</h1>
-							)}
-						</Container>
-					</Col>
-					<Col className="month-col">
-						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
-							This month
-						</h1>
-						<Container className="item-month">
-							{myCourses.month ? (
-								myCourses.month.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
-							) : (
-								<h1 className={style.righteous}>no data</h1>
-							)}
-						</Container>
-					</Col>
-					<Col className="year-col">
-						<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
-							This year
-						</h1>
-						<Container className="item-year">
-							{myCourses.year ? (
-								myCourses.year.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
-							) : (
-								<h1 className={style.righteous}>no data</h1>
-							)}
-						</Container>
-					</Col>
-				</Row>
-			</Container>
+			{loading ? (
+				<Spinner />
+			) : (
+				<Container sm="3" md="4">
+					<Row>
+						<Col className="week-col">
+							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+								This week
+							</h1>
+							<Container className="item-week">
+								{myCourses.week ? (
+									myCourses.week.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+								) : (
+									<h1 className={`mx-auto ${style.righteous}`}>no data</h1>
+								)}
+							</Container>
+						</Col>
+						<Col className="month-col">
+							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+								This month
+							</h1>
+							<Container className="item-month">
+								{myCourses.month ? (
+									myCourses.month.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+								) : (
+									<h1 className={style.righteous}>no data</h1>
+								)}
+							</Container>
+						</Col>
+						<Col className="year-col">
+							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+								This year
+							</h1>
+							<Container className="item-year">
+								{myCourses.year ? (
+									myCourses.year.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+								) : (
+									<h1 className={style.righteous}>no data</h1>
+								)}
+							</Container>
+						</Col>
+					</Row>
+				</Container>
+			)}
 		</div>
 	);
 };

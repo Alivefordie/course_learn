@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Container, Col, Button, Spinner, Form, Row, Image } from "react-bootstrap";
+import { Container, Col, Button, Form, Row, Image } from "react-bootstrap";
+import Spinner from "../../components/Spinner";
+
 import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
 import NavbarTop from "../../components/NavbarTop";
 import style from "../../css/CreateCourse.module.css";
+
 const CreateCourse = () => {
 	const [CourseData, setCourseData] = useState(null);
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
@@ -14,6 +17,7 @@ const CreateCourse = () => {
 	const [Svalidated, setSValidated] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [edit, setedit] = useState(false);
+
 	const handleChange = (e) => {
 		setCourseData({
 			...CourseData,
@@ -28,6 +32,7 @@ const CreateCourse = () => {
 	// send axios
 	const postCourse = async () => {
 		const form = new FormData();
+		setLoading(true);
 		const jwtToken = sessionStorage.getItem("auth.jwt");
 		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
 		const data = CourseSyllabus.map((c, i) => {
@@ -123,7 +128,7 @@ const CreateCourse = () => {
 		<div className={style.body}>
 			<NavbarTop />
 			{loading ? (
-				<Spinner animation="border" role="status" />
+				<Spinner />
 			) : (
 				<Container sm="3" md="4">
 					<Row>

@@ -14,10 +14,10 @@ import Payment from "./pages/Payment";
 import Register from "./pages/Register";
 import MyCourses from "./pages/myCourses";
 import History from "./pages/History";
-import SpecificCourse from "./pages/instructors/SpecificCourse";
 import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
+import Management from "./pages/superadmin/Management";
 
 const router = createBrowserRouter([
 	{
@@ -57,10 +57,6 @@ const router = createBrowserRouter([
 		element: <InsSee />,
 	},
 	{
-		path: "/Instructors/:id",
-		element: <SpecificCourse />,
-	},
-	{
 		path: "/Instructors/create",
 		element: <CreateCourse />,
 	},
@@ -68,7 +64,10 @@ const router = createBrowserRouter([
 		path: "/profile",
 		element: <Profile />,
 	},
-
+	{
+		path: "/superadmin",
+		element: <Management />,
+	},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
