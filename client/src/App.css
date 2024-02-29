@@ -247,3 +247,69 @@
 .progressBar .progress-bar {
   background-color: #007bff;
 }
+
+/* ManageData.css */
+
+.manage-data-container {
+  padding: 20px;
+}
+
+.header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.role {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.data-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.data-item {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.data-item-actions {
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.confirm-delete {
+  margin-top: 10px;
+}
+
+.confirm-delete button {
+  margin-right: 10px;
+}
+
+.edit-form {
+  margin-top: 10px;
+}
+
+
