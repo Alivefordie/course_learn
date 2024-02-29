@@ -121,7 +121,7 @@ const Payment = () => {
 
             const postData = {
                 paymentDate: new Date(),
-                paymentAmout: 600,
+                paymentAmout: totalPrice,
                 slip: pictureId
             };
 
