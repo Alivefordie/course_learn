@@ -101,7 +101,7 @@ const ManageData = () => {
             </div>
 
             <div className="section">
-                <h2 className="section-header">Courses</h2>
+                <h2 className="section-header">Courses ({courses.length})</h2>
                 <div className="data-list">
                     {filteredCourses.map(course => (
                         <div key={course.id} className="data-item">
@@ -123,7 +123,7 @@ const ManageData = () => {
             </div>
 
             <div className="section">
-                <h2 className="section-header">Entries</h2>
+                <h2 className="section-header">Entries ({entries.length})</h2>
                 <div className="data-list">
                     {filteredEntries.map(entry => (
                         <div key={entry.id} className="data-item">
