@@ -22,17 +22,11 @@ const Payment = () => {
 	const [Id, setID] = useState([]);
 	const [filter, setFilter] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [slip, setSlip] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// const jwtToken = sessionStorage.getItem('auth.jwt');
-				// if (!jwtToken) {
-				//     console.error('JWT token not found.');
-				//     return;
-				// }
-				// axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-				// const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
 				const response = await ax.get(conf.findanything);
 				const data = response.data.entries.map((entry) => entry.course);
 				setID(data.map((course) => course.id));
@@ -64,6 +58,10 @@ const Payment = () => {
 		setShowModal(true);
 	};
 
+	const handleFileChange = (event) => {
+		setSlip(event.target.files[0]);
+	};
+
 	const handleCloseModal = () => {
 		setShowModal(false);
 	};
@@ -81,6 +79,7 @@ const Payment = () => {
 			setPhone("");
 			setData([]);
 			success(Id);
+			sendslip();
 		}
 	};
 
@@ -91,6 +90,7 @@ const Payment = () => {
 	const success = async (Id) => {
 		try {
 			setLoading(true);
+
 			const jwtToken = sessionStorage.getItem("auth.jwt");
 			if (!jwtToken) {
 				console.error("JWT token not found.");
@@ -100,9 +100,44 @@ const Payment = () => {
 			const response = await axios.get(`http://localhost:1337/api/enroll/${Id}`);
 			console.log(response);
 			window.location.reload();
+			////fix it relate
 		} catch {
 			console.log("fail");
 			setLoading(false);
+		}
+	};
+
+	const sendslip = async () => {
+		try {
+			const jwtToken = sessionStorage.getItem("auth.jwt");
+			if (!jwtToken) {
+				console.error("JWT token not found.");
+				return;
+			}
+
+			axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+
+			const formData = new FormData();
+			formData.append("files", slip, slip.name);
+			console.log(formData);
+
+			const uploadResponse = await axios.post("http://localhost:1337/api/upload/", formData);
+			console.log("File uploaded successfully:", uploadResponse.data);
+			const pictureId = uploadResponse.data[0].id;
+			console.log(pictureId);
+
+			const postData = {
+				paymentDate: new Date(),
+				paymentAmout: totalPrice,
+				slip: pictureId,
+			};
+
+			const transactionResponse = await axios.post("http://localhost:1337/api/tansactions", {
+				data: postData,
+			}); // Corrected variable name here
+			console.log("Slip uploaded successfully. Response:", transactionResponse.data);
+		} catch (error) {
+			console.error("Error uploading slip:", error);
 		}
 	};
 
@@ -214,6 +249,7 @@ const Payment = () => {
 								<div>
 									<p>Step 2: QR Code</p>
 									<img src="/qrcode.png" alt="QR Code" className={styles.qrCode} />
+									<input type="file" accept="image/*" name="file" onChange={handleFileChange} />
 								</div>
 							)}
 							{progress >= 66 && <p>Step 3: Completion</p>}
