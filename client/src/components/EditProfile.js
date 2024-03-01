@@ -10,7 +10,7 @@ const EditProfile = () => {
     const [error, setError] = useState(null);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [picture, setPicture] = useState(null); // Corrected variable name
+    const [picture, setPicture] = useState(null);
     const { id } = useParams(); 
 
     const fetchData = async () => {
@@ -51,7 +51,6 @@ const EditProfile = () => {
             const uploadResponse = await axios.post('http://localhost:1337/api/upload/', formData);
             console.log('File uploaded successfully:', uploadResponse.data);
             const pictureId = uploadResponse.data[0].id;
-            console.log(pictureId)
 
             const updatedUserData = { username, email, picture: pictureId }; 
             const updateUserResponse = await axios.put(`http://localhost:1337/api/users/${id}`, updatedUserData);
@@ -84,24 +83,36 @@ const EditProfile = () => {
                 userData && (
                     <div>
                         <form>
-                            
                             <div className="mb-3">
-                                <label htmlFor="username" className="form-label">Username:</label>
+                                <label htmlFor="username" className="form-label">Username</label>
                                 <input
                                     type="text"
                                     id="username"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     className="form-control"
+                                    placeholder="Enter username"
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email:</label>
+                                <label htmlFor="email" className="form-label">Email</label>
                                 <input
                                     type="email"
                                     id="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    className="form-control"
+                                    placeholder="Enter email"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="profilePicture" className="form-label">Profile Picture</label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="profilePicture"
+                                    name="file"
+                                    onChange={handleChange}
                                     className="form-control"
                                 />
                             </div>
@@ -109,13 +120,12 @@ const EditProfile = () => {
                                 Update Profile
                             </button>
                         </form>
-                        {userData.picture && (
-                            <img src={`${conf.url}${userData.picture.url}`} alt="Profile" className="profile-picture mt-3" />
-                        )}
-                        <br/>
-                        <input type="file" accept="image/*" name='file' onChange={handleChange} />
+                        <div className="mt-3">
+                            {userData.picture && (
+                                <img src={`${conf.url}${userData.picture.url}`} alt="Profile" className="img-fluid" />
+                            )}
+                        </div>
                     </div>
-                    
                 )
             )}
         </div>
