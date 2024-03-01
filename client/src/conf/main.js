@@ -11,7 +11,7 @@ const conf = {
 	Picture: "users/me?populate[picture]=*",
 	Course: "/courses?populate=*",
 	Entries: "/entries?populate[owner]=*",
-	Silp:"/api/tansactions?populate[slip]=*"
+	Slip:"tansactions?populate[slip]=*"
 };
 
 export default conf;

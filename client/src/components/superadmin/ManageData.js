@@ -32,7 +32,7 @@ const ManageData = () => {
 
     const fetchSlip = async () => {
         try {
-            const response = await ax.get(conf.Silp);
+            const response = await ax.get(conf.Slip);
             const slipData = response.data.data.map((item) => item.attributes.slip.data.attributes.url);
             setslip(slipData);
             // console.log("slip data:", slipData);
