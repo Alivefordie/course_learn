@@ -28,7 +28,7 @@ const Payment = () => {
         const fetchData = async () => {
             try {
                 const response = await ax.get(conf.findanything);
-                console.log(response.data)
+                // console.log(response.data)
 
                 const data = response.data.entries.map((entry) => entry.course);
                 // console.log(data)
@@ -63,7 +63,7 @@ const Payment = () => {
 
             const courseIdWithNullEnroll = nullEnrollEntries.map(entry => entry.course.id);
             setID(courseIdWithNullEnroll)
-            console.log("Course IDs with enroll === null:", courseIdWithNullEnroll);
+            // console.log("Course IDs with enroll === null:", courseIdWithNullEnroll);
         } catch (error) {
             console.log("Failed to test", error);
         }
@@ -114,9 +114,9 @@ const Payment = () => {
         }
     };
 
-    useEffect(() => {
-        console.log(Id);
-    }, [Id]);
+    // useEffect(() => {
+    //     console.log(Id);
+    // }, [Id]);
 
     const success = async (Id) => {
         try {
