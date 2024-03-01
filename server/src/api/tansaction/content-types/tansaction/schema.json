@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tansaction",
     "pluralName": "tansactions",
-    "displayName": "tansaction"
+    "displayName": "tansaction",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,27 @@
       "type": "biginteger"
     },
     "slip": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "paymentDate": {
       "type": "datetime"
+    },
+    "member": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tansactions"
+    },
+    "entries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::entry.entry",
+      "mappedBy": "tansaction"
     }
   }
 }

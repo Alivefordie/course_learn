@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col, Container, Row, Collapse } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import conf from "../conf/main";
 
 const Specific = ({ data }) => {
   const { item } = useParams();
+  const [openReview, setOpenReview] = useState(false);
+  const [CourseSyllabus, setCourseSyllabus] = useState([]);
+  
   useEffect(() => {
     console.log("Specific:", data);
     console.log("item", item);
+    setCourseSyllabus(data.attributes.course_syllabus)
+    console.log('course',CourseSyllabus)
+    {CourseSyllabus.map((val, index) => () => {console.log(val.title)})}
   }, [data, item]);
 
   const AddCart = async () => {
@@ -46,8 +52,54 @@ const Specific = ({ data }) => {
               <p>Amount: {data.attributes.amount}</p>
               <p>Link Count: {data.attributes.likeCount}</p>
             </div>
+            <Card>
+              <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                <span style={{ marginRight: 'auto' }}>Course Review</span>
+                <Button
+                  variant="outline-dark"
+                  style={{ border: '0' }}
+                  onClick={() => setOpenReview(!openReview)}
+                  aria-controls="course-review"
+                  aria-expanded={openReview}
+                >
+                  {openReview ? '⮟' : '⮞'} 
+                </Button>
+              </Card.Header>
+              <Collapse in={openReview}>
+                <Card.Body id="course-review">
+                {CourseSyllabus.map((val, index) => {
+                  switch (val.__component){
+                    case "activity.video":
+                      return(
+                      <div key={index}>
+                        <h6>video</h6>
+                        <p>title: {val.title}</p>                      
+                        <p>link: {val.link}</p>
+                        <p>example: {val.videoFile.data}</p>
+                        <hr style={{ borderTop: '1px solid black' }} />
+                      </div>)
+                    case "activity.text":
+                      return(
+                      <div key={index}>
+                        <h6>text</h6>
+                        <p>title: {val.title}</p>
+                        <p>description: {val.description}</p>
+                        <hr style={{ borderTop: '1px solid black' }} />
+                      </div>)
+                    case "activity.file":
+                      return(
+                      <div key={index}>
+                        <h6>File</h6>
+                        <p>title: {val.title}</p>
+                        <p>material: {val.material.data}</p>
+                      </div>)
+                  }
+                })}
+                </Card.Body>
+              </Collapse>
+            </Card>
 
-            <div style={{ marginTop: 'auto', display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ marginTop: '10px', display: "flex", justifyContent: "flex-end" }}>
               <Button variant="outline-dark" style={{ marginBottom: '10px' }} onClick={AddCart}>add to cart</Button>
             </div>
           </Container>

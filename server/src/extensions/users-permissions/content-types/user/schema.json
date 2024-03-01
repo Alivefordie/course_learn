@@ -84,6 +84,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "tansactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tansaction.tansaction",
+      "mappedBy": "member"
     }
   }
 }
