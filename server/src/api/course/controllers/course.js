@@ -33,9 +33,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       populate: {
         picture: true,
         owner: { select: "username" },
-        entries: {
-          where: { owner: user.id },
-        },
+        entries: { where: { owner: user.id } },
       },
     });
     return this.transformResponse(entries);
@@ -54,9 +52,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       populate: {
         picture: true,
         owner: { select: "username" },
-        entries: {
-          where: { owner: user.id },
-        },
+        entries: { where: { owner: user.id } },
       },
     });
     return this.transformResponse(entries);
@@ -75,9 +71,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       populate: {
         picture: true,
         owner: { select: "username" },
-        entries: {
-          where: { owner: user.id },
-        },
+        entries: { where: { owner: user.id } },
       },
     });
     return this.transformResponse(entries);
@@ -92,23 +86,13 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       ? { publishedAt: "desc" }
       : undefined;
     const userEnrty = user
-      ? {
-          entries: {
-            where: { owner: user.id },
-          },
-        }
+      ? { entries: { where: { owner: user.id } } }
       : undefined;
     const Owned =
       user && ctx.request.query.owner ? { owner: user.id } : undefined;
     const entries = await strapi.db.query("api::course.course").findMany({
       ...Parameters,
-      where: {
-        entries: {
-          like: { $null: true },
-          cart: { $null: true },
-        },
-        ...Owned,
-      },
+      where: { ...Owned },
       populate: {
         picture: true,
         owner: { select: "username" },

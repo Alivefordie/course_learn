@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
-import axios from "axios";
 import "../App.css";
 import style from "../css/History.module.css";
 import moment from "moment";
 import _ from "lodash";
 import MiniCourse from "../components/MiniCourse";
 import Spinner from "../components/Spinner";
+import ax from "../conf/ax";
+import conf from "../conf/main";
 
 const History = () => {
 	const [myCourses, setmyCourse] = useState("");
 	const [loading, setLoading] = useState(true);
-	const setJwt = () => {
-		const jwtToken = sessionStorage.getItem("auth.jwt");
-		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-	};
+
 	const fetch = async () => {
-		const response = await axios.get("http://localhost:1337/api/my-courses");
+		const response = await ax.get(`${conf.apiUrlPrefix}/my-courses`);
 		const courses = response.data.data;
 		const time = ["week", "month", "year"];
 		let GroupCourses = {};
@@ -28,13 +26,25 @@ const History = () => {
 			);
 			GroupCourses = { ...GroupCourses, [t]: groupConditon.true };
 		});
+		const month = GroupCourses["month"].filter(
+			(m) => !GroupCourses["week"].find((w) => m.id == w.id)
+		);
+		const deleteMonthFromYear = GroupCourses["year"].filter(
+			(y) => !GroupCourses["month"].find((m) => m.id == y.id)
+		);
+		const deleteAllFromYear = deleteMonthFromYear.filter(
+			(y) => !GroupCourses["week"].find((w) => y.id == w.id)
+		);
+		GroupCourses["month"] = month;
+		GroupCourses["year"] = deleteAllFromYear;
 		setmyCourse(GroupCourses);
 		setLoading(false);
 	};
+
 	useEffect(() => {
-		setJwt();
 		fetch();
 	}, []);
+
 	return (
 		<div className="body">
 			<NavbarTop NavbarLink={NavbarLink} />
@@ -49,21 +59,35 @@ const History = () => {
 							</h1>
 							<Container className="item-week">
 								{myCourses.week ? (
-									myCourses.week.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+									myCourses.week.map((c, i) => (
+										<div key={i}>
+											<h5 className="dateText">
+												{moment(c.attributes.publishedAt).format("-- D MMMM")}
+											</h5>
+											<MiniCourse course={c} />
+										</div>
+									))
 								) : (
-									<h1 className={`mx-auto ${style.righteous}`}>no data</h1>
+									<h3 className={`mx-auto ${style.righteous}`}>no data</h3>
 								)}
 							</Container>
 						</Col>
-						<Col className="month-col">
-							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+						<Col className="month-col ">
+							<h1 className={`righteous d-flex justify-content-center  ${style.righteous}`}>
 								This month
 							</h1>
 							<Container className="item-month">
 								{myCourses.month ? (
-									myCourses.month.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+									myCourses.month.map((c, i) => (
+										<div key={i}>
+											<h5 className="dateText">
+												{moment(c.attributes.publishedAt).format("-- D MMMM")}
+											</h5>
+											<MiniCourse course={c} />
+										</div>
+									))
 								) : (
-									<h1 className={style.righteous}>no data</h1>
+									<h3 className={style.righteous}>no data</h3>
 								)}
 							</Container>
 						</Col>
@@ -73,9 +97,16 @@ const History = () => {
 							</h1>
 							<Container className="item-year">
 								{myCourses.year ? (
-									myCourses.year.map((c) => <MiniCourse key={c.id} course={c}></MiniCourse>)
+									myCourses.year.map((c, i) => (
+										<div key={i}>
+											<h5 className="dateText">
+												{moment(c.attributes.publishedAt).format("-- D MMMM")}
+											</h5>
+											<MiniCourse course={c} />
+										</div>
+									))
 								) : (
-									<h1 className={style.righteous}>no data</h1>
+									<h3 className={style.righteous}>no data</h3>
 								)}
 							</Container>
 						</Col>

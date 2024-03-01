@@ -30,7 +30,7 @@ const AllCourse = () => {
 
 	const fetchNewest = async () => {
 		try {
-			const response = await ax.get(`${conf.apiUrlPrefix}/courses?`);
+			const response = await ax.get(`${conf.apiUrlPrefix}/courses?Newest=true`);
 			const coursesData = response.data.data;
 			setNewestCourses(coursesData);
 		} catch (error) {
