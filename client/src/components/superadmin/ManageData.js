@@ -9,6 +9,8 @@ const ManageData = () => {
     const [editingItemId, setEditingItemId] = useState(null);
     const [searchCourse, setSearchCourse] = useState("");
     const [searchEntryId, setSearchEntryId] = useState("");
+    const [slip, setslip] = useState([])
+
 
     const fetchCourse = async () => {
         try {
@@ -27,6 +29,19 @@ const ManageData = () => {
             console.log("Failed to fetch entries data", error);
         }
     };
+
+    const fetchSlip = async () => {
+        try {
+            const response = await ax.get(conf.Silp);
+            const slipData = response.data.data.map((item) => item.attributes.slip.data.attributes.url);
+            setslip(slipData);
+            // console.log("slip data:", slipData);
+        } catch (error) {
+            console.log("fail to fetch slip", error);
+        }
+    }
+
+
 
     const handleEditCourse = (id) => {
         setEditingItemId(id);
@@ -60,7 +75,7 @@ const ManageData = () => {
                 return;
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-            
+
             const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/entries/${id}`);
             setEntries(entries.filter(entry => entry.id !== id));
@@ -88,7 +103,12 @@ const ManageData = () => {
     useEffect(() => {
         fetchCourse();
         fetchEntries();
+        fetchSlip()
     }, []);
+
+    // useEffect(() => {
+    //     console.log(slip)
+    // }, [slip])
 
     return (
         <div className="manage-data-container">
@@ -159,6 +179,20 @@ const ManageData = () => {
                     ))}
                 </div>
             </div>
+
+            <h2>Slip</h2>
+            {slip && slip.map((url, index) => (
+                <div key={index}>
+                    <p>id: {index}</p>
+                    <img src={"http://localhost:1337" + url} alt={`slip-${index}`} width={200} />
+                </div>
+            ))}
+
+
+
+
+
+
         </div>
     );
 }
