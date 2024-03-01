@@ -32,6 +32,12 @@
     },
     "enroll": {
       "type": "datetime"
+    },
+    "tansaction": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tansaction.tansaction",
+      "inversedBy": "entries"
     }
   }
 }
