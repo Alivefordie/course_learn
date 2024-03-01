@@ -24,7 +24,7 @@ const History = () => {
 			const groupConditon = _.groupBy(courses, (c) =>
 				moment(c.attributes.entries.data[0].attributes.enroll).isSame(moment(), t)
 			);
-			GroupCourses = { ...GroupCourses, [t]: groupConditon.true };
+			GroupCourses = { ...GroupCourses, [t]: groupConditon.true ? groupConditon.true : [] };
 		});
 		const month = GroupCourses["month"].filter(
 			(m) => !GroupCourses["week"].find((w) => m.id == w.id)
@@ -58,7 +58,7 @@ const History = () => {
 								This week
 							</h1>
 							<Container className="item-week">
-								{myCourses.week ? (
+								{myCourses.week.length ? (
 									myCourses.week.map((c, i) => (
 										<div key={i}>
 											<h5 className="dateText">
@@ -77,7 +77,7 @@ const History = () => {
 								This month
 							</h1>
 							<Container className="item-month">
-								{myCourses.month ? (
+								{myCourses.month.length ? (
 									myCourses.month.map((c, i) => (
 										<div key={i}>
 											<h5 className="dateText">
@@ -96,7 +96,7 @@ const History = () => {
 								This year
 							</h1>
 							<Container className="item-year">
-								{myCourses.year ? (
+								{myCourses.year.length ? (
 									myCourses.year.map((c, i) => (
 										<div key={i}>
 											<h5 className="dateText">
