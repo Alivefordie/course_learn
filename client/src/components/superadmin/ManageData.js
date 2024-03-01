@@ -8,7 +8,7 @@ const ManageData = () => {
     const [entries, setEntries] = useState([]);
     const [editingItemId, setEditingItemId] = useState(null);
     const [searchCourse, setSearchCourse] = useState("");
-    const [searchEntryId, setSearchEntryId] = useState(""); 
+    const [searchEntryId, setSearchEntryId] = useState("");
 
     const fetchCourse = async () => {
         try {
@@ -18,7 +18,7 @@ const ManageData = () => {
             console.log("Failed to fetch courses data", error);
         }
     };
-    
+
     const fetchEntries = async () => {
         try {
             const response = await ax.get(conf.Entries);
@@ -34,6 +34,14 @@ const ManageData = () => {
 
     const handleDeleteCourse = async (id) => {
         try {
+            const jwtToken = sessionStorage.getItem('auth.jwt');
+            if (!jwtToken) {
+                console.error('JWT token not found.');
+                return;
+            }
+            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+
+            const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/courses/${id}`);
             setCourses(courses.filter(course => course.id !== id));
         } catch (error) {
@@ -47,6 +55,14 @@ const ManageData = () => {
 
     const handleDeleteEntry = async (id) => {
         try {
+            const jwtToken = sessionStorage.getItem('auth.jwt');
+            if (!jwtToken) {
+                console.error('JWT token not found.');
+                return;
+            }
+            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+            
+            const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/entries/${id}`);
             setEntries(entries.filter(entry => entry.id !== id));
         } catch (error) {
@@ -89,7 +105,7 @@ const ManageData = () => {
                     onChange={handleSearchCourse}
                     className="search-input"
                 />
-                
+
                 {/*entries*/}
                 <input
                     type="text"
