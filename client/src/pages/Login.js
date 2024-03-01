@@ -27,9 +27,7 @@ const Login = () => {
 		<div>
 			<NavbarTop />
 			<div style={{ display: loading ? "block" : "none" }}>
-				<div className="body">
-					<Spinner />
-				</div>
+				<Spinner />
 			</div>
 			<div style={{ display: loading ? "none" : "flex" }}>
 				<div>

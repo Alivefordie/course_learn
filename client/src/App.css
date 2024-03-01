@@ -343,6 +343,10 @@
   text-align: center;
 }
 
+.Sbody {
+  background-color: #ff2121;
+  min-height: 100vh;
+}
 
 .cssload-box-loading {
   width: 100px;
