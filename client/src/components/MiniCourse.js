@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
 import conf from "../conf/main";
+import { AuthContext } from "../context/AuthContext";
 
 function MiniCourse({ course }) {
+	const context = useContext(AuthContext);
+	const login = context.state.isLoggedIn;
 	const navigate = useNavigate();
 	const courseContent = course.attributes;
 	const picture = courseContent.picture.data.attributes.url;
@@ -12,19 +15,26 @@ function MiniCourse({ course }) {
 	const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
 	const [cart, setcart] = useState(courseContent.entries?.data[0]?.attributes?.cart);
 	const enroll = courseContent.entries?.data[0]?.attributes?.enroll;
-
 	const addTolike = async () => {
-		const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
-		setLike(response.data.like);
+		if (login) {
+			const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
+			setLike(response.data.like);
+		} else {
+		}
 	};
 
 	const addToCart = async () => {
-		const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/toCart`);
-		setcart(response.data.AddToCart);
+		if (login) {
+			const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/toCart`);
+			setcart(response.data.AddToCart);
+		} else {
+		}
 	};
 
 	useEffect(() => {
-		//console.log(courseContent);
+		// console.log(login);
+		// console.log(like);
+		// console.log(courseContent);
 	}, []);
 
 	return (
@@ -75,7 +85,7 @@ function MiniCourse({ course }) {
 						)}
 					</Col>
 					<Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-						{like ? (
+						{!like ? (
 							<img
 								onClick={addTolike}
 								style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
