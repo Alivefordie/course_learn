@@ -40,7 +40,6 @@ const ManageData = () => {
                 return;
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-
             const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/courses/${id}`);
             setCourses(courses.filter(course => course.id !== id));
