@@ -4,7 +4,7 @@ import Toprank from "../components/Toprank";
 import Common from "../components/Common";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../App.css";
 import Newest from "../components/Newest";
 

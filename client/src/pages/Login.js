@@ -71,7 +71,7 @@ const Login = () => {
 							type="submit"
 							style={{
 								marginLeft: "135px",
-								marginTop: "225px",
+								marginTop: "100px",
 								fontWeight: "bold",
 								borderRadius: "15px",
 								width: "17vw",
