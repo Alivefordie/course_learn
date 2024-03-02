@@ -248,7 +248,7 @@ const Payment = () => {
         />
     </div>
 </div>
-                        <div className={styles.ct3} style = {{boxShadow: '0 0 50px rgba(0, 0, 0, 0.75)'}}>
+                        <div className={styles.ct3} style = {{boxShadow: '0 0 50px rgba(0, 0, 0, 0.65)'}}>
                             .
                             <div className={styles.payment} style = {{border : '4px solid black'}}>
                                 <p style = {{fontWeight: 'bold'}}>CHOOSE PAYMENT</p>
