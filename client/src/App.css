@@ -570,3 +570,25 @@
   margin-top: 3%;
   font-size: small;
 }
+
+.search-bar {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.search-bar input[type="text"] {
+  width: 35%;
+  padding: 10px;
+  border-radius: 20px; /* Adjust the border-radius value as needed */
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.search-bar input[type="text"]:focus {
+  border-color: dodgerblue;
+  box-shadow: 0 0 5px dodgerblue;
+}

@@ -43,62 +43,67 @@ const Specific = ({ data }) => {
       {data && data.attributes && (
         <div>
           <Container className="course-info">
-            <div>
-              <div className="course-title">
-                <img src={"http://localhost:1337" + data.attributes.picture.data.attributes.url} alt="item" width={300} />
-                <h4>Title: {data.attributes.title}</h4>
-              </div>
-              <p style={{ wordWrap: 'break-word' }}>Description: {data.attributes.description}</p>
-              <p>Amount: {data.attributes.amount}</p>
-              <p>Link Count: {data.attributes.likeCount}</p>
-            </div>
-            <Card>
-              <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                <span style={{ marginRight: 'auto' }}>Course Review</span>
-                <Button
-                  variant="outline-dark"
-                  style={{ border: '0' }}
-                  onClick={() => setOpenReview(!openReview)}
-                  aria-controls="course-review"
-                  aria-expanded={openReview}
-                >
-                  {openReview ? '⮟' : '⮞'} 
-                </Button>
-              </Card.Header>
-              <Collapse in={openReview}>
-                <Card.Body id="course-review">
-                {CourseSyllabus.map((val, index) => {
-                  switch (val.__component){
-                    case "activity.video":
-                      return(
-                      <div key={index}>
-                        <h6>video</h6>
-                        <p>title: {val.title}</p>                      
-                        <p>link: {val.link}</p>
-                        <p>example: {val.videoFile.data}</p>
-                        <hr style={{ borderTop: '1px solid black' }} />
-                      </div>)
-                    case "activity.text":
-                      return(
-                      <div key={index}>
-                        <h6>text</h6>
-                        <p>title: {val.title}</p>
-                        <p>description: {val.description}</p>
-                        <hr style={{ borderTop: '1px solid black' }} />
-                      </div>)
-                    case "activity.file":
-                      return(
-                      <div key={index}>
-                        <h6>File</h6>
-                        <p>title: {val.title}</p>
-                        <p>material: {val.material.data}</p>
-                      </div>)
-                  }
-                })}
-                </Card.Body>
-              </Collapse>
-            </Card>
-
+            <Row>
+              <Col md={6}>
+                <div>
+                  <div className="course-title">
+                    <img src={"http://localhost:1337" + data.attributes.picture.data.attributes.url} alt="item" width={300} />
+                    <h4>Title: {data.attributes.title}</h4>
+                  </div>
+                  <p style={{ wordWrap: 'break-word' }}>Description: {data.attributes.description}</p>
+                  <p>Amount: {data.attributes.amount}</p>
+                  <p>Link Count: {data.attributes.likeCount}</p>
+                </div>
+              </Col>
+              <Col md={6}>
+                <Card>
+                  <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                    <span style={{ marginRight: 'auto' }}>Course Review</span>
+                    <Button
+                      variant="outline-dark"
+                      style={{ border: '0' }}
+                      onClick={() => setOpenReview(!openReview)}
+                      aria-controls="course-review"
+                      aria-expanded={openReview}
+                    >
+                      {openReview ? '⮟' : '⮞'} 
+                    </Button>
+                  </Card.Header>
+                  <Collapse in={openReview}>
+                    <Card.Body id="course-review">
+                    {CourseSyllabus.map((val, index) => {
+                      switch (val.__component){
+                        case "activity.video":
+                          return(
+                          <div key={index}>
+                            <h6>video</h6>
+                            <p>title: {val.title}</p>                      
+                            <p>link: {val.link}</p>
+                            <p>example: {val.videoFile.data}</p>
+                            <hr style={{ borderTop: '1px solid black' }} />
+                          </div>)
+                        case "activity.text":
+                          return(
+                          <div key={index}>
+                            <h6>text</h6>
+                            <p>title: {val.title}</p>
+                            <p>description: {val.description}</p>
+                            <hr style={{ borderTop: '1px solid black' }} />
+                          </div>)
+                        case "activity.file":
+                          return(
+                          <div key={index}>
+                            <h6>File</h6>
+                            <p>title: {val.title}</p>
+                            <p>material: {val.material.data}</p>
+                          </div>)
+                      }
+                    })}
+                    </Card.Body>
+                  </Collapse>
+                </Card>
+              </Col>
+            </Row>
             <div style={{ marginTop: '10px', display: "flex", justifyContent: "flex-end" }}>
               <Button variant="outline-dark" style={{ marginBottom: '10px' }} onClick={AddCart}>add to cart</Button>
             </div>
