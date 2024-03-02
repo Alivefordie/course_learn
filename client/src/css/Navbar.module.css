@@ -1,0 +1,25 @@
+.text{
+    flex-direction: column;
+    text-align: center;
+}
+
+.picture{
+    height: 40px;
+    width: 40px;
+}
+
+.profile{
+    height: 40px;
+    width: 40px;
+    border-radius: 50;
+}
+
+.circle{
+    height: 40px;
+    width: 40px;
+    border-radius: 50;
+    border-width: 12;
+    border-color: black;
+    align-items: center;
+    justify-content: center;
+}

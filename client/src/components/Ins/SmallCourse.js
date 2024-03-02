@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function SmallCourse({ course }) {
 	const navigate = useNavigate();
 	const courseContent = course.attributes;
-	const picture = courseContent.picture.data.attributes.formats.thumbnail.url;
+	const picture = courseContent.picture.data.attributes.url;
 	const teacher = courseContent.owner.data?.attributes;
 	useEffect(() => {
 		console.log(course);

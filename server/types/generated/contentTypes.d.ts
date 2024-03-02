@@ -438,6 +438,11 @@ export interface ApiEntryEntry extends Schema.CollectionType {
     like: Attribute.DateTime;
     cart: Attribute.DateTime;
     enroll: Attribute.DateTime;
+    tansaction: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'api::tansaction.tansaction'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -461,6 +466,7 @@ export interface ApiTansactionTansaction extends Schema.CollectionType {
     singularName: 'tansaction';
     pluralName: 'tansactions';
     displayName: 'tansaction';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -469,6 +475,16 @@ export interface ApiTansactionTansaction extends Schema.CollectionType {
     paymentAmout: Attribute.BigInteger;
     slip: Attribute.Media;
     paymentDate: Attribute.DateTime;
+    member: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    entries: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToMany',
+      'api::entry.entry'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -854,6 +870,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::entry.entry'
     >;
     picture: Attribute.Media;
+    tansactions: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::tansaction.tansaction'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

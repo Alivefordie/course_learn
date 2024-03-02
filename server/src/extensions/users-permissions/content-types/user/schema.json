@@ -78,14 +78,18 @@
       "mappedBy": "owner"
     },
     "picture": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "tansactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tansaction.tansaction",
+      "mappedBy": "member"
     }
   }
 }

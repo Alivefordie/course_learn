@@ -14,11 +14,12 @@ import Payment from "./pages/Payment";
 import Register from "./pages/Register";
 import MyCourses from "./pages/myCourses";
 import History from "./pages/History";
-import SpecificCourse from "./pages/instructors/SpecificCourse";
 import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
+import Datacourse from "./components/Ins/Datacourse";
+import EditProfile from "./components/EditProfile";
 
 const router = createBrowserRouter([
 	{
@@ -58,10 +59,6 @@ const router = createBrowserRouter([
 		element: <InsSee />,
 	},
 	{
-		path: "/Instructors/:id",
-		element: <SpecificCourse />,
-	},
-	{
 		path: "/Instructors/create",
 		element: <CreateCourse />,
 	},
@@ -70,10 +67,17 @@ const router = createBrowserRouter([
 		element: <Profile />,
 	},
 	{
-		path: "/subperadmin",
+		path: "/superadmin",
 		element: <Management />,
 	},
-
+	{
+		path: "/Instructors/:course",
+		element: <Datacourse />,
+	},
+	{
+		path: "/profile/edit-profile/:id",
+		element: <EditProfile />,
+	},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

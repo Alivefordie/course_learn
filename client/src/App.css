@@ -13,6 +13,7 @@
   border-radius: 8px;
   margin-bottom: 20px;
   margin-right: 20px;
+  min-height: 80vh;
 }
 
 .header-mycourse {
@@ -50,6 +51,7 @@
   border-radius: 8px;
   margin-bottom: 20px;
   margin-right: 20px;
+  min-height: 80vh;
 }
 
 .incart-container {
@@ -106,10 +108,9 @@
 .course-info {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: fit-content;
   border-spacing: 30px;
   border-radius: 8px;
-  margin-bottom: 20px;
   margin-right: 20px;
   display: flex;
   flex-direction: column;
@@ -311,5 +312,258 @@
 .edit-form {
   margin-top: 10px;
 }
+.search-container {
+  margin-bottom: 20px;
+}
 
+.search-input {
+  width: 200px;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
+.section-header {
+  margin-top: 30px;
+}
+
+.data-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.data-item-actions {
+  margin-top: 10px;
+}
+
+.header,
+.role {
+  text-align: center;
+}
+
+.Sbody {
+  background-color: #ff2121;
+  min-height: 100vh;
+}
+
+.cssload-box-loading {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.cssload-box-loading:before {
+  content: '';
+  width: 70px;
+  height: 7px;
+  background: #000000;
+  opacity: 0.1;
+  position: absolute;
+  top: 78px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.58s linear infinite;
+  -o-animation: shadow 0.58s linear infinite;
+  -ms-animation: shadow 0.58s linear infinite;
+  -webkit-animation: shadow 0.58s linear infinite;
+  -moz-animation: shadow 0.58s linear infinite;
+}
+.cssload-box-loading:after {
+  content: '';
+  width: 70px;
+  height: 70px;
+  background: url("../public/logo.png");
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  border-radius: 3px;
+  animation: cssload-animate 0.58s linear infinite;
+  -o-animation: cssload-animate 0.58s linear infinite;
+  -ms-animation: cssload-animate 0.58s linear infinite;
+  -webkit-animation: cssload-animate 0.58s linear infinite;
+  -moz-animation: cssload-animate 0.58s linear infinite;
+}
+
+@keyframes cssload-animate {
+  0%{
+    transform: translateY(0) rotate(0deg);
+  }
+  17% {
+    border-bottom-right-radius: 10px;
+  }
+  25% {
+    transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
+  }
+  75% {
+    transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  } 
+}
+@-o-keyframes cssload-animate {
+  0%{
+    -o-transform: translateY(0) rotate(0deg);
+  }
+  17% {
+    border-bottom-right-radius: 10px;
+  }
+  25% {
+    -o-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  50% {
+    -o-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
+  }
+  75% {
+    -o-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  100% {
+    -o-transform: translateY(0) rotate(0deg);
+  } 
+}
+@-ms-keyframes cssload-animate {
+  0%{
+    -ms-transform: translateY(0) rotate(0deg);
+  }
+  17% {
+    border-bottom-right-radius: 10px;
+  }
+  25% {
+    -ms-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  50% {
+    -ms-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
+  }
+  75% {
+    -ms-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  100% {
+    -ms-transform: translateY(0) rotate(0deg);
+  } 
+}
+@-webkit-keyframes cssload-animate {
+  0%{
+    -webkit-transform: translateY(0) rotate(0deg);
+  }
+  17% {
+    border-bottom-right-radius: 10px;
+  }
+  25% {
+    -webkit-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  50% {
+    -webkit-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
+  }
+  75% {
+    -webkit-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(0deg);
+  } 
+}
+@-moz-keyframes cssload-animate {
+  0%{
+    -moz-transform: translateY(0) rotate(0deg);
+  }
+  17% {
+    border-bottom-right-radius: 10px;
+  }
+  25% {
+    -moz-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  50% {
+    -moz-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
+  }
+  75% {
+    -moz-transform: translateY(9px) rotate(45deg);
+    border-bottom-right-radius: 39px;
+  }
+  100% {
+    -moz-transform: translateY(0) rotate(0deg);
+  } 
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+@-o-keyframes shadow {
+  0%,
+  100% {
+    -o-transform: scale(1, 1);
+  }
+  50% {
+    -o-transform: scale(1.2, 1);
+  }
+}
+@-ms-keyframes shadow {
+  0%,
+  100% {
+    -ms-transform: scale(1, 1);
+  }
+  50% {
+    -ms-transform: scale(1.2, 1);
+  }
+}
+@-webkit-keyframes shadow {
+  0%,
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(1.2, 1);
+  }
+}
+@-moz-keyframes shadow {
+  0%,
+  100% {
+    -moz-transform: scale(1, 1);
+  }
+  50% {
+    -moz-transform: scale(1.2, 1);
+  }
+}
+
+.scrollbar {
+  overflow: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dateText{
+  margin-top: 3%;
+  font-size: small;
+}
