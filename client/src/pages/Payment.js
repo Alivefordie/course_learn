@@ -184,7 +184,7 @@ const Payment = () => {
             ) : (
                 <div className={styles.container}>
                     <div className={styles.body}>
-                        <div className={styles.ct1}>
+                        <div className={styles.ct1} style = {{boxShadow: '0 0 50px rgba(0, 0, 0, 0.45)'}}>
                             <p>.</p>
                             {filter.length === 0 ? (
                                 <p className={styles.no_cart}>No course in cart</p>
@@ -202,7 +202,7 @@ const Payment = () => {
                                 <div className={styles.totalPrice}>TotalPrice: {totalPrice}</div>
                             )}
                         </div>
-                        <div className={styles.ct2} style={{ fontWeight: 'bold', display: 'flex', flexWrap: 'wrap' }}>
+                        <div className={styles.ct2} style={{ fontWeight: 'bold', display: 'flex', flexWrap: 'wrap' ,boxShadow: '0 0 50px rgba(0, 0, 0, 0.45)'}}>
     <div style={{ marginRight: '20px' }}>
         <label>Name</label>
         <br />
@@ -248,7 +248,7 @@ const Payment = () => {
         />
     </div>
 </div>
-                        <div className={styles.ct3}>
+                        <div className={styles.ct3} style = {{boxShadow: '0 0 50px rgba(0, 0, 0, 0.75)'}}>
                             .
                             <div className={styles.payment}>
                                 <p style = {{fontWeight: 'bold'}}>CHOOSE PAYMENT</p>
