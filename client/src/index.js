@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
 import Datacourse from "./components/Ins/Datacourse";
 import EditProfile from "./components/EditProfile";
+import CourseSyllabus from "./pages/coursesyllabus";
 
 const router = createBrowserRouter([
 	{
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
 		path: "/profile/edit-profile/:id",
 		element: <EditProfile />,
 	},
+	{
+		path: "/mycourses/:item",
+		element: <CourseSyllabus/>,
+	}
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
