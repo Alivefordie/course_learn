@@ -236,7 +236,7 @@ const Payment = () => {
             onChange={(e) => setDate(e.target.value)}
         />
     </div>
-    <div>
+    <div style={{ marginRight: '20px' ,marginBottom: '400px'}}>
         <label>Phone</label>
         <br />
         <input
