@@ -64,20 +64,24 @@ const AllCourse = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Container className="page1-container" sm="3" md="4" >
-          <Row className="page1-rows">
+        <Container className="page1-container" sm="3" md="4"   >
+          <Row className="page1-rows" >
             <Col
             style =  {{boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
             WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
-            MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
+            MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            
+          }}
               id="top-rank-course"
               className="top-rank-course"
               data-bs-spy="scroll"
               data-bs-target="#top-rank-course"
               data-bs-offset="0"
+              
             >
               <h3 className="header-toprank" style = {{textShadow: '4px 4px 9px rgba(0,0,0,0.6)'}}>
                 <img
+                
                   src="../fire.png"
                   style={{ width: "30px", height: "30px" }}
                   alt="Fire Icon"
@@ -86,14 +90,14 @@ const AllCourse = () => {
                 />
                 
                 Top 3 ranks
-              </h3>
+              </h3 >
               
               <div 
                 className="item-top scrollbar"
                 style={{ maxHeight: "500px" , lineWidth : '51px' }}
 
               >
-                <Toprank data={courses} />
+                <Toprank data={courses}  />
               </div>
             </Col>
 

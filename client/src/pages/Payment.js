@@ -202,62 +202,71 @@ const Payment = () => {
                                 <div className={styles.totalPrice}>TotalPrice: {totalPrice}</div>
                             )}
                         </div>
-                        <div className={styles.ct2}>
-                            Name
-                            <br />
-                            <input
-                                className={styles.input}
-                                placeholder="Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            <br />
-                            Email
-                            <br />
-                            <input
-                                className={styles.input}
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <br />
-                            Date
-                            <br />
-                            <input
-                                className={styles.input}
-                                placeholder="Date"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            <br />
-                            Phone
-                            <br />
-                            <input
-                                className={styles.input}
-                                placeholder="Phone"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                            />
-                        </div>
+                        <div className={styles.ct2} style={{ fontWeight: 'bold', display: 'flex', flexWrap: 'wrap' }}>
+    <div style={{ marginRight: '20px' }}>
+        <label>Name</label>
+        <br />
+        <input
+            style={{ width: '20vw' }}
+            className={styles.input}
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+        />
+    </div>
+    <div style={{ marginRight: '20px' }}>
+        <label>Email</label>
+        <br />
+        <input
+            style={{ width: '20vw' }}
+            className={styles.input}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+        />
+    </div>
+    <div style={{ marginRight: '20px' ,marginBottom: '200px'}}>
+        <label>Date</label>
+        <br />
+        <input
+            style={{ width: '20vw' }}
+            className={styles.input}
+            placeholder="Date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+        />
+    </div>
+    <div>
+        <label>Phone</label>
+        <br />
+        <input
+            style={{ width: '20vw' }}
+            className={styles.input}
+            placeholder="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+        />
+    </div>
+</div>
                         <div className={styles.ct3}>
                             .
                             <div className={styles.payment}>
-                                <p>CHOOSE PAYMENT</p>
-                                <p>METHOD</p>
+                                <p style = {{fontWeight: 'bold'}}>CHOOSE PAYMENT</p>
+                                <p style = {{fontWeight: 'bold'}}>METHOD</p>
                                 <br />
                                 <div className={styles.choosebank}>
-                                    <img src="/a.png" width={50} height={50} alt="Bank A" />
-                                    <img src="/b.png" width={50} height={50} alt="Bank B" />
-                                    <img src="/c.png" width={50} height={50} alt="Bank C" />
+                                    <img src="/a.png" width={75} height={75} alt="Bank A" style = {{}}/>
+                                    <img src="/b.png" width={75} height={75} alt="Bank B" />
+                                    <img src="/c.png" width={75} height={75} alt="Bank C" />
                                     <br />
-                                    <img src="/d.png" width={50} height={50} alt="Bank D" />
-                                    <img src="/e.png" width={50} height={50} alt="Bank E" />
-                                    <img src="/f.png" width={50} height={50} alt="Bank F" />
+                                    <img src="/d.png" width={75} height={75} alt="Bank D" />
+                                    <img src="/e.png" width={75} height={75} alt="Bank E" />
+                                    <img src="/f.png" width={75} height={75} alt="Bank F" />
                                     <br />
-                                    <img src="/g.png" width={50} height={50} alt="Bank G" />
+                                    <img src="/g.png" width={75} height={75} alt="Bank G" />
                                 </div>
                                 {data.length === 0 ? (
-                                    <p>Cannot confirm when cart is empty</p>
+                                    <p style = {{fontWeight: 'bold'}}>⚠️ cart is empty ⚠️</p>
                                 ) : (
                                     <div className={styles.confirm}>
                                         <Button onClick={handleConfirm} variant="dark">
