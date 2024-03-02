@@ -9,8 +9,7 @@ const ManageData = () => {
     const [editingItemId, setEditingItemId] = useState(null);
     const [searchCourse, setSearchCourse] = useState("");
     const [searchEntryId, setSearchEntryId] = useState("");
-    const [slip, setslip] = useState([])
-
+    const [slip, setSlip] = useState([]);
 
     const fetchCourse = async () => {
         try {
@@ -33,15 +32,26 @@ const ManageData = () => {
     const fetchSlip = async () => {
         try {
             const response = await ax.get(conf.Slip);
-            const slipData = response.data.data.map((item) => item.attributes.slip.data.attributes.url);
-            setslip(slipData);
-            // console.log("slip data:", slipData);
+            setSlip(response.data.data);
         } catch (error) {
-            console.log("fail to fetch slip", error);
+            console.log("Failed to fetch slip", error);
         }
-    }
+    };
 
+    useEffect(() => {
+        fetchCourse();
+        fetchEntries();
+        fetchSlip();
+    }, []);
 
+    useEffect(() => {
+        console.log(slip);
+        if (slip && slip.length > 0) {
+            slip.forEach(item => {
+                console.log(item.attributes.member);
+            });
+        }
+    }, [slip]);
 
     const handleEditCourse = (id) => {
         setEditingItemId(id);
@@ -75,7 +85,6 @@ const ManageData = () => {
                 return;
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-
             const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/entries/${id}`);
             setEntries(entries.filter(entry => entry.id !== id));
@@ -99,16 +108,6 @@ const ManageData = () => {
     const filteredEntries = entries.filter(entry =>
         entry.id.toString().includes(searchEntryId)
     );
-
-    useEffect(() => {
-        fetchCourse();
-        fetchEntries();
-        fetchSlip()
-    }, []);
-
-    // useEffect(() => {
-    //     console.log(slip)
-    // }, [slip])
 
     return (
         <div className="manage-data-container">
@@ -181,16 +180,15 @@ const ManageData = () => {
             </div>
 
             <h2>Slip</h2>
-            {slip && slip.map((url, index) => (
+            {slip && slip.map((item, index) => (
                 <div key={index}>
-                    <p>id: {index}</p>
-                    <img src={"http://localhost:1337" + url} alt={`slip-${index}`} width={200} />
+                    <p>id: {item.id}</p>
+                    <p>Owner: {item.attributes.member && item.attributes.member.data && item.attributes.member.data.attributes.username}</p>
+                    {item.attributes.slip && item.attributes.slip.data && item.attributes.slip.data.attributes.url && (
+                        <img src={"http://localhost:1337" + item.attributes.slip.data.attributes.url} alt={`slip-${index}`} width={200} />
+                    )}
                 </div>
             ))}
-
-
-
-
 
 
         </div>
