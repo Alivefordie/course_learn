@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Toprank from "../components/Toprank";
 import Common from "../components/Common";
 import NavbarTop from "../components/NavbarTop";

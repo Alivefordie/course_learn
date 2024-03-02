@@ -1,84 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, ProgressBar } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  ProgressBar,
+} from "react-bootstrap";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
 import "../App.css";
 import Spinner from "../components/Spinner";
-
-const inpro = 60; //now progress % form data
-const complete = 100;
-const late = 40;
+import fetchOwnerCourses from "../components/Owner";
 
 const MyCourses = () => {
-	const [loading, setLoading] = useState(true);
-	useEffect(() => {
-		//if fetch
-		setLoading(false);
-	}, []);
-	return (
-		<div className="body">
-			<NavbarTop NavbarLink={NavbarLink} />
-			{loading ? (
-				<Spinner />
-			) : (
-				<Container sm="3" md="4">
-					<Row className="mycourse-rows">
-						<Col className="inprogress-col">
-							<h1 style={{ fontSize: 30 }}>Inprogress</h1>
-							<Container className="item-inpro">
-								<Card style={{ width: "100%" }} className="d-flex flex-row">
-									<div className="image-col">
-										<Card.Img className="course-image" variant="left" src="books-pile.png" />
-									</div>
-									<div className="body-col">
-										<Card.Body>
-											<Card.Title>Course Title</Card.Title>
-											<Card.Text>details</Card.Text>
-											<ProgressBar now={inpro} label={`${inpro}%`} />
-										</Card.Body>
-									</div>
-								</Card>
-							</Container>
-						</Col>
-						<Col className="complete-col">
-							<h1 style={{ fontSize: 30 }}>Complete</h1>
-							<Container className="item-complete">
-								<Card style={{ width: "100%" }} className="d-flex flex-row">
-									<div className="image-col">
-										<Card.Img className="course-image" variant="left" src="books-pile.png" />
-									</div>
-									<div className="body-col">
-										<Card.Body>
-											<Card.Title>Course Title</Card.Title>
-											<Card.Text>details</Card.Text>
-											<ProgressBar now={complete} label={`${complete}%`} />
-										</Card.Body>
-									</div>
-								</Card>
-							</Container>
-						</Col>
-						<Col className="expired-col">
-							<h1 style={{ fontSize: 30 }}>Expired</h1>
-							<Container className="item-expired">
-								<Card style={{ width: "100%" }} className="d-flex flex-row">
-									<div className="image-col">
-										<Card.Img className="course-image" variant="left" src="books-pile.png" />
-									</div>
-									<div className="body-col">
-										<Card.Body>
-											<Card.Title>Course Title</Card.Title>
-											<Card.Text>details</Card.Text>
-											<ProgressBar now={late} label={`${late}%`} />
-										</Card.Body>
-									</div>
-								</Card>
-							</Container>
-						</Col>
-					</Row>
-				</Container>
-			)}
-		</div>
-	);
+  const [ownerCourses, setOwnerCourses] = useState([]);
+  const [loadingOwnerCourses, setLoadingOwnerCourses] = useState(true);
+  const [loadingRegularCourses, setLoadingRegularCourses] = useState(true);
+
+  // Fetch owner courses
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchOwnerCourses();
+        setOwnerCourses(data);
+        setLoadingOwnerCourses(false);
+      } catch (error) {
+        console.error("Error fetching owner courses data:", error);
+        setLoadingOwnerCourses(false);
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function to cancel any ongoing fetches if the component unmounts
+    return () => {
+      // Cleanup logic if needed
+    };
+  }, []);
+
+  // Simulate regular courses fetching
+  useEffect(() => {
+    // You can replace this with actual fetching logic if required
+    setTimeout(() => {
+      setLoadingRegularCourses(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <div className="body">
+      <NavbarTop NavbarLink={NavbarLink} />
+      {loadingOwnerCourses || loadingRegularCourses ? (
+        <Spinner />
+      ) : (
+        <Container sm="3" md="4">
+          <Row className="mycourse-rows">
+            {/* Render Owner Courses */}
+            {ownerCourses.map((course) => (
+              <Col key={course.id} className="owner-course-col">
+                <h1 style={{ fontSize: 30 }}>{course.name}</h1>
+                {/* Add more details or components for owner courses if needed */}
+              </Col>
+            ))}
+
+            {/* Regular Courses */}
+            <Col className="inprogress-col">
+              <h1 style={{ fontSize: 30 }} className="header-inpro">
+                Inprogress
+              </h1>
+              {/* Add your regular courses rendering logic here */}
+            </Col>
+            <Col className="complete-col">
+              <h1 style={{ fontSize: 30 }} className="header-com">
+                Complete
+              </h1>
+              {/* Add your regular courses rendering logic here */}
+            </Col>
+            <Col className="expired-col">
+              <h1 style={{ fontSize: 30 }} className="header-exp">
+                Expired
+              </h1>
+              {/* Add your regular courses rendering logic here */}
+            </Col>
+          </Row>
+        </Container>
+      )}
+    </div>
+  );
 };
 
 export default MyCourses;

@@ -145,7 +145,10 @@
 
 .header-toprank,
 .header-common,
-.header-newest {
+.header-newest,
+.header-inpro,
+.header-com,
+.header-exp {
   font-family: "Righteous", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -246,7 +249,7 @@
 }
 
 .progressBar .progress-bar {
-  background-color: #007bff;
+  background-color: #f21f1f;
 }
 
 /* ManageData.css */
