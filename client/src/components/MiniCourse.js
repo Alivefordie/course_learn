@@ -54,7 +54,7 @@ function MiniCourse({ course }) {
 					<Card.Body
 						onClick={() => navigate(`/courses/${course.id}`, { replace: true })}
 						style={{ cursor: "pointer" }}>
-						<Card.Title>{courseContent.title}</Card.Title>
+						<Card.Title>{courseContent.title}✅</Card.Title>
 						<Card.Text>details</Card.Text>
 						<Card.Text className="m-0">เนื้อหา {courseContent.description}</Card.Text>
 						<Card.Text className="m-0">ระยะเวลา {courseContent.duration}</Card.Text>

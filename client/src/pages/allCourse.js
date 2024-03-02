@@ -83,6 +83,7 @@ const AllCourse = () => {
                 <img
                 
                   src="../fire.png"
+                  
                   style={{ width: "30px", height: "30px" }}
                   alt="Fire Icon"
                   className="fire-image"
@@ -97,7 +98,7 @@ const AllCourse = () => {
                 style={{ maxHeight: "500px" , lineWidth : '51px' }}
 
               >
-                <Toprank data={courses}  />
+                <Toprank data={courses}   />
               </div>
             </Col>
 
