@@ -64,34 +64,43 @@ const AllCourse = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Container className="page1-container" sm="3" md="4">
+        <Container className="page1-container" sm="3" md="4" >
           <Row className="page1-rows">
             <Col
+            style =  {{boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
               id="top-rank-course"
               className="top-rank-course"
               data-bs-spy="scroll"
               data-bs-target="#top-rank-course"
               data-bs-offset="0"
             >
-              <h3 className="header-toprank">
+              <h3 className="header-toprank" >
                 <img
                   src="../fire.png"
                   style={{ width: "30px", height: "30px" }}
                   alt="Fire Icon"
                   className="fire-image"
+                  
                 />
+                
                 Top 3 ranks
               </h3>
-
-              <div
+              
+              <div 
                 className="item-top scrollbar"
-                style={{ maxHeight: "500px" }}
+                style={{ maxHeight: "500px" , lineWidth : '51px' }}
+
               >
                 <Toprank data={courses} />
               </div>
             </Col>
 
             <Col
+            style =  {{boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
               id="common-col"
               className="common-col"
               data-bs-spy="scroll"
@@ -100,8 +109,11 @@ const AllCourse = () => {
             >
               <h3 className="header-common">
                 <img
+                
                   src="../book.png"
-                  style={{ width: "30px", height: "30px" }}
+                  style={{ width: "30px", height: "30px" ,boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+                  WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+                  MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
                   alt="Common Icon"
                   className="common-image"
                 />
@@ -117,26 +129,30 @@ const AllCourse = () => {
             </Col>
 
             <Col
+            style =  {{boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
+            MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
               id="newest-col"
               className="newest-col"
               data-bs-spy="scroll"
               data-bs-target="#newest-col"
               data-bs-offset="0"
             >
-              <h3 className="header-newest">
+              <h3 className="header-newest" >
                 <img
                   src="../newest.png"
                   style={{ width: "40px", height: "40px" }}
                   alt="Newest Icon"
                   className="newest-image"
+                  
                 />
                 Newest
-              </h3>
+              </h3 >
               <div
                 className="item-newest scrollbar"
                 style={{ maxHeight: "500px" }}
               >
-                <Newest data={newestCourses} />
+                <Newest data={newestCourses}  />
               </div>
             </Col>
           </Row>
