@@ -76,7 +76,7 @@ const AllCourse = () => {
               data-bs-target="#top-rank-course"
               data-bs-offset="0"
             >
-              <h3 className="header-toprank" >
+              <h3 className="header-toprank" style = {{textShadow: '4px 4px 9px rgba(0,0,0,0.6)'}}>
                 <img
                   src="../fire.png"
                   style={{ width: "30px", height: "30px" }}
@@ -107,13 +107,11 @@ const AllCourse = () => {
               data-bs-target="#common-col"
               data-bs-offset="0"
             >
-              <h3 className="header-common">
+              <h3 className="header-common" style = {{textShadow: '4px 4px 9px rgba(0,0,0,0.6)'}}>
                 <img
                 
                   src="../book.png"
-                  style={{ width: "30px", height: "30px" ,boxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
-                  WebkitBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)',
-                  MozBoxShadow: '10px 10px 17px 0px rgba(0,0,0,0.75)'}}
+                  style={{ width: "30px", height: "30px" }}
                   alt="Common Icon"
                   className="common-image"
                 />
@@ -138,7 +136,7 @@ const AllCourse = () => {
               data-bs-target="#newest-col"
               data-bs-offset="0"
             >
-              <h3 className="header-newest" >
+              <h3 className="header-newest" style = {{textShadow: '4px 4px 9px rgba(0,0,0,0.6)'}} >
                 <img
                   src="../newest.png"
                   style={{ width: "40px", height: "40px" }}
