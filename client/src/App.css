@@ -12,6 +12,7 @@
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
+  margin-left: 20px;
   margin-right: 20px;
   min-height: 80vh;
 }
@@ -552,7 +553,7 @@
 }
 
 .scrollbar {
-  overflow: scroll;
+ overflow-y:scroll;
 }
 
 .scrollbar::-webkit-scrollbar {
