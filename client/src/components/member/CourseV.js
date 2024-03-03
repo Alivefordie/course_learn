@@ -35,6 +35,8 @@ const CourseV = () => {
         setProgress(0);
     };
 
+    
+
     return (
         <div className="container">
             <NavbarTop NavbarLink={NavbarLink} />

@@ -364,7 +364,7 @@
   bottom: 0;
 }
 .cssload-box-loading:before {
-  content: '';
+  content: "";
   width: 70px;
   height: 7px;
   background: #000000;
@@ -380,7 +380,7 @@
   -moz-animation: shadow 0.58s linear infinite;
 }
 .cssload-box-loading:after {
-  content: '';
+  content: "";
   width: 70px;
   height: 70px;
   background: url("../public/logo.png");
@@ -397,7 +397,7 @@
 }
 
 @keyframes cssload-animate {
-  0%{
+  0% {
     transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -416,10 +416,10 @@
   }
   100% {
     transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-o-keyframes cssload-animate {
-  0%{
+  0% {
     -o-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -438,10 +438,10 @@
   }
   100% {
     -o-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-ms-keyframes cssload-animate {
-  0%{
+  0% {
     -ms-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -460,10 +460,10 @@
   }
   100% {
     -ms-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-webkit-keyframes cssload-animate {
-  0%{
+  0% {
     -webkit-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -482,10 +482,10 @@
   }
   100% {
     -webkit-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-moz-keyframes cssload-animate {
-  0%{
+  0% {
     -moz-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -504,7 +504,7 @@
   }
   100% {
     -moz-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @keyframes shadow {
   0%,
@@ -553,7 +553,7 @@
 }
 
 .scrollbar {
- overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -567,7 +567,7 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-.dateText{
+.dateText {
   margin-top: 3%;
   font-size: small;
 }
@@ -591,11 +591,11 @@
   border-style: solid;
   border-width: 0 1px 0;
   position: absolute;
-  width: calc(25% - 1px );
+  width: calc(25% - 1px);
   z-index: 10;
 }
 .password:before {
-  left: calc(25% );
+  left: calc(25%);
 }
 .password:after {
   right: calc(25%);
@@ -611,17 +611,17 @@
 }
 
 .strength-3::-webkit-progress-value {
-  background-color: #70c1b3; 
-  width: 100%;  
+  background-color: #70c1b3;
+  width: 100%;
 }
 
 .strength-4::-webkit-progress-value {
-  background-color: #084c1eba; 
-  width: 100%;  
+  background-color: #084c1eba;
+  width: 100%;
 }
 
 .strength-1,
-.strength-0s{
+.strength-0s {
   color: #f25f5c;
   display: flex;
   font-size: 11px;
@@ -652,13 +652,13 @@
   margin-top: 5px;
 }
 
-.feedback{
+.feedback {
   display: inherit !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-.formnewpass{
+.formnewpass {
   border: 1px solid #fff;
   background-color: #fff;
   height: fit-content;
@@ -689,13 +689,43 @@
   box-shadow: 0 0 5px dodgerblue;
 }
 
-.col-shadow{
-  box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);    
+.col-shadow {
+  box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
 }
 
-.shadow-text{
- text-shadow: 4px 4px 9px rgba(0,0,0,0.6)
+.shadow-text {
+  text-shadow: 4px 4px 9px rgba(0, 0, 0, 0.6);
 }
 
+.container {
+  padding-top: 20px;
+}
+
+.col-md-8 {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.col-md-8 p {
+  margin-bottom: 15px;
+}
+
+.list-group {
+  padding: 10px;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
+}
+
+.list-group-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
