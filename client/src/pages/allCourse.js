@@ -28,6 +28,15 @@ const AllCourse = () => {
     }
   };
 
+  const fetchCourse = async () => {
+    try {
+      const response = await ax.get(conf.Course);
+      setCourses(response.data.data);
+    } catch (error) {
+      console.log("Failed to fetch courses data", error);
+    }
+  };
+
   const fetchNewest = async () => {
     try {
       const response = await ax.get(`${conf.apiUrlPrefix}/courses?Newest=true`);
@@ -54,17 +63,22 @@ const AllCourse = () => {
 
   useEffect(() => {
     fetchData();
+    fetchCourse();
   }, []);
 
   const handleSearchCourse = (e) => {
     setSearchCourse(e.target.value);
   };
 
+  const filteredCourses = courses.filter((course) =>
+		course.attributes.title.toLowerCase().includes(searchCourse.toLowerCase())
+	);
+
   return (
     <div>
       <NavbarTop NavbarLink={NavbarLink} />
       <div className="search-bar">
-        <InputGroup className="search-bar-input" style={{ width: '35%' }}>
+        <InputGroup className="search-bar-input" style={{ width: "35%" }}>
           <FormControl
             placeholder="Search course..."
             value={searchCourse}
@@ -116,14 +130,14 @@ const AllCourse = () => {
                   alt="Common Icon"
                   className="common-image"
                 />
-                Common
+                Search
               </h3>
 
               <div
                 className="item-common scrollbar"
                 style={{ maxHeight: "500px" }}
               >
-                <Common data={courses} />
+                <Common data={filteredCourses} />
               </div>
             </Col>
 

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import MiniCourse from "./MiniCourse";
 
+//display search data in common
+
 const Common = ({ data }) => {
 	useEffect(() => {
 		console.log("Common", data);
@@ -8,7 +10,7 @@ const Common = ({ data }) => {
 
 	return (
 		<div>
-			{data.slice(3).map((item, i) => (
+			{data.map((item, i) => (
 				<MiniCourse key={i} course={item} />
 			))}
 		</div>
