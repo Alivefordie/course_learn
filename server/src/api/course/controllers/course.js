@@ -132,8 +132,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
 
   async findOne(ctx) {
     const user = ctx.state.user;
-    const isStudent = user.role.name === 'student';
-    // const entryId = ctx.params.id;
+    const entryId = ctx.params.id;
     // const Owned = await strapi.db.query("api::course.course").count({
     //   where: {
     //     id: entryId,
@@ -163,9 +162,10 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         owner: { fields: "username" },
         picture: true,
         course_syllabus: { populate: "*" },
-        entries:  { populate: {owner: {fields: "username"} } },
+        entries: { filters: { owner: user.id } },
       },
     };
+
     const response = await super.findOne(ctx);
     return response;
   },
