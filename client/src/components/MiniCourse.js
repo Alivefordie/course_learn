@@ -15,10 +15,13 @@ function MiniCourse({ course }) {
 	const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
 	const [cart, setcart] = useState(courseContent.entries?.data[0]?.attributes?.cart);
 	const enroll = courseContent.entries?.data[0]?.attributes?.enroll;
+	const [likeCount, setlikeCount] = useState(courseContent.likeCount);
+
 	const addTolike = async () => {
 		if (login) {
 			const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
 			setLike(response.data.like);
+			setlikeCount(response.data.likeCount);
 		} else {
 		}
 	};
@@ -80,21 +83,29 @@ function MiniCourse({ course }) {
 							/>
 						)}
 					</Col>
-					<Col className="heart-icon position-absolute bottom-0 end-0 p-2">
+					<Col className="heart-icon position-absolute bottom-0 end-0 p-2 d-flex">
 						{!like ? (
-							<img
-								onClick={addTolike}
-								style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-								src="../heart.png"
-								alt="Like Icon"
-							/>
+							<>
+								<img
+									onClick={addTolike}
+									className="align-self-end"
+									style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+									src="../heart.png"
+									alt="Like Icon"
+								/>
+								<Card.Text className=" ps-1">{likeCount}</Card.Text>
+							</>
 						) : (
-							<img
-								onClick={addTolike}
-								style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-								src="../red-heart-icon.svg"
-								alt="Like Icon"
-							/>
+							<>
+								<img
+									onClick={addTolike}
+									className="align-self-end"
+									style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+									src="../red-heart-icon.svg"
+									alt="Like Icon"
+								/>
+								<Card.Text className=" ps-1">{likeCount}</Card.Text>
+							</>
 						)}
 					</Col>
 				</div>

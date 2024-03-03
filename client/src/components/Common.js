@@ -5,7 +5,7 @@ import MiniCourse from "./MiniCourse";
 
 const Common = ({ data }) => {
 	useEffect(() => {
-		console.log("Common", data);
+		//console.log("Common", data);
 	});
 
 	return (
