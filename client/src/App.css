@@ -8,13 +8,13 @@
 .newest-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 
 .header-mycourse {
@@ -27,7 +27,7 @@
 .expired-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -47,7 +47,7 @@
 .year-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -88,21 +88,21 @@
 .item-top,
 .item-common,
 .item-newest {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
 .item-inpro,
 .item-complete,
 .item-expired {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
 .item-week,
 .item-month,
 .item-year {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
@@ -153,15 +153,25 @@
   font-family: "Righteous", sans-serif;
   font-weight: 400;
   font-style: normal;
-  margin-left: 20px;
-  margin-top: 10px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.header-cart {
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .fire-image,
 .common-image,
 .newest-image {
+  margin-top: 5px;
   margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .no-course-message {
   font-size: 18px;
@@ -184,7 +194,7 @@
 .courseData-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -674,19 +684,18 @@
   margin-bottom: 10px; /* Adjust margin as needed */
 }
 
-.search-bar input[type="text"] {
+.search-bar-input {
   width: 35%;
   padding: 10px;
   border-radius: 20px; /* Adjust the border-radius value as needed */
-  border: 1px solid #ccc;
   outline: none;
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
-.search-bar input[type="text"]:focus {
-  border-color: dodgerblue;
-  box-shadow: 0 0 5px dodgerblue;
+.search-bar-input :focus {
+  border-color: rgb(247, 54, 44);
+  box-shadow: 0 0 5px rgb(247, 54, 44);
 }
 
 .col-shadow {
