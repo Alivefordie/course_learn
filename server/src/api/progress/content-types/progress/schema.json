@@ -14,12 +14,6 @@
     "value": {
       "type": "integer"
     },
-    "course_video": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course-video.course-video",
-      "inversedBy": "progresses"
-    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
