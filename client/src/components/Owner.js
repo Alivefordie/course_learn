@@ -10,7 +10,7 @@ const CourseComponent = () => {
 
 	const fetchOwnerCourses = async () => {
 		try {
-			const response = await ax.get(`${conf.apiUrlPrefix}}/course`);
+			const response = await ax.get(`${conf.apiUrlPrefix}/course`);
 			const data = await response.json();
 			setCourses(data);
 		} catch (error) {
