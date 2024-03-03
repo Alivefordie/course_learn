@@ -1,8 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
 import MiniCourse from "./MiniCourse";
 
 const Common = ({ data }) => {

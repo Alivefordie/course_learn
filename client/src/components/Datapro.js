@@ -6,13 +6,15 @@ const Datapro = ({ data }) => {
 	const data_1 = data[0];
 	const entries = data[1];
 	const picture = data[3] ? `${conf.url}${data[3]}` : "../../public/Profiledf.jpg";
+	const id = data[4]
 
 	useEffect(() => {
 		console.log(`${conf.url}${data[3]}`);
 		console.log("data:", data_1);
 		console.log("entries", entries);
 		console.log("picture:", picture);
-	}, [data_1, entries, picture]);
+		console.log("id:", id)
+	}, [data_1, entries, picture, id]);
 
 	const filteredEntries = entries.filter((entry) => entry.cart === null);
 	console.log("filteredEntries:", filteredEntries);
@@ -56,6 +58,11 @@ const Datapro = ({ data }) => {
 						<p style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px" }}>
 							<strong>Email:</strong> {data_1.email}
 						</p>
+						<Link to={`./edit-profile/${id}`}>
+							<p style={{ fontFamily: "Roboto, sans-serif", fontSize: "16px", marginBottom: "10px", textDecoration: "none", color: "black" }}>
+								<strong>Edit Profile</strong>
+							</p>
+						</Link>
 					</div>
 				</div>
 				<div

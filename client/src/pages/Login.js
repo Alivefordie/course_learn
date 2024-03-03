@@ -89,6 +89,8 @@ const Login = () => {
 							type="submit"
 							className=" mt-3"
 							style={{
+								marginLeft: "135px",
+								marginTop: "225px",
 								fontWeight: "bold",
 								borderRadius: "15px",
 								width: "17vw",

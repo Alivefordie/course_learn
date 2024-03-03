@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
+import { Button, Container, Form, FormControl, InputGroup } from 'react-bootstrap';
 
 const ManageData = () => {
     const [courses, setCourses] = useState([]);
@@ -9,8 +10,8 @@ const ManageData = () => {
     const [editingItemId, setEditingItemId] = useState(null);
     const [searchCourse, setSearchCourse] = useState("");
     const [searchEntryId, setSearchEntryId] = useState("");
-    const [slip, setslip] = useState([])
-
+    const [searchUser, setSearchUser] = useState("");
+    const [slip, setSlip] = useState([]);
 
     const fetchCourse = async () => {
         try {
@@ -33,15 +34,26 @@ const ManageData = () => {
     const fetchSlip = async () => {
         try {
             const response = await ax.get(conf.Slip);
-            const slipData = response.data.data.map((item) => item.attributes.slip.data.attributes.url);
-            setslip(slipData);
-            // console.log("slip data:", slipData);
+            setSlip(response.data.data);
         } catch (error) {
-            console.log("fail to fetch slip", error);
+            console.log("Failed to fetch slip", error);
         }
-    }
+    };
 
+    useEffect(() => {
+        fetchCourse();
+        fetchEntries();
+        fetchSlip();
+    }, []);
 
+    useEffect(() => {
+        console.log(slip);
+        if (slip && slip.length > 0) {
+            slip.forEach(item => {
+                console.log(item.attributes.member);
+            });
+        }
+    }, [slip]);
 
     const handleEditCourse = (id) => {
         setEditingItemId(id);
@@ -75,7 +87,6 @@ const ManageData = () => {
                 return;
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-
             const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
             await axios.delete(`http://localhost:1337/api/entries/${id}`);
             setEntries(entries.filter(entry => entry.id !== id));
@@ -92,6 +103,10 @@ const ManageData = () => {
         setSearchEntryId(e.target.value);
     };
 
+    const handleSearchUser = (e) => {
+        setSearchUser(e.target.value);
+    };
+
     const filteredCourses = courses.filter(course =>
         course.attributes.title.toLowerCase().includes(searchCourse.toLowerCase())
     );
@@ -100,39 +115,46 @@ const ManageData = () => {
         entry.id.toString().includes(searchEntryId)
     );
 
-    useEffect(() => {
-        fetchCourse();
-        fetchEntries();
-        fetchSlip()
-    }, []);
+    // ใช้ filter เพื่อกรอง slip และ entries ตามผู้ใช้ที่ค้นหา
+    const filteredSlip = slip.filter(item => 
+        item.attributes.member && 
+        item.attributes.member.data && 
+        item.attributes.member.data.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
+    );
 
-    // useEffect(() => {
-    //     console.log(slip)
-    // }, [slip])
+    const filteredEntriesByUser = entries.filter(entry => 
+        entry.attributes.owner && 
+        entry.attributes.owner.data && 
+        entry.attributes.owner.data.attributes.username.toLowerCase().includes(searchUser.toLowerCase())
+    );
 
     return (
-        <div className="manage-data-container">
+        <Container>
             <h1 className="header">Manage Data</h1>
             <p className="role">Role: Super Admin</p>
 
             <div className="search-container">
-                {/*course */}
-                <input
-                    type="text"
-                    placeholder="Search course..."
-                    value={searchCourse}
-                    onChange={handleSearchCourse}
-                    className="search-input"
-                />
-
-                {/*entries*/}
-                <input
-                    type="text"
-                    placeholder="Search entry ID..."
-                    value={searchEntryId}
-                    onChange={handleSearchEntryId}
-                    className="search-input"
-                />
+                <InputGroup className="mb-3">
+                    <FormControl
+                        placeholder="Search course..."
+                        value={searchCourse}
+                        onChange={handleSearchCourse}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        placeholder="Search entry ID..."
+                        value={searchEntryId}
+                        onChange={handleSearchEntryId}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        placeholder="Search user..."
+                        value={searchUser}
+                        onChange={handleSearchUser}
+                    />
+                </InputGroup>
             </div>
 
             <div className="section">
@@ -149,8 +171,8 @@ const ManageData = () => {
                                 <strong>Owner:</strong> {course.attributes && course.attributes.owner ? course.attributes.owner.data.attributes.username : 'N/A'}<br />
                             </div>
                             <div className="data-item-actions">
-                                <button onClick={() => handleEditCourse(course.id)} className="edit-button btn btn-primary">Edit</button>
-                                <button onClick={() => handleDeleteCourse(course.id)} className="delete-button btn btn-danger">Delete</button>
+                                <Button onClick={() => handleEditCourse(course.id)} variant="primary">Edit</Button>
+                                <Button onClick={() => handleDeleteCourse(course.id)} variant="danger">Delete</Button>
                             </div>
                         </div>
                     ))}
@@ -158,9 +180,9 @@ const ManageData = () => {
             </div>
 
             <div className="section">
-                <h2 className="section-header">Entries ({entries.length})</h2>
+                <h2 className="section-header">Entries ({filteredEntriesByUser.length})</h2>
                 <div className="data-list">
-                    {filteredEntries.map(entry => (
+                    {filteredEntriesByUser.map(entry => (
                         <div key={entry.id} className="data-item">
                             <div className="entry-details">
                                 <strong>ID:</strong> {entry.id}<br />
@@ -172,8 +194,8 @@ const ManageData = () => {
                                 <strong>Owner:</strong> {entry.attributes && entry.attributes.owner && entry.attributes.owner.data && entry.attributes.owner.data.attributes && entry.attributes.owner.data.attributes.username ? entry.attributes.owner.data.attributes.username : 'N/A'}<br />
                             </div>
                             <div className="data-item-actions">
-                                <button onClick={() => handleEditEntry(entry.id)} className="edit-button btn btn-primary">Edit</button>
-                                <button onClick={() => handleDeleteEntry(entry.id)} className="delete-button btn btn-danger">Delete</button>
+                                <Button onClick={() => handleEditEntry(entry.id)} variant="primary">Edit</Button>
+                                <Button onClick={() => handleDeleteEntry(entry.id)} variant="danger">Delete</Button>
                             </div>
                         </div>
                     ))}
@@ -181,19 +203,23 @@ const ManageData = () => {
             </div>
 
             <h2>Slip</h2>
-            {slip && slip.map((url, index) => (
-                <div key={index}>
-                    <p>id: {index}</p>
-                    <img src={"http://localhost:1337" + url} alt={`slip-${index}`} width={200} />
-                </div>
-            ))}
+            <div className="row">
+                {filteredSlip.map((item, index) => (
+                    <div className="col-md-4 mb-3" key={index}>
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Slip ID: {item.id}</h5>
+                                <p className="card-text">Owner: {item.attributes.member && item.attributes.member.data && item.attributes.member.data.attributes.username}</p>
+                                {item.attributes.slip && item.attributes.slip.data && item.attributes.slip.data.attributes.url && (
+                                    <img src={"http://localhost:1337" + item.attributes.slip.data.attributes.url} className="card-img-top" alt={`slip-${index}`} />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-
-
-
-
-
-        </div>
+        </Container>
     );
 }
 

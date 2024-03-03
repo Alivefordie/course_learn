@@ -1,12 +1,16 @@
 .text{
     flex-direction: column;
-    text-align: center;
+    text-align: center; 
 }
 
 .picture{
     height: 40px;
     width: 40px;
+    
 }
+
+
+
 
 .profile{
     height: 40px;
@@ -23,3 +27,6 @@
     align-items: center;
     justify-content: center;
 }
+
+
+

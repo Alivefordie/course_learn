@@ -21,6 +21,8 @@ import Management from "./pages/superadmin/Management";
 import Datacourse from "./components/Ins/Datacourse";
 import ForgotPassword from "./pages/forgotPassword";
 import NewPassword from "./pages/newPassword";
+import EditProfile from "./components/EditProfile";
+import CourseSyllabus from "./pages/coursesyllabus";
 
 const router = createBrowserRouter([
 	{
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
 	{
 		path: "/NewPassword",
 		element: <NewPassword />,
+	},
+	{
+		path: "/profile/edit-profile/:id",
+		element: <EditProfile />,
+	},
+	{
+		path: "/mycourses/:item",
+		element: <CourseSyllabus />,
 	},
 ]);
 
