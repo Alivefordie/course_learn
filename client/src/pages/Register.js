@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -9,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import NavbarTop from "../components/NavbarTop";
 import styles from "../css/RegisterCss.module.css";
 import Spinner from "../components/Spinner";
+import ax from "../conf/ax";
+import conf from "../conf/main";
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Register = () => {
 				setLoading(false);
 				return;
 			}
-			const response = await axios.post("http://localhost:1337/api/auth/local/register", {
+			const response = await ax.post(`${conf.apiUrlPrefix}/auth/local/register`, {
 				username: user.username,
 				email: user.email,
 				password: user.password,

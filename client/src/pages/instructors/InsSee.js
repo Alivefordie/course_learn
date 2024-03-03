@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "../../App.css";
 import SmallCourse from "../../components/Ins/SmallCourse";
 import { Row } from "react-bootstrap";
 import NavbarTop from "../../components/NavbarTop";
 import Spinner from "../../components/Spinner";
 import ax from "../../conf/ax";
+import conf from "../../conf/main";
 
 const InsSee = () => {
 	const [myData, setMyData] = useState([]);
@@ -13,7 +13,7 @@ const InsSee = () => {
 
 	const fetchData = async () => {
 		try {
-			const response = await ax.get("http://localhost:1337/api/courses?owner=true");
+			const response = await ax.get(`${conf.apiUrlPrefix}/courses?owner=true`);
 			setMyData(response.data.data);
 			setLoading(false);
 		} catch (err) {

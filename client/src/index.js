@@ -19,10 +19,16 @@ import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
 import Datacourse from "./components/Ins/Datacourse";
+import ForgotPassword from "./pages/forgotPassword";
+import NewPassword from "./pages/newPassword";
 import EditProfile from "./components/EditProfile";
+<<<<<<< HEAD
 import Study from "./pages/Study";
 
 
+=======
+import CourseSyllabus from "./pages/coursesyllabus";
+>>>>>>> f66ed5540887a313ce8e0c55caef779685c8aa27
 
 const router = createBrowserRouter([
 	{
@@ -78,12 +84,25 @@ const router = createBrowserRouter([
 		element: <Datacourse />,
 	},
 	{
+		path: "/ForgotPassword",
+		element: <ForgotPassword />,
+	},
+	{
+		path: "/NewPassword",
+		element: <NewPassword />,
+	},
+	{
 		path: "/profile/edit-profile/:id",
 		element: <EditProfile />,
 	},
 	{
+<<<<<<< HEAD
 		path: "/study",
 		element: <Study />,
+=======
+		path: "/mycourses/:item",
+		element: <CourseSyllabus />,
+>>>>>>> f66ed5540887a313ce8e0c55caef779685c8aa27
 	},
 ]);
 
