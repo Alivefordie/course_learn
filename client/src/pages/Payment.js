@@ -61,8 +61,7 @@ const Payment = () => {
 				return;
 			}
 
-			const response = await ax.get(
-				`${conf.apiUrlPrefix}}/users/me?populate[entries][populate][course]=*`
+			const response = await ax.get(`${conf.apiUrlPrefix}/users/me?populate[entries][populate][course]=*`
 			);
 			setmember(response.data.id);
 			// console.log(response.data.id)
@@ -119,9 +118,9 @@ const Payment = () => {
 		}
 	};
 
-	// useEffect(() => {
-	//     console.log(Id);
-	// }, [Id]);
+	useEffect(() => {
+	    console.log("test:",Id);
+	}, [Id]);
 
 	const success = async (Id) => {
 		try {
@@ -155,7 +154,7 @@ const Payment = () => {
 			formData.append("files", slip, slip.name);
 			console.log(formData);
 
-			const uploadResponse = await ax.post(`${conf.apiUrlPrefix}}/upload/`, formData);
+			const uploadResponse = await ax.post(`${conf.apiUrlPrefix}/upload/`, formData);
 			console.log("File uploaded successfully:", uploadResponse.data);
 			const pictureId = uploadResponse.data[0].id;
 			// console.log(pictureId);
