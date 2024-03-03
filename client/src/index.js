@@ -24,7 +24,7 @@ import NewPassword from "./pages/newPassword";
 import EditProfile from "./components/EditProfile";
 import CourseSyllabus from "./pages/coursesyllabus";
 import CourseV from "./components/member/CourseV";
-
+import Coursedata from "./pages/instructors/Coursedata";
 
 const router = createBrowserRouter([
 	{
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/Instructors/:course",
-		element: <Datacourse />,
+		element: <Coursedata />,
 	},
 	{
 		path: "/ForgotPassword",
