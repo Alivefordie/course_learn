@@ -7,6 +7,7 @@ import NavbarTop from "../NavbarTop";
 const CourseV = () => {
     const [videos, setVideos] = useState([]);
     const [data, setData] = useState([]);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [progress, setProgress] = useState(0);
 
     const fetchVideos = async () => {
@@ -29,24 +30,45 @@ const CourseV = () => {
         fetchVideos();
     }, []);
 
+    const handleVideoChange = index => {
+        setCurrentVideoIndex(index);
+        setProgress(0);
+    };
+
     return (
-        <div>
+        <div className="container">
             <NavbarTop NavbarLink={NavbarLink} />
-            {videos.length > 0 && data.map((item, index) => (
-                <div key={index}>
-                    <p>Title: {item.attributes.title}</p>
-                    <p>Description: {item.attributes.description}</p>
-                    <ReactPlayer
-                        url={"http://localhost:1337" + videos[index]}
-                        controls
-                        onProgress={({ playedSeconds }) => {
-                            console.log(Math.round(playedSeconds));
-                            setProgress(Math.round(playedSeconds));
-                        }}
-                    />
-                    <p>Progress: {progress}</p>
+            {videos.length > 0 && (
+                <div className="row">
+                    <div className="col-md-8">
+                        <p>Title: {data[currentVideoIndex].attributes.title}</p>
+                        <p>Description: {data[currentVideoIndex].attributes.description}</p>
+                        <ReactPlayer
+                            url={"http://localhost:1337" + videos[currentVideoIndex]}
+                            controls
+                            playing={true}
+                            onProgress={({ playedSeconds }) => {
+                                console.log(Math.round(playedSeconds));
+                                setProgress(Math.round(playedSeconds));
+                            }}
+                        />
+                        <p>Progress: {progress}</p>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="list-group">
+                            {data.map((item, index) => (
+                                <button
+                                    key={index}
+                                    className={`list-group-item list-group-item-action ${index === currentVideoIndex ? "active" : ""}`}
+                                    onClick={() => handleVideoChange(index)}
+                                >
+                                    {item.attributes.title}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            ))}
+            )}
         </div>
     );
 };
