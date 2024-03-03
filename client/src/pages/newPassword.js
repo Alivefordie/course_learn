@@ -7,13 +7,15 @@ import conf from "../conf/main";
 import NavbarTop from "../components/NavbarTop";
 import { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PasswordStrength from "../components/PasswordStrength";
 
 function NewPassword() {
 	const [password, setpassword] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const code = searchParams.get("code");
+	const navigate = useNavigate();
 	const [strength, setStrength] = useState({
 		hasLow: false,
 		hasCap: false,
@@ -28,21 +30,25 @@ function NewPassword() {
 	const sendpassword = async () => {
 		setLoading(true);
 		const response = await ax.post(`${conf.apiUrlPrefix}/auth/reset-password`, {
-			code: searchParams.get("code"),
+			code: code,
 			password: password,
 			passwordConfirmation: password,
 		});
 		alert("reset");
-		console.log(response);
+		navigate("/login");
 	};
 
 	const handelSubmit = (event) => {
-		if (!strength.has8digit) {
-			event.preventDefault();
-			event.stopPropagation();
+		if (code) {
+			if (!strength.has8digit) {
+				event.preventDefault();
+				event.stopPropagation();
+			} else {
+				event.preventDefault();
+				sendpassword();
+			}
 		} else {
-			event.preventDefault();
-			sendpassword();
+			navigate("/ForgotPassword");
 		}
 	};
 
