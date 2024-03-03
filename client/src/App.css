@@ -688,3 +688,13 @@
   box-shadow: 0 0 5px dodgerblue;
 }
 
+.col-shadow{
+  box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 17px 0px rgba(0,0,0,0.75);    
+}
+
+.shadow-text{
+ text-shadow: 4px 4px 9px rgba(0,0,0,0.6)
+}
+
