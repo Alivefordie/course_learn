@@ -61,7 +61,7 @@ const NavbarLink = () => {
 				</Nav.Link>
 				<Nav.Link href="/profile" className={styles.text}>
 					<img src={profilePicture} className={styles.profile} />
-					<div style={{ fontSize: "10px" }}>profile</div>
+					<div style={{ fontSize: "10px" }}>myProfile</div>
 				</Nav.Link>
 			</Nav>
 		</>

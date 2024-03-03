@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, } from "react-bootstrap";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
@@ -10,88 +10,114 @@ import conf from "../conf/main";
 import Spinner from "../components/Spinner";
 
 const Cart = () => {
-	const navigate = useNavigate();
-	const [data, setData] = useState([]);
-	const [totalPrice, setTotalPrice] = useState(0);
-	const [filter, setFilter] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const fetchData = async () => {
-		try {
-			const response = await ax.get(conf.findanything);
-			const filteredData = response.data.entries.filter((entry) => entry.cart !== null);
-			setFilter(filteredData);
-			setData(filteredData.map((entry) => entry.course));
-			calculateTotalPrice(filteredData.map((entry) => entry.course));
-			setLoading(false);
-		} catch (error) {
-			console.error("Error occurred:", error);
-			setLoading(false);
-		}
-	};
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [filter, setFilter] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
 
-	const payment = () => {
-		navigate("/payment");
-	};
+  const fetchData = async () => {
+    try {
+      const response = await ax.get(conf.findanything);
+      const filteredData = response.data.entries.filter(
+        (entry) => entry.cart !== null
+      );
+      setFilter(filteredData);
+      setData(filteredData.map((entry) => entry.course));
+      calculateTotalPrice(filteredData.map((entry) => entry.course));
+      setLoading(false);
+    } catch (error) {
+      console.error("Error occurred:", error);
+      setLoading(false);
+    }
+  };
 
-	const calculateTotalPrice = (courses) => {
-		const totalPrice = courses.reduce((acc, course) => {
-			if (course.price) {
-				return acc + course.price;
-			}
-			return acc;
-		}, 0);
-		setTotalPrice(totalPrice);
-	};
+  const payment = () => {
+    navigate("/payment");
+  };
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+  const calculateTotalPrice = (courses) => {
+    const totalPrice = courses.reduce((acc, course) => {
+      if (course.price) {
+        return acc + course.price;
+      }
+      return acc;
+    }, 0);
+    setTotalPrice(totalPrice);
+  };
 
-	return (
-		<div className="body">
-			<NavbarTop NavbarLink={NavbarLink} />
-			{loading ? (
-				<Spinner />
-			) : (
-				<Container className="cart-container">
-					<Container className="incart-container">
-						<h1 className="text-center mb-4">My Cart</h1>
-						<Row className="g-4">
-							<Col md={6}>
-								{filter.map((item) => (
-									<div
-										key={item.id}
-										className="card border border-dark mb-3"
-										style={{
-											backgroundImage: `url(${item.course.image})`,
-											backgroundSize: "cover",
-											backgroundPosition: "left",
-											width: "100%",
-										}}>
-										<div className="card-body">
-											<h5 className="card-title">{item.course.title}</h5>
-											<p className="card-text">Price: {item.course.price}</p>
-										</div>
-									</div>
-								))}
-							</Col>
-							<Col md={6}>
-								<div className="d-flex flex-column justify-content-center align-items-center">
-									<Button variant="outline-dark" onClick={payment} className="pay-button mb-3">
-										Proceed to Payment
-									</Button>
-									<div className="total-price">
-										<p className="mb-0">Total Price: {totalPrice}</p>
-									</div>
-								</div>
-							</Col>
-						</Row>
-					</Container>
-					<div></div>
-				</Container>
-			)}
-		</div>
-	);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div className="body">
+      <NavbarTop NavbarLink={NavbarLink} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Container className="cart-container">
+          <Container className="incart-container">
+            <h1 className="header-cart">My Cart</h1>
+            <Row className="g-4">
+              <Col md={6}>
+                {filter.map((item) => (
+                  <Card
+                    className="d-flex flex-row"
+                    style={{ marginTop: "15px", marginBottom: "15px", marginLeft: "15px" }}
+                    key={item.id}
+                  >
+                    <div
+                      onClick={() => navigate(`/courses/${item.course.id}`)}
+                      style={{ cursor: "pointer" }}
+                      className="image-col"
+                    >
+                      <Card.Img
+                        className="course-image"
+                        variant="left"
+                        src={conf.url + item.course.image}
+                      />
+                    </div>
+                    <div className="body-col">
+                      <Card.Body
+                        onClick={() => navigate(`/courses/${item.course.id}`)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Card.Title>{item.course.title}</Card.Title>
+                        <Card.Text>Details</Card.Text>
+                        <Card.Text className="m-0">
+                          เนื้อหา {item.course.description}
+                        </Card.Text>
+                        <Card.Text className="m-0">
+                          ระยะเวลา {item.course.duration}
+                        </Card.Text>
+                      </Card.Body>
+                    </div>
+                  </Card>
+                ))}
+              </Col>
+              <Col md={6}>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <Button
+                    variant="outline-dark"
+                    onClick={payment}
+                    className="pay-button mb-3"
+                  >
+                    Proceed to Payment
+                  </Button>
+                  <div className="total-price">
+                    <p className="mb-0">Total Price: {totalPrice}</p>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+          <div></div>
+        </Container>
+      )}
+    </div>
+  );
 };
 
 export default Cart;

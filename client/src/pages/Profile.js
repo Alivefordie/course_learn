@@ -35,7 +35,7 @@ const Profile = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="body">
 			<NavbarTop NavbarLink={NavbarLink} />
 			{loading ? <Spinner /> : <Datapro data={[data, entries, course, picture,id]} />}
 		</div>
