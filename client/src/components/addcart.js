@@ -21,7 +21,7 @@ function AddCart({ course }) {
     };
 
     return (
-        <div>
+        <>
             {enroll ? (
                 <img
                     onClick={addToCart}
@@ -44,7 +44,7 @@ function AddCart({ course }) {
                     alt="Add Icon"
                 />
             )}
-        </div>
+        </>
     );
 }
 

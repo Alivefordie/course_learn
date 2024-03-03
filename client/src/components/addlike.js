@@ -10,17 +10,29 @@ function AddLike({ course }) {
     const login = context.state.isLoggedIn;
     const courseContent = course.attributes;
     const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
-    const enroll = courseContent.entries?.data[0]?.attributes?.enroll;
+    const multipleEntries = courseContent.entries?.data.length > 1;
 
     const addTolike = async () => {
-        if (login) {
+        if (login && !multipleEntries) {
+            console.log('like',courseContent.entries?.data[0]?.attributes?.like)
+            console.log('multipleentry',courseContent.entries?.data.length > 1)
             const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
             setLike(response.data.like);
         } else {
+            
         }
     };
+
+    useEffect(() => {
+		console.log('course',course)
+        console.log('like',courseContent.entries?.data[0]?.attributes?.like)
+		// console.log(login);
+		// console.log(like);
+		// console.log(courseContent);
+	}, []);
+
     return (
-        <div>
+        <>
             {!like ? (
                 <img
                     onClick={addTolike}
@@ -35,7 +47,7 @@ function AddLike({ course }) {
                     src="../red-heart-icon.svg"
                     alt="Like Icon"
                 />
-            )}</div>
+            )}</>
     );
 }
 

@@ -16,6 +16,7 @@ function MiniCourse({ course }) {
 	const teacher = courseContent.owner.data?.attributes;
 
 	useEffect(() => {
+		console.log('course',course)
 		// console.log(login);
 		// console.log(like);
 		// console.log(courseContent);
