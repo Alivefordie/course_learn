@@ -32,7 +32,7 @@ const NavbarLink = () => {
 				<div style={{ fontSize: "10px" }}>Back</div>
 			</Nav.Link>
 			<Nav.Link href="/profile" className={styles.text}>
-				<img src={profilePicture} style={{ borderRadius: "50%" }} className={styles.profile} />
+				<img src={profilePicture} className={styles.profile} />
 				<div style={{ fontSize: "10px" }}>profile</div>
 			</Nav.Link>
 		</Nav>
