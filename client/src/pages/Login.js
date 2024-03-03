@@ -65,7 +65,15 @@ const Login = () => {
 						<br />
 					</div>
 					<div className="d-flex justify-content-between">
-						<span className=" d-flex ">Forgot Password</span>
+						<span
+							className=" d-flex "
+							onClick={() => navigate("/ForgotPassword")}
+							style={{
+								textDecorationLine: "underline",
+								cursor: "pointer",
+							}}>
+							Forgot Password
+						</span>
 						<span
 							onClick={() => navigate("/register")}
 							style={{

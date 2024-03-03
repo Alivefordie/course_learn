@@ -19,6 +19,8 @@ import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
 import Datacourse from "./components/Ins/Datacourse";
+import ForgotPassword from "./pages/forgotPassword";
+import NewPassword from "./pages/newPassword";
 
 const router = createBrowserRouter([
 	{
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
 	{
 		path: "/Instructors/:course",
 		element: <Datacourse />,
+	},
+	{
+		path: "/ForgotPassword",
+		element: <ForgotPassword />,
+	},
+	{
+		path: "/NewPassword",
+		element: <NewPassword />,
 	},
 ]);
 
