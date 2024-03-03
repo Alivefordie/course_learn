@@ -11,9 +11,9 @@ const Toprank = ({ data }) => {
 	}, [data]);
 
 	return (
-		<div>
+		<div > 
 			{data.slice(0, 3).map((item, i) => (
-				<MiniCourse key={i} course={item} />
+				<MiniCourse key={i} course={item}  />
 			))}
 		</div>
 	);

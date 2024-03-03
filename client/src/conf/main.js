@@ -11,7 +11,7 @@ const conf = {
 	Picture: "users/me?populate[picture]=*",
 	Course: "/courses?populate=*",
 	Entries: "/entries?populate[owner]=*",
-	Slip:"tansactions?populate[slip]=*",
+	Slip:"tansactions?populate=*",
 	EditProfile:"users/me?populate[picture]=*",
 };
 

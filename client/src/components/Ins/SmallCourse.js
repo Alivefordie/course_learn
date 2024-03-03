@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import conf from "../../conf/main";
 
 function SmallCourse({ course }) {
 	const navigate = useNavigate();
@@ -17,11 +18,7 @@ function SmallCourse({ course }) {
 				style={{ cursor: "pointer" }}
 				className="m-2 d-flex flex-row">
 				<div className="image-col">
-					<Card.Img
-						className="course-image"
-						variant="left"
-						src={"http://localhost:1337" + picture}
-					/>
+					<Card.Img className="course-image" variant="left" src={conf.url + picture} />
 				</div>
 				<div className="body-col">
 					<Card.Body>
