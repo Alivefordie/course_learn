@@ -9,13 +9,12 @@ function AddLike({ course }) {
     const context = useContext(AuthContext);
     const login = context.state.isLoggedIn;
     const courseContent = course.attributes;
-    const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
     const multipleEntries = courseContent.entries?.data.length > 1;
+    const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
+    
 
     const addTolike = async () => {
-        if (login && !multipleEntries) {
-            console.log('like',courseContent.entries?.data[0]?.attributes?.like)
-            console.log('multipleentry',courseContent.entries?.data.length > 1)
+        if (login) {
             const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
             setLike(response.data.like);
         } else {
