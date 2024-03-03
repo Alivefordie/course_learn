@@ -20,6 +20,9 @@ import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
 import Datacourse from "./components/Ins/Datacourse";
 import EditProfile from "./components/EditProfile";
+import Study from "./pages/Study";
+
+
 
 const router = createBrowserRouter([
 	{
@@ -77,6 +80,10 @@ const router = createBrowserRouter([
 	{
 		path: "/profile/edit-profile/:id",
 		element: <EditProfile />,
+	},
+	{
+		path: "/study",
+		element: <Study />,
 	},
 ]);
 

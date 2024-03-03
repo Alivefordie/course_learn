@@ -362,147 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'course';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    duration: Attribute.Integer;
-    owner: Attribute.Relation<
-      'api::course.course',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    price: Attribute.Integer;
-    amount: Attribute.Integer & Attribute.DefaultTo<0>;
-    maxCapacity: Attribute.Integer;
-    likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
-    picture: Attribute.Media;
-    entries: Attribute.Relation<
-      'api::course.course',
-      'oneToMany',
-      'api::entry.entry'
-    >;
-    course_syllabus: Attribute.DynamicZone<
-      ['activity.file', 'activity.text', 'activity.video']
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEntryEntry extends Schema.CollectionType {
-  collectionName: 'entries';
-  info: {
-    singularName: 'entry';
-    pluralName: 'entries';
-    displayName: 'entry';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    course: Attribute.Relation<
-      'api::entry.entry',
-      'manyToOne',
-      'api::course.course'
-    >;
-    owner: Attribute.Relation<
-      'api::entry.entry',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    like: Attribute.DateTime;
-    cart: Attribute.DateTime;
-    enroll: Attribute.DateTime;
-    tansaction: Attribute.Relation<
-      'api::entry.entry',
-      'manyToOne',
-      'api::tansaction.tansaction'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::entry.entry',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::entry.entry',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTansactionTansaction extends Schema.CollectionType {
-  collectionName: 'tansactions';
-  info: {
-    singularName: 'tansaction';
-    pluralName: 'tansactions';
-    displayName: 'tansaction';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    paymentAmout: Attribute.BigInteger;
-    slip: Attribute.Media;
-    paymentDate: Attribute.DateTime;
-    member: Attribute.Relation<
-      'api::tansaction.tansaction',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    entries: Attribute.Relation<
-      'api::tansaction.tansaction',
-      'oneToMany',
-      'api::entry.entry'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tansaction.tansaction',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tansaction.tansaction',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -875,6 +734,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::tansaction.tansaction'
     >;
+    progresses: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::progress.progress'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -939,6 +803,235 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    duration: Attribute.Integer;
+    owner: Attribute.Relation<
+      'api::course.course',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    price: Attribute.Integer;
+    amount: Attribute.Integer & Attribute.DefaultTo<0>;
+    maxCapacity: Attribute.Integer;
+    likeCount: Attribute.Integer & Attribute.DefaultTo<0>;
+    picture: Attribute.Media;
+    entries: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::entry.entry'
+    >;
+    course_syllabus: Attribute.DynamicZone<
+      ['activity.file', 'activity.text', 'activity.video']
+    >;
+    course_videos: Attribute.Relation<
+      'api::course.course',
+      'oneToMany',
+      'api::course-video.course-video'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseVideoCourseVideo extends Schema.CollectionType {
+  collectionName: 'course_videos';
+  info: {
+    singularName: 'course-video';
+    pluralName: 'course-videos';
+    displayName: 'Course_video';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    video: Attribute.Media;
+    title: Attribute.String;
+    description: Attribute.String;
+    course: Attribute.Relation<
+      'api::course-video.course-video',
+      'manyToOne',
+      'api::course.course'
+    >;
+    progresses: Attribute.Relation<
+      'api::course-video.course-video',
+      'oneToMany',
+      'api::progress.progress'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course-video.course-video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course-video.course-video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEntryEntry extends Schema.CollectionType {
+  collectionName: 'entries';
+  info: {
+    singularName: 'entry';
+    pluralName: 'entries';
+    displayName: 'entry';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    course: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'api::course.course'
+    >;
+    owner: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    like: Attribute.DateTime;
+    cart: Attribute.DateTime;
+    enroll: Attribute.DateTime;
+    tansaction: Attribute.Relation<
+      'api::entry.entry',
+      'manyToOne',
+      'api::tansaction.tansaction'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProgressProgress extends Schema.CollectionType {
+  collectionName: 'progresses';
+  info: {
+    singularName: 'progress';
+    pluralName: 'progresses';
+    displayName: 'progress';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    value: Attribute.Integer;
+    course_video: Attribute.Relation<
+      'api::progress.progress',
+      'manyToOne',
+      'api::course-video.course-video'
+    >;
+    users_permissions_user: Attribute.Relation<
+      'api::progress.progress',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::progress.progress',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::progress.progress',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTansactionTansaction extends Schema.CollectionType {
+  collectionName: 'tansactions';
+  info: {
+    singularName: 'tansaction';
+    pluralName: 'tansactions';
+    displayName: 'tansaction';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    paymentAmout: Attribute.BigInteger;
+    slip: Attribute.Media;
+    paymentDate: Attribute.DateTime;
+    member: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    entries: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToMany',
+      'api::entry.entry'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tansaction.tansaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -949,9 +1042,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::course.course': ApiCourseCourse;
-      'api::entry.entry': ApiEntryEntry;
-      'api::tansaction.tansaction': ApiTansactionTansaction;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -960,6 +1050,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::course.course': ApiCourseCourse;
+      'api::course-video.course-video': ApiCourseVideoCourseVideo;
+      'api::entry.entry': ApiEntryEntry;
+      'api::progress.progress': ApiProgressProgress;
+      'api::tansaction.tansaction': ApiTansactionTansaction;
     }
   }
 }
