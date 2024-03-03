@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import Specific from "../../components/Specific";
 import NavbarTop from "../../components/NavbarTop";
 import NavbarLink from "../../components/NavbarLink";
 import Spinner from "../../components/Spinner";
+import ax from "../../conf/ax";
+import conf from "../../conf/main";
 
 const CourseInfo = () => {
 	const [courses1, setCourses1] = useState([]);
@@ -14,7 +15,7 @@ const CourseInfo = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(`http://localhost:1337/api/courses/${item}`);
+				const response = await ax.get(`${conf.apiUrlPrefix}/courses/${item}`);
 				const coursesData = response.data.data;
 				setCourses1(coursesData);
 				// console.log(coursesData);

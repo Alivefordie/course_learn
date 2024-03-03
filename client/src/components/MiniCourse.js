@@ -39,20 +39,16 @@ function MiniCourse({ course }) {
 
 	return (
 		<>
-			<Card className="d-flex flex-row" style = {{marginTop : '15px'}}>
+			<Card className="d-flex flex-row" style={{ marginTop: "15px" }}>
 				<div
-					onClick={() => navigate(`/courses/${course.id}`, { replace: true })}
+					onClick={() => navigate(`/courses/${course.id}`)}
 					style={{ cursor: "pointer" }}
 					className="image-col">
-					<Card.Img
-						className="course-image"
-						variant="left"
-						src={"http://localhost:1337" + picture}
-					/>
+					<Card.Img className="course-image" variant="left" src={conf.url + picture} />
 				</div>
 				<div className="body-col">
 					<Card.Body
-						onClick={() => navigate(`/courses/${course.id}`, { replace: true })}
+						onClick={() => navigate(`/courses/${course.id}`)}
 						style={{ cursor: "pointer" }}>
 						<Card.Title>{courseContent.title}✅</Card.Title>
 						<Card.Text>details</Card.Text>

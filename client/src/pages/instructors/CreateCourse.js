@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Col, Button, Form, Row, Image } from "react-bootstrap";
 import Spinner from "../../components/Spinner";
 
-import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
@@ -31,10 +30,8 @@ const CreateCourse = () => {
 	};
 	// send axios
 	const postCourse = async () => {
-		const form = new FormData();
 		setLoading(true);
-		const jwtToken = sessionStorage.getItem("auth.jwt");
-		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+		const form = new FormData();
 		const data = CourseSyllabus.map((c, i) => {
 			if (c.__component == "activity.video") {
 				form.append(`files.course_syllabus[${i}].videoFile`, c.videoFile[0]);
@@ -49,7 +46,7 @@ const CreateCourse = () => {
 		// console.log(sendData);
 		form.append("data", JSON.stringify(sendData));
 		form.append("files.picture", picture["files.picture"]);
-		const response = await axios.post("http://localhost:1337/api/courses", form);
+		const response = await ax.post(`${conf.apiUrlPrefix}}/courses`, form);
 		console.log(response);
 		// link to some page
 		setLoading(false);
