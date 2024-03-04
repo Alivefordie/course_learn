@@ -49,32 +49,21 @@ const MyCourses = () => {
       ) : (
         <Container sm="3" md="4">
           <Row className="mycourse-rows">
-            {/* Render Owner Courses */}
             {ownerCourses.map((course) => (
               <Col key={course.id} className="owner-course-col">
                 <h1 style={{ fontSize: 30 }}>{course.name}</h1>
-                {/* Add more details or components for owner courses if needed */}
               </Col>
             ))}
 
-            {/* Regular Courses */}
             <Col className="inprogress-col">
               <h1 style={{ fontSize: 30 }} className="header-inpro">
                 Inprogress
               </h1>
-              {/* Add your regular courses rendering logic here */}
             </Col>
             <Col className="complete-col">
               <h1 style={{ fontSize: 30 }} className="header-com">
                 Complete
               </h1>
-              {/* Add your regular courses rendering logic here */}
-            </Col>
-            <Col className="expired-col">
-              <h1 style={{ fontSize: 30 }} className="header-exp">
-                Expired
-              </h1>
-              {/* Add your regular courses rendering logic here */}
             </Col>
           </Row>
         </Container>
