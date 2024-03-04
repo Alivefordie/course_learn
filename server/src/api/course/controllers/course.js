@@ -208,6 +208,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         owner: { select: "username" },
         picture: true,
         course_syllabus: true,
+        entries: { filters: { owner: user.id } },
       },
     });
     return this.transformResponse(response);
