@@ -160,7 +160,7 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         enroll: { $notNull: true },
       },
     });
-
+    console.log(enrolled, Owned);
     if (Owned) {
       const response = await strapi.db.query("api::course.course").findOne({
         where: { id: entryId },
@@ -202,5 +202,14 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
       });
       return this.transformResponse(response);
     }
+    const response = await strapi.db.query("api::course.course").findOne({
+      where: { id: entryId },
+      populate: {
+        owner: { select: "username" },
+        picture: true,
+        course_syllabus: true,
+      },
+    });
+    return this.transformResponse(response);
   },
 }));
