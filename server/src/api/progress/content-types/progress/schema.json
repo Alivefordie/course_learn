@@ -4,10 +4,11 @@
   "info": {
     "singularName": "progress",
     "pluralName": "progresses",
-    "displayName": "progress"
+    "displayName": "progress",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
