@@ -12,3 +12,81 @@
   width: 6px;
   height: 6px;
 }
+
+strong {
+  font-size: 17px;
+}
+
+.customBtn {
+  cursor: pointer;
+  font-size: 16px; /* Adjust the font size as needed */
+  width: 18%; /* Adjust the width as needed */
+  height: 49.58684px; /* Adjust the height as needed */
+  /* Add your desired background color */
+
+  border: none; /* Remove border if not needed */
+  border-radius: 5px; /* Add border radius as needed */
+  color: #ffffff; /* Set text color */
+}
+.test {
+  border: solid #000 1px;
+  display: inline-block; /* Add this to make the underline fit the content width */
+  position: relative; /* Add this to position the underline */
+}
+
+.test::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Adjust this value to control the distance between the text and the underline */
+  width: 100%; /* Extend the underline to cover the width of the container */
+  height: 2px; /* Increase the thickness of the underline */
+  background-color: #000; /* Change the color of the underline */
+}
+.op{
+  margin-bottom: 1%;
+  margin-left: 80%;
+}
+.customBtn{
+  font-size: 100%;
+}
+/* CreateCourse.module.css */
+
+.courseDataCol {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.customForm label {
+  font-weight: bold;
+}
+
+.customForm input[type="text"],
+.customForm input[type="number"],
+.customForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.customForm textarea {
+  resize: vertical;
+}
+
+.customForm input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.customForm .row {
+  margin-bottom: 20px;
+}
+
+.customForm .form-group {
+  margin-bottom: 0;
+}
+
