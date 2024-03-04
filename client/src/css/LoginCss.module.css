@@ -1,79 +1,79 @@
-.test {
-  
+.body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 
-.leftAlign {
-    text-align: left;
-}
-
-.test123 {
-    margin-top: 10px;
-}
-
-.test123:hover {
-    cursor: pointer; 
-}
-
-.test123 span {
-    margin-right: 50px;
-}
-
-
-
-.font {
-    font-family: 'Righteous';
-    font-style: normal;
-    font-weight: 400;
-    color: white;
-}
-
-.choice {
-    color: white;
+.loginContainer {
     display: flex;
-    justify-content: space-between;
-}
-
-.form {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 0.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    margin: 16px;
-    flex: 1;
-  }
-
-.center {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 550px;
+}
+
+.loginInput {
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.loginImageContainer {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+    border: 2px solid #fff;
 }
 
 .loginImage {
     width: 100%;
-    margin-top: 5vw;
     height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; /* Ensure the image stays behind the form */
+    max-width: 200px;
+    margin: 0 auto;
+}
 
+.loginBackground {
+    width: 100%;
+    height: auto;
 }
 
 .username {
-    margin-left: 3vw;
-    
-    margin-top: 20vw;
-    color: white;
-    width: 35vw;
+    width: 100%;
 }
 
 .resize {
-    height: 3vw;
-    border-radius: 15px;
+    resize: none;
 }
 
-.forgetpassword {
-    display: flex;
-    
+.text-center {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .loginContainer {
+        flex-direction: column;
+    }
+
+    .loginInput {
+        margin-bottom: 20px;
+    }
+
+    .loginImageContainer {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .loginInput {
+        padding: 10px;
+    }
+}
+
+.header {
+    text-align: center;
+    font-family: "Righteous", sans-serif;
+    font-style: normal;
+    font-size: 30px;
+    color: #fff;
 }
