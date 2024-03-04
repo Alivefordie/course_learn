@@ -8,6 +8,7 @@ import NavbarLink from "../components/NavbarLink";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import Spinner from "../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
 	const [data, setData] = useState([]);
@@ -24,6 +25,8 @@ const Payment = () => {
 	const [slip, setSlip] = useState(null);
 	const [member, setmember] = useState();
 	const [ids, setids] = useState();
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		console.log("ids", ids);
@@ -61,8 +64,7 @@ const Payment = () => {
 				return;
 			}
 
-			const response = await ax.get(
-				`${conf.apiUrlPrefix}}/users/me?populate[entries][populate][course]=*`
+			const response = await ax.get(`${conf.apiUrlPrefix}/users/me?populate[entries][populate][course]=*`
 			);
 			setmember(response.data.id);
 			// console.log(response.data.id)
@@ -119,9 +121,9 @@ const Payment = () => {
 		}
 	};
 
-	// useEffect(() => {
-	//     console.log(Id);
-	// }, [Id]);
+	useEffect(() => {
+	    console.log("test:",Id);
+	}, [Id]);
 
 	const success = async (Id) => {
 		try {
@@ -155,7 +157,7 @@ const Payment = () => {
 			formData.append("files", slip, slip.name);
 			console.log(formData);
 
-			const uploadResponse = await ax.post(`${conf.apiUrlPrefix}}/upload/`, formData);
+			const uploadResponse = await ax.post(`${conf.apiUrlPrefix}/upload/`, formData);
 			console.log("File uploaded successfully:", uploadResponse.data);
 			const pictureId = uploadResponse.data[0].id;
 			// console.log(pictureId);
@@ -171,6 +173,7 @@ const Payment = () => {
 			const transactionResponse = await ax.post(`${conf.apiUrlPrefix}/tansactions`, {
 				data: postData,
 			}); // Corrected variable name here
+			navigate("/mycourses")
 			console.log("Slip uploaded successfully. Response:", transactionResponse.data);
 		} catch (error) {
 			console.error("Error uploading slip:", error);

@@ -245,7 +245,7 @@ const ManageData = () => {
 									item.attributes.slip.data &&
 									item.attributes.slip.data.attributes.url && (
 										<img
-											src={conf.apiUrlPrefix + item.attributes.slip.data.attributes.url}
+											src={conf.url + item.attributes.slip.data.attributes.url}
 											className="card-img-top"
 											alt={`slip-${index}`}
 										/>

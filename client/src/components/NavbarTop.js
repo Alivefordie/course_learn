@@ -1,6 +1,5 @@
-import { Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { Navbar, Nav } from "react-bootstrap";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import UnloginNavbar from "./UnloginNavbar";
 import InsNavbar from "./Ins/InsNavbar";
@@ -15,9 +14,9 @@ const NavbarTop = ({ NavbarLink }) => {
 		<div>
 			<Navbar bg="white" className="NavbarTop">
 				<Navbar.Brand style={{ marginLeft: "10px" }}>
-					<Link to="/">
+					<Nav.Link href="/">
 						<img src="../course_learn.png" width="125" height="60" />
-					</Link>
+					</Nav.Link>
 				</Navbar.Brand>
 				{context.state.isLoggedIn ? (
 					context.state.role == "student" ? (

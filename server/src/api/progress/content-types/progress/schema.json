@@ -4,21 +4,16 @@
   "info": {
     "singularName": "progress",
     "pluralName": "progresses",
-    "displayName": "progress"
+    "displayName": "progress",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "value": {
       "type": "integer"
-    },
-    "course_video": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course-video.course-video",
-      "inversedBy": "progresses"
     },
     "users_permissions_user": {
       "type": "relation",

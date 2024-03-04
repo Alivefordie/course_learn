@@ -1,5 +1,7 @@
 "use strict";
 
+const progress = require("../../progress/controllers/progress");
+
 /**
  * course controller
  */
@@ -131,41 +133,74 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
   },
 
   async findOne(ctx) {
-    // const user = ctx.state.user;
-    // const entryId = ctx.params.id;
-    // const Owned = await strapi.db.query("api::course.course").count({
-    //   where: {
-    //     id: entryId,
-    //     owner: user.id,
-    //   },
-    // });
-    // const enrolled = await strapi.db.query("api::entry.entry").count({
-    //   where: {
-    //     course: entryId,
-    //     owner: user.id,
-    //     enroll: { $notNull: true },
-    //   },
-    // });
-    // const myCourse =
-    //   Owned > 0 || enrolled > 0
-    //     ? { course_syllabus: true }
-    //     : {
-    //         course_syllabus: {
-    //           filters: {
-    //             __component: "activity.topic",
-    //           },
-    //         },
-    //       };
-    ctx.request.query = {
-      populate: {
-        // @ts-ignore
-        owner: { fields: "username" },
-        picture: true,
-        course_syllabus: { populate: "*" },
-        entries: true,
+    const user = ctx.state.user;
+    const entryId = ctx.params.id;
+
+    if (!user) {
+      const response = await strapi.db.query("api::course.course").findOne({
+        where: { id: entryId },
+        populate: {
+          owner: { select: "username" },
+          picture: true,
+          course_syllabus: true,
+        },
+      });
+      return this.transformResponse(response);
+    }
+    const Owned = await strapi.db.query("api::course.course").count({
+      where: {
+        id: entryId,
+        owner: user.id,
       },
-    };
-    const response = await super.findOne(ctx);
-    return response;
+    });
+    const enrolled = await strapi.db.query("api::entry.entry").count({
+      where: {
+        course: entryId,
+        owner: user.id,
+        enroll: { $notNull: true },
+      },
+    });
+
+    if (Owned) {
+      const response = await strapi.db.query("api::course.course").findOne({
+        where: { id: entryId },
+        populate: {
+          owner: { select: "username" },
+          picture: true,
+          course_syllabus: {
+            on: {
+              "activity.file": { populate: true },
+              "activity.text": true,
+              "activity.video": { populate: { videoFile: true } },
+            },
+          },
+        },
+      });
+      return this.transformResponse(response);
+    }
+    if (enrolled) {
+      const response = await strapi.db.query("api::course.course").findOne({
+        where: { id: entryId },
+        populate: {
+          owner: { select: "username" },
+          picture: true,
+          course_syllabus: {
+            on: {
+              "activity.file": { populate: true },
+              "activity.text": true,
+              "activity.video": {
+                populate: {
+                  videoFile: true,
+                  progresses: {
+                    where: { users_permissions_user: user.id },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      return this.transformResponse(response);
+    }
   },
 }));
