@@ -6,49 +6,48 @@ import conf from "../conf/main";
 import { AuthContext } from "../context/AuthContext";
 
 function AddCart({ course, onResponse }) {
-    const context = useContext(AuthContext);
-    const login = context.state.isLoggedIn;
-    const courseContent = course.attributes;
-    const [cart, setcart] = useState(courseContent.entries?.data[0]?.attributes?.cart);
-    const enroll = courseContent.entries?.data[0]?.attributes?.enroll;
+	const context = useContext(AuthContext);
+	const login = context.state.isLoggedIn;
+	const courseContent = course.attributes;
+	const [cart, setcart] = useState(courseContent.entries?.data[0]?.attributes?.cart);
+	const enroll = courseContent.entries?.data[0]?.attributes?.enroll;
 
-    const addToCart = async () => {
-        if (login) {
-            const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/toCart`);
-            if (onResponse) {
-                onResponse(response);
-            }
-            setcart(response.data.AddToCart);
-        } else {
-        }
-    };
+	const addToCart = async () => {
+		if (login) {
+			const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/toCart`);
+			if (onResponse) {
+				onResponse(response);
+			}
+			setcart(response.data.AddToCart);
+		} else {
+		}
+	};
 
-    return (
-        <>
-            {enroll ? (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../check-all.svg"
-                    alt="Add Icon"
-                />
-            ) : cart ? (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../cart-check.svg"
-                    alt="Add Icon"
-                />
-            ) : (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../plus.png"
-                    alt="Add Icon"
-                />
-            )}
-        </>
-    );
+	return (
+		<>
+			{enroll ? (
+				<img
+					style={{ width: "100%", width: "20px", height: "20px" }}
+					src="../check-all.svg"
+					alt="Add Icon"
+				/>
+			) : cart ? (
+				<img
+					onClick={addToCart}
+					style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+					src="../cart-check.svg"
+					alt="Add Icon"
+				/>
+			) : (
+				<img
+					onClick={addToCart}
+					style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+					src="../plus.png"
+					alt="Add Icon"
+				/>
+			)}
+		</>
+	);
 }
 
 export default AddCart;
