@@ -54,7 +54,7 @@ const History = () => {
 				<Container sm="3" md="4">
 					<Row>
 						<Col className="week-col">
-							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+							<h1 className={style.header}>
 								This week
 							</h1>
 							<Container className="item-week">
@@ -68,12 +68,12 @@ const History = () => {
 										</div>
 									))
 								) : (
-									<h3 className={`mx-auto ${style.righteous}`}>no data</h3>
+									<h3 className={`mx-auto ${style.error}`}>no data</h3>
 								)}
 							</Container>
 						</Col>
 						<Col className="month-col ">
-							<h1 className={`righteous d-flex justify-content-center  ${style.righteous}`}>
+							<h1 className={style.header}>
 								This month
 							</h1>
 							<Container className="item-month">
@@ -87,12 +87,12 @@ const History = () => {
 										</div>
 									))
 								) : (
-									<h3 className={style.righteous}>no data</h3>
+									<h3 className={style.error}>no data</h3>
 								)}
 							</Container>
 						</Col>
 						<Col className="year-col">
-							<h1 className={`righteous d-flex justify-content-center ${style.righteous}`}>
+							<h1 className={style.header}>
 								This year
 							</h1>
 							<Container className="item-year">
@@ -106,7 +106,7 @@ const History = () => {
 										</div>
 									))
 								) : (
-									<h3 className={style.righteous}>no data</h3>
+									<h3 className={style.error}>no data</h3>
 								)}
 							</Container>
 						</Col>
