@@ -102,7 +102,7 @@ const AllCourse = () => {
 									<Toprank data={courses} />
 								</div>
 							</Col>
-						)}
+						
 
 						<Col
 							id="common-col"

@@ -86,12 +86,11 @@ const Cart = () => {
                         style={{ cursor: "pointer" }}
                       >
                         <Card.Title>{item.course.title}</Card.Title>
-                        <Card.Text>Details</Card.Text>
                         <Card.Text className="m-0">
-                          เนื้อหา {item.course.description.slice(0, 55)}...
+                         {item.course.description.slice(0, 55)}...
                         </Card.Text>
                         <Card.Text className="m-0">
-                          ระยะเวลา {item.course.duration}
+                          ราคา: {item.course.price} ฿
                         </Card.Text>
                       </Card.Body>
                     </div>
