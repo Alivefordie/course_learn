@@ -23,32 +23,31 @@ function AddCart({ course, onResponse }) {
         } 
     };
 
-    return (
-        <>
-            {enroll ? (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../check-all.svg"
-                    alt="Add Icon"
-                />
-            ) : cart ? (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../cart-check.svg"
-                    alt="Add Icon"
-                />
-            ) : (
-                <img
-                    onClick={addToCart}
-                    style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-                    src="../plus.png"
-                    alt="Add Icon"
-                />
-            )}
-        </>
-    );
+	return (
+		<>
+			{enroll ? (
+				<img
+					style={{ width: "100%", width: "20px", height: "20px" }}
+					src="../check-all.svg"
+					alt="Add Icon"
+				/>
+			) : cart ? (
+				<img
+					onClick={addToCart}
+					style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+					src="../cart-check.svg"
+					alt="Add Icon"
+				/>
+			) : (
+				<img
+					onClick={addToCart}
+					style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
+					src="../plus.png"
+					alt="Add Icon"
+				/>
+			)}
+		</>
+	);
 }
 
 export default AddCart;

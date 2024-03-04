@@ -4,170 +4,140 @@ import NavbarTop from "../NavbarTop";
 import { Link, useParams } from "react-router-dom";
 import ax from "../../conf/ax";
 import conf from "../../conf/main";
+import axios from "axios";
 
 const CourseV = () => {
-	const { item } = useParams();
-	console.log(item)
-	const [course, setCourse] = useState({});
-	const [syllabus, setSyllabus] = useState([]);
-	const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
-	const [progress, setProgress] = useState(0);
+    const { item } = useParams();
+    const [course, setCourse] = useState({});
+    const [syllabus, setSyllabus] = useState([]);
+    const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
+    const [progress, setProgress] = useState(0);
+    const [video,setvideo] = useState(0)
 
-	const fetchSyllabus = async () => {
-		const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
-		setCourse(response.data.data);
-		setSyllabus(response.data.data.attributes.course_syllabus);
-	};
+    const fetchSyllabus = async () => {
+        const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
+        setCourse(response.data.data);
+        setSyllabus(response.data.data.attributes.course_syllabus);
+        const syllabusData = response.data.data.attributes.course_syllabus;
+        // console.log(response.data.data.attributes.course_syllabus.map((item) => item.id))
+        // const videos = syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url }));
+        // setvideo(syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url })));
+        // console.log(videos);
 
-	useEffect(() => {
-		fetchSyllabus();
-	}, []);
+        const videoIds = syllabus.filter(item => item.__component === 'activity.video').map(item => item.id);
+        setvideo(videoIds);
+        // console.log(videoIds);
 
-	// useEffect(() => {
-	// 	console.log(syllabus);
-	// }, [currentSyllabusIndex, syllabus]);
+    };
 
-	const handlesyllabusChange = (index) => {
-		setCurrentSyllabusIndex(index);
-		setProgress(0);
-	};
+    useEffect(()=>{
+        console.log(video)
+    })
 
-	const getUrlVideo = (videoComponent) => {
-		return videoComponent.videoFile.data[0].attributes.url;
-	};
-	const getUrlFile = (FileComponent) => {
-		return FileComponent.material.data[0].attributes.url;
-	};
+    useEffect(() => {
+        fetchSyllabus();
+    }, []);
 
-	const componentStyle = (syllabus) => {
-		switch (syllabus.__component) {
-			case "activity.video":
-				return (
-					<div className="col-md-8">
-						<p>Title: {syllabus.title}</p>
-						<p>Description: {syllabus.description}</p>
+    useEffect(() => {
+        const test1 = async () => {
+            try {
+                const progressData = {
+                    data: {
+                        id: video,
+                        value: progress
+                    }
+                };
+                const response2 = await ax.put(`http://localhost:1337/api/progresses/${item}`, progressData);
+                console.log(response2);
+            } catch (error) {
+                console.log("Error fetching progress:", error);
+            }
+        };
 
-						<ReactPlayer
-							url={conf.url + getUrlVideo(syllabus)}
-							controls
-							playing={true}
-							onProgress={({ playedSeconds }) => {
-								// console.log(Math.round(playedSeconds));
-								setProgress(Math.round(playedSeconds));
-							}}
-						/>
-						<p>Progress: {progress}</p>
-					</div>
-				);
-			case "activity.text":
-				return (
-					<div className="col-md-8">
-						<p>Title: {syllabus.title}</p>
-						<p>Description: {syllabus.description}</p>
-					</div>
-				);
+        test1();
+    }, [progress]);
 
-			case "activity.file":
-				return (
-					<div className="col-md-8">
-						<p>"Title: "{syllabus.title}</p>
-						<p>
-							Download:{" "}
-							<Link to={conf.url + getUrlFile(syllabus)} target="_blank">
-								"File"
-							</Link>
-						</p>
-					</div>
-				);
-		}
-	};
+    const handlesyllabusChange = (index) => {
+        setCurrentSyllabusIndex(index);
+        setProgress(0);
+    };
 
-	// useEffect(() => {
-	// 	const updateLearningProgress = async () => {
-	// 		const response = await ax.get("http://localhost:1337/api/progresses?populate=*");
-	// 		// const user = response.data.data[0]?.attributes?.users?.data?.id;
-	// 		const response1 = await axios.get("http://localhost:1337/api/users/me");
-	// 		setuser("find users:", response1.data.id);
-	// 		console.log("find users:", response1.data.id);
-	// 		const test = response?.data?.data;
-	// 		console.log("test l:", test);
-	// 		setid(response.data.data[0]?.id);
-	// 		console.log("id:", response.data.data[0]?.id);
+    const getUrlVideo = (videoComponent) => {
+        return videoComponent.videoFile.data[0].attributes.url;
+    };
+    const getUrlFile = (FileComponent) => {
+        return FileComponent.material.data[0].attributes.url;
+    };
 
-	// 		if (!test.length) {
-	// 			const progressData = {
-	// 				data: {
-	// 					course: item,
-	// 					course_video: null,
-	// 					value: 0,
-	// 					users: 21,
-	// 				},
-	// 			};
-	// 			const test1 = await ax.post("http://localhost:1337/api/progresses", progressData);
-	// 			console.log(test1);
-	// 			console.log("postttttttttttttttttttttt");
-	// 		} else {
-	// 			const fixprogressData = {
-	// 				data: { value: progress },
-	// 			};
+    const componentStyle = (syllabus) => {
+        switch (syllabus.__component) {
+            case "activity.video":
+                return (
+                    <div className="col-md-8">
+                        <p>Title: {syllabus.title}</p>
+                        <p>Description: {syllabus.description}</p>
+                        <ReactPlayer
+                            url={conf.url + getUrlVideo(syllabus)}
+                            controls
+                            playing={true}
+                            onProgress={({ playedSeconds }) => {
+                                setProgress(Math.round(playedSeconds));
+                            }}
+                        />
+                        <p>Progress: {progress}</p>
+                    </div>
+                );
+            case "activity.text":
+                return (
+                    <div className="col-md-8">
+                        <p>Title: {syllabus.title}</p>
+                        <p>Description: {syllabus.description}</p>
+                    </div>
+                );
 
-	// 			const test2 = await ax.put(`http://localhost:1337/api/progresses/${id}`, fixprogressData);
-	// 			console.log(test2);
-	// 			console.log("putttttttttttttttttttttttttttt");
-	// 		}
-	// 	};
-	// 	updateLearningProgress();
-	// }, [progress]);
+            case "activity.file":
+                return (
+                    <div className="col-md-8">
+                        <p>Title: {syllabus.title}</p>
+                        <p>
+                            Download:{" "}
+                            <Link to={conf.url + getUrlFile(syllabus)} target="_blank">
+                                File
+                            </Link>
+                        </p>
+                    </div>
+                );
+            default:
+                return null;
+        }
+    };
 
-	// useEffect(() => {
-	//     updateLearningProgress()
-	// }, [progress])
-
-	return (
-		<div className="body">
-			<NavbarTop />
-			<div className="container">
-				{syllabus.length > 0 && (
-					<div className="row">
-						{componentStyle(syllabus[currentSyllabusIndex])}
-						<div className="col-md-4">
-							<div className="list-group">
-								{syllabus.map((item, index) => (
-									<button
-										key={index}
-										className={`list-group-item list-group-item-action ${
-											index === currentSyllabusIndex ? "active" : ""
-										}`}
-										onClick={() => handlesyllabusChange(index)}>
-										{item.title}
-									</button>
-								))}
-								{/* สำหรับไปหน้าไปหลัง เอง
-                            {currentSyllabusIndex + 1 < syllabus.length ? (
-								<>
-									{currentSyllabusIndex > 0 && (
-										<button
-											className={`list-group-item list-group-item-action }`}
-											onClick={() => handlesyllabusChange((index) => index - 1)}>
-											previous
-										</button>
-									)}
-									<button
-										className={`list-group-item list-group-item-action }`}
-										onClick={() => handlesyllabusChange((index) => index + 1)}>
-										next
-									</button>
-								</>
-							) : (
-								<button className={`list-group-item list-group-item-action }`}>End</button>
-							)} */}
-							</div>
-						</div>
-					</div>
-				)}
-			</div>
-		</div>
-	);
+    return (
+        <div className="body">
+            <NavbarTop />
+            <div className="container">
+                {syllabus.length > 0 && (
+                    <div className="row">
+                        {componentStyle(syllabus[currentSyllabusIndex])}
+                        <div className="col-md-4">
+                            <div className="list-group">
+                                {syllabus.map((item, index) => (
+                                    <button
+                                        key={index}
+                                        className={`list-group-item list-group-item-action ${index === currentSyllabusIndex ? "active" : ""
+                                            }`}
+                                        onClick={() => handlesyllabusChange(index)}
+                                    >
+                                        {item.title}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default CourseV;
