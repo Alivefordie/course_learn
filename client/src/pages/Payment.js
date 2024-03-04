@@ -226,7 +226,7 @@ const Payment = () => {
                       <Card.Img
                         className="course-image"
                         variant="left"
-                        src={conf.url + item.course.image}
+                        src={conf.url + item.course.picture.url}
                       />
                     </div>
                     <div className="body-col">
