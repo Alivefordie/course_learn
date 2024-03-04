@@ -28,7 +28,6 @@ module.exports = (config, { strapi }) => {
         },
       },
     });
-    // console.log(response.course_syllabus);
     const progresses = response.course_syllabus[0]
       ? response.course_syllabus[0].progresses[0]
       : undefined;
@@ -42,16 +41,22 @@ module.exports = (config, { strapi }) => {
           users_permissions_user: user.id,
         },
       });
-      const unsyllabus = course.course_syllabus.map((s) =>
-        s.id != body.data.id
-          ? s
+      const unsyllabus = course.course_syllabus.map((sylla) => {
+        console.log(sylla.progresses);
+        return sylla.id != body.data.id
+          ? sylla
+          : sylla.progresses
+          ? {
+              id: response.course_syllabus[0].id,
+              __component: "activity.video",
+              progresses: [...sylla.progresses, resp.id],
+            }
           : {
               id: response.course_syllabus[0].id,
               __component: "activity.video",
-              progresses: [...s.progresses, resp.id],
-            }
-      );
-      console.log(unsyllabus);
+              progresses: [resp.id],
+            };
+      });
 
       await strapi.entityService.update("api::course.course", entryId, {
         data: {
