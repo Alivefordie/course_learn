@@ -738,6 +738,27 @@
   background-color: #007bff;
   color: #fff;
 }
+.custom-btn {
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: white;
+}
+
+.save-btn {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+}
+.custom-btn.delete-btn {
+  margin-right: 10px;
+}
+
 
 
 

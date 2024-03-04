@@ -64,14 +64,17 @@ const Payment = () => {
 				return;
 			}
 
-			const response = await ax.get(`${conf.apiUrlPrefix}/users/me?populate[entries][populate][course]=*`
+			const response = await ax.get(`${conf.apiUrlPrefix}/cart`
 			);
+			console.log(response.data.data[0].id)
+			
 			setmember(response.data.id);
 			// console.log(response.data.id)
-			const nullEnrollEntries = response.data.entries.filter((entry) => entry.enroll === null);
+			// const nullEnrollEntries = response.data.entries.filter((entry) => entry.enroll === null);
 
-			const courseIdWithNullEnroll = nullEnrollEntries.map((entry) => entry.course.id);
+			const courseIdWithNullEnroll = response.data.data.map((entry) => entry.id);
 			setID(courseIdWithNullEnroll);
+			console.log(courseIdWithNullEnroll)
 			// console.log("Course IDs with enroll === null:", courseIdWithNullEnroll);
 		} catch (error) {
 			console.log("Failed to test", error);
@@ -135,7 +138,7 @@ const Payment = () => {
 				return;
 			}
 
-			const response = await ax.get(`${conf.apiUrlPrefix}/enroll/${Id}`);
+			const response = await ax.get(`${conf.apiUrlPrefix}/enroll/${Id.join(',')}`);
 			console.log(response);
 			// window.location.reload();
 			////fix it relate
