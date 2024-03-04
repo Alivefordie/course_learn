@@ -907,9 +907,10 @@ export interface ApiProgressProgress extends Schema.CollectionType {
     singularName: 'progress';
     pluralName: 'progresses';
     displayName: 'progress';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     value: Attribute.Integer;
@@ -920,7 +921,6 @@ export interface ApiProgressProgress extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::progress.progress',
       'oneToOne',
@@ -945,7 +945,7 @@ export interface ApiTansactionTansaction extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     paymentAmout: Attribute.BigInteger;
@@ -963,7 +963,6 @@ export interface ApiTansactionTansaction extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::tansaction.tansaction',
       'oneToOne',
