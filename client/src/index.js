@@ -28,6 +28,7 @@ import ProtectedRoutes from "./components/ProtectecRoute";
 import ProtectectMember from "./components/ProtectectMember";
 import ProtectecInstructer from "./components/ProtectecInstructer";
 import ProtectecSuperadmin from "./components/ProtectecSuperadmin";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
 	{
@@ -122,7 +123,7 @@ const router = createBrowserRouter([
 			},
 		],
 	},
-	{ path: "*", element: <h1>errror</h1> },
+	{ path: "*", element: <Error /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
