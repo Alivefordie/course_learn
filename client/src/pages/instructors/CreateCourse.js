@@ -351,11 +351,11 @@ const CreateCourse = () => {
 															</Accordion.Body>
 														</Accordion>
 
-														<Button className={style.op} variant="danger"  onClick={(e) => {
+														<Button className={style.op} variant="danger" onClick={(e) => {
 															e.preventDefault();
 															handleDelete(val.onEdit, i);
 														}}>
-															Delete1
+															Delete
 														</Button>
 
 
@@ -431,7 +431,7 @@ const CreateCourse = () => {
 															e.preventDefault();
 															handleDelete(val.onEdit, i);
 														}}>
-															Delete123
+															Delete
 														</Button>
 
 													</div>
@@ -441,9 +441,10 @@ const CreateCourse = () => {
 								})}
 							</Form>
 							{!edit && (
-								<Button form="myform" type="submit" className={`${style.customBtn} btn btn-secondary ml-200`}>
-									Save to
+								<Button form="myform" type="submit" className={`${style.customBtn} btn btn-outline-danger ml-200`}>
+									Save to <img src="/floppy.svg" alt="Bag Icon" className="mr-2" />
 								</Button>
+
 
 							)}
 						</Col>
