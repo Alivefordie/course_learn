@@ -10,15 +10,18 @@
     "title": {
       "type": "string"
     },
-    "link": {
-      "type": "string"
-    },
     "videoFile": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "progresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::progress.progress"
     }
   }
 }

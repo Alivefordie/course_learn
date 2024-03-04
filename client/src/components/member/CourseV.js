@@ -1,133 +1,173 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import ReactPlayer from "react-player";
-import NavbarLink from "../NavbarLink";
 import NavbarTop from "../NavbarTop";
+import { Link, useParams } from "react-router-dom";
 import ax from "../../conf/ax";
+import conf from "../../conf/main";
 
 const CourseV = () => {
-    const [videos, setVideos] = useState([]);
-    const [data, setData] = useState([]);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [progress, setProgress] = useState(0);
-    const [values, setvalues] = useState()
+	const { item } = useParams();
+	console.log(item)
+	const [course, setCourse] = useState({});
+	const [syllabus, setSyllabus] = useState([]);
+	const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
+	const [progress, setProgress] = useState(0);
 
-    const fetchVideos = async () => {
-        try {
-            const jwtToken = sessionStorage.getItem('auth.jwt');
-            if (!jwtToken) {
-                console.error('JWT token not found.');
-                return;
-            }
-            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-            const response = await axios.get("http://localhost:1337/api/course-videos?populate=*");
-            setData(response.data.data);
-            setVideos(response.data.data.map(item => item.attributes.video.data.attributes.url));
-        } catch (error) {
-            console.error("Failed to fetch videos:", error.message);
-        }
-    };
+	const fetchSyllabus = async () => {
+		const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
+		setCourse(response.data.data);
+		setSyllabus(response.data.data.attributes.course_syllabus);
+	};
 
+	useEffect(() => {
+		fetchSyllabus();
+	}, []);
 
+	// useEffect(() => {
+	// 	console.log(syllabus);
+	// }, [currentSyllabusIndex, syllabus]);
 
-    useEffect(() => {
-        fetchVideos();
-    }, []);
+	const handlesyllabusChange = (index) => {
+		setCurrentSyllabusIndex(index);
+		setProgress(0);
+	};
 
-    const handleVideoChange = index => {
-        setCurrentVideoIndex(index);
-        setProgress(0);
-    };
+	const getUrlVideo = (videoComponent) => {
+		return videoComponent.videoFile.data[0].attributes.url;
+	};
+	const getUrlFile = (FileComponent) => {
+		return FileComponent.material.data[0].attributes.url;
+	};
 
-    const updateLearningProgress = async () => {
-        try {
-            const jwtToken = sessionStorage.getItem('auth.jwt');
-            if (!jwtToken) {
-                console.error('JWT token not found.');
-                return;
-            }
-            axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-            const response = await axios("http://localhost:1337/api/progresses?populate=*")
-            console.log(response.data.data)
-            setvalues(response.data.data)
-            const test = response.data.data
+	const componentStyle = (syllabus) => {
+		switch (syllabus.__component) {
+			case "activity.video":
+				return (
+					<div className="col-md-8">
+						<p>Title: {syllabus.title}</p>
+						<p>Description: {syllabus.description}</p>
 
+						<ReactPlayer
+							url={conf.url + getUrlVideo(syllabus)}
+							controls
+							playing={true}
+							onProgress={({ playedSeconds }) => {
+								// console.log(Math.round(playedSeconds));
+								setProgress(Math.round(playedSeconds));
+							}}
+						/>
+						<p>Progress: {progress}</p>
+					</div>
+				);
+			case "activity.text":
+				return (
+					<div className="col-md-8">
+						<p>Title: {syllabus.title}</p>
+						<p>Description: {syllabus.description}</p>
+					</div>
+				);
 
-            const progressData = {
-                course_video: 20,
-                values: 0,
-                users: 1
-            }
+			case "activity.file":
+				return (
+					<div className="col-md-8">
+						<p>"Title: "{syllabus.title}</p>
+						<p>
+							Download:{" "}
+							<Link to={conf.url + getUrlFile(syllabus)} target="_blank">
+								"File"
+							</Link>
+						</p>
+					</div>
+				);
+		}
+	};
 
-            const fixprogressData = {
-                values: 20,
-            }
+	// useEffect(() => {
+	// 	const updateLearningProgress = async () => {
+	// 		const response = await ax.get("http://localhost:1337/api/progresses?populate=*");
+	// 		// const user = response.data.data[0]?.attributes?.users?.data?.id;
+	// 		const response1 = await axios.get("http://localhost:1337/api/users/me");
+	// 		setuser("find users:", response1.data.id);
+	// 		console.log("find users:", response1.data.id);
+	// 		const test = response?.data?.data;
+	// 		console.log("test l:", test);
+	// 		setid(response.data.data[0]?.id);
+	// 		console.log("id:", response.data.data[0]?.id);
 
+	// 		if (!test.length) {
+	// 			const progressData = {
+	// 				data: {
+	// 					course: item,
+	// 					course_video: null,
+	// 					value: 0,
+	// 					users: 21,
+	// 				},
+	// 			};
+	// 			const test1 = await ax.post("http://localhost:1337/api/progresses", progressData);
+	// 			console.log(test1);
+	// 			console.log("postttttttttttttttttttttt");
+	// 		} else {
+	// 			const fixprogressData = {
+	// 				data: { value: progress },
+	// 			};
 
-            if (!test) {
-                const test1 = await axios.post("http://localhost:1337/api/progresses", progressData)
-                console.log(test1)
-            }
-            else {
-                const test2 = await axios.put("http://localhost:1337/api/progresses", fixprogressData)
-                console.log(test2)
-            }
-        }
-        catch (error) {
-            console.log("fail to progress", error)
-        }
-    }
-    useEffect(() => {
-        updateLearningProgress()
-    }, [])
+	// 			const test2 = await ax.put(`http://localhost:1337/api/progresses/${id}`, fixprogressData);
+	// 			console.log(test2);
+	// 			console.log("putttttttttttttttttttttttttttt");
+	// 		}
+	// 	};
+	// 	updateLearningProgress();
+	// }, [progress]);
 
+	// useEffect(() => {
+	//     updateLearningProgress()
+	// }, [progress])
 
-
-    // useEffect(() => {
-    //     if (
-    //         (progress % 2 === 0 || Math.round((progress / C[currentVideoIndex].attributes.length) * 100) > 80) &&
-    //         progress !== 100
-    //     ) {
-    //         updateLearningProgress();
-    //     }
-    // }, [progress]);
-
-    return (
-        <div className="container">
-            <NavbarTop NavbarLink={NavbarLink} />
-            {videos.length > 0 && (
-                <div className="row">
-                    <div className="col-md-8">
-                        <p>Title: {data[currentVideoIndex].attributes.title}</p>
-                        <p>Description: {data[currentVideoIndex].attributes.description}</p>
-                        <ReactPlayer
-                            url={"http://localhost:1337" + videos[currentVideoIndex]}
-                            controls
-                            playing={true}
-                            onProgress={({ playedSeconds }) => {
-                                console.log(Math.round(playedSeconds));
-                                setProgress(Math.round(playedSeconds));
-                            }}
-                        />
-                        <p>Progress: {progress}</p>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="list-group">
-                            {data.map((item, index) => (
-                                <button
-                                    key={index}
-                                    className={`list-group-item list-group-item-action ${index === currentVideoIndex ? "active" : ""}`}
-                                    onClick={() => handleVideoChange(index)}
-                                >
-                                    {item.attributes.title}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
+	return (
+		<div className="body">
+			<NavbarTop />
+			<div className="container">
+				{syllabus.length > 0 && (
+					<div className="row">
+						{componentStyle(syllabus[currentSyllabusIndex])}
+						<div className="col-md-4">
+							<div className="list-group">
+								{syllabus.map((item, index) => (
+									<button
+										key={index}
+										className={`list-group-item list-group-item-action ${
+											index === currentSyllabusIndex ? "active" : ""
+										}`}
+										onClick={() => handlesyllabusChange(index)}>
+										{item.title}
+									</button>
+								))}
+								{/* สำหรับไปหน้าไปหลัง เอง
+                            {currentSyllabusIndex + 1 < syllabus.length ? (
+								<>
+									{currentSyllabusIndex > 0 && (
+										<button
+											className={`list-group-item list-group-item-action }`}
+											onClick={() => handlesyllabusChange((index) => index - 1)}>
+											previous
+										</button>
+									)}
+									<button
+										className={`list-group-item list-group-item-action }`}
+										onClick={() => handlesyllabusChange((index) => index + 1)}>
+										next
+									</button>
+								</>
+							) : (
+								<button className={`list-group-item list-group-item-action }`}>End</button>
+							)} */}
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default CourseV;
