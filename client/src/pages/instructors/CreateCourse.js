@@ -151,7 +151,7 @@ const CreateCourse = () => {
 								<Form.Group controlId="formPicture">
 									<Form.Label>Cover</Form.Label>
 									{!picture ? (
-										<Form.Control required type="file" onChange={handlePicture} name="picture" />
+										<Form.Control required type="file" accept="image/png" onChange={handlePicture} name="picture" />
 									) : (
 										<>
 											<br />
@@ -238,6 +238,7 @@ const CreateCourse = () => {
 																/>
 															</Col>
 														</Form.Group>
+
 														<Form.Group as={Row} className="mb-3">
 															<Form.Label column sm={2}>
 																<strong >File</strong>
@@ -245,6 +246,8 @@ const CreateCourse = () => {
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
+																//word png exal เอกสาร บลาๆ
+																	accept="image/png, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .doc, .docx, .xls"
 																	required
 																	onChange={(e) => handleSyllabusFileChange(e, i)}
 																	type="file"
@@ -289,6 +292,7 @@ const CreateCourse = () => {
 													</div>
 												);
 											}
+
 										case "activity.video":
 											if (!val.onEdit) {
 												return (
@@ -319,6 +323,8 @@ const CreateCourse = () => {
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
+																//mp4
+																	accept="video/mp4, .mp4"
 																	required
 																	type="file"
 																	onChange={(e) => handleSyllabusFileChange(e, i)}
