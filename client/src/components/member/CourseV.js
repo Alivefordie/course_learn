@@ -6,7 +6,8 @@ import ax from "../../conf/ax";
 import conf from "../../conf/main";
 
 const CourseV = () => {
-	const item = 1; //useParams()
+	const { item } = useParams();
+	console.log(item)
 	const [course, setCourse] = useState({});
 	const [syllabus, setSyllabus] = useState([]);
 	const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);

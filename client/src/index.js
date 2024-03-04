@@ -96,7 +96,7 @@ const router = createBrowserRouter([
 		element: <CourseSyllabus />,
 	},
 	{
-		path: "/study",
+		path: "/mycourses/study/:item",
 		element: <CourseV />,
 	},
 ]);
