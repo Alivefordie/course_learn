@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import NavbarLink from "../NavbarLink";
 import NavbarTop from "../NavbarTop";
 import { Link, useParams } from "react-router-dom";
 import ax from "../../conf/ax";
