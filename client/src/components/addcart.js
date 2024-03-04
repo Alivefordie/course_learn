@@ -5,7 +5,7 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 import { AuthContext } from "../context/AuthContext";
 
-function AddCart({ course }) {
+function AddCart({ course, onResponse }) {
     const context = useContext(AuthContext);
     const login = context.state.isLoggedIn;
     const courseContent = course.attributes;
@@ -15,6 +15,9 @@ function AddCart({ course }) {
     const addToCart = async () => {
         if (login) {
             const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/toCart`);
+            if (onResponse) {
+                onResponse(response);
+            }
             setcart(response.data.AddToCart);
         } else {
         }

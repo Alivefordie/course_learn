@@ -8,6 +8,7 @@ import NavbarLink from "../components/NavbarLink";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import Spinner from "../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
 	const [data, setData] = useState([]);
@@ -24,6 +25,8 @@ const Payment = () => {
 	const [slip, setSlip] = useState(null);
 	const [member, setmember] = useState();
 	const [ids, setids] = useState();
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		console.log("ids", ids);
@@ -170,6 +173,7 @@ const Payment = () => {
 			const transactionResponse = await ax.post(`${conf.apiUrlPrefix}/tansactions`, {
 				data: postData,
 			}); // Corrected variable name here
+			navigate("/mycourses")
 			console.log("Slip uploaded successfully. Response:", transactionResponse.data);
 		} catch (error) {
 			console.error("Error uploading slip:", error);
