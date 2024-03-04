@@ -124,7 +124,7 @@ const CourseV = () => {
 
 	return (
 		<div className="body">
-			<NavbarTop NavbarLink={NavbarLink} />
+			<NavbarTop />
 			<div className="container">
 				{syllabus.length > 0 && (
 					<div className="row">
