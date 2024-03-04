@@ -8,6 +8,7 @@ module.exports = (config, { strapi }) => {
   return async (ctx, next) => {
     const user = ctx.state.user;
     const body = ctx.request["body"];
+    console.log(body)
     const entryId = ctx.params.id ? ctx.params.id : undefined;
     const response = await strapi.db.query("api::course.course").findOne({
       where: { id: entryId },
@@ -31,7 +32,6 @@ module.exports = (config, { strapi }) => {
     const progresses = response.course_syllabus[0]
       ? response.course_syllabus[0].progresses[0]
       : undefined;
-    // console.log(progresses);
     if (!progresses) {
       const course = await strapi.db.query("api::course.course").findOne({
         where: { id: entryId },
