@@ -12,57 +12,48 @@ const CourseV = () => {
     const [syllabus, setSyllabus] = useState([]);
     const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
     const [progress, setProgress] = useState(0);
-    const [Id, setId] = useState();
-    const [value,setvalue] = useState()
+    const [video,setvideo] = useState(0)
 
     const fetchSyllabus = async () => {
         const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
         setCourse(response.data.data);
         setSyllabus(response.data.data.attributes.course_syllabus);
+        const syllabusData = response.data.data.attributes.course_syllabus;
+        // console.log(response.data.data.attributes.course_syllabus.map((item) => item.id))
+        // const videos = syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url }));
+        // setvideo(syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url })));
+        // console.log(videos);
+
+        const videoIds = syllabus.filter(item => item.__component === 'activity.video').map(item => item.id);
+        setvideo(videoIds);
+        // console.log(videoIds);
+
     };
+
+    useEffect(()=>{
+        console.log(video)
+    })
 
     useEffect(() => {
         fetchSyllabus();
     }, []);
 
-    const test1 = async () => {
-        try {
-            const response1 = await ax.get("http://localhost:1337/api/progresses");
-            console.log("data vulue progress:", response1.data.data);
-            console.log("data value progress:", response1.data.data.map((item) => item.attributes.value));
-            setvalue(response1.data.data.map((item) => item.attributes.value));
-            console.log("data progress len:", response1.data.data[0].id);
-            setId(response1.data.data[0].id);
-            // setLen(response1.data.data.length);
-            const progressData = {
-                data: {
-                    value: progress,
-                    users_permissions_user: 21
-                }
-            };
-            if (response1.data.data.length === 0) {
-                console.log("post");
-                const test1 = await ax.post(`${conf.apiUrlPrefix}/progresses`, progressData);
-                console.log(test1);
-            } else {
-                const fixprogressData = {
-                    data : {value: progress}
-                };
-                if(response1.data.data.map((item) => item.attributes.value) <= progress){
-                console.log("put");
-                const test = await ax.put(`${conf.apiUrlPrefix}/progresses/${Id}`, fixprogressData);
-                }
-                // console.log(test);
-            }
-            // Call test function to handle progress data
-            // test();
-        } catch (error) {
-            console.log("Error fetching progress:", error);
-            // setLen(0);
-        }
-    };
-
     useEffect(() => {
+        const test1 = async () => {
+            try {
+                const progressData = {
+                    data: {
+                        id: video,
+                        value: progress
+                    }
+                };
+                const response2 = await ax.put(`http://localhost:1337/api/progresses/${item}`, progressData);
+                console.log(response2);
+            } catch (error) {
+                console.log("Error fetching progress:", error);
+            }
+        };
+
         test1();
     }, [progress]);
 
@@ -133,9 +124,8 @@ const CourseV = () => {
                                 {syllabus.map((item, index) => (
                                     <button
                                         key={index}
-                                        className={`list-group-item list-group-item-action ${
-                                            index === currentSyllabusIndex ? "active" : ""
-                                        }`}
+                                        className={`list-group-item list-group-item-action ${index === currentSyllabusIndex ? "active" : ""
+                                            }`}
                                         onClick={() => handlesyllabusChange(index)}
                                     >
                                         {item.title}
