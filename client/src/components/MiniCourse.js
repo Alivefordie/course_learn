@@ -46,7 +46,7 @@ function MiniCourse({ course }) {
                     <AddCart course={course}/>
                 </Col>
                 <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-                    <AddLike course={course}/>
+                    ({courseContent.likeCount}) <AddLike course={course}/>
                 </Col>
             </div>
         </Card>

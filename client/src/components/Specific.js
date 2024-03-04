@@ -5,6 +5,7 @@ import conf from "../conf/main";
 import ax from "../conf/ax";
 import AddLike from "./addlike";
 import AddCart from "./addcart";
+import styles from "../css/Popup.module.css";
 
 const Specific = ({ data }) => {
 	const { item } = useParams();
@@ -45,9 +46,9 @@ const Specific = ({ data }) => {
 	// };
 
 	const handleAddCartResponse = (responseData) => {
-        setShowModal(true);
-        setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
-    };
+		setShowModal(true);
+		setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
+	};
 
 	return (
 		<Container className="body">
@@ -138,16 +139,14 @@ const Specific = ({ data }) => {
 					</Container>
 				</div>
 			)}
-			<Modal show={showModal} onHide={() => { setShowModal(false); window.location.href = "/cart"; }}>
-				<Modal.Header closeButton>
-					<Modal.Title>Notification</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>{modalMessage}</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={() => { setShowModal(false) }}>
-						Close
-					</Button>
-				</Modal.Footer>
+			<Modal show={showModal} onHide={() => { setShowModal(false)}}>
+				<Modal.Header closeButton />
+				<Modal.Body className={styles.modalBody}>
+					<Container className={styles.centeredContent}>
+						<div className={modalMessage==="Course added to cart!"?styles.check:styles.exclamation} />
+						<span className={styles.loginText}>{modalMessage}</span>
+					</Container>
+				</Modal.Body>
 			</Modal>
 		</Container>
 	);

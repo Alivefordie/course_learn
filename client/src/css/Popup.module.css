@@ -1,0 +1,30 @@
+ .modalBody {
+     flex-direction: column;
+     text-align: center;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .check::before {
+    content: '\2713';
+    font-size: 200px;
+    color: greenyellow;
+ }
+
+
+ .exclamation::before {
+     content: '\2757';
+     font-size: 200px;
+     color: red;
+ }
+
+ .centeredContent {
+     display: grid;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .loginText {
+     font-size: 20px;
+     margin-bottom: 20px;
+ }
