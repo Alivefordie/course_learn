@@ -4,14 +4,14 @@ import { useParams } from "react-router-dom";
 import conf from "../conf/main";
 import ax from "../conf/ax";
 import AddLike from "./addlike";
+import AddCart from "./addcart";
 
 const Specific = ({ data }) => {
 	const { item } = useParams();
-	const [openReview, setOpenReview] = useState(false);
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
-	const [like, setLike] = useState(data.attributes.entries?.data[0]?.attributes?.like);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
+	const jwtToken = sessionStorage.getItem("auth.jwt");
 
 	useEffect(() => {
 		console.log("Specific:", data);
@@ -25,27 +25,29 @@ const Specific = ({ data }) => {
 		}
 	}, [data, item]);
 
-	const AddCart = async () => {
-		try {
-			const jwtToken = sessionStorage.getItem("auth.jwt");
-			if (!jwtToken) {
-				console.error("JWT token not found.");
-				return;
-			}
-			const response = await ax.get(`${conf.apiUrlPrefix}/courses/${item}/toCart`);
-			console.log(response);
-			if (response.data.AddToCart) {
-				setModalMessage("Course added to cart!");
-				setShowModal(true);
-			} else if (response.data.RemoveFromCart) {
-				setModalMessage("Course removed from cart!");
-				setShowModal(true);
-			}
-			// window.location.href = "/cart";
-		} catch (error) {
-			console.error("Error fetching data:", error);
-		}
-	};
+	// const AddtoCart = async () => {
+	// 	try {
+	// 		if (jwtToken) {
+	// 			const response = await ax.get(conf.apiUrlPrefix + `/courses/${item}/toCart`);
+	// 			console.log(response)
+	// 		if (response.data.AddToCart) {
+	// 			setModalMessage("Course added to cart!");
+	// 			setShowModal(true);
+	// 		} else if (response.data.RemoveFromCart) {
+	// 			setModalMessage("Course removed from cart!");
+	// 			setShowModal(true);
+	// 		}
+	// 	}
+	// 		// window.location.href = "/cart";
+	// 	} catch (error) {
+	// 		console.error("Error fetching data:", error);
+	// 	}
+	// };
+
+	const handleAddCartResponse = (responseData) => {
+        setShowModal(true);
+        setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
+    };
 
 	return (
 		<Container className="body">
@@ -62,7 +64,7 @@ const Specific = ({ data }) => {
 											width={300}
 										/>
 										<p style={{ fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
-											Amount: {data.attributes.amount} | <AddLike course={data}/> ({data.attributes.likeCount})
+											Amount: {data.attributes.amount} | <AddLike course={data} /> ({data.attributes.likeCount})
 										</p>
 
 									</div>
@@ -128,10 +130,10 @@ const Specific = ({ data }) => {
                                 </Card> */}
 							</Col>
 						</Row>
-						<div style={{ marginTop: "10px", display: "flex", justifyContent: "flex-end" }}>
-							<Button variant="outline-dark" style={{ marginBottom: "10px" }} onClick={AddCart}>
-								add to cart
-							</Button>
+						<div style={{
+							margin: "20px", display: "flex", justifyContent: "flex-end"
+						}} >
+							<AddCart course={data} onResponse={handleAddCartResponse} />
 						</div>
 					</Container>
 				</div>

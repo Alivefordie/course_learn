@@ -15,8 +15,9 @@ function MiniCourse({ course }) {
 	const picture = courseContent.picture.data.attributes.url;
 	const teacher = courseContent.owner.data?.attributes;
 
+
 	useEffect(() => {
-		console.log('course', course)
+		console.log('course',course)
 		// console.log(login);
 		// console.log(like);
 		// console.log(courseContent);
@@ -25,34 +26,30 @@ function MiniCourse({ course }) {
 	return (
 		<>
 			<Card className="d-flex flex-row" style={{ marginTop: "15px" }}>
-				<div
-					onClick={() => navigate(`/courses/${course.id}`)}
-					style={{ cursor: "pointer" }}
-					className="image-col"
-				>
-					<Card.Img className="course-image" variant="left" src={conf.url + picture} />
-				</div>
-				<div className="body-col">
-					<Card.Body
-						onClick={() => navigate(`/courses/${course.id}`)}
-						style={{ cursor: "pointer" }}
-					>
-						<Card.Title>{courseContent.title}✅</Card.Title>
-						<Card.Text className="details">details</Card.Text>
-						<Card.Text className="m-0 description" style={{ display: "-webkit-box", WebkitLineClamp: 2, overflow: "hidden" }}>
-							{courseContent.description}
-						</Card.Text>
-						<Card.Text className="m-0">ระยะเวลา {courseContent.duration}</Card.Text>
-						<Card.Text className="m-0">ครู {teacher.username}</Card.Text>
-					</Card.Body>
-					<Col className="add-icon position-absolute top-0 end-0 p-2">
-						<AddCart course={course} />
-					</Col>
-					<Col className="heart-icon position-absolute bottom-0 end-0 p-2">
-						<AddLike course={course} />
-					</Col>
-				</div>
-			</Card>
+            <div
+                onClick={() => navigate(`/courses/${course.id}`)}
+                style={{ cursor: "pointer" }}
+                className="image-col">
+                <Card.Img className="course-image" variant="left" src={conf.url + picture} />
+            </div>
+            <div className="body-col">
+                <Card.Body
+                    onClick={() => navigate(`/courses/${course.id}`)}
+                    style={{ cursor: "pointer" }}>
+                    <Card.Title>{courseContent.title}✅</Card.Title>
+                    <Card.Text className="m-0">{courseContent.description.slice(0, 55)}...</Card.Text>
+                    <Card.Text className="m-0">ระยะเวลา {courseContent.duration}</Card.Text>
+                    <Card.Text className="m-0">ครู {teacher.username}</Card.Text>
+                    
+                </Card.Body>
+                <Col className="add-icon position-absolute top-0 end-0 p-2">
+                    <AddCart course={course}/>
+                </Col>
+                <Col className="heart-icon position-absolute bottom-0 end-0 p-2">
+                    <AddLike course={course}/>
+                </Col>
+            </div>
+        </Card>
 		</>
 	);
 }
