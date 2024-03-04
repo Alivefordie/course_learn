@@ -80,7 +80,7 @@ const AllCourse = () => {
       <div className="search-bar">
         <InputGroup className="search-bar-input" style={{ width: "35%" }}>
           <FormControl
-            placeholder="Search course..."
+            placeholder="Search your course"
             value={searchCourse}
             onChange={handleSearchCourse}
           />

@@ -47,6 +47,7 @@ const Datapro = ({ data }) => {
               borderBottom: "2px solid #ccc",
               paddingBottom: "10px",
               marginBottom: "20px",
+			  textAlign: "center"
             }}
           >
             Profile Information
