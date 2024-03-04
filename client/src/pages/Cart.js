@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import Spinner from "../components/Spinner";
+import AddCart from "../components/addcart";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
 
   const fetchData = async () => {
     try {
@@ -76,7 +77,7 @@ const Cart = () => {
                       <Card.Img
                         className="course-image"
                         variant="left"
-                        src={conf.url + item.course.image}
+                        src={conf.url + item.course.picture.url}
                       />
                     </div>
                     <div className="body-col">
@@ -87,12 +88,17 @@ const Cart = () => {
                         <Card.Title>{item.course.title}</Card.Title>
                         <Card.Text>Details</Card.Text>
                         <Card.Text className="m-0">
-                          เนื้อหา {item.course.description}
+                          เนื้อหา {item.course.description.slice(0, 55)}...
                         </Card.Text>
                         <Card.Text className="m-0">
                           ระยะเวลา {item.course.duration}
                         </Card.Text>
                       </Card.Body>
+                    </div>
+                    <div style={{
+                      margin: "20px", display: "flex", justifyContent: "flex-end"
+                    }} >
+                      <AddCart course={item} />
                     </div>
                   </Card>
                 ))}

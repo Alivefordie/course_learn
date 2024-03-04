@@ -45,9 +45,9 @@ const Specific = ({ data }) => {
 	// };
 
 	const handleAddCartResponse = (responseData) => {
-        setShowModal(true);
-        setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
-    };
+		setShowModal(true);
+		setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
+	};
 
 	return (
 		<Container className="body">
