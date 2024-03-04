@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import ax from "../../conf/ax";
 import conf from "../../conf/main";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 
 const CourseV = () => {
     const { item } = useParams();
@@ -12,41 +13,46 @@ const CourseV = () => {
     const [syllabus, setSyllabus] = useState([]);
     const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
     const [progress, setProgress] = useState(0);
-    const [video,setvideo] = useState(0)
+    const [video, setvideo] = useState(false)
 
     const fetchSyllabus = async () => {
         const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
         setCourse(response.data.data);
         setSyllabus(response.data.data.attributes.course_syllabus);
         const syllabusData = response.data.data.attributes.course_syllabus;
+        console.log(syllabusData)
         // console.log(response.data.data.attributes.course_syllabus.map((item) => item.id))
         // const videos = syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url }));
         // setvideo(syllabusData.filter(item => item.__component === 'activity.video').map(item => ({ id: item.id, url: item.videoFile.data[0].attributes.url })));
         // console.log(videos);
-
-        const videoIds = syllabus.filter(item => item.__component === 'activity.video').map(item => item.id);
-        setvideo(videoIds);
+        console.log(syllabusData)
+        if(syllabusData[0].__component == "activity.video"){
+            console.log("Yes")
+            setvideo(true)
+        }
+        else{
+            setvideo(false)
+        }
+        // const videoIds = syllabus.filter(item => item.__component === 'activity.video').map(item => item.id);
+        // setvideo(videoIds);
         // console.log(videoIds);
 
     };
 
-    useEffect(()=>{
-        console.log(video)
-    })
-
-    useEffect(() => {
-        fetchSyllabus();
-    }, []);
-
-    useEffect(() => {
+    // useEffect(() => {
+        //     console.log(video)
+        // })
+        
         const test1 = async () => {
             try {
+                console.log(syllabus[currentSyllabusIndex])
                 const progressData = {
                     data: {
-                        id: video,
+                        id: syllabus[currentSyllabusIndex].id,
                         value: progress
                     }
                 };
+                console.log(progressData)
                 const response2 = await ax.put(`http://localhost:1337/api/progresses/${item}`, progressData);
                 console.log(response2);
             } catch (error) {
@@ -54,20 +60,38 @@ const CourseV = () => {
             }
         };
 
-        test1();
+    useEffect(() => {
+        fetchSyllabus();
+    }, []);
+
+    useEffect(() => {
+
+        if (progress == 5) {
+            // test1();
+        }
     }, [progress]);
 
     const handlesyllabusChange = (index) => {
+        if(syllabus[index].__component === "activity.video"){
+            setvideo(true)
+        }
+        else{
+            setvideo(false)
+        }
         setCurrentSyllabusIndex(index);
         setProgress(0);
     };
 
     const getUrlVideo = (videoComponent) => {
+        // console.log(videoComponent)
         return videoComponent.videoFile.data[0].attributes.url;
     };
     const getUrlFile = (FileComponent) => {
+        // console.log(FileComponent)
         return FileComponent.material.data[0].attributes.url;
     };
+
+    
 
     const componentStyle = (syllabus) => {
         switch (syllabus.__component) {
@@ -131,6 +155,7 @@ const CourseV = () => {
                                         {item.title}
                                     </button>
                                 ))}
+                                {video && <Button variant="daak" onClick={test1}>Click</Button>}
                             </div>
                         </div>
                     </div>
