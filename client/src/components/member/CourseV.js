@@ -12,7 +12,7 @@ const CourseV = () => {
     const [syllabus, setSyllabus] = useState([]);
     const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
     const [progress, setProgress] = useState(0);
-    // const [len, setLen] = useState(0);
+    const [Id, setId] = useState();
 
     const fetchSyllabus = async () => {
         const response = await ax.get(`http://localhost:1337/api/courses/${item}`);
@@ -27,7 +27,8 @@ const CourseV = () => {
     const test1 = async () => {
         try {
             const response1 = await ax.get("http://localhost:1337/api/progresses");
-            console.log("data progress len:", response1.data.data.length);
+            console.log("data progress len:", response1.data.data[0].id);
+            setId(response1.data.data[0].id);
             // setLen(response1.data.data.length);
             const progressData = {
                 data: {
@@ -44,8 +45,8 @@ const CourseV = () => {
                     data : {value: progress}
                 };
                 console.log("put");
-                const test = await ax.put(`${conf.apiUrlPrefix}/progresses/62`, fixprogressData);
-                console.log(test);
+                const test = await ax.put(`${conf.apiUrlPrefix}/progresses/${Id}`, fixprogressData);
+                // console.log(test);
             }
             // Call test function to handle progress data
             // test();
