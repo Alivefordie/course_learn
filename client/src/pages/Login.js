@@ -33,12 +33,14 @@ const Login = () => {
         <Container className={styles.loginContainer} sm="2">
           <Col className={styles.loginInput}>
             <h1 className={styles.header}>Login</h1>
-            <img
+            <Container className={styles.loginImage}>
+			<img
               src="../login.png"
               alt="Register Background"
               className={styles.loginImage}
               onLoad={() => setLoading(false)}
             />
+			</Container>
             <Form onSubmit={handleSubmit} className={styles.username}>
               <Form onSubmit={handleSubmit} className={styles.username}>
                 <Form.Group controlId="username">
