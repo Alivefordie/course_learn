@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 import styles from "../css/Student.module.css";
 import CourseComponent from "../components/Owner";
 
-
 const MyCoursesStudent = () => {
     const [coursesVideo, setCoursesVideo] = useState([]);
     
@@ -81,4 +80,3 @@ const MyCoursesStudent = () => {
 };
 
 export default MyCoursesStudent;
-

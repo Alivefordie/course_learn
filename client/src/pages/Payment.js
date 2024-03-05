@@ -16,6 +16,9 @@ import conf from "../conf/main";
 import { useNavigate } from "react-router-dom";
 import NavbarLink from "../components/NavbarLink";
 import styles from "../css/PayCss.module.css";
+import generatePayload from "promptpay-qr";
+import QRCode from "qrcode";
+import LoginFirst from "../components/PleaseLogin";
 
 const Payment = () => {
   const [data, setData] = useState([]);
@@ -31,28 +34,22 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [slip, setSlip] = useState(null);
   const [member, setmember] = useState();
-  const [ids, setids] = useState();
-
+  const [qrc, setqrc] = useState();
+  // const [ids, setids] = useState();
+  const [valid, setvaid] = useState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("ids", ids);
-  });
+  // useEffect(() => {
+  //   console.log("ids", ids);
+  // });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await ax.get(conf.findanything);
-        setids(response.data.id);
-
-        const data = response.data.entries.map((entry) => entry.course);
-        setData(data);
+        const response1 = await ax.get(conf.apiUrlPrefix + "/cart");
+        const data = response1.data.data.map((item) => item.attributes.price);
+        setData(response1.data.data);
         calculateTotalPrice(data);
-
-        const filteredData = response.data.entries.filter(
-          (entry) => entry.cart !== null
-        );
-        setFilter(filteredData);
         setLoading(false);
       } catch (error) {
         console.error("Error occurred:", error);
@@ -64,12 +61,6 @@ const Payment = () => {
 
   const test = async () => {
     try {
-      const jwtToken = sessionStorage.getItem("auth.jwt");
-      if (!jwtToken) {
-        console.error("JWT token not found.");
-        return;
-      }
-
       const response = await ax.get(
         `${conf.apiUrlPrefix}/users/me?populate[entries][populate][course]=*`
       );
@@ -93,15 +84,29 @@ const Payment = () => {
 
   const calculateTotalPrice = (courses) => {
     const totalPrice = courses.reduce((acc, course) => {
-      if (course.price) {
-        return acc + course.price;
+      if (course) {
+        return acc + course;
       }
       return acc;
     }, 0);
+    console.log("total:", totalPrice);
     setTotalPrice(totalPrice);
   };
 
+  const generateQRcode = async () => {
+    const mobileNumber = "000-000-0000";
+    const amount = totalPrice;
+    const payload = generatePayload(mobileNumber, { amount });
+    const qrc = await QRCode.toDataURL(payload, {
+      color: { dark: "#000", light: "#fff" },
+    });
+    setqrc(qrc);
+    setLoading(false);
+  };
+
   const handleConfirm = () => {
+    setLoading(true);
+    generateQRcode();
     setShowModal(true);
   };
 
@@ -130,19 +135,9 @@ const Payment = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("test:", Id);
-  }, [Id]);
-
   const success = async (Id) => {
     try {
       setLoading(true);
-
-      const jwtToken = sessionStorage.getItem("auth.jwt");
-      if (!jwtToken) {
-        console.error("JWT token not found.");
-        return;
-      }
 
       const response = await ax.get(`${conf.apiUrlPrefix}/enroll/${Id}`);
       console.log(response);
@@ -154,12 +149,6 @@ const Payment = () => {
 
   const sendslip = async () => {
     try {
-      const jwtToken = sessionStorage.getItem("auth.jwt");
-      if (!jwtToken) {
-        console.error("JWT token not found.");
-        return;
-      }
-
       const formData = new FormData();
       formData.append("files", slip, slip.name);
 
@@ -198,98 +187,99 @@ const Payment = () => {
       <NavbarTop NavbarLink={NavbarLink} />
       {loading ? (
         <Spinner />
-      ) : (
+      ) : data.length > 0 ? (
         <Container className={styles.paymentContainer} sm="3" md="4">
-          <Row>
+          <Row className="d-flex">
             <Col className={styles.orderCol}>
               <div
                 id="orderList"
                 data-spy="scroll"
                 data-target=".navbar"
-                className={styles.orderListContainer} // Add a custom class for styling
+                className={styles.orderListContainer}
               >
-                {filter.slice(0, 2).map((item) => ( // Slice the filter array to display only the first 2 items
+                {data.map((item) => (
                   <Card
                     className="d-flex flex-row"
                     style={{
                       marginTop: "15px",
                       marginBottom: "15px",
                       marginLeft: "15px",
+                      marginRight: "15px"
                     }}
                     key={item.id}
                   >
                     <div
-                      onClick={() => navigate(`/courses/${item.course.id}`)}
+                      onClick={() => navigate(`/courses/${item.id}`)}
                       style={{ cursor: "pointer" }}
                       className="image-col"
                     >
+                      {console.log(item)}
                       <Card.Img
                         className="course-image"
                         variant="left"
-                        src={conf.url + item.course.picture.url}
+                        src={
+                          conf.url + item.attributes.picture.data.attributes.url
+                        }
                       />
                     </div>
                     <div className="body-col">
                       <Card.Body
-                        onClick={() =>
-                          navigate(`/courses/${item.course.id}`)
-                        }
+                        onClick={() => navigate(`/courses/${item.id}`)}
                         style={{ cursor: "pointer" }}
                       >
-                        <Card.Title>{item.course.title}</Card.Title>
+                        <Card.Title>{item.attributes.title}</Card.Title>
                         <Card.Text>Details</Card.Text>
                         <Card.Text className="m-0">
-                          เนื้อหา {item.course.description}
-                        </Card.Text>
-                        <Card.Text className="m-0">
-                          ระยะเวลา {item.course.duration}
+                          ระยะเวลา {item.attributes.duration}
                         </Card.Text>
                       </Card.Body>
                     </div>
                   </Card>
                 ))}
               </div>
-              {filter.length > 0 && (
+              {data.length > 0 && (
                 <div className={styles.totalPrice}>
                   TotalPrice: {totalPrice}
                 </div>
               )}
-              <Row className={styles.InfoInput}>
-                <Col md={6}>
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </Col>
-                <Col md={6}>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Col>
-              </Row>
-              <Row className="mb-3">
-                <Col md={6}>
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    placeholder="Date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </Col>
-                <Col md={6}>
-                  <Form.Label>Phone</Form.Label>
-                  <Form.Control
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </Col>
-              </Row>
+              <Form name="for" noValidate validated={valid}>
+                <Row className={styles.InfoInput}>
+                  <Col md={6}>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      placeholder="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Col>
+                </Row>
+                <Row className="mb-3">
+                  <Col md={6}>
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      placeholder="Date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </Col>
+                </Row>
+              </Form>
             </Col>
             <Col className={styles.paymentMethod}>
               <Container className={styles.methodCon}>
@@ -299,15 +289,15 @@ const Payment = () => {
                 </h1>
                 <br />
                 <div className={styles.choosebank}>
-                  <img src="/a.png" width={50} height={50} alt="Bank A" />
-                  <img src="/b.png" width={50} height={50} alt="Bank B" />
-                  <img src="/c.png" width={50} height={50} alt="Bank C" />
+                  <img src="/a.png" width={40} height={40} alt="Bank A" />
+                  <img src="/b.png" width={40} height={40} alt="Bank B" />
+                  <img src="/c.png" width={40} height={40} alt="Bank C" />
                   <br />
-                  <img src="/d.png" width={50} height={50} alt="Bank D" />
-                  <img src="/e.png" width={50} height={50} alt="Bank E" />
-                  <img src="/f.png" width={50} height={50} alt="Bank F" />
+                  <img src="/d.png" width={40} height={40} alt="Bank D" />
+                  <img src="/e.png" width={40} height={40} alt="Bank E" />
+                  <img src="/f.png" width={40} height={40} alt="Bank F" />
                   <br />
-                  <img src="/g.png" width={50} height={50} alt="Bank G" />
+                  <img src="/g.png" width={40} height={40} alt="Bank G" />
                 </div>
                 {data.length === 0 ? (
                   <p>Cannot confirm when cart is empty</p>
@@ -324,43 +314,54 @@ const Payment = () => {
                 )}
               </Container>
             </Col>
+            <Modal show={showModal} onHide={handleCloseModal} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Payment Process</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="text-center">
+                  {progress >= 0 && (
+                    <div>
+                      <p>Step 1: Payment Details: {totalPrice} บาท</p>
+                    </div>
+                  )}
+                  {progress >= 33 && (
+                    <div>
+                      <p>Step 2: Upload Payment Slip</p>
+                      <img src={qrc} />
+                      <Form name="for" noValidate validated={valid}>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          name="file"
+                          onChange={handleFileChange}
+                        />
+                      </Form>
+                    </div>
+                  )}
+                  {progress >= 66 && <p>Step 3: Completion</p>}
+                  <ProgressBar now={progress} className="mt-3" />
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseModal}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleNext}>
+                  Next
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </Row>
-          <Modal show={showModal} onHide={handleCloseModal} centered>
-            <Modal.Header closeButton>
-              <Modal.Title>Payment Process</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="text-center">
-                {progress >= 0 && (
-                  <div>
-                    <p>Step 1: Payment Details: {totalPrice} บาท</p>
-                  </div>
-                )}
-                {progress >= 33 && (
-                  <div>
-                    <p>Step 2: Upload Payment Slip</p>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="file"
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                )}
-                {progress >= 66 && <p>Step 3: Completion</p>}
-                <ProgressBar now={progress} className="mt-3" />
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseModal}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleNext}>
-                Next
-              </Button>
-            </Modal.Footer>
-          </Modal>
         </Container>
+      ) : (
+        <LoginFirst
+          showLoginFirstModal={true}
+          closeModal={() => {
+            navigate("/");
+          }}
+          message={"Cart Is Empty"}
+        />
       )}
     </div>
   );

@@ -9,12 +9,12 @@ function LoginFirst({ showLoginFirstModal, closeModal, message }) {
 	};
 
 	return (
-		<Modal show={showLoginFirstModal} onHide={handleClose} >
+		<Modal centered show={showLoginFirstModal} onHide={handleClose}>
 			<Modal.Header closeButton />
 			<Modal.Body className={styles.modalBody}>
 				<Container className={styles.centeredContent}>
 					<div className={styles.exclamation} />
-					<span className={styles.loginText}>{message}</span>
+					<span className={styles.loginText}>{message ? message : ""}</span>
 				</Container>
 			</Modal.Body>
 		</Modal>

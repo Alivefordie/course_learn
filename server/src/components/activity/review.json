@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_activity_reviews",
+  "info": {
+    "displayName": "review"
+  },
+  "options": {},
+  "attributes": {
+    "preview": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
