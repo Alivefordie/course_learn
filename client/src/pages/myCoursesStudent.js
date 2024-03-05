@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const MyCoursesStudent = () => {
     return(
         <div>
-            <NavbarLink/>
+            <NavbarTop NavbarLink={NavbarLink}/>
             
         </div>
     );
