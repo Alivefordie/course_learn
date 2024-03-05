@@ -1,24 +1,21 @@
-.text{
+.text {
     flex-direction: column;
-    text-align: center; 
+    text-align: center;
 }
 
-.picture{
+.picture {
     height: 40px;
     width: 40px;
-    
+
 }
 
-
-
-
-.profile{
+.profile {
     height: 40px;
     width: 40px;
     border-radius: 50%;
 }
 
-.circle{
+.circle {
     height: 40px;
     width: 40px;
     border-radius: 50;
@@ -28,5 +25,7 @@
     justify-content: center;
 }
 
-
-
+.navLink {
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
