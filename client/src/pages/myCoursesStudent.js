@@ -22,7 +22,6 @@ import styles from "../css/Student.module.css" ;
 
 const MyCoursesStudent = () => {
     return(
-<<<<<<< HEAD
         
         <div className = {styles.Bgcolor}>
             <NavbarTop NavbarLink={NavbarLink} />
@@ -46,11 +45,6 @@ const MyCoursesStudent = () => {
                      </Col>      
             </Row>
             </Container>
-=======
-        <div>
-            <NavbarTop NavbarLink={NavbarLink}/>
-            
->>>>>>> 9ae657ee78c8d8b93627b7ebe9ba8c7b89f8b990
         </div>
     );
 };
