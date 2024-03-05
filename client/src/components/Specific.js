@@ -14,13 +14,14 @@ const Specific = ({ data }) => {
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
+	const [openReview, setOpenReview] = useState(false)
 
 	useEffect(() => {
 		console.log("Specific:", data);
 		console.log("item", item);
 		console.log(course)
 		setCourseSyllabus(course.course_syllabus);
-		console.log("course", CourseSyllabus);
+		console.log("coursess", CourseSyllabus);
 		{
 			CourseSyllabus.map((val, index) => () => {
 				console.log(val.title);
@@ -47,9 +48,9 @@ const Specific = ({ data }) => {
 											alt="item"
 											width={300}
 										/>
-										<span  style={{ fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
+										<span style={{ fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
 											remaining: {remaining}/{course.maxCapacity} | <AddLike course={data} /> ({course.likeCount}) <br />
-											<div className="centeredContent" style={{ flexDirection:"column", textAlign:"center", marginTop:"30px",marginBottom:"-50px" }}>
+											<div className="centeredContent" style={{ flexDirection: "column", textAlign: "center", marginTop: "30px", marginBottom: "-50px" }}>
 												<img src="../clock.png" alt="remaining" style={{ width: '40px', height: '40px' }} />
 												<p>ชั่วโมงเรียน {course.maxCapacity} ชม.</p>
 											</div>
@@ -59,63 +60,47 @@ const Specific = ({ data }) => {
 								</div>
 							</Col>
 							<Col md={6} style={{ marginTop: '20px' }}>
+
 								<div style={{ margin: '20px' }}>
 									<h4 style={{ fontFamily: 'Arial, sans-serif', marginBottom: '8px' }}>{course.title}</h4>
 									<p style={{ fontFamily: 'Arial, sans-serif', marginBottom: '4px', color: 'red', fontWeight: 'bold' }}>{course.price} ฿</p>
+									<Card>
+										<Card.Header
+											style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+											<span style={{ marginRight: "auto" }}>Course Preview</span>
+											<Button
+												variant="outline-dark"
+												style={{ border: "0" }}
+												onClick={() => setOpenReview(!openReview)}
+												aria-controls="course-review"
+												aria-expanded={openReview}>
+												{openReview ? "⮟" : "⮞"}
+											</Button>
+										</Card.Header>
+										<Collapse in={openReview}>
+											<Card.Body id="course-review">
+												{CourseSyllabus.map((val, index) => {
+													switch (val.__component) {
+														case "activity.review":
+															return (
+																<div key={index}>
+																	<h6>video</h6>
+																	<p>title: {val.title}</p>
+																	<p>link: {val.link}</p>
+																	{/* <p>example: {val.videoFile.data}</p> */}
+																</div>
+															);
+													}
+												})}
+											</Card.Body>
+										</Collapse>
+									</Card>
 									<p style={{ fontFamily: 'Arial, sans-serif', marginBottom: '4px', wordWrap: "break-word", lineHeight: '2' }}>
 										<span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>รายละเอียดคอร์ส</span> : {course.description}
 									</p>
 
 								</div>
-								{/* <Card>
-                                    <Card.Header
-                                        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        <span style={{ marginRight: "auto" }}>Course Review</span>
-                                        <Button
-                                            variant="outline-dark"
-                                            style={{ border: "0" }}
-                                            onClick={() => setOpenReview(!openReview)}
-                                            aria-controls="course-review"
-                                            aria-expanded={openReview}>
-                                            {openReview ? "⮟" : "⮞"}
-                                        </Button>
-                                    </Card.Header>
-                                    <Collapse in={openReview}>
-                                        <Card.Body id="course-review">
-                                            {CourseSyllabus.map((val, index) => {
-                                                switch (val.__component) {
-                                                    case "activity.video":
-                                                        return (
-                                                            <div key={index}>
-                                                                <h6>video</h6>
-                                                                <p>title: {val.title}</p>
-                                                                <p>link: {val.link}</p>
-                                                                <p>example: {val.videoFile.data}</p>
-                                                                <hr style={{ borderTop: "1px solid black" }} />
-                                                            </div>
-                                                        );
-                                                    case "activity.text":
-                                                        return (
-                                                            <div key={index}>
-                                                                <h6>text</h6>
-                                                                <p>title: {val.title}</p>
-                                                                <p>description: {val.description}</p>
-                                                                <hr style={{ borderTop: "1px solid black" }} />
-                                                            </div>
-                                                        );
-                                                    case "activity.file":
-                                                        return (
-                                                            <div key={index}>
-                                                                <h6>File</h6>
-                                                                <p>title: {val.title}</p>
-                                                                <p>material: {val.material.data}</p>
-                                                            </div>
-                                                        );
-                                                }
-                                            })}
-                                        </Card.Body>
-                                    </Collapse>
-                                </Card> */}
+
 							</Col>
 						</Row>
 						<div style={{

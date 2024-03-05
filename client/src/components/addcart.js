@@ -40,6 +40,13 @@ function AddCart({ course, onResponse }) {
         setShowLoginFirst(false);
     };
 
+    useEffect(() => {
+        console.log('course', course)
+       
+        // console.log(like);
+        // console.log(courseContent);
+    }, []);
+
     return (
         <>
             {showLoginFirst && <LoginFirst showLoginFirstModal={showLoginFirst} closeModal={handleClose} message={message}/>}
