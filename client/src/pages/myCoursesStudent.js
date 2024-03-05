@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 const MyCoursesStudent = () => {
     return(
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         <div className = {styles.Bgcolor}>
             <NavbarTop NavbarLink={NavbarLink} />
@@ -58,6 +59,11 @@ const MyCoursesStudent = () => {
                      </Col>      
             </Row>
             </Container>
+=======
+        <div>
+            <NavbarTop NavbarLink={NavbarLink}/>
+            
+>>>>>>> a7736428f9edea8611b8161724b2a4ebad5a4192
 =======
         <div>
             <NavbarTop NavbarLink={NavbarLink}/>
