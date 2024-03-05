@@ -16,8 +16,7 @@ import fetchOwnerCourses from "../components/Owner";
 const MyCoursesStudent = () => {
     return(
         <div>
-            <NavbarTop NavbarLink={NavbarLink} />
-            <h1>hi</h1>
+            
             
         </div>
     );
