@@ -1,26 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Card, Button, Col, Container, Row, Form } from "react-bootstrap";
+import axios from "axios";
 import conf from "../conf/main";
-import { Col, Container, Row, Button } from "react-bootstrap";
 
 const Datapro = ({ data }) => {
-  const data_1 = data[0];
-  const entries = data[1];
+  const [userData, setUserData] = useState(data[0]);
+  const [myData, setMyData] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const picture = data[3]
     ? `${conf.url}${data[3]}`
     : "../../public/Profiledf.jpg";
   const id = data[4];
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${conf.apiUrlPrefix}/my-courses`);
+      setMyData(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    console.log(`${conf.url}${data[3]}`);
-    console.log("data:", data_1);
-    console.log("entries", entries);
     console.log("picture:", picture);
     console.log("id:", id);
-  }, [data_1, entries, picture, id]);
+    fetchData();
+  }, []);
 
-  const filteredEntries = entries.filter((entry) => entry.cart === null);
-  console.log("filteredEntries:", filteredEntries);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Submit user data to the server for updating
+      await axios.put(`${conf.apiUrlPrefix}/update-profile`, userData);
+      setIsEditing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -47,23 +73,12 @@ const Datapro = ({ data }) => {
                   }}
                 />
               </div>
-              <p
-                style={{
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "16px",
-                  marginBottom: "10px",
-                }}
-              >
-                <strong>Username:</strong> {data_1.username}
+
+              <p>
+                <strong>Username:</strong> {userData.username}
               </p>
-              <p
-                style={{
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "16px",
-                  marginBottom: "10px",
-                }}
-              >
-                <strong>Email:</strong> {data_1.email}
+              <p>
+                <strong>Email:</strong> {userData.email}
               </p>
               <Link
                 to={`./edit-profile/${id}`}
@@ -76,7 +91,7 @@ const Datapro = ({ data }) => {
                     marginBottom: "10px",
                   }}
                 >
-                  <Button variant="outline-light">Edit Profile</Button>
+                  <Button variant="dark" className="edit-Btn">Edit Profile</Button>
                 </p>
               </Link>
             </Container>
@@ -84,16 +99,90 @@ const Datapro = ({ data }) => {
           <Col className="profile-info-col" style={{ width: "600px" }}>
             <Row className="info-row">
               <Col className="profile-info">
-                <h>Personal Information</h>
+                <h1 className="personal-header" style={{ marginTop: "10px" }}>
+                  Personal Information
+                </h1>
+                {isEditing ? (
+                  <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formFullName">
+                      <Form.Label>Full Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter full name"
+                        name="fullname"
+                        value={userData.fullname}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formDateOfBirth">
+                      <Form.Label>Date of Birth</Form.Label>
+                      <Form.Control
+                        type="date"
+                        name="dateOfBirth"
+                        value={userData.dateOfBirth}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formJob">
+                      <Form.Label>Job</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter job"
+                        name="job"
+                        value={userData.job}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formRole">
+                      <Form.Label>Role</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter role"
+                        name="role"
+                        value={userData.role}
+                        onChange={handleInputChange}
+                      />
+                    </Form.Group>
+                    <Button variant="dark" type="submit">
+                      Save
+                    </Button>
+                  </Form>
+                ) : (
+                  <>
+                    <p className="text-info-pro">
+                      <strong>Full Name:</strong> {userData.fullname}
+                    </p>
+                    <p className="text-info-pro">
+                      <strong>Date of Birth:</strong> {userData.dateOfBirth}
+                    </p>
+                    <p className="text-info-pro">
+                      <strong>Job:</strong> {userData.job}
+                    </p>
+                    <p className="text-info-pro">
+                      <strong>Role:</strong> {userData.role}
+                    </p>
+                  </>
+                )}
               </Col>
-              <div class="w-100"></div>
-              <Col className="mycourse-col">
-                <h>myCourse</h>
+              <div className="w-100"></div>
+              <Col className="mycourse-col" style={{ marginTop: "10px" }}>
+                <h2 className="my-header">myCourse</h2>
+                {myData.map((course) => (
+                  <Card key={course.id} className="inpro-card">
+                    <Card.Body>
+                      <Card.Title>{course.attributes.title}</Card.Title>
+                      <Card.Text>{course.attributes.description}</Card.Text>
+                      <Link to={`./study/${course.id}`}>
+                        <Button variant="dark">View Details</Button>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                ))}
               </Col>
             </Row>
           </Col>
           <Col className="my-favorite" style={{ width: "350px" }}>
-            <h>myFavorite Course</h>
+            <h3 className="myfav-header">myFavorite Course</h3>
           </Col>
         </Row>
       </Container>

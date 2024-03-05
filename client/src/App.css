@@ -157,6 +157,7 @@
   margin-top: 15px;
   text-align: flex;
 }
+
 .header-cart {
   font-family: "Righteous", sans-serif;
   font-weight: 400;
@@ -174,6 +175,7 @@
   margin-right: 10px;
   margin-bottom: 5px;
 }
+
 .no-course-message {
   font-size: 18px;
 }
@@ -216,6 +218,7 @@
 .pay-button {
   width: 200px;
 }
+
 .item-cart {
   background-color: #f0f0f0;
   padding: 10px;
@@ -306,7 +309,7 @@
   margin-top: 10px;
   /* margin-left: auto; */
   /* margin-right: auto; */
-  
+
 }
 
 .edit-button,
@@ -331,6 +334,7 @@
 .edit-form {
   margin-top: 10px;
 }
+
 .search-container {
   margin-bottom: 20px;
 }
@@ -378,6 +382,7 @@
   top: 0;
   bottom: 0;
 }
+
 .cssload-box-loading:before {
   content: "";
   width: 70px;
@@ -394,6 +399,7 @@
   -webkit-animation: shadow 0.58s linear infinite;
   -moz-animation: shadow 0.58s linear infinite;
 }
+
 .cssload-box-loading:after {
   content: "";
   width: 70px;
@@ -415,153 +421,197 @@
   0% {
     transform: translateY(0) rotate(0deg);
   }
+
   17% {
     border-bottom-right-radius: 10px;
   }
+
   25% {
     transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   50% {
     transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
   }
+
   75% {
     transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   100% {
     transform: translateY(0) rotate(0deg);
   }
 }
+
 @-o-keyframes cssload-animate {
   0% {
     -o-transform: translateY(0) rotate(0deg);
   }
+
   17% {
     border-bottom-right-radius: 10px;
   }
+
   25% {
     -o-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   50% {
     -o-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
   }
+
   75% {
     -o-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   100% {
     -o-transform: translateY(0) rotate(0deg);
   }
 }
+
 @-ms-keyframes cssload-animate {
   0% {
     -ms-transform: translateY(0) rotate(0deg);
   }
+
   17% {
     border-bottom-right-radius: 10px;
   }
+
   25% {
     -ms-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   50% {
     -ms-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
   }
+
   75% {
     -ms-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   100% {
     -ms-transform: translateY(0) rotate(0deg);
   }
 }
+
 @-webkit-keyframes cssload-animate {
   0% {
     -webkit-transform: translateY(0) rotate(0deg);
   }
+
   17% {
     border-bottom-right-radius: 10px;
   }
+
   25% {
     -webkit-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   50% {
     -webkit-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
   }
+
   75% {
     -webkit-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   100% {
     -webkit-transform: translateY(0) rotate(0deg);
   }
 }
+
 @-moz-keyframes cssload-animate {
   0% {
     -moz-transform: translateY(0) rotate(0deg);
   }
+
   17% {
     border-bottom-right-radius: 10px;
   }
+
   25% {
     -moz-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   50% {
     -moz-transform: translateY(18px) scale(1, 0.9) rotate(67.5deg);
   }
+
   75% {
     -moz-transform: translateY(9px) rotate(45deg);
     border-bottom-right-radius: 39px;
   }
+
   100% {
     -moz-transform: translateY(0) rotate(0deg);
   }
 }
+
 @keyframes shadow {
+
   0%,
   100% {
     transform: scale(1, 1);
   }
+
   50% {
     transform: scale(1.2, 1);
   }
 }
+
 @-o-keyframes shadow {
+
   0%,
   100% {
     -o-transform: scale(1, 1);
   }
+
   50% {
     -o-transform: scale(1.2, 1);
   }
 }
+
 @-ms-keyframes shadow {
+
   0%,
   100% {
     -ms-transform: scale(1, 1);
   }
+
   50% {
     -ms-transform: scale(1.2, 1);
   }
 }
+
 @-webkit-keyframes shadow {
+
   0%,
   100% {
     -webkit-transform: scale(1, 1);
   }
+
   50% {
     -webkit-transform: scale(1.2, 1);
   }
 }
+
 @-moz-keyframes shadow {
+
   0%,
   100% {
     -moz-transform: scale(1, 1);
   }
+
   50% {
     -moz-transform: scale(1.2, 1);
   }
@@ -596,6 +646,7 @@
   border-radius: 5px;
   width: 150px;
 }
+
 .password:before,
 .password:after {
   content: "";
@@ -609,9 +660,11 @@
   width: calc(25% - 1px);
   z-index: 10;
 }
+
 .password:before {
   left: calc(25%);
 }
+
 .password:after {
   right: calc(25%);
 }
@@ -620,6 +673,7 @@
   background-color: #f25f5c;
   width: 100%;
 }
+
 .strength-2::-webkit-progress-value {
   background-color: orange;
   width: 100%;
@@ -643,6 +697,7 @@
   font-weight: 500;
   margin-top: 5px;
 }
+
 .strength-2 {
   color: orange;
   display: flex;
@@ -682,17 +737,22 @@
   margin-bottom: 20px;
   margin-right: 20px;
 }
+
 .search-bar {
   display: flex;
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-  margin-bottom: 10px; /* Adjust margin as needed */
+  justify-content: center;
+  /* Horizontally center the content */
+  align-items: center;
+  /* Vertically center the content */
+  margin-bottom: 10px;
+  /* Adjust margin as needed */
 }
 
 .search-bar-input {
   width: 35%;
   padding: 10px;
-  border-radius: 20px; /* Adjust the border-radius value as needed */
+  border-radius: 20px;
+  /* Adjust the border-radius value as needed */
   outline: none;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -743,6 +803,7 @@
   background-color: #007bff;
   color: #fff;
 }
+
 .custom-btn {
   border: none;
   padding: 8px 16px;
@@ -752,14 +813,17 @@
 }
 
 .delete-btn {
-  background-color: #dc3545; /* Bootstrap danger color */
+  background-color: #dc3545;
+  /* Bootstrap danger color */
   color: white;
 }
 
 .save-btn {
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: #007bff;
+  /* Bootstrap primary color */
   color: white;
 }
+
 .custom-btn.delete-btn {
   margin-right: 10px;
 }
@@ -784,11 +848,11 @@
   margin-left: 20px;
 }
 
-.seose{
+.seose {
   font-size: 10rem;
 }
 
-.NotFond{
+.NotFond {
   font-size: 3rem;
 }
 
@@ -837,7 +901,7 @@
 }
 
 .my-favorite {
-  background-color: rgba(248, 123, 123, 0.5);
+  background-color: #fff;
   border-radius: 8px;
   height: 550px;
   margin-left: 15px;
@@ -850,14 +914,14 @@
 }
 
 .profile-info {
-  height: 250px;
+  height: 300px;
   border-radius: 8px;
-  margin-bottom: 45px;
+  margin-bottom: 40px;
   background-color: #fff;
 }
 
 .mycourse-col {
-  height: 250px;
+  height: 200px;
   border-radius: 8px;
   background-color: #fff;
 }
@@ -868,4 +932,31 @@
 
 .option-con {
   text-align: center;
+}
+
+.personal-header {
+  font-style: bold;
+  font-size: 24px;
+  color: #000;
+  padding: 10px;
+}
+
+.my-header {
+  font-style: bold;
+  font-size: 24px;
+  color: #000;
+  padding: 10px;
+}
+
+.myfav-header {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.text-info-pro {
+  margin-left: 15px;
+}
+
+.edit-Btn {
+  margin-top: 200px;
 }
