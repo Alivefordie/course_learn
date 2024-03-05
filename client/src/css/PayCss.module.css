@@ -1,108 +1,88 @@
-.container {
-  border: 1px solid black;
-  background-color: #ff2121;
-  border-radius: 20px; 
+.paymentContainer {
+  border-radius: 8px;
+  height: 550px;
+  width: 90%;
 }
 
-.body {
-  margin: 30px;
+.orderCol {
+  border-radius: 8px;
+  width: 50%;
+  margin-right: 15px;
+  height: fit-content;
 }
 
-.ct1 {
-  width: 700px;
-  height: 400px;
-  margin-bottom: 40px;
-  background-color: whitesmoke;
-  border-radius: 20px;
+.orderCard {
+  justify-content: center;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
 }
 
-.ct2 {
-  width: 700px;
-  height: 400px;
-  background-color: whitesmoke;
-  border: 1px solid black;
-  padding: 20px;
-  border-radius: 20px;
+.paymentMethod {
+  border-radius: 8px;
+  width: 50%;
+  margin-right: 15px;
 }
 
-.ct3 {
-  margin-top: -22.2cm;
-  margin-left: 740px;
-  width: 670px;
-  height: 900px;
-  background-color: whitesmoke;
-  border-radius: 20px;
+.methodCon {
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 15px;
+  height: 550px;
+  margin-bottom: 15px;
 }
 
-.payment {
+.methodText {
   text-align: center;
-  margin: 40px;
-  border: 1px solid black;
-  height: 800px;
-  border-radius: 20px;
-  font-size: 50px;
-}
-
-.confirm {
-  margin-top: 130px;
-}
-
-.ct1_1 {
-  border-radius: 20px;
-  margin: 30px;
-  padding: 20px;
-  border: 1px solid rgb(98, 35, 35);
-
-}
-
-.ct1_2 {
-  width: 320px;
-  margin: 30px;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 20px;
-}
-
-.input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.test {
-  border: 1px solid black;
-  margin: 10px;
-  width: 280px;
-  border-radius: 20px;
-  padding: 10px;
-}
-
-.input {
-  margin: 5px;
-  width: 400px;
-  border-radius: 20px;
-  border: 1px solid black;
-}
-
-.totalPrice {
-  border: 1px solid black;
-  border-radius: 20px;
-  width: 400px;
-  margin-top: -2.8cm;
-  margin-left: 250px;
-  padding: 15px;
-}
-
-.no_cart {
-  font-size: 20px;
-  margin: 20px;
 }
 
 .choosebank {
-  margin-bottom: 70px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  margin-bottom: 50px;
 }
 
+.confirmBtn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
 .choosebank img {
-  margin: 25px;
+  margin: 15px;
+}
+
+
+.totalPrice {
+  display: flex;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 50%;
+  margin-left: 50%;
+}
+
+.InfoInput {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.order-list {
+  overflow-y: auto;
+  max-height: 550px; 
+  padding-right: 15px; 
+}
+
+.orderCard {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add border for separation */
+  cursor: pointer; /* Change cursor to indicate clickable */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.orderCard:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background color on hover */
 }

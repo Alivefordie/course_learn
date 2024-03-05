@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import NavbarTop from "../components/NavbarTop";
 import NavbarLink from "../components/NavbarLink";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, } from "react-bootstrap";
 import "../App.css";
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import Spinner from "../components/Spinner";
+import AddCart from "../components/addcart";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -16,15 +16,10 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
   const fetchData = async () => {
     try {
-      // const jwtToken = sessionStorage.getItem('auth.jwt');
-      // if (!jwtToken) {
-      //   console.error('JWT token not found.');
-      //   return;
-      // }
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-      // const response = await axios.get("http://localhost:1337/api/users/me?populate[entries][populate][course]=*");
       const response = await ax.get(conf.findanything);
       const filteredData = response.data.entries.filter(
         (entry) => entry.cart !== null
@@ -65,25 +60,46 @@ const Cart = () => {
       ) : (
         <Container className="cart-container">
           <Container className="incart-container">
-            <h1 className="text-center mb-4">My Cart</h1>
+            <h1 className="header-cart">My Cart</h1>
             <Row className="g-4">
               <Col md={6}>
                 {filter.map((item) => (
-                  <div
+                  <Card
+                    className="d-flex flex-row"
+                    style={{ marginTop: "15px", marginBottom: "15px", marginLeft: "15px" }}
                     key={item.id}
-                    className="card border border-dark mb-3"
-                    style={{
-                      backgroundImage: `url(${item.course.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "left",
-                      width: "100%",
-                    }}
                   >
-                    <div className="card-body">
-                      <h5 className="card-title">{item.course.title}</h5>
-                      <p className="card-text">Price: {item.course.price}</p>
+                    <div
+                      onClick={() => navigate(`/courses/${item.course.id}`)}
+                      style={{ cursor: "pointer" }}
+                      className="image-col"
+                    >
+                      <Card.Img
+                        className="course-image"
+                        variant="left"
+                        src={conf.url + item.course.picture.url}
+                      />
                     </div>
-                  </div>
+                    <div className="body-col">
+                      <Card.Body
+                        onClick={() => navigate(`/courses/${item.course.id}`)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Card.Title>{item.course.title}</Card.Title>
+                        <Card.Text className="m-0">
+                         {item.course.description.slice(0, 55)}...
+                        </Card.Text>
+                        <Card.Text className="m-0">
+                          ราคา: {item.course.price} ฿
+                        </Card.Text>
+                      </Card.Body>
+                    </div>
+                    <div style={{
+                      margin: "20px", display: "flex", justifyContent: "flex-end"
+                    }} >
+                      <AddCart course={item} />
+                    </div>
+                  </Card>
                 ))}
               </Col>
               <Col md={6}>

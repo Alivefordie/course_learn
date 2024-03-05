@@ -8,12 +8,13 @@
 .newest-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
+  margin-left: 20px;
   margin-right: 20px;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 
 .header-mycourse {
@@ -26,7 +27,7 @@
 .expired-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -46,7 +47,7 @@
 .year-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: fit-content;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -87,21 +88,21 @@
 .item-top,
 .item-common,
 .item-newest {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
 .item-inpro,
 .item-complete,
 .item-expired {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
 .item-week,
 .item-month,
 .item-year {
-  height: fit-content;
+  height: 400px;
   border-radius: 8px;
 }
 
@@ -152,15 +153,25 @@
   font-family: "Righteous", sans-serif;
   font-weight: 400;
   font-style: normal;
-  margin-left: 20px;
-  margin-top: 10px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.header-cart {
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .fire-image,
 .common-image,
 .newest-image {
+  margin-top: 5px;
   margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .no-course-message {
   font-size: 18px;
@@ -173,7 +184,7 @@
 .syllabus-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -183,7 +194,7 @@
 .courseData-col {
   border: 1px solid #fff;
   background-color: #fff;
-  height: 550px;
+  height: 500px;
   border-spacing: 30px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -218,6 +229,7 @@
 .total-price {
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .pay-button {
@@ -363,11 +375,11 @@
   bottom: 0;
 }
 .cssload-box-loading:before {
-  content: '';
+  content: "";
   width: 70px;
   height: 7px;
   background: #000000;
-  opacity: 0.1;
+  opacity: 0.2;
   position: absolute;
   top: 78px;
   left: 0;
@@ -379,7 +391,7 @@
   -moz-animation: shadow 0.58s linear infinite;
 }
 .cssload-box-loading:after {
-  content: '';
+  content: "";
   width: 70px;
   height: 70px;
   background: url("../public/logo.png");
@@ -396,7 +408,7 @@
 }
 
 @keyframes cssload-animate {
-  0%{
+  0% {
     transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -415,10 +427,10 @@
   }
   100% {
     transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-o-keyframes cssload-animate {
-  0%{
+  0% {
     -o-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -437,10 +449,10 @@
   }
   100% {
     -o-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-ms-keyframes cssload-animate {
-  0%{
+  0% {
     -ms-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -459,10 +471,10 @@
   }
   100% {
     -ms-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-webkit-keyframes cssload-animate {
-  0%{
+  0% {
     -webkit-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -481,10 +493,10 @@
   }
   100% {
     -webkit-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @-moz-keyframes cssload-animate {
-  0%{
+  0% {
     -moz-transform: translateY(0) rotate(0deg);
   }
   17% {
@@ -503,7 +515,7 @@
   }
   100% {
     -moz-transform: translateY(0) rotate(0deg);
-  } 
+  }
 }
 @keyframes shadow {
   0%,
@@ -552,7 +564,7 @@
 }
 
 .scrollbar {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -566,11 +578,106 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-.dateText{
+.dateText {
   margin-top: 3%;
   font-size: small;
 }
 
+.password {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  width: 150px;
+}
+.password:before,
+.password:after {
+  content: "";
+  height: inherit;
+  background: transparent;
+  display: block;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0 1px 0;
+  position: absolute;
+  width: calc(25% - 1px);
+  z-index: 10;
+}
+.password:before {
+  left: calc(25%);
+}
+.password:after {
+  right: calc(25%);
+}
+
+.strength-1::-webkit-progress-value {
+  background-color: #f25f5c;
+  width: 100%;
+}
+.strength-2::-webkit-progress-value {
+  background-color: orange;
+  width: 100%;
+}
+
+.strength-3::-webkit-progress-value {
+  background-color: #70c1b3;
+  width: 100%;
+}
+
+.strength-4::-webkit-progress-value {
+  background-color: #084c1eba;
+  width: 100%;
+}
+
+.strength-1,
+.strength-0s {
+  color: #f25f5c;
+  display: flex;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.strength-2 {
+  color: orange;
+  display: flex;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.strength-3 {
+  color: #70c1b3;
+  display: flex;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.strength-4 {
+  color: #084c1eba;
+  display: flex;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.feedback {
+  display: inherit !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.formnewpass {
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: fit-content;
+  border-spacing: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
 .search-bar {
   display: flex;
   justify-content: center; /* Horizontally center the content */
@@ -578,21 +685,105 @@
   margin-bottom: 10px; /* Adjust margin as needed */
 }
 
-
-
-
-.search-bar input[type="text"] {
+.search-bar-input {
   width: 35%;
   padding: 10px;
   border-radius: 20px; /* Adjust the border-radius value as needed */
-  border: 1px solid #ccc;
   outline: none;
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
-.search-bar input[type="text"]:focus {
-  border-color: dodgerblue;
-  box-shadow: 0 0 5px dodgerblue;
+.search-bar-input :focus {
+  border-color: rgb(247, 54, 44);
+  box-shadow: 0 0 5px rgb(247, 54, 44);
 }
 
+.col-shadow {
+  box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 17px 0px rgba(0, 0, 0, 0.75);
+}
+
+.shadow-text {
+  text-shadow: 4px 4px 9px rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  padding-top: 20px;
+}
+
+.col-md-8 {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.col-md-8 p {
+  margin-bottom: 15px;
+}
+
+.list-group {
+  padding: 10px;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
+}
+
+.list-group-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+.custom-btn {
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: white;
+}
+
+.save-btn {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+}
+.custom-btn.delete-btn {
+  margin-right: 10px;
+}
+
+
+.Btn-Login {
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+
+.error-col {
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 400px;
+  border-spacing: 30px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.seose{
+  font-size: 10rem;
+}
+
+.NotFond{
+  font-size: 3rem;
+}

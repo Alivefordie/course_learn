@@ -3,3 +3,18 @@
   font-style: normal;
   font-size: 30;
 }
+
+.header {
+  text-align: center;
+  font-family: "Righteous","sans-serif";
+  font-style: normal;
+  font-size: 30;
+  margin-top: 15px;
+}
+
+.error {
+  text-align: center;
+  font-family: "Righteous","sans-serif";
+  font-style: normal;
+  font-size: 30;
+}

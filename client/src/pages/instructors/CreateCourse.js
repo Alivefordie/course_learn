@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Container, Col, Button, Form, Row, Image } from "react-bootstrap";
+import { Container, Col, btn, Form, Row, Image, Button } from "react-bootstrap";
 import Spinner from "../../components/Spinner";
 
-import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
@@ -31,10 +30,8 @@ const CreateCourse = () => {
 	};
 	// send axios
 	const postCourse = async () => {
-		const form = new FormData();
 		setLoading(true);
-		const jwtToken = sessionStorage.getItem("auth.jwt");
-		axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+		const form = new FormData();
 		const data = CourseSyllabus.map((c, i) => {
 			if (c.__component == "activity.video") {
 				form.append(`files.course_syllabus[${i}].videoFile`, c.videoFile[0]);
@@ -49,11 +46,12 @@ const CreateCourse = () => {
 		// console.log(sendData);
 		form.append("data", JSON.stringify(sendData));
 		form.append("files.picture", picture["files.picture"]);
-		const response = await axios.post("http://localhost:1337/api/courses", form);
+		const response = await ax.post(`${conf.apiUrlPrefix}/courses`, form);
 		console.log(response);
 		// link to some page
 		setLoading(false);
 	};
+
 	const handleCreate = (event) => {
 		event.preventDefault();
 		setLoading(true);
@@ -67,6 +65,7 @@ const CreateCourse = () => {
 		setLoading(false);
 		setValidated(true);
 	};
+
 	const handleValidate = (event, i) => {
 		event.preventDefault();
 		const form = document.getElementById("CForm");
@@ -79,6 +78,7 @@ const CreateCourse = () => {
 		}
 		setSValidated(true);
 	};
+
 	const addFile = () => {
 		setedit(true);
 		setSValidated(false);
@@ -124,7 +124,10 @@ const CreateCourse = () => {
 		onchangeVal[i]["N" + name] = value;
 		setCourseSyllabus(onchangeVal);
 	};
+
+
 	return (
+
 		<div className={style.body}>
 			<NavbarTop />
 			{loading ? (
@@ -132,106 +135,82 @@ const CreateCourse = () => {
 			) : (
 				<Container sm="3" md="4">
 					<Row>
-						<Col className="courseData-col">
-							<Form
-								id="myform"
-								noValidate
-								validated={validated}
-								onSubmit={handleCreate}
-								className="mt-3">
+
+						<Col className={`${style.courseDataCol} courseData-col`}>
+							<Form id="myform" noValidate validated={validated} onSubmit={handleCreate} className={`mt-3 ${style.customForm}`}>
 								<Form.Group controlId="formTitle">
 									<Form.Label>Title</Form.Label>
-									<Form.Control
-										required
-										onChange={handleChange}
-										type="text"
-										name="title"
-										placeholder="Enter title"
-									/>
+									<Form.Control required onChange={handleChange} type="text" name="title" placeholder="Enter title" />
 								</Form.Group>
+
 								<Form.Group controlId="formDescription">
 									<Form.Label>Description</Form.Label>
-									<Form.Control
-										required
-										onChange={handleChange}
-										as="textarea"
-										rows={3}
-										name="description"
-										placeholder="Enter description"
-									/>
+									<Form.Control required onChange={handleChange} as="textarea" rows={3} name="description" placeholder="Enter description" />
 								</Form.Group>
+
 								<Form.Group controlId="formPicture">
 									<Form.Label>Cover</Form.Label>
 									{!picture ? (
-										<Form.Control required type="file" onChange={handlePicture} name="picture" />
+										<Form.Control required type="file" accept="image/png" onChange={handlePicture} name="picture" />
 									) : (
 										<>
 											<br />
-											<Image
-												className="h-50 w-50"
-												src={URL.createObjectURL(picture["files.picture"])}
-											/>
-											<Button onClick={() => setPicture(null)} variant="outline-danger">
-												delete
-											</Button>
+											<Image className="h-25 w-25 mb-1" src={URL.createObjectURL(picture["files.picture"])} />
+											<br />
+											<Button onClick={() => setPicture(null)} variant="outline-danger">Delete Image</Button>
 										</>
 									)}
 								</Form.Group>
+
 								<Row className="mb-4">
 									<Form.Group as={Col} controlId="formPrice">
 										<Form.Label>Price</Form.Label>
-										<Form.Control
-											required
-											type="number"
-											name="price"
-											min="1"
-											step="1"
-											onChange={handleChange}
-											placeholder="Enter price"
-										/>
+										<Form.Control required type="number" name="price" min="1" step="1" onChange={handleChange} placeholder="Enter price" />
 									</Form.Group>
+
 									<Form.Group as={Col} controlId="formMaxCapacity">
 										<Form.Label>Max Capacity</Form.Label>
-										<Form.Control
-											required
-											onChange={handleChange}
-											type="number"
-											min="1"
-											step="1"
-											name="maxCapacity"
-											placeholder="Enter max capacity"
-										/>
+										<Form.Control required onChange={handleChange} type="number" min="1" step="1" name="maxCapacity" placeholder="Enter max capacity" />
 									</Form.Group>
+
 									<Form.Group as={Col} controlId="formMaxCapacity">
 										<Form.Label>Duration</Form.Label>
-										<Form.Control
-											required
-											onChange={handleChange}
-											type="number"
-											min="1"
-											step="1"
-											name="duration"
-											placeholder="Enter duration"
-										/>
+										<Form.Control required onChange={handleChange} type="number" min="1" step="1" name="duration" placeholder="Enter duration" />
 									</Form.Group>
 								</Row>
 							</Form>
 						</Col>
+
+
+
+
+
 						<Col className={`${style.scrollbar} syllabus-col`}>
 							{!edit && (
-								<div className="m-1">
-									<Button className="m-1" onClick={addFile}>
-										file
-									</Button>
-									<Button className="m-1" onClick={addvideo}>
-										video
-									</Button>
-									<Button className="m-1" onClick={addtext}>
-										text
-									</Button>
+								<div className="m-1 d-flex">
+
+									<div className="m-3">
+										<Button style={{ backgroundColor: 'transparent', border: 'none' }} className="m-1 custom-btn" onClick={addFile}>
+											<img src="/file-earmark-pdf.svg" alt="File" width="50px" />
+										</Button>
+									</div>
+
+									<div className="m-3">
+										<Button style={{ backgroundColor: 'transparent', border: 'none' }} className="m-1 custom-btn" onClick={addvideo}>
+											<img src="/file-earmark-play.svg" alt="File" width="50px" />
+										</Button>
+									</div>
+									<div className="m-3">
+										<Button style={{ backgroundColor: 'transparent', border: 'none' }} className="m-1 custom-btn" onClick={addtext}>
+											<img src="/card-text.svg" alt="File" width="50px" />
+										</Button>
+									</div>
 									<br />
+
 								</div>
+
 							)}
+
 							<Form id="CForm" noValidate validated={Svalidated} className="mt-3">
 								{CourseSyllabus.map((val, i) => {
 									switch (val.__component) {
@@ -240,9 +219,13 @@ const CreateCourse = () => {
 												return (
 													<div key={i}>
 														<Form.Group as={Row} className="mb-3">
-															<Form.Text>file</Form.Text>
+															<Form.Text>
+																<strong>
+																	file
+																</strong>
+															</Form.Text>
 															<Form.Label column sm={2}>
-																Title
+																<strong>Title</strong>
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
@@ -255,12 +238,16 @@ const CreateCourse = () => {
 																/>
 															</Col>
 														</Form.Group>
+
 														<Form.Group as={Row} className="mb-3">
 															<Form.Label column sm={2}>
-																File
+																<strong >File</strong>
+
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
+																//word png exal เอกสาร บลาๆ
+																	accept="image/png, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .doc, .docx, .xls"
 																	required
 																	onChange={(e) => handleSyllabusFileChange(e, i)}
 																	type="file"
@@ -268,14 +255,14 @@ const CreateCourse = () => {
 																/>
 															</Col>
 														</Form.Group>
-														<button
+														<button className="custom-btn delete-btn"
 															onClick={(e) => {
 																e.preventDefault();
 																handleDelete(val.onEdit, i);
 															}}>
-															Delete
+															Back
 														</button>
-														<button
+														<button className="custom-btn save-btn"
 															form="CForm"
 															name="onEdit"
 															value={true}
@@ -295,16 +282,17 @@ const CreateCourse = () => {
 																{val.material ? val.material[0].name : "No file"}
 															</Accordion.Body>
 														</Accordion>
-														<button
+														<Button variant="danger" className={style.op}
 															onClick={(e) => {
 																e.preventDefault();
 																handleDelete(val.onEdit, i);
 															}}>
 															Delete
-														</button>
+														</Button>
 													</div>
 												);
 											}
+
 										case "activity.video":
 											if (!val.onEdit) {
 												return (
@@ -312,7 +300,9 @@ const CreateCourse = () => {
 														<Form.Group as={Row} className="mb-3">
 															<Form.Text>Video</Form.Text>
 															<Form.Label column sm={2}>
-																Title
+																<strong>
+																	Title
+																</strong>
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
@@ -327,10 +317,14 @@ const CreateCourse = () => {
 														</Form.Group>
 														<Form.Group as={Row} className="mb-3">
 															<Form.Label column sm={2}>
-																Video
+																<strong>
+																	Video
+																</strong>
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
+																//mp4
+																	accept="video/mp4, .mp4"
 																	required
 																	type="file"
 																	onChange={(e) => handleSyllabusFileChange(e, i)}
@@ -338,20 +332,17 @@ const CreateCourse = () => {
 																/>
 															</Col>
 														</Form.Group>
-														<button
-															onClick={(e) => {
-																e.preventDefault();
-																handleDelete(val.onEdit, i);
-															}}>
-															Delete
-														</button>
-														<button
-															form="CForm"
-															name="onEdit"
-															value={true}
-															onClick={(e) => handleValidate(e, i)}>
+														<Button variant="danger" className="m-2" onClick={(e) => {
+															e.preventDefault();
+															handleDelete(val.onEdit, i);
+														}}>
+															Back
+														</Button>
+
+														<Button form="CForm" name="onEdit" value={true} onClick={(e) => handleValidate(e, i)}>
 															Save
-														</button>
+														</Button>
+
 													</div>
 												);
 											} else {
@@ -365,13 +356,16 @@ const CreateCourse = () => {
 																{val.videoFile ? val.videoFile[0].name : "No file"}
 															</Accordion.Body>
 														</Accordion>
-														<button
-															onClick={(e) => {
-																e.preventDefault();
-																handleDelete(val.onEdit, i);
-															}}>
+
+														<Button className={style.op} variant="danger" onClick={(e) => {
+															e.preventDefault();
+															handleDelete(val.onEdit, i);
+														}}>
 															Delete
-														</button>
+														</Button>
+
+
+
 													</div>
 												);
 											}
@@ -382,7 +376,9 @@ const CreateCourse = () => {
 														<Form.Group as={Row} className="mb-3">
 															<Form.Text>Text</Form.Text>
 															<Form.Label column sm={2}>
-																Title
+																<strong>
+																	Title
+																</strong>
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
@@ -397,7 +393,10 @@ const CreateCourse = () => {
 														</Form.Group>
 														<Form.Group as={Row} className="mb-3">
 															<Form.Label column sm={2}>
-																description
+																<strong>
+
+																	description
+																</strong>
 															</Form.Label>
 															<Col sm={10}>
 																<Form.Control
@@ -410,20 +409,19 @@ const CreateCourse = () => {
 																/>
 															</Col>
 														</Form.Group>
-														<button
-															onClick={(e) => {
-																e.preventDefault();
-																handleDelete(val.onEdit, i);
-															}}>
-															Delete
-														</button>
-														<button
-															form="CForm"
-															name="onEdit"
-															value={true}
-															onClick={(e) => handleValidate(e, i)}>
+														<Button className="custom-btn delete-btn" variant="danger" onClick={(e) => {
+															e.preventDefault();
+															handleDelete(val.onEdit, i);
+														}}>
+															Back
+														</Button>
+
+														<Button className="btn" form="CForm" name="onEdit" value={true} onClick={(e) => handleValidate(e, i)}>
 															Save
-														</button>
+														</Button>
+
+
+
 													</div>
 												);
 											} else {
@@ -435,13 +433,13 @@ const CreateCourse = () => {
 															</Accordion.Header>
 															<Accordion.Body>{val.description}</Accordion.Body>
 														</Accordion>
-														<button
-															onClick={(e) => {
-																e.preventDefault();
-																handleDelete(val.onEdit, i);
-															}}>
+														<Button className={style.op} variant="danger" onClick={(e) => {
+															e.preventDefault();
+															handleDelete(val.onEdit, i);
+														}}>
 															Delete
-														</button>
+														</Button>
+
 													</div>
 												);
 											}
@@ -449,9 +447,11 @@ const CreateCourse = () => {
 								})}
 							</Form>
 							{!edit && (
-								<Button form="myform" type="submit">
-									New
+								<Button form="myform" type="submit" className={`${style.customBtn} btn btn-outline-danger ml-200`}>
+									Save to <img src="/floppy.svg" alt="Bag Icon" className="mr-2" />
 								</Button>
+
+
 							)}
 						</Col>
 					</Row>
