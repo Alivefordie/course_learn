@@ -46,16 +46,14 @@ const EditProfile = () => {
 
 			const formData = new FormData();
 			formData.append("files", picture, picture.name);
-
 			const uploadResponse = await ax.post(`${conf.apiUrlPrefix}/upload/`, formData);
 			console.log("File uploaded successfully:", uploadResponse.data);
 			const pictureId = uploadResponse.data[0].id;
-
 			const updatedUserData = { username, email, picture: pictureId };
 			const updateUserResponse = await ax.put(`${conf.apiUrlPrefix}/users/${id}`, updatedUserData);
-
 			setUserData(updateUserResponse.data);
 			console.log("Profile updated successfully:", updateUserResponse.data);
+			
 		} catch (error) {
 			setError("Failed to update profile");
 			console.error("Failed to update profile:", error);

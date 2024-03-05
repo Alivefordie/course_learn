@@ -96,6 +96,12 @@
       "relation": "oneToMany",
       "target": "api::progress.progress",
       "mappedBy": "users_permissions_user"
+    },
+    "date": {
+      "type": "date"
+    },
+    "fullname": {
+      "type": "string"
     }
   }
 }

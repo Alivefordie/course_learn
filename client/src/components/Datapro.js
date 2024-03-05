@@ -156,17 +156,7 @@ return (
                         onChange={handleInputChange}
                       />
                     </Form.Group>
-                    <Form.Group controlId="formJob" className="mb-2">
-                      <Form.Label>Job</Form.Label>
-                      <Form.Control
-                        size="sm"
-                        type="text"
-                        placeholder="Enter job"
-                        name="job"
-                        value={userData.job}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
+
                     <Form.Group controlId="formRole" className="mb-2">
                       <Form.Label>Role</Form.Label>
                       <Form.Control
@@ -187,9 +177,6 @@ return (
                   </p>
                   <p className="text-info-pro">
                     <strong>Date of Birth:</strong> {userData.dateOfBirth}
-                  </p>
-                  <p className="text-info-pro">
-                    <strong>Job:</strong> {userData.job}
                   </p>
                   <p className="text-info-pro">
                     <strong>Role:</strong> {userData.role}

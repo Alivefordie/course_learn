@@ -16,7 +16,18 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
 
+// import { useContext, useEffect, useState } from "react";
+// import { Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+// import ax from "../conf/ax";
+// import conf from "../conf/main";
+import { AuthContext } from "../context/AuthContext";
+
+
+
+
 const MyCourses = () => {
+  const navigate = useNavigate()
   const [ownerCourses, setOwnerCourses] = useState([]);
   const [loadingOwnerCourses, setLoadingOwnerCourses] = useState(true);
   const [loadingRegularCourses, setLoadingRegularCourses] = useState(true);
@@ -75,29 +86,33 @@ const MyCourses = () => {
       ) : (
         <Container sm="3" md="4">
           <Row className="mycourse-rows">
-            {ownerCourses.map((course) => (
-              <Col key={course.id} className="owner-course-col">
-                <h1 style={{ fontSize: 30 }}>{course.name}</h1>
-              </Col>
-            ))}
 
-            <Col className="inprogress-col">
+            <Col className="inprogress-col scrollbar">
               <h1 style={{ fontSize: 30 }} className="header-inpro">
                 Inprogress
               </h1>
-              {data.map((course) => (
-                <Card key={course.id} className="inpro-card">
-                  <Card.Body>
-                    <Card.Title>{course.attributes.title}</Card.Title>
-                    <Card.Text>{course.attributes.description}</Card.Text>
-                    <Link to={`./study/${course.id}`}>
-                      <Button variant="dark">View Details</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              ))}
+              {data.map((course) => {
+                console.log(course)
+                return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
+                   <div
+                        onClick={() => navigate(`/mycourse/${course.id}`)}
+                        style={{ cursor: "pointer" }}
+                        className="image-col">
+                        <Card.Img className="course-image" variant="left" src={conf.url+course.attributes.picture.data.attributes.url } />
+                    </div>
+                    <div className="body-col">
+                        <Card.Body
+                            onClick={() => navigate(`/mycourse/${course.id}`)}
+                            style={{ cursor: "pointer" }}>
+                            <Card.Title>{course.attributes.title}</Card.Title>
+                            <Card.Text className="m-0">ระยะเวลา {course.attributes.duration}</Card.Text>
+                            <Card.Text className="m-0">ครู {course.attributes.owner.data.attributes.username}</Card.Text>
+                        </Card.Body>
+                    </div>
+                </Card>}
+              )}
             </Col>
-            <Col className="complete-col">
+            <Col className="complete-col scrollbar">
               <h1 style={{ fontSize: 30 }} className="header-com">
                 Complete
               </h1>
