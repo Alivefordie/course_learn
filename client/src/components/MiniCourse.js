@@ -24,7 +24,7 @@ function MiniCourse({ course }) {
 	}, []);
 
 	return (
-		<>
+		<div>
 			<Card className="d-flex flex-row" style={{ marginTop: "15px" }}>
             <div
                 onClick={() => navigate(`/courses/${course.id}`)}
@@ -50,7 +50,7 @@ function MiniCourse({ course }) {
                 </Col>
             </div>
         </Card>
-		</>
+		</div>
 	);
 }
 export default MiniCourse;

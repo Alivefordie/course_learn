@@ -18,17 +18,11 @@ import CreateCourse from "./pages/instructors/CreateCourse";
 import { ContextProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import Management from "./pages/superadmin/Management";
-import ForgotPassword from "./pages/forgotPassword";
-import NewPassword from "./pages/newPassword";
+import Datacourse from "./components/Ins/Datacourse";
 import EditProfile from "./components/EditProfile";
-import CourseSyllabus from "./pages/coursesyllabus";
-import CourseV from "./components/member/CourseV";
-import Coursedata from "./pages/instructors/Coursedata";
-import ProtectedRoutes from "./components/ProtectecRoute";
-import ProtectectMember from "./components/ProtectectMember";
-import ProtectecInstructer from "./components/ProtectecInstructer";
-import ProtectecSuperadmin from "./components/ProtectecSuperadmin";
-import Error from "./pages/Error";
+import myCourses from "./pages/myCoursesStudent";
+import MyCoursesStudent from "./pages/myCoursesStudent";
+
 
 const router = createBrowserRouter([
 	{
@@ -40,90 +34,57 @@ const router = createBrowserRouter([
 		element: <CourseInfo />,
 	},
 	{
+		path: "/cart",
+		element: <Cart />,
+	},
+	{
 		path: "/login",
 		element: <Login />,
+	},
+	{
+		path: "/payment",
+		element: <Payment />,
 	},
 	{
 		path: "/register",
 		element: <Register />,
 	},
 	{
-		path: "/ForgotPassword",
-		element: <ForgotPassword />,
+		path: "/mycourses",
+		element: <MyCourses />,
 	},
 	{
-		path: "/NewPassword",
-		element: <NewPassword />,
+		path: "/history",
+		element: <History />,
 	},
 	{
-		element: <ProtectedRoutes />,
-		children: [
-			{
-				element: <ProtectectMember />,
-				children: [
-					{
-						path: "/profile",
-						element: <Profile />,
-					},
-					{
-						path: "/profile/edit-profile/:id",
-						element: <EditProfile />,
-					},
-					{
-						path: "/history",
-						element: <History />,
-					},
-					{
-						path: "/mycourses",
-						element: <MyCourses />,
-					},
-					{
-						path: "/mycourses/:item",
-						element: <CourseSyllabus />,
-					},
-					{
-						path: "/mycourses/study/:item",
-						element: <CourseV />,
-					},
-					{
-						path: "/cart",
-						element: <Cart />,
-					},
-					{
-						path: "/payment",
-						element: <Payment />,
-					},
-				],
-			},
-			{
-				element: <ProtectecInstructer />,
-				children: [
-					{
-						path: "/Instructors",
-						element: <InsSee />,
-					},
-					{
-						path: "/Instructors/create",
-						element: <CreateCourse />,
-					},
-					{
-						path: "/Instructors/:course",
-						element: <Coursedata />,
-					},
-				],
-			},
-			{
-				element: <ProtectecSuperadmin />,
-				children: [
-					{
-						path: "/superadmin",
-						element: <Management />,
-					},
-				],
-			},
-		],
+		path: "/Instructors",
+		element: <InsSee />,
 	},
-	{ path: "*", element: <Error /> },
+	{
+		path: "/Instructors/create",
+		element: <CreateCourse />,
+	},
+	{
+		path: "/profile",
+		element: <Profile />,
+	},
+	{
+		path: "/superadmin",
+		element: <Management />,
+	},
+	{
+		path: "/Instructors/:course",
+		element: <Datacourse />,
+	},
+	{
+		path: "/profile/edit-profile/:id",
+		element: <EditProfile />,
+	},
+	{
+		path: "/mycourses/study/:item",
+		element: <MyCoursesStudent />,
+	},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
