@@ -54,11 +54,11 @@ const History = () => {
 			) : (
 				<Container sm="3" md="4">
 					<Row>
-						<Col className="week-col">
+						<Col className="top-rank-course col-shadow scrollbar ">
 							<h1 className={style.header}>
 								This week
 							</h1>
-							<Container className="item-week">
+							<Container className="">
 								{myCourses.week.length ? (
 									myCourses.week.map((c, i) => (
 										c.attributes.entries.data.map((date, index) =>
@@ -74,7 +74,7 @@ const History = () => {
 								)}
 							</Container>
 						</Col>
-						<Col className="month-col ">
+						<Col className="top-rank-course col-shadow scrollbar ">
 							<h1 className={style.header}>
 								This month
 							</h1>
@@ -94,7 +94,7 @@ const History = () => {
 								)}
 							</Container>
 						</Col>
-						<Col className="year-col">
+						<Col className="top-rank-course col-shadow scrollbar">
 							<h1 className={style.header}>
 								This year
 							</h1>

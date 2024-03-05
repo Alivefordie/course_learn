@@ -32,6 +32,7 @@ const MyCourses = () => {
   const [loadingOwnerCourses, setLoadingOwnerCourses] = useState(true);
   const [loadingRegularCourses, setLoadingRegularCourses] = useState(true);
   const [data, setdata] = useState([]);
+  const [pro, setprogess] = useState([])
 
   const fetchData = async () => {
     try {
@@ -90,30 +91,62 @@ const MyCourses = () => {
                 Inprogress
               </h1>
               {data.map((course) => {
-                console.log(course)
-                return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
-                   <div
-                        onClick={() => navigate(`/mycourse/${course.id}`)}
-                        style={{ cursor: "pointer" }}
-                        className="image-col">
-                        <Card.Img className="course-image" variant="left" src={conf.url+course.attributes.picture.data.attributes.url } />
+                const p = course.attributes.course_syllabus.map((Sylla) => Sylla.progresses.data[0].attributes.value)
+                const pr = p.length > 0 ? p.reduce((ac, v) => { return ac + v }, 0) : 0
+                if ((pr ? (pr / p.length) : 0) < 100) {
+                  return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
+                    <div
+                      onClick={() => navigate(`/mycourses/study/${course.id}`)}
+                      style={{ cursor: "pointer" }}
+                      className="image-col">
+                      <Card.Img className="course-image" variant="left" src={conf.url + course.attributes.picture.data.attributes.url} />
                     </div>
                     <div className="body-col">
-                        <Card.Body
-                            onClick={() => navigate(`/mycourse/${course.id}`)}
-                            style={{ cursor: "pointer" }}>
-                            <Card.Title>{course.attributes.title}</Card.Title>
-                            <Card.Text className="m-0">ระยะเวลา {course.attributes.duration}</Card.Text>
-                            <Card.Text className="m-0">ครู {course.attributes.owner.data.attributes.username}</Card.Text>
-                        </Card.Body>
+                      <Card.Body
+                        onClick={() => navigate(`/mycourses/study/${course.id}`)}
+                        style={{ cursor: "pointer" }}>
+                        <Card.Title>{course.attributes.title}</Card.Title>
+                        <Card.Text className="m-0">ระยะเวลา {course.attributes.duration}</Card.Text>
+                        <Card.Text className="m-0">ครู {course.attributes.owner.data.attributes.username}</Card.Text>
+
+                        <ProgressBar now={pr / p.length} label={`${pr ? pr / p.length : 0}%`} />
+                      </Card.Body>
                     </div>
-                </Card>}
+                  </Card>
+                }
+              }
               )}
             </Col>
             <Col className="complete-col scrollbar">
               <h1 style={{ fontSize: 30 }} className="header-com">
                 Complete
               </h1>
+              {data.map((course) => {
+                const p = course.attributes.course_syllabus.map((Sylla) => Sylla.progresses.data[0].attributes.value)
+                const pr = p.length > 0 ? p.reduce((ac, v) => { return ac + v }, 0) : 0
+                if (pr / p.length >= 100) {
+                  return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
+                    <div
+                      onClick={() => navigate(`/mycourses/study/${course.id}`)}
+                      style={{ cursor: "pointer" }}
+                      className="image-col">
+                      <Card.Img className="course-image" variant="left" src={conf.url + course.attributes.picture.data.attributes.url} />
+                    </div>
+                    <div className="body-col">
+                      <Card.Body
+                        onClick={() => navigate(`/mycourses/study/${course.id}`)}
+                        style={{ cursor: "pointer" }}>
+                        <Card.Title>{course.attributes.title}</Card.Title>
+                        <Card.Text className="m-0">ระยะเวลา {course.attributes.duration}</Card.Text>
+                        <Card.Text className="m-0">ครู {course.attributes.owner.data.attributes.username}</Card.Text>
+
+                        <ProgressBar now={pr / p.length} label={`${pr ? pr / p.length : 0}%`} />
+                      </Card.Body>
+                    </div>
+                  </Card>
+                }
+              }
+              )}
             </Col>
           </Row>
         </Container>
