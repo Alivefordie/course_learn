@@ -42,7 +42,7 @@ const Login = () => {
             </Container>
             <Form onSubmit={handleSubmit} className={styles.username}>
               <Form.Group controlId="username">
-                <Form.Label>Username</Form.Label>
+                <Form.Label className = {styles.righteous}>Username</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter Your Email"
@@ -53,7 +53,7 @@ const Login = () => {
                 />
               </Form.Group>
               <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className = {styles.righteous}>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter Your Password"
@@ -73,16 +73,22 @@ const Login = () => {
                   style={{
                     textDecorationLine: "underline",
                     cursor: "pointer",
+                    fontFamily: '"Righteous", sans-serif',
+                    fontWeight: "400",
+                    fontStyle: "normal",
+                    display: "flex",
+                    color: "white",
                   }}
                 >
                   Forgot Password
                 </span>
                 <span
+                className = {styles.righteous}
                   onClick={() => navigate("/register")}
                   style={{
                     textDecorationLine: "underline",
                     cursor: "pointer",
-                    marginLeft:"10px"
+                    
                   }}
                 >
                   Don't have Account?
@@ -90,6 +96,7 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <Button
+                
                   variant="light"
                   type="submit"
                   className=" mt-3"
@@ -98,6 +105,7 @@ const Login = () => {
                     fontWeight: "bold",
                     borderRadius: "15px",
                     width: "17vw",
+                    boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.33)"
                   }}
                 >
                   Login
