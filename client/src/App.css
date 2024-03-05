@@ -618,7 +618,7 @@
 }
 
 .scrollbar {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -960,3 +960,4 @@
 .edit-Btn {
   margin-top: 200px;
 }
+
