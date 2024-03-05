@@ -1026,7 +1026,7 @@
     /* Add spacing between components */
   }
 
-  .inpro-card {
+  .my-card {
     width: 50%;
     padding: 10px;
     margin: 10px auto;
@@ -1061,3 +1061,4 @@
     /* Add scrollbar when content exceeds max height */
   }
 }
+
