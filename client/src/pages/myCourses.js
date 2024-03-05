@@ -80,25 +80,29 @@ const MyCourses = () => {
             ))}
 
             <Col className="inprogress-col">
-              <h1 style={{ fontSize: 30 }} className="header-inpro">
-                Inprogress
-              </h1>
-              {data.map((course) => (
-                <Card key={course.id} className="inpro-card">
-                  <Card.Body>
-                    <Card.Title>{course.attributes.title}</Card.Title>
-                    <Card.Text>{course.attributes.description}</Card.Text>
-                    <Link to={`./study/${course.id}`}>
-                      <Button variant="dark">View Details</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              ))}
+              <div className="scrollable-col">
+                <h1 style={{ fontSize: 30 }} className="header-inpro">
+                  Inprogress
+                </h1>
+                {data.map((course) => (
+                  <Card key={course.id} className="inpro-card">
+                    <Card.Body>
+                      <Card.Title>{course.attributes.title}</Card.Title>
+                      <Card.Text>{course.attributes.description}</Card.Text>
+                      <Link to={`./study/${course.id}`}>
+                        <Button variant="dark">View Details</Button>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
             </Col>
             <Col className="complete-col">
-              <h1 style={{ fontSize: 30 }} className="header-com">
-                Complete
-              </h1>
+              <div className="scrollable-col">
+                <h1 style={{ fontSize: 30 }} className="header-com">
+                  Complete
+                </h1>
+              </div>
             </Col>
           </Row>
         </Container>

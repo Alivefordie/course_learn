@@ -1025,7 +1025,6 @@
   margin-top: 20px;
   margin-left: auto; /* To center horizontally */
   margin-right: auto; /* To center horizontally */
-
 }
 
 .progressbar-data {
@@ -1097,4 +1096,11 @@
     /* Add scrollbar when content exceeds max height */
   }
 }
+
+.scrollable-col {
+  scrollbar-width: thin;
+  height: 400px; /* Adjust the height as per your requirement */
+  overflow-y: auto;
+}
+
 
