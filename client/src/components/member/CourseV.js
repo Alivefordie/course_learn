@@ -113,11 +113,22 @@ const CourseV = () => {
       <Container className="study-con" sm="2" md="4">
         <Row>
           <Col className="main-study">
-            <Container className="main-video"></Container>
-            <div className="Card-course-study"></div>
+            <Container className="main-video">
+              <p>main video</p>
+            </Container>
+            <div className="Card-course-study">
+              <p>
+                video details
+              </p>
+            </div>
           </Col>
           <Col className="video-list" style={{ maxWidth: "400px" }}>
-            <Row className="video-rows"></Row>
+            <Row className="video-rows">
+            <p>#1 video</p>
+            <p>#2 video</p>
+            <p>#3 video</p>
+            <p>#4 video</p>
+            </Row>
           </Col>
         </Row>
       </Container>
