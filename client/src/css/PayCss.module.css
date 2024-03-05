@@ -38,19 +38,22 @@
 
 .choosebank {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  margin-bottom: 50px;
+  justify-content: center;
+  align-content: center;
+  margin-top: auto;
+  margin-bottom: 30px;
 }
 
 .confirmBtn {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 
 .choosebank img {
-  margin: 15px;
+  margin: 10px;
 }
 
 
@@ -60,6 +63,7 @@
   background-color: #fff;
   width: 50%;
   margin-left: 50%;
+  padding: 10px;
 }
 
 .InfoInput {

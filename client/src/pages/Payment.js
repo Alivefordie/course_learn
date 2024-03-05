@@ -305,15 +305,15 @@ const Payment = () => {
                 </h1>
                 <br />
                 <div className={styles.choosebank}>
-                  <img src="/a.png" width={50} height={50} alt="Bank A" />
-                  <img src="/b.png" width={50} height={50} alt="Bank B" />
-                  <img src="/c.png" width={50} height={50} alt="Bank C" />
+                  <img src="/a.png" width={40} height={40} alt="Bank A" />
+                  <img src="/b.png" width={40} height={40} alt="Bank B" />
+                  <img src="/c.png" width={40} height={40} alt="Bank C" />
                   <br />
-                  <img src="/d.png" width={50} height={50} alt="Bank D" />
-                  <img src="/e.png" width={50} height={50} alt="Bank E" />
-                  <img src="/f.png" width={50} height={50} alt="Bank F" />
+                  <img src="/d.png" width={40} height={40} alt="Bank D" />
+                  <img src="/e.png" width={40} height={40} alt="Bank E" />
+                  <img src="/f.png" width={40} height={40} alt="Bank F" />
                   <br />
-                  <img src="/g.png" width={50} height={50} alt="Bank G" />
+                  <img src="/g.png" width={40} height={40} alt="Bank G" />
                 </div>
                 {data.length === 0 ? (
                   <p>Cannot confirm when cart is empty</p>
