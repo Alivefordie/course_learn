@@ -35,7 +35,7 @@ const NavbarLink = () => {
               className={`menu-items d-flex ${styles.navLink}`}
             >
               <img
-                className="my-auto"
+                className={styles.picture}
                 src="../course.png"
                 style={{ height: "50px", width: "50px" }}
               />
@@ -49,7 +49,7 @@ const NavbarLink = () => {
             >
               <img
                 src="../history.png"
-                className={styles.picture+'my-auto'}
+                className={styles.picture}
                 style={{ height: "50px", width: "50px" }}
               />
               <h1 style={{ fontSize: "30px" }} className="menu-header">
@@ -62,7 +62,7 @@ const NavbarLink = () => {
             >
               <img
                 src="../cart.png"
-                className={styles.picture+'my-auto'}
+                className={styles.picture}
                 style={{ height: "50px", width: "50px" }}
               />
               <h1 style={{ fontSize: "30px" }} className="menu-header">
