@@ -93,7 +93,7 @@ const Login = () => {
                   <Button
                     variant="light"
                     type="submit"
-                    className=" mt-3"
+                    className="mt-3"
                     style={{
                       justifyContent: "center",
                       fontWeight: "bold",
