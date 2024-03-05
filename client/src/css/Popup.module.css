@@ -7,14 +7,14 @@
 
  .check::before {
     content: '\2713';
-    font-size: 200px;
+    font-size: 150px;
     color: greenyellow;
  }
 
 
  .exclamation::before {
      content: '\2757';
-     font-size: 200px;
+     font-size: 150px;
      color: red;
  }
 
