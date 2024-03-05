@@ -17,9 +17,27 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
 import styles from "../css/Student.module.css";
+import CourseComponent from "../components/Owner";
 
 
 const MyCoursesStudent = () => {
+    const [coursesVideo, setCoursesVideo] = useState([]);
+    
+    const fetchOwnerCourses = async () => {
+		try {
+			const response = await ax.get(`${conf.apiUrlPrefix}/course`);
+			const data = await response.json();
+			setCoursesVideo(data);
+		} catch (error) {
+			console.error("Error fetching owner courses:", error);
+			// Handle the error if necessary
+		}
+	};
+
+    useEffect(() => {
+        fetchOwnerCourses();
+    }, []);
+
     return(
         <div className = {styles.Bgcolor}>
             <NavbarTop NavbarLink={NavbarLink} />
@@ -47,6 +65,7 @@ const MyCoursesStudent = () => {
                                
                                 <Card.Body>
                                     <Card.Title >Display Course</Card.Title>
+                                    <CourseComponent/>
                                     <Card.Text style = {{marginTop: "6vw"}}>
                                     Study Progression --🕙--
                                     </Card.Text>
