@@ -17,6 +17,14 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
 import styles from "../css/Student.module.css" ;
+import Toprank from "../components/Toprank";
+import Common from "../components/Common";
+import Newest from "../components/Newest";
+
+
+
+
+
 
 
 
@@ -28,9 +36,9 @@ const MyCoursesStudent = () => {
             <Container class="container" > 
             <Row>
                       <Col  >
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>Study 📚 ✏️</div>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>
-                            Video
+                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif' , borderRadius : "15px" , boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>Study 📚 ✏️</div>
+                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',borderRadius : "15px"  ,boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
+                            Video 🎬
                             <div>
                                 <video width="auto" height="auto" controls>
                                     <source src="movie.mp4" type="video/mp4"/>
@@ -41,7 +49,19 @@ const MyCoursesStudent = () => {
                         </div>
                      </Col>
                      <Col>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>mycourses</div>
+                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>mycourses 💼</div>
+                        <div >
+                            <Card style={{ width: '34rem' , boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)" }} class="container p-3 my-3 bg-white text-dark">
+                               
+                                <Card.Body>
+                                    <Card.Title >Display Course</Card.Title>
+                                    <Card.Text style = {{marginTop: "6vw"}}>
+                                    Study Progression --🕙--
+                                    </Card.Text>
+                                    <Link to="/mycourses" class="btn btn-primary">See Progression</Link>
+                                </Card.Body>
+                            </Card>
+                        </div>
                      </Col>      
             </Row>
             </Container>
