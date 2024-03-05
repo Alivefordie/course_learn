@@ -117,7 +117,7 @@ const Datapro = ({ data }) => {
                     <Form
                       onSubmit={handleSubmit}
                       className="personal-form"
-                      style={{ maxWidth: "80%"}}
+                      style={{ maxWidth: "80%" }}
                     >
                       <Form.Group controlId="formFullName" className="mb-2">
                         <Form.Label>Full Name</Form.Label>
