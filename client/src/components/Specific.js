@@ -67,7 +67,7 @@ const Specific = ({ data }) => {
 									<Card>
 										<Card.Header
 											style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-											<span style={{ marginRight: "auto" }}>Course Preview</span>
+											<span style={{ marginRight: "auto" }}>Video Preview</span>
 											<Button
 												variant="outline-dark"
 												style={{ border: "0" }}
@@ -84,10 +84,10 @@ const Specific = ({ data }) => {
 														case "activity.review":
 															return (
 																<div key={index}>
-																	<h6>video</h6>
-																	<p>title: {val.title}</p>
-																	<p>link: {val.link}</p>
-																	{/* <p>example: {val.videoFile.data}</p> */}
+																	<video controls width="250">
+																		<source src={conf.url + val.preview.data.attributes.url} type="video/mp4" />
+																		Your browser does not support the video tag.
+																	</video>
 																</div>
 															);
 													}
