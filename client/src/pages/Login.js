@@ -7,21 +7,21 @@ import styles from "../css/LoginCss.module.css";
 import Spinner from "../components/Spinner";
 
 const Login = () => {
-	const { login } = useContext(AuthContext);
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-	const navigate = useNavigate();
-	const [loading, setLoading] = useState(true);
+  const { login } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		try {
-			login(username, password);
-			navigate("/");
-		} catch (error) {
-			console.error("Login error", error);
-		}
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      login(username, password);
+      navigate("/");
+    } catch (error) {
+      console.error("Login error", error);
+    }
+  };
 
   return (
     <div className="body">
@@ -34,13 +34,13 @@ const Login = () => {
           <Col className={styles.loginInput}>
             <h1 className={styles.header}>Login</h1>
             <Container className={styles.loginImage}>
-			<img
-              src="../login.png"
-              alt="Register Background"
-              className={styles.loginImage}
-              onLoad={() => setLoading(false)}
-            />
-			</Container>
+              <img
+                src="../login.png"
+                alt="Register Background"
+                className={styles.loginImage}
+                onLoad={() => setLoading(false)}
+              />
+            </Container>
             <Form onSubmit={handleSubmit} className={styles.username}>
               <Form onSubmit={handleSubmit} className={styles.username}>
                 <Form.Group controlId="username">
