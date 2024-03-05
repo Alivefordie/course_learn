@@ -106,7 +106,7 @@ const Datapro = ({ data }) => {
                     <img
                       src="../edit.png"
                       className="edit-icon"
-                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      style={{ marginLeft: "280px", cursor: "pointer" }}
                       onClick={() => setIsEditing(!isEditing)}
                     />
                   </h1>
