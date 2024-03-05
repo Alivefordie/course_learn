@@ -14,7 +14,6 @@ const Specific = ({ data }) => {
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
-	const jwtToken = sessionStorage.getItem("auth.jwt");
 
 	useEffect(() => {
 		console.log("Specific:", data);
@@ -28,25 +27,6 @@ const Specific = ({ data }) => {
 			});
 		}
 	}, [data, item]);
-
-	// const AddtoCart = async () => {
-	// 	try {
-	// 		if (jwtToken) {
-	// 			const response = await ax.get(conf.apiUrlPrefix + `/courses/${item}/toCart`);
-	// 			console.log(response)
-	// 		if (response.data.AddToCart) {
-	// 			setModalMessage("Course added to cart!");
-	// 			setShowModal(true);
-	// 		} else if (response.data.RemoveFromCart) {
-	// 			setModalMessage("Course removed from cart!");
-	// 			setShowModal(true);
-	// 		}
-	// 	}
-	// 		// window.location.href = "/cart";
-	// 	} catch (error) {
-	// 		console.error("Error fetching data:", error);
-	// 	}
-	// };
 
 	const handleAddCartResponse = (responseData) => {
 		setShowModal(true);
