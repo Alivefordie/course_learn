@@ -16,35 +16,13 @@ import fetchOwnerCourses from "../components/Owner";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
-import styles from "../css/Student.module.css" ;
-
 
 
 const MyCoursesStudent = () => {
     return(
-        
-        <div className = {styles.Bgcolor}>
-            <NavbarTop NavbarLink={NavbarLink} />
-            <Container class="container" > 
-            <Row>
-                      <Col  >
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>Study 📚 ✏️</div>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>
-                            Video
-                            <div>
-                                <video width="auto" height="auto" controls>
-                                    <source src="movie.mp4" type="video/mp4"/>
-                                    <source src="movie.ogg" type="video/ogg"/>
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                     </Col>
-                     <Col>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif'}}>mycourses</div>
-                     </Col>      
-            </Row>
-            </Container>
+        <div>
+            <NavbarTop NavbarLink={NavbarLink}/>
+            
         </div>
     );
 };
