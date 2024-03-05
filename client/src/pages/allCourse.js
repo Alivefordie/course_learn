@@ -88,7 +88,7 @@ const AllCourse = () => {
               data-bs-target="#top-rank-course"
               data-bs-offset="0"
             >
-              <h3 className="header-toprank shadow-text">
+              <h3 className="header-toprank">
                 <img
                   src="../fire.png"
                   style={{ width: "30px", height: "30px" }}
@@ -113,7 +113,7 @@ const AllCourse = () => {
               data-bs-target="#common-col"
               data-bs-offset="0"
             >
-              <h3 className="header-common shadow-text">
+              <h3 className="header-common">
                 <img
                   src="../book.png"
                   style={{ width: "30px", height: "30px" }}
@@ -139,7 +139,7 @@ const AllCourse = () => {
                 data-bs-target="#newest-col"
                 data-bs-offset="0"
               >
-                <h3 className="header-newest shadow-text">
+                <h3 className="header-newest">
                   <img
                     src="../newest.png"
                     style={{ width: "40px", height: "40px" }}

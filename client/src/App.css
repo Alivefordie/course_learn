@@ -155,6 +155,7 @@
   font-style: normal;
   margin-left: 10px;
   margin-top: 15px;
+  text-align: flex;
 }
 .header-cart {
   font-family: "Righteous", sans-serif;
