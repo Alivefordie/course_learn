@@ -47,8 +47,8 @@ const MyCoursesStudent = () => {
                         <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif' , borderRadius : "15px" , boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>Study 📚 ✏️</div>
                         <div class="container p-2 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',borderRadius : "15px"  ,boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
                             Video 🎬
-                            <div >
-                                <video style={{ width: "100%", height: "auto" }} controls>
+                            <div style = {{padding : "25px"}}>
+                                <video style={{ width: "100%", height: "auto",boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.9)" }} controls>
                                     <source src="movie.mp4" type="video/mp4"/>
                                     <source src="movie.ogg" type="video/ogg"/>
                                     Your browser does not support the video tag.
