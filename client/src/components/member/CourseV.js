@@ -118,7 +118,7 @@ const CourseV = () => {
             </Container>
             <div className="Card-course-study">
               <p>
-                video details
+                coure short card 
               </p>
             </div>
           </Col>
