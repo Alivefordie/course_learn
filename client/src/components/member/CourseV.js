@@ -6,6 +6,11 @@ import ax from "../../conf/ax";
 import conf from "../../conf/main";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import NavbarLink from "../NavbarLink";
+import ProgressBar from 'react-bootstrap/ProgressBar';
+// import ButtonGroup from 'react-bootstrap/ButtonGroup';
+// import ListGroupItem from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
+
 
 const CourseV = () => {
   const { item } = useParams();
@@ -14,6 +19,8 @@ const CourseV = () => {
   const [currentSyllabusIndex, setCurrentSyllabusIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [video, setVideo] = useState(false);
+  const [duration, setDuration] = useState(0);
+
 
   const fetchSyllabus = async () => {
     try {
@@ -21,6 +28,7 @@ const CourseV = () => {
         `http://localhost:1337/api/courses/${item}`
       );
       setCourse(response.data.data);
+      console.log(response)
       setSyllabus(response.data.data.attributes.course_syllabus);
     } catch (error) {
       console.log("Error fetching syllabus:", error);
@@ -61,23 +69,25 @@ const CourseV = () => {
     }
   };
 
+
+
   const componentStyle = (syllabus) => {
     switch (syllabus.__component) {
       case "activity.video":
         return (
-          <div className="col-md-8">
-            <p>Title: {syllabus.title}</p>
-            <p>Description: {syllabus.description}</p>
-            <ReactPlayer
-              url={conf.url + syllabus.videoFile.data[0].attributes.url}
-              controls
-              playing={true}
-              onProgress={({ playedSeconds }) => {
-                setProgress(Math.round(playedSeconds));
-              }}
-            />
-            <p>Progress: {progress}</p>
-          </div>
+          <Container className="main-video">
+            <div className="d-flex justify-content-center mx-auto">
+              <ReactPlayer
+                url={conf.url + syllabus.videoFile.data[0].attributes.url}
+                controls
+                playing={true}
+                onDuration={(d) => setDuration(d)}
+                onProgress={({ playedSeconds }) => {
+                  setProgress(Math.round((playedSeconds / duration) * 100));
+                }}
+              />
+            </div>
+          </Container>
         );
       case "activity.text":
         return (
@@ -107,33 +117,89 @@ const CourseV = () => {
     }
   };
 
+  const ShotCard = (syllabus) => {
+    switch (syllabus.__component) {
+      case "activity.video":
+        return (
+          <>
+            <p>Title: {syllabus.title}</p>
+            <p>Description: {syllabus.description}</p>
+            <ProgressBar now={progress} label={`${progress}%`} />;
+          </>
+        );
+      // case "activity.text":
+      //   return (
+      //     <div className="col-md-8">
+      //       <p>Title: {syllabus.title}</p>
+      //       <p>Description: {syllabus.description}</p>
+      //     </div>
+      //   );
+
+      // case "activity.file":
+      //   return (
+      //     <div className="col-md-8">
+      //       <p>Title: {syllabus.title}</p>
+      //       <p>
+      //         Download:{" "}
+      //         <Link
+      //           to={conf.url + syllabus.material.data[0].attributes.url}
+      //           target="_blank"
+      //         >
+      //           File
+      //         </Link>
+      //       </p>
+      //     </div>
+      //   );
+      default:
+        return null;
+    }
+  };
+
+
   return (
     <div className="body">
+      {/* {console.log(course)} */}
       <NavbarTop NavbarLink={NavbarLink} />
-      <Container className="study-con" sm="2" md="4">
-        <Row>
-          <Col className="main-study">
-            <Container className="main-video">
-              <p>main video</p>
-            </Container>
-            <div className="Card-course-study">
-              <p>
-                coure short card 
-              </p>
-            </div>
-          </Col>
-          <Col className="video-list" style={{ maxWidth: "400px" }}>
-            <Row className="video-rows">
-            <p>#1 video</p>
-            <p>#2 video</p>
-            <p>#3 video</p>
-            <p>#4 video</p>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+      {syllabus.length > 0 &&
+        <Container className="study-con" sm="2" md="4">
+          <Row>
+            <Col className="main-study">
+              {componentStyle(syllabus[currentSyllabusIndex])}
+              <div className="Card-course-study">
+                {ShotCard(syllabus[currentSyllabusIndex])}
+              </div>
+            </Col>
+            <Col className="video-list" style={{ maxWidth: "400px" }}>
+              <Row className="video-rows">
+                <ListGroup as="ui" >
+                  {syllabus.map((item, index) => (
+                    <ListGroup.Item as="li"
+                      key={index}
+                      // className={`list-group-item list-group-item-action ${index === currentSyllabusIndex ? "active" : "" }`}
+                      className={` w-100 ${index === currentSyllabusIndex ? "active" : "" }`}
+
+                      onClick={() => handlesyllabusChange(index)}
+                    >
+                      {item.title}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+                {video && (
+
+                  <Button variant="dark" onClick={test1}>
+                    Save progress
+                  </Button>
+
+                )}
+
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      }
     </div>
   );
+
 };
 
 export default CourseV;
