@@ -91,7 +91,7 @@ const MyCourses = () => {
                     <Card.Title>{course.attributes.title}</Card.Title>
                     <Card.Text>{course.attributes.description}</Card.Text>
                     <Link to={`./study/${course.id}`}>
-                      <Button variant="primary">View Details</Button>
+                      <Button variant="dark">View Details</Button>
                     </Link>
                   </Card.Body>
                 </Card>

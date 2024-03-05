@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Modal, Row, Col, Container } from "react-bootstrap";
 import styles from "../css/Popup.module.css";
 
-function LoginFirst({ showLoginFirstModal, closeModal }) {
+function LoginFirst({ showLoginFirstModal, closeModal, message }) {
 	const handleClose = () => {
 		closeModal();
 	};
@@ -14,7 +14,7 @@ function LoginFirst({ showLoginFirstModal, closeModal }) {
 			<Modal.Body className={styles.modalBody}>
 				<Container className={styles.centeredContent}>
 					<div className={styles.exclamation} />
-					<span className={styles.loginText}>Please Login First</span>
+					<span className={styles.loginText}>{message}</span>
 				</Container>
 			</Modal.Body>
 		</Modal>

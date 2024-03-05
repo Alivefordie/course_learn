@@ -16,20 +16,11 @@ import fetchOwnerCourses from "../components/Owner";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
-import styles from "../css/Student.module.css" ;
-import Toprank from "../components/Toprank";
-import Common from "../components/Common";
-import Newest from "../components/Newest";
-
-
-
-
-
-
 
 
 const MyCoursesStudent = () => {
     return(
+<<<<<<< HEAD
         
         <div className = {styles.Bgcolor}>
             <NavbarTop NavbarLink={NavbarLink} />
@@ -67,6 +58,11 @@ const MyCoursesStudent = () => {
                      </Col>      
             </Row>
             </Container>
+=======
+        <div>
+            <NavbarTop NavbarLink={NavbarLink}/>
+            
+>>>>>>> a7736428f9edea8611b8161724b2a4ebad5a4192
         </div>
     );
 };

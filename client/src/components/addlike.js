@@ -13,12 +13,20 @@ function AddLike({ course }) {
     const multipleEntries = courseContent.entries?.data.length > 1;
     const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
     const [showLoginFirst, setShowLoginFirst] = useState(false);
+    const [message, setmessage] = useState('');
 
     const addTolike = async () => {
         if (login) {
-            const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
-            setLike(response.data.like);
-        } else {
+            if (context.state.role === 'student') {
+                const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
+                setLike(response.data.like);
+            } else {
+                setmessage("You can't like")
+                setShowLoginFirst(true)
+            }
+        }
+        else {
+            setmessage("Please Login First")
             setShowLoginFirst(true);
         }
     };
@@ -29,16 +37,16 @@ function AddLike({ course }) {
 
 
     useEffect(() => {
-		console.log('course',course)
-        console.log('like',courseContent.entries?.data[0]?.attributes?.like)
-		// console.log(login);
-		// console.log(like);
-		// console.log(courseContent);
-	}, []);
+        console.log('course', course)
+        console.log('like', courseContent.entries?.data[0]?.attributes?.like)
+        // console.log(login);
+        // console.log(like);
+        // console.log(courseContent);
+    }, []);
 
     return (
         <>
-            {showLoginFirst && <LoginFirst showLoginFirstModal={showLoginFirst} closeModal={handleClose}/>}
+            {showLoginFirst && <LoginFirst showLoginFirstModal={showLoginFirst} closeModal={handleClose} message={message}/>}
             {!like ? (
                 <img
                     onClick={addTolike}
