@@ -82,6 +82,7 @@ const Login = () => {
                   style={{
                     textDecorationLine: "underline",
                     cursor: "pointer",
+                    marginLeft:"10px"
                   }}
                 >
                   Don't have Account?
