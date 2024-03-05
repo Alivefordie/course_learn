@@ -54,10 +54,6 @@ const ManageData = () => {
 		}
 	}, [slip]);
 
-	const handleEditCourse = (id) => {
-		setEditingItemId(id);
-	};
-
 	const handleDeleteCourse = async (id) => {
 		try {
 			const response = await ax.get(
@@ -70,9 +66,8 @@ const ManageData = () => {
 		}
 	};
 
-	const handleEditEntry = (id) => {
-		setEditingItemId(id);
-	};
+
+
 
 	const handleDeleteEntry = async (id) => {
 		try {
@@ -175,11 +170,9 @@ const ManageData = () => {
 								<br />
 							</div>
 							<div className="data-item-actions">
-								<Button onClick={() => handleEditCourse(course.id)} variant="primary">
-									Edit
-								</Button>
 								<Button onClick={() => handleDeleteCourse(course.id)} variant="danger">
-									Delete
+									<strong style={{ marginRight: 8 }}  >Delete</strong>
+									<img src="/trash-can-list.svg" alt="bin" width={20} height={20} />
 								</Button>
 							</div>
 						</div>
@@ -207,20 +200,18 @@ const ManageData = () => {
 								<br />
 								<strong>Owner:</strong>{" "}
 								{entry.attributes &&
-								entry.attributes.owner &&
-								entry.attributes.owner.data &&
-								entry.attributes.owner.data.attributes &&
-								entry.attributes.owner.data.attributes.username
+									entry.attributes.owner &&
+									entry.attributes.owner.data &&
+									entry.attributes.owner.data.attributes &&
+									entry.attributes.owner.data.attributes.username
 									? entry.attributes.owner.data.attributes.username
 									: "N/A"}
 								<br />
 							</div>
 							<div className="data-item-actions">
-								<Button onClick={() => handleEditEntry(entry.id)} variant="primary">
-									Edit
-								</Button>
 								<Button onClick={() => handleDeleteEntry(entry.id)} variant="danger">
-									Delete
+									<strong style={{ marginRight: 8 }}  >Delete</strong>
+									<img src="/trash-can-list.svg" alt="bin" width={20} height={20} />
 								</Button>
 							</div>
 						</div>

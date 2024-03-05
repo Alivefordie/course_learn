@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { useEffect, useState  } from "react";
+import { Card, Col, Row, Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import conf from "../../conf/main";
 import ax from "../../conf/ax";
@@ -9,14 +9,20 @@ function SmallCourse({ course, setLoading, fetchData }) {
 	const courseContent = course.attributes;
 	const picture = courseContent.picture.data.attributes.url;
 	const teacher = courseContent.owner.data?.attributes;
+	const [showModal, setShowModal] = useState(false);
+
 	useEffect(() => {
 		//console.log(course);
 	}, []);
+
+	const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
 	const deleteAction = async () => {
 		setLoading(true);
 		await ax.delete(`${conf.apiUrlPrefix}/courses/${course.id}`);
 		await fetchData();
+		handleClose();
 	};
 	const editAction = () => {
 		navigate(`${course.id}`);
@@ -42,7 +48,7 @@ function SmallCourse({ course, setLoading, fetchData }) {
 								<div>
 									<Card.Img
 										className="mx-2"
-										onClick={deleteAction}
+										onClick={handleShow}
 										style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
 										variant="top"
 										src="../trash.svg"
@@ -59,13 +65,27 @@ function SmallCourse({ course, setLoading, fetchData }) {
 							<div onClick={() => navigate(`${course.id}`)} style={{ cursor: "pointer" }}>
 								<Card.Text className="m-0">details</Card.Text>
 								<Card.Text className="m-0 ms-2">{courseContent.description}</Card.Text>
-								<Card.Text className="m-0">ระยะเวลา {courseContent.duration}</Card.Text>
-								<Card.Text className="m-0">ครู {teacher.username}</Card.Text>
+								<Card.Text className="m-0">ระยะเวลา: {courseContent.duration} ชม.</Card.Text>
+								<Card.Text className="m-0">ครู: {teacher.username}</Card.Text>
 							</div>
 						</Col>
 					</Row>
 				</Card.Body>
 			</Card>
+			<Modal show={showModal} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>ยืนยันการลบ</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>คุณแน่ใจหรือไม่ที่ต้องการลบคอร์สนี้?</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						ยกเลิก
+					</Button>
+					<Button variant="danger" onClick={deleteAction}>
+						ลบ
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	);
 }
