@@ -40,8 +40,7 @@ const Datapro = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Submit user data to the server for updating
-      await axios.put(`${conf.apiUrlPrefix}/update-profile`, userData);
+      await axios.put(`${conf.apiUrlPrefix}/profile`, userData);
       setIsEditing(false);
     } catch (error) {
       console.error(error);
@@ -91,7 +90,9 @@ const Datapro = ({ data }) => {
                     marginBottom: "10px",
                   }}
                 >
-                  <Button variant="dark" className="edit-Btn">Edit Profile</Button>
+                  <Button variant="dark" className="edit-Btn">
+                    Edit Profile
+                  </Button>
                 </p>
               </Link>
             </Container>
@@ -99,54 +100,70 @@ const Datapro = ({ data }) => {
           <Col className="profile-info-col" style={{ width: "600px" }}>
             <Row className="info-row">
               <Col className="profile-info">
-                <h1 className="personal-header" style={{ marginTop: "10px" }}>
-                  Personal Information
-                </h1>
+                <div id="personal-info">
+                  <h1 className="personal-header" style={{ marginTop: "10px" }}>
+                    Personal Information
+                    <img
+                      src="../edit.png"
+                      className="edit-icon"
+                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      onClick={() => setIsEditing(!isEditing)}
+                    />
+                  </h1>
+                </div>
+
                 {isEditing ? (
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formFullName">
-                      <Form.Label>Full Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter full name"
-                        name="fullname"
-                        value={userData.fullname}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <Form.Group controlId="formDateOfBirth">
-                      <Form.Label>Date of Birth</Form.Label>
-                      <Form.Control
-                        type="date"
-                        name="dateOfBirth"
-                        value={userData.dateOfBirth}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <Form.Group controlId="formJob">
-                      <Form.Label>Job</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter job"
-                        name="job"
-                        value={userData.job}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <Form.Group controlId="formRole">
-                      <Form.Label>Role</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter role"
-                        name="role"
-                        value={userData.role}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group>
-                    <Button variant="dark" type="submit">
-                      Save
-                    </Button>
-                  </Form>
+                  <div className="d-flex justify-content-center">
+                    <Form
+                      onSubmit={handleSubmit}
+                      className="personal-form"
+                      style={{ maxWidth: "80%"}}
+                    >
+                      <Form.Group controlId="formFullName" className="mb-2">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control
+                          size="sm"
+                          type="text"
+                          placeholder="Enter full name"
+                          name="fullname"
+                          value={userData.fullname}
+                          onChange={handleInputChange}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formDateOfBirth" className="mb-2">
+                        <Form.Label>Date of Birth</Form.Label>
+                        <Form.Control
+                          size="sm"
+                          type="date"
+                          name="dateOfBirth"
+                          value={userData.dateOfBirth}
+                          onChange={handleInputChange}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formJob" className="mb-2">
+                        <Form.Label>Job</Form.Label>
+                        <Form.Control
+                          size="sm"
+                          type="text"
+                          placeholder="Enter job"
+                          name="job"
+                          value={userData.job}
+                          onChange={handleInputChange}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formRole" className="mb-2">
+                        <Form.Label>Role</Form.Label>
+                        <Form.Control
+                          size="sm"
+                          type="text"
+                          placeholder="Enter role"
+                          name="role"
+                          value={userData.role}
+                          onChange={handleInputChange}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </div>
                 ) : (
                   <>
                     <p className="text-info-pro">
