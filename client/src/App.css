@@ -997,3 +997,67 @@
   margin-right: 20px;
   height: 540px;
 }
+
+@media only screen and (max-width: 400px) {
+  .profile-con {
+    padding: 0 10px;
+    height: fit-content;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: center;
+    /* Center-align the components */
+  }
+
+  .profile-menu,
+  .profile-info-col,
+  .personal-info,
+  .my-favorite {
+    width: 80%;
+    /* Reduce width to make them smaller */
+    padding: 0;
+    /* Reduce padding for smaller spacing */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Center-align text content */
+    margin: 20px auto;
+    /* Add spacing between components */
+  }
+
+  .inpro-card {
+    width: 50%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    justify-content: center;
+  }
+
+  .profile-menu {
+    margin: 30px auto;
+    /* Increase margin for additional spacing */
+  }
+
+  .personal-header {
+    margin-left: 0;
+  }
+
+  .edit-icon {
+    display: none;
+  }
+  
+  .personal-info,
+  .mycourse-col {
+    font-size: 12px;
+    width: 100%;
+    /* Set width to 100% */
+    border-radius: 5px;
+    /* Make border radius smaller */
+    max-height: 150px;
+    /* Set maximum height for scrollbar */
+    overflow-y: auto;
+    /* Add scrollbar when content exceeds max height */
+  }
+}

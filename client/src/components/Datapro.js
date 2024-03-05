@@ -116,7 +116,7 @@ return (
         <Col className="profile-info-col" style={{ width: "600px" }}>
           <Row className="info-row">
             <Col className="profile-info">
-              <div id="personal-info">
+              <div className="personal-info">
                 <h1 className="personal-header" style={{ marginTop: "10px" }}>
                   Personal Information
                   <img
