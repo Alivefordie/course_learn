@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import conf from "../conf/main";
 import ax from "../conf/ax";
+import NavbarTop from "./NavbarTop";
+import NavbarLink from "./NavbarLink";
 
 const EditProfile = () => {
 	const [userData, setUserData] = useState(null);
@@ -71,14 +73,15 @@ const EditProfile = () => {
 	};
 
 	return (
-		<div className="container">
+		<div className="body">
+			<NavbarTop NavbarLink={NavbarLink}/>
 			{loading ? (
 				<p>Loading...</p>
 			) : error ? (
 				<p>Error: {error}</p>
 			) : (
 				userData && (
-					<div>
+					<div className="container">
 						<form>
 							<div className="mb-3">
 								<label htmlFor="username" className="form-label">

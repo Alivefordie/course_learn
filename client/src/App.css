@@ -696,7 +696,7 @@
 }
 
 .search-bar-input :focus {
-  border-color: rgb(247, 54, 44);
+  border-color: rgb(251, 234, 233);
   box-shadow: 0 0 5px rgb(247, 54, 44);
 }
 
