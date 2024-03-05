@@ -63,30 +63,23 @@
   background-color: #fff;
   width: 50%;
   margin-left: 50%;
+  margin-top: 15px;
   padding: 10px;
 }
 
 .InfoInput {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .order-list {
-  overflow-y: auto;
   max-height: 550px; 
   padding-right: 15px; 
 }
 
-.orderCard {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Add border for separation */
-  cursor: pointer; /* Change cursor to indicate clickable */
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+.orderListContainer {
+  height: 350px; /* Set a fixed height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin;
 }
 
-.orderCard:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Light background color on hover */
-}
