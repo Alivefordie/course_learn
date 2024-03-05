@@ -1006,6 +1006,10 @@
   height: 540px;
 }
 
+.video-rows {
+  width: 100%;
+}
+
 .save-pro-Btn {
   height: 50px;
   width: 50px;

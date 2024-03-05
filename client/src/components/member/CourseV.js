@@ -120,7 +120,13 @@ const CourseV = () => {
           <>
             <p className="data-text">Title: {syllabus.title}</p>
             <p className="data-text">Description: {syllabus.description}</p>
-            <ProgressBar now={progress} label={`${progress}%`}  className="progressbar-data"variant="danger" />;
+            <ProgressBar
+              now={progress}
+              label={`${progress}%`}
+              className="progressbar-data"
+              variant="danger"
+            />
+            ;
           </>
         );
       // case "activity.text":
@@ -183,7 +189,11 @@ const CourseV = () => {
                   ))}
                 </ListGroup>
                 {video && (
-                  <Button  className="save-pro-Btn" variant="dark" onClick={test1}>
+                  <Button
+                    className="save-pro-Btn"
+                    variant="dark"
+                    onClick={test1}
+                  >
                     Save progress
                   </Button>
                 )}
