@@ -37,7 +37,7 @@ const MyCoursesStudent = () => {
             <Row>
                       <Col  >
                         <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif' , borderRadius : "15px" , boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>Study 📚 ✏️</div>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',borderRadius : "15px"  ,boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
+                        <div class="container p-2 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',borderRadius : "15px"  ,boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
                             Video 🎬
                             <div>
                                 <video width="auto" height="auto" controls>
@@ -49,16 +49,18 @@ const MyCoursesStudent = () => {
                         </div>
                      </Col>
                      <Col>
-                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>mycourses 💼</div>
-                        <div >
-                            <Card style={{ width: '34rem' , boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)" }} class="container p-3 my-3 bg-white text-dark">
+                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
+                            mycourses 💼
+                        </div>
+                        <div class="container p-3 my-3 bg-white text-dark" style = {{fontFamily: '"Righteous", sans-serif',boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.3)"}}>
+                            <Card >
                                
                                 <Card.Body>
                                     <Card.Title >Display Course</Card.Title>
                                     <Card.Text style = {{marginTop: "6vw"}}>
                                     Study Progression --🕙--
                                     </Card.Text>
-                                    <Link to="/mycourses" class="btn btn-primary">See Progression</Link>
+                                    <Link to="/mycourses" class="btn btn-dark">See Progression 👀</Link>
                                 </Card.Body>
                             </Card>
                         </div>
