@@ -63,7 +63,8 @@
       "components": [
         "activity.file",
         "activity.text",
-        "activity.video"
+        "activity.video",
+        "activity.review"
       ]
     }
   }

@@ -13,6 +13,16 @@ export interface ActivityFile extends Schema.Component {
   };
 }
 
+export interface ActivityReview extends Schema.Component {
+  collectionName: 'components_activity_reviews';
+  info: {
+    displayName: 'review';
+  };
+  attributes: {
+    preview: Attribute.Media;
+  };
+}
+
 export interface ActivityText extends Schema.Component {
   collectionName: 'components_activity_texts';
   info: {
@@ -47,6 +57,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'activity.file': ActivityFile;
+      'activity.review': ActivityReview;
       'activity.text': ActivityText;
       'activity.video': ActivityVideo;
     }

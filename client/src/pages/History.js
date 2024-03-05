@@ -38,6 +38,7 @@ const History = () => {
 		GroupCourses["month"] = month;
 		GroupCourses["year"] = deleteAllFromYear;
 		setmyCourse(GroupCourses);
+		console.log(GroupCourses)
 		setLoading(false);
 	};
 
@@ -60,12 +61,13 @@ const History = () => {
 							<Container className="item-week">
 								{myCourses.week.length ? (
 									myCourses.week.map((c, i) => (
-										<div key={i}>
-											<h5 className="dateText">
-												{moment(c.attributes.publishedAt).format("-- D MMMM")}
-											</h5>
-											<MiniCourse course={c} />
-										</div>
+										c.attributes.entries.data.map((date, index) =>
+											<div key={i}>
+												<h5 className="dateText">
+													{moment(date.attributes.enroll).format("-- D MMMM")}
+												</h5>
+												<MiniCourse course={c} />
+											</div>)
 									))
 								) : (
 									<h3 className={`mx-auto ${style.error}`}>no data</h3>
@@ -79,12 +81,13 @@ const History = () => {
 							<Container className="item-month">
 								{myCourses.month.length ? (
 									myCourses.month.map((c, i) => (
-										<div key={i}>
-											<h5 className="dateText">
-												{moment(c.attributes.publishedAt).format("-- D MMMM")}
-											</h5>
-											<MiniCourse course={c} />
-										</div>
+										c.attributes.entries.data.map((date, index) =>
+											<div key={i}>
+												<h5 className="dateText">
+													{moment(date.attributes.enroll).format("-- D MMMM")}
+												</h5>
+												<MiniCourse course={c} />
+											</div>)
 									))
 								) : (
 									<h3 className={style.error}>no data</h3>
@@ -98,12 +101,13 @@ const History = () => {
 							<Container className="item-year">
 								{myCourses.year.length ? (
 									myCourses.year.map((c, i) => (
-										<div key={i}>
-											<h5 className="dateText">
-												{moment(c.attributes.publishedAt).format("-- D MMMM")}
-											</h5>
-											<MiniCourse course={c} />
-										</div>
+										c.attributes.entries.data.map((date, index) =>
+											<div key={i}>
+												<h5 className="dateText">
+													{moment(date.attributes.enroll).format("-- D MMMM")}
+												</h5>
+												<MiniCourse course={c} />
+											</div>)
 									))
 								) : (
 									<h3 className={style.error}>no data</h3>
