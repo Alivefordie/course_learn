@@ -1,4 +1,4 @@
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Row, Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import conf from "../../conf/main";
@@ -16,7 +16,7 @@ function SmallCourse({ course, setLoading, fetchData }) {
 	}, []);
 
 	const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+	const handleShow = () => setShowModal(true);
 
 	const deleteAction = async () => {
 		setLoading(true);
@@ -63,8 +63,6 @@ function SmallCourse({ course, setLoading, fetchData }) {
 								</div>
 							</Card.Title>
 							<div onClick={() => navigate(`${course.id}`)} style={{ cursor: "pointer" }}>
-								<Card.Text className="m-0">details</Card.Text>
-								<Card.Text className="m-0 ms-2">{courseContent.description}</Card.Text>
 								<Card.Text className="m-0">ระยะเวลา: {courseContent.duration} ชม.</Card.Text>
 								<Card.Text className="m-0">ครู: {teacher.username}</Card.Text>
 							</div>
