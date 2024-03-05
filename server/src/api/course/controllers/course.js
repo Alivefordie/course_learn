@@ -74,6 +74,17 @@ module.exports = createCoreController("api::course.course", ({ strapi }) => ({
         picture: true,
         owner: { select: "username" },
         entries: { where: { owner: user.id } },
+        course_syllabus: {
+          on: {
+            "activity.video": {
+              populate: {
+                progresses: {
+                  where: { users_permissions_user: user.id },
+                },
+              },
+            },
+          },
+        },
       },
     });
     return this.transformResponse(entries);
