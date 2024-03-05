@@ -116,7 +116,7 @@ return (
         <Col className="profile-info-col" style={{ width: "600px" }}>
           <Row className="info-row">
             <Col className="profile-info">
-              <div id="personal-info">
+              <div className="personal-info">
                 <h1 className="personal-header" style={{ marginTop: "10px" }}>
                   Personal Information
                   <img
@@ -201,7 +201,7 @@ return (
             <Col className="mycourse-col scrollbar" style={{ marginTop: "10px" }}>
               <h2 className="my-header">myCourse</h2>
               {myData.map((course) => (
-                <Card key={course.id} className="inpro-card">
+                <Card key={course.id} className="my-card">
                   <Card.Body>
                     <Card.Title>{course.attributes.title}</Card.Title>
                     <Card.Text>{course.attributes.description}</Card.Text>
