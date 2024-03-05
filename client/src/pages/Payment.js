@@ -31,28 +31,34 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [slip, setSlip] = useState(null);
   const [member, setmember] = useState();
-  const [ids, setids] = useState();
+  // const [ids, setids] = useState();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("ids", ids);
-  });
+  // useEffect(() => {
+  //   console.log("ids", ids);
+  // });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await ax.get(conf.findanything);
-        setids(response.data.id);
+        const response1 = await ax.get(conf.apiUrlPrefix + "/cart")
+        console.log("resonse:", response1.data.data.map((item) => item.attributes.price))
+        // const response = await ax.get(conf.findanything);
+        // console.log(response.data)
+        // setids(response.data.id);
 
-        const data = response.data.entries.map((entry) => entry.course);
-        setData(data);
+        // const data = response.data.entries.map((entry) => entry.course);
+        // console.log(data)
+
+        const data = response1.data.data.map((item) => item.attributes.price)
+        setData(response1.data.data);
         calculateTotalPrice(data);
+        // const filteredData = response.data.entries.filter(
+        //   (entry) => entry.cart !== null
+        // );
+        // setFilter(filteredData);
 
-        const filteredData = response.data.entries.filter(
-          (entry) => entry.cart !== null
-        );
-        setFilter(filteredData);
         setLoading(false);
       } catch (error) {
         console.error("Error occurred:", error);
@@ -92,12 +98,14 @@ const Payment = () => {
   }, []);
 
   const calculateTotalPrice = (courses) => {
+
     const totalPrice = courses.reduce((acc, course) => {
-      if (course.price) {
-        return acc + course.price;
+      if (course) {
+        return acc + course;
       }
       return acc;
     }, 0);
+    console.log("total:",totalPrice)
     setTotalPrice(totalPrice);
   };
 
@@ -208,7 +216,7 @@ const Payment = () => {
                 data-target=".navbar"
                 className={styles.orderListContainer} // Add a custom class for styling
               >
-                {filter.slice(0, 2).map((item) => ( // Slice the filter array to display only the first 2 items
+                {data.map((item) => ( // Slice the filter array to display only the first 2 items
                   <Card
                     className="d-flex flex-row"
                     style={{
@@ -219,37 +227,35 @@ const Payment = () => {
                     key={item.id}
                   >
                     <div
-                      onClick={() => navigate(`/courses/${item.course.id}`)}
+                      onClick={() => navigate(`/courses/${item.id}`)}
                       style={{ cursor: "pointer" }}
                       className="image-col"
                     >
+                      {console.log(item)}
                       <Card.Img
                         className="course-image"
                         variant="left"
-                        src={conf.url + item.course.picture.url}
+                        src={conf.url + item.attributes.picture.data.attributes.url}
                       />
                     </div>
                     <div className="body-col">
                       <Card.Body
                         onClick={() =>
-                          navigate(`/courses/${item.course.id}`)
+                          navigate(`/courses/${item.id}`)
                         }
                         style={{ cursor: "pointer" }}
                       >
-                        <Card.Title>{item.course.title}</Card.Title>
+                        <Card.Title>{item.attributes.title}</Card.Title>
                         <Card.Text>Details</Card.Text>
                         <Card.Text className="m-0">
-                          เนื้อหา {item.course.description}
-                        </Card.Text>
-                        <Card.Text className="m-0">
-                          ระยะเวลา {item.course.duration}
+                          ระยะเวลา {item.attributes.duration}
                         </Card.Text>
                       </Card.Body>
                     </div>
                   </Card>
                 ))}
               </div>
-              {filter.length > 0 && (
+              {data.length > 0 && (
                 <div className={styles.totalPrice}>
                   TotalPrice: {totalPrice}
                 </div>
