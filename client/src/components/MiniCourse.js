@@ -39,7 +39,7 @@ function MiniCourse({ course }) {
 
 	return (
 		<>
-			<Card className="d-flex flex-row" style = {{marginTop : '15px'}}>
+			<Card className="d-flex flex-row" style = {{marginTop : '15px',marginRight: '5px'}}>
 				<div
 					onClick={() => navigate(`/courses/${course.id}`, { replace: true })}
 					style={{ cursor: "pointer" }}
