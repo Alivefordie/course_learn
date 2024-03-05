@@ -5,9 +5,12 @@ import conf from "../conf/main";
 import ax from "../conf/ax";
 import AddLike from "./addlike";
 import AddCart from "./addcart";
+import styles from "../css/Popup.module.css";
 
 const Specific = ({ data }) => {
 	const { item } = useParams();
+	const course = data.attributes;
+	const remaining = course.maxCapacity - course.amount;
 	const [CourseSyllabus, setCourseSyllabus] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
@@ -16,7 +19,8 @@ const Specific = ({ data }) => {
 	useEffect(() => {
 		console.log("Specific:", data);
 		console.log("item", item);
-		setCourseSyllabus(data.attributes.course_syllabus);
+		console.log(course)
+		setCourseSyllabus(course.course_syllabus);
 		console.log("course", CourseSyllabus);
 		{
 			CourseSyllabus.map((val, index) => () => {
@@ -45,9 +49,9 @@ const Specific = ({ data }) => {
 	// };
 
 	const handleAddCartResponse = (responseData) => {
-        setShowModal(true);
-        setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
-    };
+		setShowModal(true);
+		setModalMessage(responseData.data.AddToCart ? "Course added to cart!" : "Course removed from cart!");
+	};
 
 	return (
 		<Container className="body">
@@ -59,23 +63,27 @@ const Specific = ({ data }) => {
 								<div>
 									<div className="course-title">
 										<img
-											src={conf.url + data.attributes.picture.data.attributes.url}
+											src={conf.url + course.picture.data.attributes.url}
 											alt="item"
 											width={300}
 										/>
-										<p style={{ fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
-											Amount: {data.attributes.amount} | <AddLike course={data} /> ({data.attributes.likeCount})
-										</p>
+										<span  style={{ fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
+											remaining: {remaining}/{course.maxCapacity} | <AddLike course={data} /> ({course.likeCount}) <br />
+											<div className="centeredContent" style={{ flexDirection:"column", textAlign:"center", marginTop:"30px",marginBottom:"-50px" }}>
+												<img src="../clock.png" alt="remaining" style={{ width: '40px', height: '40px' }} />
+												<p>ชั่วโมงเรียน {course.maxCapacity} ชม.</p>
+											</div>
+										</span >
 
 									</div>
 								</div>
 							</Col>
 							<Col md={6} style={{ marginTop: '20px' }}>
 								<div style={{ margin: '20px' }}>
-									<h4 style={{ fontFamily: 'Arial, sans-serif', marginBottom: '8px' }}>{data.attributes.title}</h4>
-									<p style={{ fontFamily: 'Arial, sans-serif', marginBottom: '4px', color: 'red', fontWeight: 'bold' }}>{data.attributes.price} ฿</p>
+									<h4 style={{ fontFamily: 'Arial, sans-serif', marginBottom: '8px' }}>{course.title}</h4>
+									<p style={{ fontFamily: 'Arial, sans-serif', marginBottom: '4px', color: 'red', fontWeight: 'bold' }}>{course.price} ฿</p>
 									<p style={{ fontFamily: 'Arial, sans-serif', marginBottom: '4px', wordWrap: "break-word", lineHeight: '2' }}>
-										<span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>รายละเอียดคอร์ส</span> : {data.attributes.description}
+										<span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>รายละเอียดคอร์ส</span> : {course.description}
 									</p>
 
 								</div>
@@ -138,16 +146,14 @@ const Specific = ({ data }) => {
 					</Container>
 				</div>
 			)}
-			<Modal show={showModal} onHide={() => { setShowModal(false); window.location.href = "/cart"; }}>
-				<Modal.Header closeButton>
-					<Modal.Title>Notification</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>{modalMessage}</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={() => { setShowModal(false) }}>
-						Close
-					</Button>
-				</Modal.Footer>
+			<Modal show={showModal} onHide={() => { setShowModal(false) }}>
+				<Modal.Header closeButton />
+				<Modal.Body className={styles.modalBody}>
+					<Container className={styles.centeredContent}>
+						<div className={modalMessage === "Course added to cart!" ? styles.check : styles.exclamation} />
+						<span className={styles.loginText}>{modalMessage}</span>
+					</Container>
+				</Modal.Body>
 			</Modal>
 		</Container>
 	);

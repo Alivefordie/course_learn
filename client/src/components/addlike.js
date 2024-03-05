@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import { AuthContext } from "../context/AuthContext";
+import LoginFirst from "./PleaseLogin";
 
 function AddLike({ course }) {
     const context = useContext(AuthContext);
@@ -11,16 +12,21 @@ function AddLike({ course }) {
     const courseContent = course.attributes;
     const multipleEntries = courseContent.entries?.data.length > 1;
     const [like, setLike] = useState(courseContent.entries?.data[0]?.attributes?.like);
-    
+    const [showLoginFirst, setShowLoginFirst] = useState(false);
 
     const addTolike = async () => {
         if (login) {
             const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
             setLike(response.data.like);
         } else {
-            
+            setShowLoginFirst(true);
         }
     };
+
+    const handleClose = () => {
+        setShowLoginFirst(false);
+    };
+
 
     useEffect(() => {
 		console.log('course',course)
@@ -32,6 +38,7 @@ function AddLike({ course }) {
 
     return (
         <>
+            {showLoginFirst && <LoginFirst showLoginFirstModal={showLoginFirst} closeModal={handleClose}/>}
             {!like ? (
                 <img
                     onClick={addTolike}

@@ -8,6 +8,7 @@ module.exports = (config, { strapi }) => {
   return async (ctx, next) => {
     const user = ctx.state.user;
     const body = ctx.request["body"];
+    console.log(body)
     const entryId = ctx.params.id ? ctx.params.id : undefined;
     const response = await strapi.db.query("api::course.course").findOne({
       where: { id: entryId },

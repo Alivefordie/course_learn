@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ax from "../conf/ax";
 import conf from "../conf/main";
 import { AuthContext } from "../context/AuthContext";
+import LoginFirst from "./PleaseLogin";
 
 function AddCart({ course, onResponse }) {
     const context = useContext(AuthContext);
@@ -11,6 +12,7 @@ function AddCart({ course, onResponse }) {
     const courseContent = course.attributes?course.attributes:null;
     const [cart, setcart] = useState(courseContent?courseContent.entries?.data[0]?.attributes?.cart:course.cart);
     const enroll = courseContent?courseContent.entries?.data[0]?.attributes?.enroll:course.enroll;
+    const [showLoginFirst, setShowLoginFirst] = useState(false);
 
     const addToCart = async () => {
         if (login) {
@@ -20,11 +22,18 @@ function AddCart({ course, onResponse }) {
                 onResponse(response);
             } else {
             window.location.reload();}
-        } 
+        } else {
+            setShowLoginFirst(true);
+        }
+    };
+
+    const handleClose = () => {
+        setShowLoginFirst(false);
     };
 
 	return (
 		<>
+            {showLoginFirst && <LoginFirst showLoginFirstModal={showLoginFirst} closeModal={handleClose}/>}
 			{enroll ? (
 				<img
 					style={{ width: "100%", width: "20px", height: "20px" }}

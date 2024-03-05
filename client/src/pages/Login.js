@@ -7,21 +7,21 @@ import styles from "../css/LoginCss.module.css";
 import Spinner from "../components/Spinner";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+	const { login } = useContext(AuthContext);
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
-      login(username, password);
-      navigate("/");
-    } catch (error) {
-      console.error("Login error", error);
-    }
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		try {
+			login(username, password);
+			navigate("/");
+		} catch (error) {
+			console.error("Login error", error);
+		}
+	};
 
   return (
     <div className="body">
@@ -93,7 +93,7 @@ const Login = () => {
                   <Button
                     variant="light"
                     type="submit"
-                    className="mt-3"
+                    className=" mt-3"
                     style={{
                       justifyContent: "center",
                       fontWeight: "bold",
