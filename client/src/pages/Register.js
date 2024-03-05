@@ -50,14 +50,18 @@ const Register = () => {
         <Container className={styles.regisContainer} sm="2">
           <Col className={styles.regisInput}>
             <h1 className={styles.header}>Register</h1>
-            <Container className={styles.regisImage}>
+            <Container>
+              <div className="d-flex justify-content-center">
+
               <img
                 src="../register.png"
                 alt="Register Icon"
                 className={styles.regisImage}
                 onLoad={() => setLoading(false)}
-              />
+                />
+                </div>
             </Container>
+
             <Form className={styles.username}>
               <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
@@ -127,6 +131,7 @@ const Register = () => {
                 </Button>
               </div>
             </Form>
+
           </Col>
           <Col className={styles.regisImageContainer}>
             <img
