@@ -6,11 +6,10 @@ import ax from "../../conf/ax";
 import conf from "../../conf/main";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import NavbarLink from "../NavbarLink";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import ProgressBar from "react-bootstrap/ProgressBar";
 // import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // import ListGroupItem from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
-
 
 const CourseV = () => {
   const { item } = useParams();
@@ -21,14 +20,13 @@ const CourseV = () => {
   const [video, setVideo] = useState(false);
   const [duration, setDuration] = useState(0);
 
-
   const fetchSyllabus = async () => {
     try {
       const response = await ax.get(
         `http://localhost:1337/api/courses/${item}`
       );
       setCourse(response.data.data);
-      console.log(response)
+      console.log(response);
       setSyllabus(response.data.data.attributes.course_syllabus);
     } catch (error) {
       console.log("Error fetching syllabus:", error);
@@ -68,8 +66,6 @@ const CourseV = () => {
       setVideo(false);
     }
   };
-
-
 
   const componentStyle = (syllabus) => {
     switch (syllabus.__component) {
@@ -155,12 +151,12 @@ const CourseV = () => {
     }
   };
 
-
   return (
     <div className="body">
       {/* {console.log(course)} */}
       <NavbarTop NavbarLink={NavbarLink} />
-      {syllabus.length > 0 &&
+
+      {syllabus.length > 0 && (
         <Container className="study-con" sm="2" md="4">
           <Row>
             <Col className="main-study">
@@ -171,13 +167,15 @@ const CourseV = () => {
             </Col>
             <Col className="video-list" style={{ maxWidth: "400px" }}>
               <Row className="video-rows">
-                <ListGroup as="ui" >
+                <ListGroup as="ui">
                   {syllabus.map((item, index) => (
-                    <ListGroup.Item as="li"
+                    <ListGroup.Item
+                      as="li"
                       key={index}
                       // className={`list-group-item list-group-item-action ${index === currentSyllabusIndex ? "active" : "" }`}
-                      className={` w-100 ${index === currentSyllabusIndex ? "active" : "" }`}
-
+                      className={` w-100 ${
+                        index === currentSyllabusIndex ? "active" : ""
+                      }`}
                       onClick={() => handlesyllabusChange(index)}
                     >
                       {item.title}
@@ -185,21 +183,17 @@ const CourseV = () => {
                   ))}
                 </ListGroup>
                 {video && (
-
                   <Button variant="dark" onClick={test1}>
                     Save progress
                   </Button>
-
                 )}
-
               </Row>
             </Col>
           </Row>
         </Container>
-      }
+      )}
     </div>
   );
-
 };
 
 export default CourseV;

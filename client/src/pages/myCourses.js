@@ -31,23 +31,21 @@ const MyCourses = () => {
   const [ownerCourses, setOwnerCourses] = useState([]);
   const [loadingOwnerCourses, setLoadingOwnerCourses] = useState(true);
   const [loadingRegularCourses, setLoadingRegularCourses] = useState(true);
-  const [data, setdata] = useState([])
+  const [data, setdata] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await ax.get(`${conf.apiUrlPrefix}/my-courses`);
-      setdata(response.data.data)
-      console.log(response.data.data)
+      setdata(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log();
     }
-    catch (error) {
-      console.log()
-    }
-  }
-
+  };
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   // Fetch owner courses
   useEffect(() => {
@@ -84,7 +82,7 @@ const MyCourses = () => {
       {loadingOwnerCourses || loadingRegularCourses ? (
         <Spinner />
       ) : (
-        <Container sm="3" md="4">
+        <Container sm="2" md="4">
           <Row className="mycourse-rows">
 
             <Col className="inprogress-col scrollbar">
