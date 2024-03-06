@@ -237,49 +237,52 @@ const Payment = () => {
                   </Card>
                 ))}
               </div>
+
               {data.length > 0 && (
                 <div className={styles.totalPrice}>
                   TotalPrice: {totalPrice}
                 </div>
               )}
-              <Form name="for" noValidate validated={valid}>
-                <Row className={styles.InfoInput}>
-                  <Col md={6}>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      placeholder="Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </Col>
-                  <Col md={6}>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Col>
-                </Row>
-                <Row className="mb-3">
-                  <Col md={6}>
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control
-                      placeholder="Date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                    />
-                  </Col>
-                  <Col md={6}>
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control
-                      placeholder="Phone"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  </Col>
-                </Row>
-              </Form>
+              <Container className={styles.formCon}>
+                <Form name="for" noValidate validated={valid}>
+                  <Row className={styles.InfoInput}>
+                    <Col md={6}>
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </Col>
+                    <Col md={6}>
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                  <Row className="mb-3">
+                    <Col md={6}>
+                      <Form.Label>Date</Form.Label>
+                      <Form.Control
+                        placeholder="Date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                      />
+                    </Col>
+                    <Col md={6}>
+                      <Form.Label>Phone</Form.Label>
+                      <Form.Control
+                        placeholder="Phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                </Form>
+              </Container>
             </Col>
             <Col className={styles.paymentMethod}>
               <Container className={styles.methodCon}>
