@@ -28,45 +28,22 @@ import { AuthContext } from "../context/AuthContext";
 
 const MyCourses = () => {
   const navigate = useNavigate()
-  const [ownerCourses, setOwnerCourses] = useState([]);
-  const [loadingOwnerCourses, setLoadingOwnerCourses] = useState(true);
   const [loadingRegularCourses, setLoadingRegularCourses] = useState(true);
   const [data, setdata] = useState([]);
-  const [pro, setprogess] = useState([])
 
   const fetchData = async () => {
     try {
       const response = await ax.get(`${conf.apiUrlPrefix}/my-courses`);
       setdata(response.data.data);
-      console.log(response.data.data);
+      setLoadingRegularCourses(false)
     } catch (error) {
       console.log();
+      setLoadingRegularCourses(false)
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
-
-  // Fetch owner courses
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchOwnerCourses();
-        setOwnerCourses(data);
-        setLoadingOwnerCourses(false);
-      } catch (error) {
-        console.error("Error fetching owner courses data:", error);
-        setLoadingOwnerCourses(false);
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function to cancel any ongoing fetches if the component unmounts
-    return () => {
-      // Cleanup logic if needed
-    };
   }, []);
 
   // Simulate regular courses fetching
@@ -80,7 +57,7 @@ const MyCourses = () => {
   return (
     <div className="body">
       <NavbarTop NavbarLink={NavbarLink} />
-      {loadingOwnerCourses || loadingRegularCourses ? (
+      { loadingRegularCourses ? (
         <Spinner />
       ) : (
         <Container sm="2" md="4">

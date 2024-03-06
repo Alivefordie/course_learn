@@ -67,7 +67,7 @@ const Specific = ({ data }) => {
 									<Card>
 										<Card.Header
 											style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-											<span style={{ marginRight: "auto" }}>Video Preview</span>
+											<span style={{ marginRight: "auto" }}>CourseSyllabus Preview</span>
 											<Button
 												variant="outline-dark"
 												style={{ border: "0" }}
@@ -81,15 +81,10 @@ const Specific = ({ data }) => {
 											<Card.Body id="course-review">
 												{CourseSyllabus.map((val, index) => {
 													switch (val.__component) {
-														case "activity.review":
-															return (
-																<div key={index}>
-																	<video controls width="250">
-																		<source src={conf.url + val.preview.data.attributes.url} type="video/mp4" />
-																		Your browser does not support the video tag.
-																	</video>
-																</div>
-															);
+														case "xxx":
+															return null
+														default:
+															return<p>{val.title} </p>
 													}
 												})}
 											</Card.Body>

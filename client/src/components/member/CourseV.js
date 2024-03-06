@@ -10,6 +10,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 // import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // import ListGroupItem from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
+import LoginFirst from "../PleaseLogin";
 
 const CourseV = () => {
   const { item } = useParams();
@@ -19,7 +20,7 @@ const CourseV = () => {
   const [progress, setProgress] = useState(0);
   const [video, setVideo] = useState(false);
   const [duration, setDuration] = useState(0);
-
+  const [show, setshow] = useState(false);
   const fetchSyllabus = async () => {
     try {
       const response = await ax.get(
@@ -39,19 +40,19 @@ const CourseV = () => {
 
   const test1 = async () => {
     try {
-      console.log(syllabus[currentSyllabusIndex]);
-      const progressData = {
-        data: {
-          id: syllabus[currentSyllabusIndex].id,
-          value: progress,
-        },
-      };
-      console.log(progressData);
-      const response2 = await ax.put(
-        `http://localhost:1337/api/progresses/${item}`,
-        progressData
-      );
-      console.log(response2);
+      if (currentSyllabusIndex <= syllabus.lenght) {
+        const progressData = {
+          data: {
+            id: syllabus[currentSyllabusIndex].id,
+            value: progress,
+          },
+        };
+        await ax.put(
+          `${conf.apiUrlPrefix}/progresses/${item}`,
+          progressData
+        );
+      }
+      setshow(true)
     } catch (error) {
       console.log("Error updating progress:", error);
     }
@@ -60,6 +61,7 @@ const CourseV = () => {
   const handlesyllabusChange = (index) => {
     setCurrentSyllabusIndex(index);
     setProgress(0);
+    setDuration(0)
     if (syllabus[index].__component === "activity.video") {
       setVideo(true);
     } else {
@@ -161,7 +163,11 @@ const CourseV = () => {
     <div className="body">
       {/* {console.log(course)} */}
       <NavbarTop NavbarLink={NavbarLink} />
-
+      <LoginFirst
+        showLoginFirstModal={show}
+        closeModal={() => setshow(false)}
+        message={"saved"}
+      />
       {syllabus.length > 0 && (
         <Container className="study-con" sm="2" md="4">
           <Row>
@@ -179,16 +185,15 @@ const CourseV = () => {
                       as="li"
                       key={index}
                       // className={`list-group-item list-group-item-action ${index === currentSyllabusIndex ? "active" : "" }`}
-                      className={` w-100 ${
-                        index === currentSyllabusIndex ? "active" : ""
-                      }`}
+                      className={` w-100 ${index === currentSyllabusIndex ? "active" : ""
+                        }`}
                       onClick={() => handlesyllabusChange(index)}
                     >
                       {item.title}
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
-                {video && (
+                {(duration != 0 || video || progress != 0) && (
                   <Button
                     className="save-pro-Btn"
                     variant="dark"

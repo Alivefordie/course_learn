@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, Button, Col, Container, Row, Form } from "react-bootstrap";
+import { Link, Navigate } from "react-router-dom";
+import { Card, Button, Col, Container, Row, Form, ListGroup } from "react-bootstrap";
 // import axios from "axios";
 import conf from "../conf/main";
 import ax from "../conf/ax";
@@ -191,8 +191,7 @@ return (
                 <Card key={course.id} className="my-card">
                   <Card.Body>
                     <Card.Title>{course.attributes.title}</Card.Title>
-                    <Card.Text>{course.attributes.description}</Card.Text>
-                    <Link to={`./study/${course.id}`}>
+                    <Link to={`/mycourses/study/${course.id}`}>
                       <Button variant="dark">View Details</Button>
                     </Link>
                   </Card.Body>
@@ -204,10 +203,14 @@ return (
         <Col className="my-favorite" style={{ width: "350px" }}>
           <h3 className="myfav-header">myFavorite Course</h3>
                 {fa.map((item)=>(
-                  <div key={item.id}>
-                    <p>title:{item.attributes.title}</p>
-                    <p></p>
-                  </div>
+                   <ListGroup as="ui" className="list-group-item-danger">
+                    <ListGroup.Item
+                      as="li"
+                      onClick={() =>Navigate(`/courses/${item.id}`)}
+                    >
+                      {item.attributes.title}
+                    </ListGroup.Item>
+                   </ListGroup>
                 ))}
         </Col>
       </Row>
