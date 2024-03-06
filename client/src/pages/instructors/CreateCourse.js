@@ -448,7 +448,7 @@ const CreateCourse = () => {
 							</Form>
 							{!edit && (
 								<Button form="myform" type="submit" className={`${style.customBtn} btn btn-outline-danger ml-200`}>
-									Save to <img src="/floppy.svg" alt="Bag Icon" className="mr-2" />
+									Save <img src="/floppy.svg" alt="Bag Icon" className="mr-2" />
 								</Button>
 
 

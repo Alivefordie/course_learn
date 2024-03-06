@@ -7,7 +7,7 @@ const NavSuperAdmin = () => {
 		<Nav className="NavbarLink" style={{ marginLeft: "auto", marginRight: "10px" }}>
 			<Nav.Link href="/superadmin" style={{ flexDirection: "column", textAlign: "center" }}>
 				<img src="/web.png" style={{ marginLeft: "5px", width: "40px", height: "40px" }} />
-				<div style={{ fontSize: "10px" }}>New</div>
+				<div style={{ fontSize: "10px" }}>Maintain</div>
 			</Nav.Link>
 			<Nav.Link
 				onClick={context.logout}

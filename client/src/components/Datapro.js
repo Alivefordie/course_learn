@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Await, Link, Navigate, Navigate, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { Card, Button, Col, Container, Row, Form, ListGroup } from "react-bootstrap";
 // import axios from "axios";
 import conf from "../conf/main";
@@ -199,8 +199,7 @@ const Datapro = ({ data }) => {
                 <Card key={course.id} className="my-card">
                   <Card.Body>
                     <Card.Title>{course.attributes.title}</Card.Title>
-                    <Card.Text>{course.attributes.description}</Card.Text>
-                    <Link to={`./study/${course.id}`}>
+                    <Link to={`/mycourses/study/${course.id}`}>
                       <Button variant="dark">View Details</Button>
                     </Link>
                   </Card.Body>
@@ -215,7 +214,7 @@ const Datapro = ({ data }) => {
                  <ListGroup as="ui" className="list-group-item-danger">
                     <ListGroup.Item
                       as="li"
-                      onClick={() =>Navigate(`/courses/${item.id}`)}
+                      onClick={() =>navigate(`/courses/${item.id}`)}
                     >
                       {item.attributes.title}
                     </ListGroup.Item>

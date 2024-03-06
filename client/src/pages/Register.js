@@ -3,6 +3,8 @@ import { Button, Col, Container, Form, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavbarTop from "../components/NavbarTop";
 import styles from "../css/RegisterCss.module.css";
+import ax from "../conf/ax";
+import conf from "../conf/main";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,15 +31,20 @@ const Register = () => {
     }
   };
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = async (e) => {
+    e.preventDefault()
     if (user.password !== user.cpassword) {
       alert("Passwords do not match");
       return;
     }
     // Call your registration API here
-    console.log("Registering user:", user);
+    const response = await ax.post(`${conf.apiUrlPrefix}/auth/local/register`, {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
     // Upon successful registration, navigate to desired page
-    navigate("/Page1");
+    navigate("/login");
   };
 
   return (
@@ -53,13 +60,13 @@ const Register = () => {
             <Container>
               <div className="d-flex justify-content-center">
 
-              <img
-                src="../register.png"
-                alt="Register Icon"
-                className={styles.regisImage}
-                onLoad={() => setLoading(false)}
+                <img
+                  src="../register.png"
+                  alt="Register Icon"
+                  className={styles.regisImage}
+                  onLoad={() => setLoading(false)}
                 />
-                </div>
+              </div>
             </Container>
 
             <Form className={styles.username}>

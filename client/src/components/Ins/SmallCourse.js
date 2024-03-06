@@ -11,9 +11,6 @@ function SmallCourse({ course, setLoading, fetchData }) {
 	const teacher = courseContent.owner.data?.attributes;
 	const [showModal, setShowModal] = useState(false);
 
-	useEffect(() => {
-		//console.log(course);
-	}, []);
 
 	const handleClose = () => setShowModal(false);
 	const handleShow = () => setShowModal(true);
@@ -23,9 +20,6 @@ function SmallCourse({ course, setLoading, fetchData }) {
 		await ax.delete(`${conf.apiUrlPrefix}/courses/${course.id}`);
 		await fetchData();
 		handleClose();
-	};
-	const editAction = () => {
-		navigate(`${course.id}`);
 	};
 	return (
 		<>
@@ -52,13 +46,6 @@ function SmallCourse({ course, setLoading, fetchData }) {
 										style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
 										variant="top"
 										src="../trash.svg"
-									/>
-									<Card.Img
-										className=""
-										onClick={() => navigate(`${course.id}`)}
-										style={{ cursor: "pointer", width: "100%", width: "20px", height: "20px" }}
-										variant="top"
-										src="../pencil.svg"
 									/>
 								</div>
 							</Card.Title>

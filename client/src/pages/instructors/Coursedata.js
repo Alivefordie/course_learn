@@ -66,17 +66,12 @@ const Coursedata = () => {
 											<span style={{ marginRight: "auto" }}>Video Preview</span>
 										</Accordion.Header>
 											<Accordion.Body id="course-review">
-												{CourseSyllabus.map((val, index) => {
+											{CourseSyllabus.map((val, index) => {
 													switch (val.__component) {
-														case "activity.review":
-															return (
-																<div key={index}>
-																	<video controls width="250">
-																		<source src={conf.url + val.preview.data.attributes.url} type="video/mp4" />
-																		Your browser does not support the video tag.
-																	</video>
-																</div>
-															);
+														case "xxx":
+															return null
+														default:
+															return<p>{val.title} </p>
 													}
 												})}
 											</Accordion.Body>

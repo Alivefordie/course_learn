@@ -10,24 +10,25 @@ import styles from "../css/Popup.module.css";
 const Specific = ({ data }) => {
 	const { item } = useParams();
 	const course = data.attributes;
+	console.log(course)
 	const remaining = course.maxCapacity - course.amount;
-	const [CourseSyllabus, setCourseSyllabus] = useState([]);
+	const [CourseSyllabus, setCourseSyllabus] = useState(course.course_syllabus);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
 	const [openReview, setOpenReview] = useState(false)
 
-	useEffect(() => {
-		console.log("Specific:", data);
-		console.log("item", item);
-		console.log(course)
-		setCourseSyllabus(course.course_syllabus);
-		console.log("coursess", CourseSyllabus);
-		{
-			CourseSyllabus.map((val, index) => () => {
-				console.log(val.title);
-			});
-		}
-	}, [data, item]);
+	// useEffect(() => {
+	// 	console.log("Specific:", data);
+	// 	console.log("item", item);
+	// 	console.log(course)
+	// 	setCourseSyllabus(course.course_syllabus);
+	// 	console.log("coursess", CourseSyllabus);
+	// 	{
+	// 		CourseSyllabus.map((val, index) => () => {
+	// 			console.log(val.title);
+	// 		});
+	// 	}
+	// }, [data, item]);
 
 	const handleAddCartResponse = (responseData) => {
 		setShowModal(true);
@@ -77,6 +78,7 @@ const Specific = ({ data }) => {
 												{openReview ? "⮟" : "⮞"}
 											</Button>
 										</Card.Header>
+
 										<Collapse in={openReview}>
 											<Card.Body id="course-review">
 												{CourseSyllabus.map((val, index) => {
