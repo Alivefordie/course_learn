@@ -53,7 +53,7 @@ const EditProfile = () => {
 			const updateUserResponse = await ax.put(`${conf.apiUrlPrefix}/users/${id}`, updatedUserData);
 			setUserData(updateUserResponse.data);
 			console.log("Profile updated successfully:", updateUserResponse.data);
-			
+
 		} catch (error) {
 			setError("Failed to update profile");
 			console.error("Failed to update profile:", error);
@@ -72,7 +72,7 @@ const EditProfile = () => {
 
 	return (
 		<div className="body">
-			<NavbarTop NavbarLink={NavbarLink}/>
+			<NavbarTop NavbarLink={NavbarLink} />
 			{loading ? (
 				<p>Loading...</p>
 			) : error ? (

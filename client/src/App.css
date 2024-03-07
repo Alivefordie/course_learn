@@ -621,6 +621,12 @@
   overflow-y: auto;
 }
 
+.scrollable-col {
+  scrollbar-width: thin;
+  height: 400px; /* Adjust the height as per your requirement */
+  overflow-y: auto;
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -1100,11 +1106,4 @@
     /* Add scrollbar when content exceeds max height */
   }
 }
-
-.scrollable-col {
-  scrollbar-width: thin;
-  height: 400px; /* Adjust the height as per your requirement */
-  overflow-y: auto;
-}
-
 

@@ -20,6 +20,7 @@ function AddLike({ course }) {
             if (context.state.role === 'student') {
                 const response = await ax.get(conf.apiUrlPrefix + `/courses/${course.id}/like`);
                 setLike(response.data.like);
+                window.location.reload();
             } else {
                 setmessage("You can't like")
                 setShowLoginFirst(true)

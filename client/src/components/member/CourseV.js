@@ -40,18 +40,18 @@ const CourseV = () => {
 
   const test1 = async () => {
     try {
-      if (currentSyllabusIndex <= syllabus.lenght) {
+      
         const progressData = {
           data: {
             id: syllabus[currentSyllabusIndex].id,
             value: progress,
           },
         };
-        await ax.put(
+        const response = await ax.put(
           `${conf.apiUrlPrefix}/progresses/${item}`,
           progressData
         );
-      }
+      
       setshow(true)
     } catch (error) {
       console.log("Error updating progress:", error);

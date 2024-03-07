@@ -19,6 +19,7 @@ import styles from "../css/PayCss.module.css";
 import generatePayload from "promptpay-qr";
 import QRCode from "qrcode";
 import LoginFirst from "../components/PleaseLogin";
+import "../App.css";
 
 const Payment = () => {
   const [data, setData] = useState([]);

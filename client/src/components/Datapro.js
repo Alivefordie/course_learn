@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import {  Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, Button, Col, Container, Row, Form, ListGroup } from "react-bootstrap";
 // import axios from "axios";
 import conf from "../conf/main";
 import ax from "../conf/ax";
 import { AuthContext } from "../context/AuthContext";
+import "../App.css";
+
 
 const Datapro = ({ data }) => {
 	const context = useContext(AuthContext);
@@ -191,40 +193,40 @@ const Datapro = ({ data }) => {
 										</p>
 									</>
 								)}
-            </Col>
-            <div className="w-100"></div>
-            <Col className="mycourse-col scrollbar" style={{ marginTop: "10px" }}>
-              <h2 className="my-header">myCourse</h2>
-              {myData.map((course) => (
-                <Card key={course.id} className="my-card">
-                  <Card.Body>
-                    <Card.Title>{course.attributes.title}</Card.Title>
-                    <Link to={`/mycourses/study/${course.id}`}>
-                      <Button variant="dark">View Details</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              ))}
-            </Col>
-          </Row>
-        </Col>
-        <Col className="my-favorite" style={{ width: "350px" }}>
-          <h3 className="myfav-header">myFavorite Course</h3>
-                {fa.map((item)=>(
-                 <ListGroup as="ui" className="list-group-item-danger">
-                    <ListGroup.Item
-                      as="li"
-                      onClick={() =>navigate(`/courses/${item.id}`)}
-                    >
-                      {item.attributes.title}
-                    </ListGroup.Item>
-                   </ListGroup>
-                ))}
-        </Col>
-      </Row>
-    </Container>
-  </div>
-);
+							</Col>
+							<div className="w-100"></div>
+							<Col className="mycourse-col scrollbar" style={{ marginTop: "10px" }}>
+								<h2 className="my-header">myCourse</h2>
+								{myData.map((course) => (
+									<Card key={course.id} className="my-card">
+										<Card.Body>
+											<Card.Title>{course.attributes.title}</Card.Title>
+											<Link to={`/mycourses/study/${course.id}`}>
+												<Button variant="dark">View Details</Button>
+											</Link>
+										</Card.Body>
+									</Card>
+								))}
+							</Col>
+						</Row>
+					</Col>
+					<Col className="my-favorite" style={{ width: "350px" }}>
+						<h3 className="myfav-header">myFavorite Course</h3>
+						{fa.map((item) => (
+							<ListGroup as="ui" className="list-group-item-danger">
+								<ListGroup.Item
+									as="li"
+									onClick={() => navigate(`/courses/${item.id}`)}
+								>
+									{item.attributes.title}
+								</ListGroup.Item>
+							</ListGroup>
+						))}
+					</Col>
+				</Row>
+			</Container>
+		</div>
+	);
 };
 
 export default Datapro;

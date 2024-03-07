@@ -136,7 +136,7 @@ const CreateCourse = () => {
 				<Container sm="3" md="4">
 					<Row>
 
-						<Col className={`${style.courseDataCol} courseData-col`}>
+						<Col className={`${style.scrollbar} courseData-col`}>
 							<Form id="myform" noValidate validated={validated} onSubmit={handleCreate} className={`mt-3 ${style.customForm}`}>
 								<Form.Group controlId="formTitle">
 									<Form.Label>Title</Form.Label>

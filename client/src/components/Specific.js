@@ -83,7 +83,7 @@ const Specific = ({ data }) => {
 											<Card.Body id="course-review">
 												{CourseSyllabus.map((val, index) => {
 													switch (val.__component) {
-														case "xxx":
+														case "activity.xxx":
 															return null
 														default:
 															return<p>{val.title} </p>

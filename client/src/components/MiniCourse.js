@@ -18,6 +18,7 @@ function MiniCourse({ course }) {
 
 	useEffect(() => {
 		console.log('course',course)
+        console.log(teacher)
 		// console.log(login);
 		// console.log(like);
 		// console.log(courseContent);
@@ -38,8 +39,8 @@ function MiniCourse({ course }) {
                     style={{ cursor: "pointer" }}>
                     <Card.Title>{courseContent.title}✅</Card.Title>
                     <Card.Text className="m-0">{courseContent.description.slice(0, 55)}...</Card.Text>
-                    <Card.Text className="m-0">ระยะเวลา {courseContent.duration}</Card.Text>
-                    <Card.Text className="m-0">ครู {teacher.username}</Card.Text>
+                    <Card.Text className="m-0">ระยะเวลา: {courseContent.duration} ชม.</Card.Text>
+                    <Card.Text className="m-0">ครู: {teacher.username}</Card.Text>
                     
                 </Card.Body>
                 <Col className="add-icon position-absolute top-0 end-0 p-2">

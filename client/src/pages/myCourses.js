@@ -16,6 +16,7 @@ import ax from "../conf/ax";
 import conf from "../conf/main";
 import { Link } from "react-router-dom";
 
+
 // import { useContext, useEffect, useState } from "react";
 // import { Card, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -63,12 +64,13 @@ const MyCourses = () => {
         <Container sm="2" md="4">
           <Row className="mycourse-rows">
 
-            <Col className="inprogress-col scrollbar">
+            <Col className="inprogress-col scrollbar ">
               <h1 style={{ fontSize: 30 }} className="header-inpro">
                 Inprogress
               </h1>
               {data.map((course) => {
-                const p = course.attributes.course_syllabus.map((Sylla) => Sylla.progresses.data[0].attributes.value)
+                console.log(course)
+                const p = course.attributes.course_syllabus.map((Sylla) => Sylla?.progresses?.data[0]?.attributes?.value)
                 const pr = p.length > 0 ? p.reduce((ac, v) => { return ac + v }, 0) : 0
                 if ((pr ? (pr / p.length) : 0) < 100) {
                   return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
@@ -99,7 +101,7 @@ const MyCourses = () => {
                 Complete
               </h1>
               {data.map((course) => {
-                const p = course.attributes.course_syllabus.map((Sylla) => Sylla.progresses.data[0].attributes.value)
+                const p = course.attributes.course_syllabus.map((Sylla) => Sylla?.progresses?.data[0]?.attributes?.value)
                 const pr = p.length > 0 ? p.reduce((ac, v) => { return ac + v }, 0) : 0
                 if (pr / p.length >= 100) {
                   return <Card className="d-flex flex-row inpro-card" key={course.id} style={{ marginTop: "15px" }}>
