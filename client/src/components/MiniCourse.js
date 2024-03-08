@@ -17,8 +17,8 @@ function MiniCourse({ course }) {
 
 
 	useEffect(() => {
-		console.log('course',course)
-        console.log(teacher)
+		// console.log('course',course)
+        // console.log(teacher)
 		// console.log(login);
 		// console.log(like);
 		// console.log(courseContent);

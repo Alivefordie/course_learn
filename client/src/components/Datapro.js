@@ -18,22 +18,22 @@ const Datapro = ({ data }) => {
 	const id = data[4];
 	const [fa, setfa] = useState([]);
 	useEffect(() => {
-		console.log(userData);
+		// console.log(userData);
 	}, [userData]);
 
 	const fetchData = async () => {
 		try {
 			const response = await ax.get(`${conf.apiUrlPrefix}/my-courses`);
 			setMyData(response.data.data);
-			console.log(response.data.data);
+			// console.log(response.data.data);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
 	useEffect(() => {
-		console.log("picture:", picture);
-		console.log("id:", id);
+		// console.log("picture:", picture);
+		// console.log("id:", id);
 		fetchData();
 		fectfaver();
 	}, []);
@@ -50,7 +50,7 @@ const Datapro = ({ data }) => {
 		try {
 			const response = await ax.get(`${conf.apiUrlPrefix}/my-courses`);
 			setfa(response.data.data);
-			console.log(response.data.data);
+			// console.log(response.data.data);
 		} catch (error) {
 			console.error(error);
 		}

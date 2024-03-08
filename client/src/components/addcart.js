@@ -41,7 +41,7 @@ function AddCart({ course, onResponse }) {
     };
 
     useEffect(() => {
-        console.log('course', course)
+        // console.log('course', course)
        
         // console.log(like);
         // console.log(courseContent);

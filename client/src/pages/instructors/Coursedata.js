@@ -17,7 +17,7 @@ const Coursedata = () => {
 		try {
 			const response = await ax.get(`${conf.apiUrlPrefix}/courses/${param.course}`);
 			setMyData(response.data.data);
-			console.log('response', response.data.data);
+			// console.log('response', response.data.data);
 			setCourseSyllabus(response.data.data.attributes.course_syllabus);
 			setLoading(false);
 		} catch (err) {

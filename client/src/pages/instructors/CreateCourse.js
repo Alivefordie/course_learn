@@ -47,7 +47,7 @@ const CreateCourse = () => {
 		form.append("data", JSON.stringify(sendData));
 		form.append("files.picture", picture["files.picture"]);
 		const response = await ax.post(`${conf.apiUrlPrefix}/courses`, form);
-		console.log(response);
+		// console.log(response);
 		// link to some page
 		setLoading(false);
 	};

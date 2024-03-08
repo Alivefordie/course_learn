@@ -7,7 +7,7 @@ import MiniCourse from "./MiniCourse";
 
 const Toprank = ({ data }) => {
 	useEffect(() => {
-		console.log("Toprank", data);
+		// console.log("Toprank", data);
 	}, [data]);
 
 	return (

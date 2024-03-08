@@ -38,7 +38,7 @@ const History = () => {
 		GroupCourses["month"] = month;
 		GroupCourses["year"] = deleteAllFromYear;
 		setmyCourse(GroupCourses);
-		console.log(GroupCourses)
+		// console.log(GroupCourses)
 		setLoading(false);
 	};
 

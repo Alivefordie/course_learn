@@ -8,13 +8,13 @@ const Specific = () => {
 	const { item } = useParams();
 
 	useEffect(() => {
-		console.log("item", item);
+		// console.log("item", item);
 	}, [item]);
 
 	const Like = async () => {
 		try {
 			const response = await ax.get(`${conf.apiUrlPrefix}/courses/${item}`);
-			console.log(response.data);
+			// console.log(response.data);
 		} catch (error) {
 			console.log("Failed to confirm:", error);
 		}

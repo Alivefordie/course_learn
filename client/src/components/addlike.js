@@ -38,8 +38,8 @@ function AddLike({ course }) {
 
 
     useEffect(() => {
-        console.log('course', course)
-        console.log('like', courseContent.entries?.data[0]?.attributes?.like)
+        // console.log('course', course)
+        // console.log('like', courseContent.entries?.data[0]?.attributes?.like)
         // console.log(login);
         // console.log(like);
         // console.log(courseContent);

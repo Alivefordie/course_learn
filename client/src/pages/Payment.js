@@ -90,7 +90,7 @@ const Payment = () => {
       }
       return acc;
     }, 0);
-    console.log("total:", totalPrice);
+    // console.log("total:", totalPrice);
     setTotalPrice(totalPrice);
   };
 
@@ -141,7 +141,7 @@ const Payment = () => {
       setLoading(true);
 
       const response = await ax.get(`${conf.apiUrlPrefix}/enroll/${Id}`);
-      console.log(response);
+      // console.log(response);
     } catch {
       console.log("fail");
       setLoading(false);
@@ -157,7 +157,7 @@ const Payment = () => {
         `${conf.apiUrlPrefix}/upload/`,
         formData
       );
-      console.log("File uploaded successfully:", uploadResponse.data);
+      // console.log("File uploaded successfully:", uploadResponse.data);
       const pictureId = uploadResponse.data[0].id;
 
       const postData = {
@@ -174,10 +174,10 @@ const Payment = () => {
         }
       );
       navigate("/mycourses");
-      console.log(
-        "Slip uploaded successfully. Response:",
-        transactionResponse.data
-      );
+      // console.log(
+      //   "Slip uploaded successfully. Response:",
+      //   transactionResponse.data
+      // );
     } catch (error) {
       console.error("Error uploading slip:", error);
     }
@@ -214,7 +214,7 @@ const Payment = () => {
                       style={{ cursor: "pointer" }}
                       className="image-col"
                     >
-                      {console.log(item)}
+                      {/* {console.log(item)} */}
                       <Card.Img
                         className="course-image"
                         variant="left"

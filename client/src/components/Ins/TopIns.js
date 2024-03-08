@@ -23,7 +23,7 @@ const TopIns = ({ data }) => {
 	};
 
 	const handleSaveChanges = () => {
-		console.log("Edited Item:", editedItem);
+		// console.log("Edited Item:", editedItem);
 		handleCloseModal();
 	};
 
@@ -47,7 +47,7 @@ const TopIns = ({ data }) => {
 	const handleDelete = async (itemId) => {
 		try {
 			const response = await ax.delete(`${conf.apiUrlPrefix}/courses/${itemId}`);
-			console.log("Delete Response:", response);
+			// console.log("Delete Response:", response);
 		} catch (error) {
 			console.error("Error deleting course:", error);
 			setError("Failed to delete course. Please try again.");

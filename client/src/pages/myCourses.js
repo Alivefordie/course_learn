@@ -38,7 +38,7 @@ const MyCourses = () => {
       setdata(response.data.data);
       setLoadingRegularCourses(false)
     } catch (error) {
-      console.log();
+      console.log(error);
       setLoadingRegularCourses(false)
     }
   };
@@ -69,7 +69,7 @@ const MyCourses = () => {
                 Inprogress
               </h1>
               {data.map((course) => {
-                console.log(course)
+                // console.log(course)
                 const p = course.attributes.course_syllabus.map((Sylla) => Sylla?.progresses?.data[0]?.attributes?.value)
                 const pr = p.length > 0 ? p.reduce((ac, v) => { return ac + v }, 0) : 0
                 if ((pr ? (pr / p.length) : 0) < 100) {

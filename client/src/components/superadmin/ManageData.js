@@ -46,10 +46,10 @@ const ManageData = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(slip);
+		// console.log(slip);
 		if (slip && slip.length > 0) {
 			slip.forEach((item) => {
-				console.log(item.attributes.member);
+				// console.log(item.attributes.member);
 			});
 		}
 	}, [slip]);
