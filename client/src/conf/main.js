@@ -2,8 +2,8 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const conf = {
 	isProd,
-	url: isProd ? 'https://wd13.cloud-workshop.online' :"http://localhost:1337"  ,
-	apiUrlPrefix: isProd ? 'https://wd13.cloud-workshop.online/api' :"http://localhost:1337/api",
+	url: isProd ? 'https://wd13-admin.cloud-workshop.online' :"http://localhost:1337"  ,
+	apiUrlPrefix: isProd ? 'https://wd13-admin.cloud-workshop.online/api' :"http://localhost:1337/api",
 	loginEndpoint: "/auth/local",
 	jwtUserEndpoint: "/users/me?populate[0]=role&populate[1]=picture",
 	jwtSessionStorageKey: "auth.jwt",

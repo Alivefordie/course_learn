@@ -3,7 +3,7 @@ import MiniCourse from "./MiniCourse";
 
 const Newest = ({ data }) => {
 	useEffect(() => {
-		console.log("Newest", data);
+		// console.log("Newest", data);
 	});
 
 	return (

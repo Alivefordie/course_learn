@@ -10,7 +10,7 @@ import styles from "../css/Popup.module.css";
 const Specific = ({ data }) => {
 	const { item } = useParams();
 	const course = data.attributes;
-	console.log(course)
+	// console.log(course)
 	const remaining = course.maxCapacity - course.amount;
 	const [CourseSyllabus, setCourseSyllabus] = useState(course.course_syllabus);
 	const [showModal, setShowModal] = useState(false);
