@@ -30,7 +30,7 @@ const AllCourse = () => {
 
   const fetchNewest = async () => {
     try {
-      const response = await ax.get(`${conf.apiUrlPrefix}/courses?Newest=true`); //test data is newest ?
+      const response = await ax.get(`${conf.apiUrlPrefix}/courses?Newest=true`); // test data is newest ?
       const coursesData = response.data.data;
       setNewestCourses(coursesData);
     } catch (error) {
@@ -42,7 +42,7 @@ const AllCourse = () => {
   const fetchLikeMost = async () => {
     try {
       const response = await ax.get(
-        `${conf.apiUrlPrefix}/courses?likeMost=true` //test data is like most ?
+        `${conf.apiUrlPrefix}/courses?likeMost=true` // test data is like most ?
       );
       const coursesData = response.data.data;
       setCourses(coursesData);
