@@ -45,7 +45,7 @@ const Specific = ({ data }) => {
 								<div>
 									<div className="course-title">
 										<img
-											src={conf.url + course.picture.data.attributes.url}
+											src={conf.url + course?.picture?.data?.attributes?.url}
 											alt="item"
 											width={300}
 										/>
