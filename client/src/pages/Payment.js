@@ -11,11 +11,13 @@ import {
 } from "react-bootstrap";
 import NavbarTop from "../components/NavbarTop";
 import Spinner from "../components/Spinner";
-import ax from "../conf/ax";
+import ax from "../conf/ax.js";
 import conf from "../conf/main";
 import { useNavigate } from "react-router-dom";
 import NavbarLink from "../components/NavbarLink";
 import styles from "../css/PayCss.module.css";
+
+
 
 const Payment = () => {
   const [data, setData] = useState([]);

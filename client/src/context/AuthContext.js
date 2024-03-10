@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSetState } from "react-use";
 import conf from "../conf/main";
-import ax, { axData } from "../conf/ax";
+import ax, { axData } from "../conf/ax.js";
 
 export const AuthContext = React.createContext(null);
 
